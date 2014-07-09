@@ -10,7 +10,7 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
   - threads
 - manage email labels programmatically
 
-## Usage ##
+## Setup ##
 This package is still in the rough stages, so getting it setup is a bit of a pain. The steps to do so are detailed below.
 
 1. Setup the oauth endpoint
@@ -32,3 +32,11 @@ This package is still in the rough stages, so getting it setup is a bit of a pai
   google_token <- oauth2.0_token(oauth_endpoints("google"), myapp,
     scope = "https://www.googleapis.com/auth/gmail.readonly")
   ```
+
+## Usage ##
+
+Retrieve first 10 email threads matching R
+
+```s
+r_threads = threads('R', 10)
+```
