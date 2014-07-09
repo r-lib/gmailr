@@ -1,0 +1,16 @@
+Package: gmailr
+Version: 0.0.1
+Date: 2014-7-8
+Maintainer: Jim Hester <james.f.hester@gmail.com>
+Author: Jim Hester
+Title: gmailr - Easily exposing the Gmail API from R.
+Description: hi
+Depends:
+    R (>= 3.0.0)
+Imports:
+    httr,
+License: NA
+URL: NA
+BugReports: NA
+VignetteBuilder: NA
+Packaged: NA

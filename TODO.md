@@ -1,0 +1,3 @@
+- [ ] handle multipage results
+- [ ] printing messages
+- [ ] sending email
