@@ -1,16 +1,29 @@
-#' @export
-base64url_decode = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
+#' \pkg{gmailr} makes gmail access easy.
+#'
+#' \code{gmailr} provides an interface to the gmail api \url{https://developers.google.com/gmail/api/}
+#' @docType package
+#' @name gmailr
+#' @import httr
+NULL
 
+#' Get a list of Threads.
+#'
+#' Get a list of threads possibly matching a given query string.
+#' @param search query to use, same format as gmail search box.
+#' @param num_results the number of results to return, max per page is 100
+#' @param page_token retrieve a specific page of results
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
 #' @export
-threads <- function(search = NULL, num_results = NULL, user_id = 'me', ...){
+threads <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me'){
   dots = list(search = search, num_results = num_results, ...)
   req = GET(gmail_path(rename(user_id), "threads"),
             query = rename(not_null(dots)), config(token = google_token))
   check(req)
   parse_threads(req)
 }
+#TODO: make a function that repeatably calls a function until all results are obtained.
 
-#' @export
 parse_threads <- function(req) {
   text = content(req, as = "text")
   data = fromJSON(text)
@@ -18,9 +31,15 @@ parse_threads <- function(req) {
   data
 }
 
-#' @export
-gmail_path = function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users/", user, ..., sep="/") }
+gmail_path = function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, ..., sep="/") }
+base64url_decode = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
 
+#' Get a single Thread.
+#'
+#' Function to retrieve a given thread by id
+#' @param id thread id to access
+#' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/thread}
 #' @export
 thread = function(id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "threads", id),
@@ -29,6 +48,11 @@ thread = function(id, user_id = 'me') {
   content(req)
 }
 
+#' Send a single Thread to the trash.
+#'
+#' Function to trash a given thread by id.  This can be undone by \code{\link{untrash_thread}}.
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/trash}
 #' @export
 trash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "trash"),
@@ -37,8 +61,26 @@ trash_thread = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-# TODO: warning prompt?
+#' Remove a single Thread from the trash.
+#'
+#' Function to untrash a given Thread by id.  This can reverse the results of a previous \code{\link{trash_thread}}.
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/untrash}
 #' @export
+trash_thread = function(id, user_id = 'me') {
+  req = POST(gmail_path(rename(user_id), "threads", id, "untrash"),
+            config(token = google_token))
+  check(req)
+  invisible(content(req))
+}
+
+#' Permanently delete a single Thread.
+#'
+#' Function to delete a given Thread by id.  This cannot be undone!
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/delete}
+#' @export
+# TODO: warning prompt?
 delete_thread = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "threads", id),
             config(token = google_token))
@@ -46,6 +88,13 @@ delete_thread = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
+#' Modify the labels on a thread.
+#'
+#' Function to modify the labels on a given Thread by id.
+#' @param add_labels labels to add to the specified thread
+#' @param remove_labels labels to remove from the specified thread
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/modify}
 #' @export
 modify_thread = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
@@ -58,12 +107,12 @@ modify_thread = function(id, add_labels = character(0), remove_labels = characte
 # https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get
 # how to handle different types?
 #' @export
-attachment = function(id, message_id, user_id = 'me') {
-  req = GET(gmail_path(rename(user_id), "messages", message_id, "attachments", id),
-            config(token = google_token))
-  check(req)
-  req
-}
+#attachment = function(id, message_id, user_id = 'me') {
+  #req = GET(gmail_path(rename(user_id), "messages", message_id, "attachments", id),
+            #config(token = google_token))
+  #check(req)
+  #req
+#}
 
 #' @export
 message = function(id, user_id = 'me') {
@@ -99,13 +148,15 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
   invisible(content(req))
 }
 
-#' @export
-insert_message = function(id, user_id = 'me') {
-  req = POST(gmail_path(rename(user_id), "messages", id, "modify"),
-            config(token = google_token))
-  check(req)
-  invisible(content(req))
-}
+#TODO: 
+##' @export
+#insert_message = function(id, user_id = 'me') {
+#  req = POST(gmail_path(rename(user_id), "messages", id, "modify"),
+#            config(token = google_token))
+#  check(req)
+#  invisible(content(req))
+#}
+
 #' @export
 check <- function(req) {
   if (req$status_code < 400) return(invisible())
@@ -119,7 +170,8 @@ name_map = c(
   "search" = "q",
   "num_results" = "maxResults",
   "add_labels" = "addLabelIds",
-  "remove_labels" = "removeLabelIds"
+  "remove_labels" = "removeLabelIds",
+  "page_token" = "pageToken"
 )
 
 #' @export

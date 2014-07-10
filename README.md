@@ -9,6 +9,8 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
   - messages
   - threads
 - manage email labels programmatically
+- send mail to the trash and untrash
+- delete mail without sending to the trash
 
 ## Setup ##
 This package is still in the rough stages, so getting it setup is a bit of a pain. The steps to do so are detailed below.
