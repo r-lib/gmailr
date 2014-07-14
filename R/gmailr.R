@@ -16,7 +16,7 @@ NULL
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
 #' @export
 threads <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me'){
-  dots = list(search = search, num_results = num_results, ...)
+  dots = list(search = search, num_results = num_results)
   req = GET(gmail_path(rename(user_id), "threads"),
             query = rename(not_null(dots)), config(token = google_token))
   check(req)
@@ -32,7 +32,8 @@ parse_threads <- function(req) {
 }
 
 gmail_path = function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, ..., sep="/") }
-base64url_decode = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
+base64url_decode_to_char = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
+base64url_decode = function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
 
 #' Get a single Thread.
 #'
@@ -98,7 +99,7 @@ delete_thread = function(id, user_id = 'me') {
 #' @export
 modify_thread = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
-  req = POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body,
+  req = POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body, encode="json",
             config(token = google_token))
   check(req)
   invisible(content(req))
@@ -148,6 +149,43 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
   invisible(content(req))
 }
 
+#' Retrieve an attachment to a message
+#'
+#' Function to retrieve an attachment to a message by id of the attachment
+#' and message.  This returns the base64 url encoded data, use
+#' \link{\code{base64url_decode}} to get the raw bytes.
+#' @param id id of the attachment
+#' @param message_id id of the parent message
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
+#' @export
+attachment = function(id, message_id, user_id = 'me') {
+  req = GET(gmail_path(rename(user_id), "messages", message_id, 'attachments', id),
+            config(token = google_token))
+  check(req)
+  content(req)
+}
+
+#' Save all of the attachments to a message.
+#'
+#' Function to retrieve and save all of the attachments to a message by id of the message.
+#' @param id id of the attachment
+#' @param message_id id of the parent message
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
+#' @export
+save_attachments = function(message_id, path='', user_id = 'me'){
+  val = message(message_id, user_id)
+  for(part in val$payload$parts){
+    if('filename' %in% names(part) && part[['filename']] != ''){
+      att = attachment(part[['body']][['attachmentId']], message_id, user_id)
+      file = paste0(path, part[['filename']])
+      data = base64url_decode(att[['data']])
+      writeBin(object=data, con=file)
+    }
+  }
+}
+
 #TODO: 
 ##' @export
 #insert_message = function(id, user_id = 'me') {
@@ -157,12 +195,10 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
 #  invisible(content(req))
 #}
 
-#' @export
 check <- function(req) {
   if (req$status_code < 400) return(invisible())
 
-  message <- content(req)$message
-  stop("HTTP failure: ", req$status_code, "\n", message, call. = FALSE)
+  stop("HTTP failure: ", req$status_code, "\n", req, call. = FALSE)
 }
 
 name_map = c(
@@ -174,7 +210,5 @@ name_map = c(
   "page_token" = "pageToken"
 )
 
-#' @export
 rename = function(x){ names(x) = names(x)[names(x) %in% names(name_map)] = name_map[names(x)]; x }
-#' @export
 not_null = function(x){ Filter(Negate(is.null), x) }
