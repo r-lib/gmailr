@@ -13,12 +13,12 @@ NULL
 #' @param num_results the number of results to return, max per page is 100
 #' @param page_token retrieve a specific page of results
 #' @inheritParams thread
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
 #' @export
 threads <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me'){
-  dots = list(search = search, num_results = num_results)
+  opts = list(search = search, num_results = num_results)
   req = GET(gmail_path(rename(user_id), "threads"),
-            query = rename(not_null(dots)), config(token = google_token))
+            query = rename(not_null(opts)), config(token = google_token))
   check(req)
   parse_threads(req)
 }
@@ -68,7 +68,7 @@ trash_thread = function(id, user_id = 'me') {
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/untrash}
 #' @export
-trash_thread = function(id, user_id = 'me') {
+untrash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "untrash"),
             config(token = google_token))
   check(req)
@@ -105,24 +105,57 @@ modify_thread = function(id, add_labels = character(0), remove_labels = characte
   invisible(content(req))
 }
 
-# https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get
-# how to handle different types?
+#' Get a single Message
+#'
+#' Function to retrieve a given Message by id
+#' @param id message id to access
+#' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
+#' @param format format of the message returned
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
 #' @export
-#attachment = function(id, message_id, user_id = 'me') {
-  #req = GET(gmail_path(rename(user_id), "messages", message_id, "attachments", id),
-            #config(token = google_token))
-  #check(req)
-  #req
-#}
-
-#' @export
-message = function(id, user_id = 'me') {
+gmail_message = function(id, user_id = 'me', format=NULL) {
   req = GET(gmail_path(rename(user_id), "messages", id),
+            query = not_null(format=format),
             config(token = google_token))
   check(req)
   content(req)
 }
 
+#' Get a list of Message.
+#'
+#' Get a list of messages possibly matching a given query string.
+#' @param search query to use, same format as gmail search box.
+#' @param num_results the number of results to return, only exact if less than 100, otherwise stops at page containing value.
+#' @param page_token retrieve a specific page of results
+#' @inheritParams thread
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
+gmail_messages <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me', include_spam_trash=FALSE, label_ids=NULL){
+  res = messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
+  all_results = list(res)
+  while(message_count(all_results) < num_results && !is.null(res[['nextPageToken']])){
+    res = gmail_messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
+    all_results[[length(all_results)+1]] = res
+  }
+  all_results
+}
+
+gmail_messages_itr <- function(search, num_results, page_token, user_id, include_spam_trash, label_ids){
+  opts = list(search = search, num_results = num_results, page_token = page_token, label_ids = label_ids, include_spam_trash = include_spam_trash)
+  req = GET(gmail_path(rename(user_id), "messages"),
+            query = rename(not_null(opts)), config(token = google_token))
+  check(req)
+  content(req)
+}
+
+has_more_results = function(res){ !identical(res[['nextPageToken']], '') }
+message_count = function(res) { sum(vapply(lapply(res, `[[`, 'messages'), length, integer(1))) }
+
+#' Send a single Message to the trash.
+#'
+#' Function to trash a given Message by id.  This can be undone by \code{\link{untrash_message}}.
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
 #' @export
 trash_message = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
@@ -131,7 +164,24 @@ trash_message = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-# TODO: warning prompt?
+#' Send a single Message to the trash.
+#'
+#' Function to trash a given Message by id.  This can be undone by \code{\link{untrash_message}}.
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
+#' @export
+untrash_message = function(id, user_id = 'me') {
+  req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
+            config(token = google_token))
+  check(req)
+  invisible(content(req))
+}
+
+#' Permanently delete a single Message.
+#'
+#' Function to delete a given message by id.  This cannot be undone!
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/delete}
 #' @export
 delete_message = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "messages", id),
@@ -140,6 +190,13 @@ delete_message = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
+#' Modify the labels on a message.
+#'
+#' Function to modify the labels on a given message by id.
+#' @param add_labels labels to add to the specified message
+#' @param remove_labels labels to remove from the specified message
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/modify}
 #' @export
 modify_message = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
@@ -149,6 +206,8 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
   invisible(content(req))
 }
 
+#TODO: message_send
+
 #' Retrieve an attachment to a message
 #'
 #' Function to retrieve an attachment to a message by id of the attachment
@@ -156,7 +215,7 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
 #' \link{\code{base64url_decode}} to get the raw bytes.
 #' @param id id of the attachment
 #' @param message_id id of the parent message
-#' @inheritParams thread
+#' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
 #' @export
 attachment = function(id, message_id, user_id = 'me') {
@@ -169,9 +228,9 @@ attachment = function(id, message_id, user_id = 'me') {
 #' Save all of the attachments to a message.
 #'
 #' Function to retrieve and save all of the attachments to a message by id of the message.
-#' @param id id of the attachment
 #' @param message_id id of the parent message
-#' @inheritParams thread
+#' @param path where to save the attachments
+#' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
 #' @export
 save_attachments = function(message_id, path='', user_id = 'me'){
@@ -186,7 +245,7 @@ save_attachments = function(message_id, path='', user_id = 'me'){
   }
 }
 
-#TODO: 
+#TODO:
 ##' @export
 #insert_message = function(id, user_id = 'me') {
 #  req = POST(gmail_path(rename(user_id), "messages", id, "modify"),
@@ -207,7 +266,9 @@ name_map = c(
   "num_results" = "maxResults",
   "add_labels" = "addLabelIds",
   "remove_labels" = "removeLabelIds",
-  "page_token" = "pageToken"
+  "page_token" = "pageToken",
+  "include_spam_trash" = "includeSpamTrash",
+  NULL
 )
 
 rename = function(x){ names(x) = names(x)[names(x) %in% names(name_map)] = name_map[names(x)]; x }
