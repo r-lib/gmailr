@@ -131,13 +131,13 @@ gmail_message = function(id, user_id = 'me', format=NULL) {
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
 gmail_messages <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me', include_spam_trash=FALSE, label_ids=NULL){
-  res = messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
+  res = gmail_messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
   all_results = list(res)
   while(message_count(all_results) < num_results && !is.null(res[['nextPageToken']])){
     res = gmail_messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
     all_results[[length(all_results)+1]] = res
   }
-  all_results
+  trim_messages(all_results, num_results)
 }
 
 gmail_messages_itr <- function(search, num_results, page_token, user_id, include_spam_trash, label_ids){
@@ -150,6 +150,31 @@ gmail_messages_itr <- function(search, num_results, page_token, user_id, include
 
 has_more_results = function(res){ !identical(res[['nextPageToken']], '') }
 message_count = function(res) { sum(vapply(lapply(res, `[[`, 'messages'), length, integer(1))) }
+
+trim_messages = function(res, amount) {
+  num_messages = vapply(lapply(res, `[[`, 'messages'), length, integer(1))
+  count = 0
+  itr = 0
+  print(num_messages)
+  while(count < amount && itr <= length(num_messages)){
+    itr = itr + 1
+    count = count + num_messages[itr]
+  }
+  remain = amount - count
+  if(itr > length(res)){
+    res
+  }
+  else {
+    res[[itr]]$messages = res[[itr]]$messages[1:(num_messages[itr] + remain)]
+    res[1:itr]
+  }
+}
+
+debug = function(...){
+  args = dplyr:::dots(...)
+
+  message(sprintf(paste0(args, '=%s', collapse=' '), ...))
+}
 
 #' Send a single Message to the trash.
 #'
