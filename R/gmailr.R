@@ -15,25 +15,26 @@ NULL
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
 #' @export
-threads <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me'){
-  opts = list(search = search, num_results = num_results)
+threads = function(search = NULL, num_results = NULL, label_ids=NULL,
+                     include_spam_trash=FALSE, user_id = 'me', page_token = NULL){
+  res = threads_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
+  all_results = list(res)
+  while(count_threads(all_results) < num_results && !is.null(res[['nextPageToken']])){
+    res = threads_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
+    all_results[[length(all_results)+1]] = res
+  }
+  trim_threads(all_results, num_results)
+}
+threads_itr <- function(search, num_results, label_ids, include_spam_trash, user_id, page_token){
+  opts = list(search = search, num_results = num_results,
+              page_token = page_token, label_ids = label_ids,
+              include_spam_trash = include_spam_trash)
+
   req = GET(gmail_path(rename(user_id), "threads"),
             query = rename(not_null(opts)), config(token = google_token))
   check(req)
-  parse_threads(req)
+  content(req)
 }
-#TODO: make a function that repeatably calls a function until all results are obtained.
-
-parse_threads <- function(req) {
-  text = content(req, as = "text")
-  data = fromJSON(text)
-  if(data$resultSizeEstimate == 0) { message("No results for query") }
-  data
-}
-
-gmail_path = function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, ..., sep="/") }
-base64url_decode_to_char = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
-base64url_decode = function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
 
 #' Get a single Thread.
 #'
@@ -130,51 +131,25 @@ gmail_message = function(id, user_id = 'me', format=NULL) {
 #' @param page_token retrieve a specific page of results
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
-gmail_messages <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me', include_spam_trash=FALSE, label_ids=NULL){
-  res = gmail_messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
+messages = function(search = NULL, num_results = NULL, label_ids=NULL,
+                     include_spam_trash=FALSE, user_id = 'me', page_token = NULL){
+  res = messages_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
   all_results = list(res)
   while(count_messages(all_results) < num_results && !is.null(res[['nextPageToken']])){
-    res = gmail_messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
+    res = messages_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
     all_results[[length(all_results)+1]] = res
   }
   trim_messages(all_results, num_results)
 }
+messages_itr <- function(search, num_results, label_ids, include_spam_trash, user_id, page_token){
+  opts = list(search = search, num_results = num_results,
+              page_token = page_token, label_ids = label_ids,
+              include_spam_trash = include_spam_trash)
 
-gmail_messages_itr <- function(search, num_results, page_token, user_id, include_spam_trash, label_ids){
-  opts = list(search = search, num_results = num_results, page_token = page_token, label_ids = label_ids, include_spam_trash = include_spam_trash)
   req = GET(gmail_path(rename(user_id), "messages"),
             query = rename(not_null(opts)), config(token = google_token))
   check(req)
   content(req)
-}
-
-has_more_results = function(res){ !identical(res[['nextPageToken']], '') }
-count_fun = function(type) function(res) { sum(vapply(lapply(res, `[[`, type), length, integer(1))) }
-trim_fun = function(type) function(res, amount) {
-  num_messages = vapply(lapply(res, `[[`, type), length, integer(1))
-  count = 0
-  itr = 0
-  while(count < amount && itr <= length(num_messages)){
-    itr = itr + 1
-    count = count + num_messages[itr]
-  }
-  remain = amount - count
-  if(itr > length(res)){
-    res
-  }
-  else {
-    res[[itr]]$messages = res[[itr]]$messages[1:(num_messages[itr] + remain)]
-    res[1:itr]
-  }
-}
-
-count_messages = count_fun("messages")
-trim_messages = trim_fun("messages")
-
-debug = function(...){
-  args = dplyr:::dots(...)
-
-  message(sprintf(paste0(args, '=%s', collapse=' '), ...))
 }
 
 #' Send a single Message to the trash.
@@ -299,3 +274,38 @@ name_map = c(
 
 rename = function(x){ names(x) = names(x)[names(x) %in% names(name_map)] = name_map[names(x)]; x }
 not_null = function(x){ Filter(Negate(is.null), x) }
+
+gmail_path = function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, ..., sep="/") }
+base64url_decode_to_char = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
+base64url_decode = function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
+
+count_fun = function(type) function(res) { sum(vapply(lapply(res, `[[`, type), length, integer(1))) }
+trim_fun = function(type) function(res, amount) {
+  num = vapply(lapply(res, `[[`, type), length, integer(1))
+  count = 0
+  itr = 0
+  while(count < amount && itr <= length(num)){
+    itr = itr + 1
+    count = count + num[itr]
+  }
+  remain = amount - count
+  if(itr > length(res)){
+    res
+  }
+  else {
+    res[[itr]][[type]] = res[[itr]][[type]][1:(num[itr] + remain)]
+    res[1:itr]
+  }
+}
+
+count_messages = count_fun("messages")
+trim_messages = trim_fun("messages")
+count_threads = count_fun("threads")
+trim_threads = trim_fun("threads")
+
+debug = function(...){
+  args = dplyr:::dots(...)
+
+  message(sprintf(paste0(args, '=%s', collapse=' '), ...))
+}
+
