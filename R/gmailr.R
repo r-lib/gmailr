@@ -126,14 +126,14 @@ gmail_message = function(id, user_id = 'me', format=NULL) {
 #'
 #' Get a list of messages possibly matching a given query string.
 #' @param search query to use, same format as gmail search box.
-#' @param num_results the number of results to return, only exact if less than 100, otherwise stops at page containing value.
+#' @param num_results the number of results to return.
 #' @param page_token retrieve a specific page of results
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
 gmail_messages <- function(search = NULL, num_results = NULL, page_token = NULL, user_id = 'me', include_spam_trash=FALSE, label_ids=NULL){
   res = gmail_messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
   all_results = list(res)
-  while(message_count(all_results) < num_results && !is.null(res[['nextPageToken']])){
+  while(count_messages(all_results) < num_results && !is.null(res[['nextPageToken']])){
     res = gmail_messages_itr(search, num_results, page_token, user_id, include_spam_trash, label_ids)
     all_results[[length(all_results)+1]] = res
   }
@@ -149,13 +149,11 @@ gmail_messages_itr <- function(search, num_results, page_token, user_id, include
 }
 
 has_more_results = function(res){ !identical(res[['nextPageToken']], '') }
-message_count = function(res) { sum(vapply(lapply(res, `[[`, 'messages'), length, integer(1))) }
-
-trim_messages = function(res, amount) {
-  num_messages = vapply(lapply(res, `[[`, 'messages'), length, integer(1))
+count_fun = function(type) function(res) { sum(vapply(lapply(res, `[[`, type), length, integer(1))) }
+trim_fun = function(type) function(res, amount) {
+  num_messages = vapply(lapply(res, `[[`, type), length, integer(1))
   count = 0
   itr = 0
-  print(num_messages)
   while(count < amount && itr <= length(num_messages)){
     itr = itr + 1
     count = count + num_messages[itr]
@@ -169,6 +167,9 @@ trim_messages = function(res, amount) {
     res[1:itr]
   }
 }
+
+count_messages = count_fun("messages")
+trim_messages = trim_fun("messages")
 
 debug = function(...){
   args = dplyr:::dots(...)
