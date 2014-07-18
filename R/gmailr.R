@@ -15,25 +15,8 @@ NULL
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
 #' @export
-threads = function(search = NULL, num_results = NULL, label_ids=NULL,
-                     include_spam_trash=FALSE, user_id = 'me', page_token = NULL){
-  res = threads_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
-  all_results = list(res)
-  while(count_threads(all_results) < num_results && !is.null(res[['nextPageToken']])){
-    res = threads_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
-    all_results[[length(all_results)+1]] = res
-  }
-  trim_threads(all_results, num_results)
-}
-threads_itr <- function(search, num_results, label_ids, include_spam_trash, user_id, page_token){
-  opts = list(search = search, num_results = num_results,
-              page_token = page_token, label_ids = label_ids,
-              include_spam_trash = include_spam_trash)
-
-  req = GET(gmail_path(rename(user_id), "threads"),
-            query = rename(not_null(opts)), config(token = google_token))
-  check(req)
-  content(req)
+threads = function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me'){
+  page_and_trim('threads', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
 #' Get a single Thread.
@@ -115,9 +98,9 @@ modify_thread = function(id, add_labels = character(0), remove_labels = characte
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
 #' @export
-gmail_message = function(id, user_id = 'me', format=NULL) {
-  req = GET(gmail_path(rename(user_id), "messages", id),
-            query = not_null(format=format),
+message = function(id, user_id = 'me', format=NULL) {
+  req = GET(gmail_path(user_id, "messages", id),
+            query = not_null(format),
             config(token = google_token))
   check(req)
   content(req)
@@ -131,25 +114,8 @@ gmail_message = function(id, user_id = 'me', format=NULL) {
 #' @param page_token retrieve a specific page of results
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
-messages = function(search = NULL, num_results = NULL, label_ids=NULL,
-                     include_spam_trash=FALSE, user_id = 'me', page_token = NULL){
-  res = messages_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
-  all_results = list(res)
-  while(count_messages(all_results) < num_results && !is.null(res[['nextPageToken']])){
-    res = messages_itr(search, num_results, label_ids, include_spam_trash, user_id, page_token)
-    all_results[[length(all_results)+1]] = res
-  }
-  trim_messages(all_results, num_results)
-}
-messages_itr <- function(search, num_results, label_ids, include_spam_trash, user_id, page_token){
-  opts = list(search = search, num_results = num_results,
-              page_token = page_token, label_ids = label_ids,
-              include_spam_trash = include_spam_trash)
-
-  req = GET(gmail_path(rename(user_id), "messages"),
-            query = rename(not_null(opts)), config(token = google_token))
-  check(req)
-  content(req)
+messages = function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me'){
+  page_and_trim('messages', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
 #' Send a single Message to the trash.
@@ -246,6 +212,11 @@ save_attachments = function(message_id, path='', user_id = 'me'){
   }
 }
 
+#' @export
+history = function(start_history_id = NULL, num_results = NULL, label_id = NULL, page_token = NULL,  user_id = 'me'){
+  page_and_trim('history', user_id, num_results, label_id, start_history_id, page_token)
+}
+
 #TODO:
 ##' @export
 #insert_message = function(id, user_id = 'me') {
@@ -269,43 +240,63 @@ name_map = c(
   "remove_labels" = "removeLabelIds",
   "page_token" = "pageToken",
   "include_spam_trash" = "includeSpamTrash",
+  "start_history_id" = "startHistoryId",
   NULL
 )
 
-rename = function(x){ names(x) = names(x)[names(x) %in% names(name_map)] = name_map[names(x)]; x }
+rename = function(...) {
+  args = as.character(dots(...))
+  to_rename = args %in% names(name_map)
+  args[to_rename] = name_map[args[to_rename]]
+
+  vals = list(...)
+  names(vals) = args
+  vals
+}
 not_null = function(x){ Filter(Negate(is.null), x) }
 
 gmail_path = function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, ..., sep="/") }
 base64url_decode_to_char = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
 base64url_decode = function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
 
-count_fun = function(type) function(res) { sum(vapply(lapply(res, `[[`, type), length, integer(1))) }
-trim_fun = function(type) function(res, amount) {
-  num = vapply(lapply(res, `[[`, type), length, integer(1))
-  count = 0
-  itr = 0
-  while(count < amount && itr <= length(num)){
-    itr = itr + 1
-    count = count + num[itr]
-  }
-  remain = amount - count
-  if(itr > length(res)){
-    res
-  }
-  else {
-    res[[itr]][[type]] = res[[itr]][[type]][1:(num[itr] + remain)]
-    res[1:itr]
-  }
-}
-
-count_messages = count_fun("messages")
-trim_messages = trim_fun("messages")
-count_threads = count_fun("threads")
-trim_threads = trim_fun("threads")
-
 debug = function(...){
-  args = dplyr:::dots(...)
+  args = dots(...)
 
   message(sprintf(paste0(args, '=%s', collapse=' '), ...))
 }
 
+dots = function (...) { eval(substitute(alist(...))) }
+
+page_and_trim = function(type, user_id, num_results, ...){
+  itr = function(...){
+    req = GET(gmail_path(user_id, type),
+              query = not_null(rename(...)), config(token = google_token))
+    check(req)
+    content(req)
+  }
+  counts = function(res) { vapply(lapply(res, `[[`, type), length, integer(1)) }
+  trim = function(res, amount) {
+    num = counts(res)
+    count = 0
+    itr = 0
+    while(count < amount && itr <= length(num)){
+      itr = itr + 1
+      count = count + num[itr]
+    }
+    remain = amount - count
+    if(itr > length(res)){
+      res
+    }
+    else {
+      res[[itr]][[type]] = res[[itr]][[type]][1:(num[itr] + remain)]
+      res[1:itr]
+    }
+  }
+  res = itr(...)
+  all_results = list(res)
+  while(sum(counts(all_results)) < num_results && !is.null(res[['nextPageToken']])){
+    res = itr(...)
+    all_results[[length(all_results)+1]] = res
+  }
+  trim(all_results, num_results)
+}
