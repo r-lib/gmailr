@@ -217,6 +217,14 @@ history = function(start_history_id = NULL, num_results = NULL, label_id = NULL,
   page_and_trim('history', user_id, num_results, label_id, start_history_id, page_token)
 }
 
+#' @export
+labels = function(user_id = 'me'){
+  req = GET(gmail_path(user_id, "labels"),
+            config(token = google_token))
+  check(req)
+  content(req)
+}
+
 #TODO:
 ##' @export
 #insert_message = function(id, user_id = 'me') {
