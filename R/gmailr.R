@@ -225,6 +225,32 @@ labels = function(user_id = 'me'){
   content(req)
 }
 
+#' @export
+label = function(id, user_id = 'me') {
+  req = GET(gmail_path(user_id, "labels", id),
+            config(token = google_token))
+  check(req)
+  content(req)
+}
+
+#' @export
+update_label = function(id, label, user_id = 'me') {
+  req = POST(gmail_path(user_id, "labels", id),
+              body=label, encode='json',
+              config(token = google_token))
+  check(req)
+  invisible(content(req))
+}
+
+#' @export
+update_label_patch = function(id, label, user_id = 'me') {
+  req = PATCH(gmail_path(user_id, "labels", id),
+              body=label, encode='json',
+              config(token = google_token))
+  check(req)
+  invisible(content(req))
+}
+
 #TODO:
 ##' @export
 #insert_message = function(id, user_id = 'me') {
@@ -278,7 +304,7 @@ dots = function (...) { eval(substitute(alist(...))) }
 page_and_trim = function(type, user_id, num_results, ...){
   itr = function(...){
     req = GET(gmail_path(user_id, type),
-              query = not_null(rename(...)), config(token = google_token))
+             query = not_null(rename(...)), config(token = google_token))
     check(req)
     content(req)
   }
