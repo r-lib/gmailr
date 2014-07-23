@@ -6,7 +6,54 @@
 #' @import httr
 NULL
 
-#' Get a list of Threads.
+#' Get a single draft
+#'
+#' Function to retrieve a given draft by id
+#' @param id draft id to access
+#' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
+#' @param format format of the draft returned
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/get}
+#' @export
+draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
+  format = match.args(format)
+  req = GET(gmail_path(user_id, "drafts", id),
+            query = format,
+            config(token = google_token))
+  check(req)
+  content(req)
+}
+
+#' Get a list of drafts
+#'
+#' Get a list of drafts possibly matching a given query string.
+#' @param search query to use, same format as gmail search box.
+#' @param num_results the number of results to return.
+#' @param page_token retrieve a specific page of results
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
+drafts = function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me'){
+  page_and_trim('drafts', user_id, num_results, search, page_token, label_ids, include_spam_trash)
+}
+
+#' Send a draft
+#'
+#' Send a draft to the recipients in the To, CC, and Bcc headers.
+#' @param id the draft id to send
+#' @param upload_type type of upload request
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
+send_draft = function(id, upload_type = c("media", "multipart", "resumable"), user_id = 'me') {
+  upload_type = match.args(upload_type)
+  req = POST(gmail_path(user_id, "drafts"),
+             query=rename(upload_type),
+             body=c("id"=id), encode="json",
+            config(token = google_token))
+  check(req)
+  invisible(content(req))
+}
+
+#' Get a list of threads
 #'
 #' Get a list of threads possibly matching a given query string.
 #' @param search query to use, same format as gmail search box.
@@ -19,7 +66,7 @@ threads = function(search = NULL, num_results = NULL, page_token = NULL, label_i
   page_and_trim('threads', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
-#' Get a single Thread.
+#' Get a single thread
 #'
 #' Function to retrieve a given thread by id
 #' @param id thread id to access
@@ -33,7 +80,7 @@ thread = function(id, user_id = 'me') {
   content(req)
 }
 
-#' Send a single Thread to the trash.
+#' Send a single thread to the trash
 #'
 #' Function to trash a given thread by id.  This can be undone by \code{\link{untrash_thread}}.
 #' @inheritParams thread
@@ -46,9 +93,9 @@ trash_thread = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-#' Remove a single Thread from the trash.
+#' Remove a single thread from the trash.
 #'
-#' Function to untrash a given Thread by id.  This can reverse the results of a previous \code{\link{trash_thread}}.
+#' Function to untrash a given thread by id.  This can reverse the results of a previous \code{\link{trash_thread}}.
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/untrash}
 #' @export
@@ -59,9 +106,9 @@ untrash_thread = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-#' Permanently delete a single Thread.
+#' Permanently delete a single thread.
 #'
-#' Function to delete a given Thread by id.  This cannot be undone!
+#' Function to delete a given thread by id.  This cannot be undone!
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/delete}
 #' @export
@@ -72,9 +119,9 @@ delete_thread = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-#' Modify the labels on a thread.
+#' Modify the labels on a thread
 #'
-#' Function to modify the labels on a given Thread by id.
+#' Function to modify the labels on a given thread by id.
 #' @param add_labels labels to add to the specified thread
 #' @param remove_labels labels to remove from the specified thread
 #' @inheritParams thread
@@ -88,24 +135,25 @@ modify_thread = function(id, add_labels = character(0), remove_labels = characte
   invisible(content(req))
 }
 
-#' Get a single Message
+#' Get a single message
 #'
-#' Function to retrieve a given Message by id
+#' Function to retrieve a given message by id
 #' @param id message id to access
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the message returned
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
 #' @export
-message = function(id, user_id = 'me', format=NULL) {
+message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
+  format = match.args(format)
   req = GET(gmail_path(user_id, "messages", id),
-            query = not_null(format),
+            query = format,
             config(token = google_token))
   check(req)
   content(req)
 }
 
-#' Get a list of Message.
+#' Get a list of message
 #'
 #' Get a list of messages possibly matching a given query string.
 #' @param search query to use, same format as gmail search box.
@@ -117,9 +165,9 @@ messages = function(search = NULL, num_results = NULL, page_token = NULL, label_
   page_and_trim('messages', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
-#' Send a single Message to the trash.
+#' Send a single message to the trash
 #'
-#' Function to trash a given Message by id.  This can be undone by \code{\link{untrash_message}}.
+#' Function to trash a given message by id.  This can be undone by \code{\link{untrash_message}}.
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
 #' @export
@@ -130,9 +178,9 @@ trash_message = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-#' Send a single Message to the trash.
+#' Remove a single message from the trash
 #'
-#' Function to trash a given Message by id.  This can be undone by \code{\link{untrash_message}}.
+#' Function to trash a given message by id.  This can be undone by \code{\link{untrash_message}}.
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
 #' @export
@@ -143,7 +191,7 @@ untrash_message = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-#' Permanently delete a single Message.
+#' Permanently delete a single message
 #'
 #' Function to delete a given message by id.  This cannot be undone!
 #' @inheritParams message
@@ -156,7 +204,7 @@ delete_message = function(id, user_id = 'me') {
   invisible(content(req))
 }
 
-#' Modify the labels on a message.
+#' Modify the labels on a message
 #'
 #' Function to modify the labels on a given message by id.
 #' @param add_labels labels to add to the specified message
@@ -191,7 +239,7 @@ attachment = function(id, message_id, user_id = 'me') {
   content(req)
 }
 
-#' Save all of the attachments to a message.
+#' Save all of the attachments to a message
 #'
 #' Function to retrieve and save all of the attachments to a message by id of the message.
 #' @param message_id id of the parent message
@@ -225,7 +273,7 @@ history = function(start_history_id = NULL, num_results = NULL, label_id = NULL,
   page_and_trim('history', user_id, num_results, label_id, start_history_id, page_token)
 }
 
-#' Get a list of all Labels.
+#' Get a list of all labels
 #'
 #' Get a list of all labels for a user.
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/list}
@@ -238,7 +286,7 @@ labels = function(user_id = 'me'){
 }
 
 
-#' Get a specific Label.
+#' Get a specific label
 #'
 #' Get a specific label by id and user_id.
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
@@ -278,7 +326,7 @@ update_label_patch = function(id, label, user_id = 'me') {
   invisible(content(req))
 }
 
-#' Permanently delete a label.
+#' Permanently delete a label
 #'
 #' Function to delete a label by id.  This cannot be undone!
 #' @inheritParams labels
@@ -333,6 +381,7 @@ name_map = c(
   "start_history_id" = "startHistoryId",
   "label_list_visibility" = "labelListVisibility",
   "message_list_visibility" = "messageListVisibility",
+  "upload_type" = "uploadType",
   NULL
 )
 
