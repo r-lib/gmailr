@@ -16,7 +16,7 @@ NULL
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/get}
 #' @export
 draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
-  format = match.args(format)
+  format = match.arg(format)
   req = GET(gmail_path(user_id, "drafts", id),
             query = format,
             config(token = google_token))
@@ -27,13 +27,12 @@ draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
 #' Get a list of drafts
 #'
 #' Get a list of drafts possibly matching a given query string.
-#' @param search query to use, same format as gmail search box.
 #' @param num_results the number of results to return.
 #' @param page_token retrieve a specific page of results
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
-drafts = function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me'){
-  page_and_trim('drafts', user_id, num_results, search, page_token, label_ids, include_spam_trash)
+drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
+  page_and_trim('drafts', user_id, num_results, page_token)
 }
 
 #' Send a draft
@@ -44,7 +43,7 @@ drafts = function(search = NULL, num_results = NULL, page_token = NULL, label_id
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
 send_draft = function(id, upload_type = c("media", "multipart", "resumable"), user_id = 'me') {
-  upload_type = match.args(upload_type)
+  upload_type = match.arg(upload_type)
   req = POST(gmail_path(user_id, "drafts"),
              query=rename(upload_type),
              body=c("id"=id), encode="json",
@@ -145,7 +144,7 @@ modify_thread = function(id, add_labels = character(0), remove_labels = characte
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
 #' @export
 message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
-  format = match.args(format)
+  format = match.arg(format)
   req = GET(gmail_path(user_id, "messages", id),
             query = format,
             config(token = google_token))
@@ -417,6 +416,9 @@ page_and_trim = function(type, user_id, num_results, ...){
   }
   counts = function(res) { vapply(lapply(res, `[[`, type), length, integer(1)) }
   trim = function(res, amount) {
+    if(is.null(amount)){
+      return(res)
+    }
     num = counts(res)
     count = 0
     itr = 0
