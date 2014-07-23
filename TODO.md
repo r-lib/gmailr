@@ -1,3 +1,3 @@
-- [ ] handle multipage results
-- [ ] printing messages
-- [ ] sending email
+- [x] handle multipage results
+- [x] printing messages
+- [ ] sending email (Punting for now, as there is no Mime formatter for R I have found yet)

@@ -4,6 +4,7 @@
 #' @docType package
 #' @name gmailr
 #' @import httr
+#' @import base64enc
 NULL
 
 #' Get a single draft
@@ -149,7 +150,68 @@ message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
             query = format,
             config(token = google_token))
   check(req)
-  content(req)
+  cont = content(req)
+  class(cont) = c(class(cont), 'gmail_message')
+  cont
+}
+
+#' @export
+body = function(x, ...) UseMethod("body")
+
+body.default = base::body
+
+#' Extract the message body from an email message
+#'
+#' If a multipart message was returned each part will be a separate list item.
+#' @param x message to retrieve body for
+#' @param collapse collapse multipart message into one
+body.gmail_message = function(x, collapse = FALSE, ...){
+  res = lapply(x$payload$parts,
+         function(x){
+           base64url_decode_to_char(x$body$data)
+         })
+  if(collapse){
+    paste0(collapse='\n', res)
+  }
+  else {
+    res
+  }
+}
+
+#' @export
+to = function(x, ...) UseMethod("to")
+
+to.gmail_message = function(x, ...){ header_value(x, "To") }
+
+#' @export
+from = function(x, ...) UseMethod("from")
+
+from.gmail_message = function(x, ...){ header_value(x, "From") }
+
+#' @export
+date = function(x, ...) UseMethod("date")
+
+date.gmail_message = function(x, ...){ header_value(x, "Date") }
+
+#' @export
+subject = function(x, ...) UseMethod("subject")
+
+subject.gmail_message = function(x, ...) { header_value(x, "Subject") }
+
+header_value = function(x, name){
+  Filter(function(header) identical(header$name, name), x$payload$headers)[[1]]$value
+}
+
+print.gmail_message = function(x, ...){
+  to = to(x)
+  from = from(x)
+  date = date(x)
+  subject = subject(x)
+  cat("To: ", to, "\n")
+  cat("From: ", from, "\n")
+  cat("Date: ", date, "\n")
+  cat("Subject: ", subject, "\n",
+      body(x, collapse=TRUE))
 }
 
 #' Get a list of message
