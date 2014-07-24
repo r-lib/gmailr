@@ -22,7 +22,9 @@ draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
             query = format,
             config(token = google_token))
   check(req)
-  content(req)
+  cont = content(req)
+  class(cont) = c(class(cont), 'gmail_draft')
+  cont
 }
 
 #' Get a list of drafts
@@ -178,28 +180,38 @@ body.gmail_message = function(x, collapse = FALSE, ...){
   }
 }
 
+body.gmail_draft = function(x, ...){ body.gmail_message(x$message, ...) }
+
+#' @export
+id = function(x, ...) UseMethod("id")
+id.gmail_message = function(x, ...) { x$id }
+id.gmail_draft = id.gmail_message
+
 #' @export
 to = function(x, ...) UseMethod("to")
-
 to.gmail_message = function(x, ...){ header_value(x, "To") }
+to.gmail_draft = function(x, ...){ to.gmail_message(x$message, ...) }
 
 #' @export
 from = function(x, ...) UseMethod("from")
 
 from.gmail_message = function(x, ...){ header_value(x, "From") }
+from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 
 #' @export
 date = function(x, ...) UseMethod("date")
 
 date.gmail_message = function(x, ...){ header_value(x, "Date") }
+date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 
 #' @export
 subject = function(x, ...) UseMethod("subject")
 
 subject.gmail_message = function(x, ...) { header_value(x, "Subject") }
+subject.gmail_draft = function(x, ...){ subject.gmail_message(x$message, ...) }
 
 header_value = function(x, name){
-  Filter(function(header) identical(header$name, name), x$payload$headers)[[1]]$value
+  Find(function(header) identical(header$name, name), x$payload$headers)$value
 }
 
 print.gmail_message = function(x, ...){
@@ -207,11 +219,25 @@ print.gmail_message = function(x, ...){
   from = from(x)
   date = date(x)
   subject = subject(x)
+  id = id(x)
+  cat("Id: ", id, "\n")
   cat("To: ", to, "\n")
   cat("From: ", from, "\n")
   cat("Date: ", date, "\n")
   cat("Subject: ", subject, "\n",
       body(x, collapse=TRUE))
+}
+print.gmail_draft = print.gmail_message
+
+print.gmail_messages = function(x, ...){
+  ids = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'id') }))
+  threads = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'threadId') }))
+  print(data.frame(Id=ids, thread=threads))
+}
+print.gmail_threads = function(x, ...){
+  ids = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'id') }))
+  snip = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'snippet') }))
+  print(data.frame(Id=ids, snippet=snip))
 }
 
 #' Get a list of message
@@ -417,91 +443,4 @@ create_label = function(name, label_list_visibility=c("hide", "show", "show_unre
             config(token = google_token))
   check(req)
   invisible(content(req))
-}
-
-label_value_map = c("hide" = "labelHide",
-                    "show" = "labelShow",
-                    "show_unread" = "labelSHowIfUnread",
-                    NULL
-                    )
-
-check <- function(req) {
-  if (req$status_code < 400) return(invisible())
-
-  stop("HTTP failure: ", req$status_code, "\n", req, call. = FALSE)
-}
-
-name_map = c(
-  "user_id" = "userId",
-  "search" = "q",
-  "num_results" = "maxResults",
-  "add_labels" = "addLabelIds",
-  "remove_labels" = "removeLabelIds",
-  "page_token" = "pageToken",
-  "include_spam_trash" = "includeSpamTrash",
-  "start_history_id" = "startHistoryId",
-  "label_list_visibility" = "labelListVisibility",
-  "message_list_visibility" = "messageListVisibility",
-  "upload_type" = "uploadType",
-  NULL
-)
-
-rename = function(...) {
-  args = as.character(dots(...))
-  to_rename = args %in% names(name_map)
-  args[to_rename] = name_map[args[to_rename]]
-
-  vals = list(...)
-  names(vals) = args
-  vals
-}
-not_null = function(x){ Filter(Negate(is.null), x) }
-
-gmail_path = function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, ..., sep="/") }
-base64url_decode_to_char = function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
-base64url_decode = function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
-
-debug = function(...){
-  args = dots(...)
-
-  message(sprintf(paste0(args, '=%s', collapse=' '), ...))
-}
-
-dots = function (...) { eval(substitute(alist(...))) }
-
-page_and_trim = function(type, user_id, num_results, ...){
-  itr = function(...){
-    req = GET(gmail_path(user_id, type),
-             query = not_null(rename(...)), config(token = google_token))
-    check(req)
-    content(req)
-  }
-  counts = function(res) { vapply(lapply(res, `[[`, type), length, integer(1)) }
-  trim = function(res, amount) {
-    if(is.null(amount)){
-      return(res)
-    }
-    num = counts(res)
-    count = 0
-    itr = 0
-    while(count < amount && itr <= length(num)){
-      itr = itr + 1
-      count = count + num[itr]
-    }
-    remain = amount - count
-    if(itr > length(res)){
-      res
-    }
-    else {
-      res[[itr]][[type]] = res[[itr]][[type]][1:(num[itr] + remain)]
-      res[1:itr]
-    }
-  }
-  res = itr(...)
-  all_results = list(res)
-  while(sum(counts(all_results)) < num_results && !is.null(res[['nextPageToken']])){
-    res = itr(...)
-    all_results[[length(all_results)+1]] = res
-  }
-  trim(all_results, num_results)
 }

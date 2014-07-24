@@ -2,14 +2,14 @@
 Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
 
 ## Features ##
-- retrieve data
+- retrieve data from your email
   - drafts
   - history
   - labels
   - messages
   - threads
 - manage email labels programmatically
-- send mail to the trash and untrash
+- put mail in the gmail trash and remove it
 - delete mail without sending to the trash
 
 ## Setup ##
