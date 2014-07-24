@@ -1,9 +1,3 @@
-check <- function(req) {
-  if (req$status_code < 400) return(invisible())
-
-  stop("HTTP failure: ", req$status_code, "\n", req, call. = FALSE)
-}
-
 label_value_map = c("hide" = "labelHide",
                     "show" = "labelShow",
                     "show_unread" = "labelSHowIfUnread",
@@ -52,8 +46,8 @@ page_and_trim = function(type, user_id, num_results, ...){
   itr = function(...){
     req = GET(gmail_path(user_id, type),
              query = not_null(rename(...)), config(token = google_token))
-    check(req)
-    content(req)
+    stop_for_status(req)
+    content(req, "parsed")
   }
   counts = function(res) { vapply(lapply(res, `[[`, type), length, integer(1)) }
   trim = function(res, amount) {
@@ -82,7 +76,5 @@ page_and_trim = function(type, user_id, num_results, ...){
     res = itr(...)
     all_results[[length(all_results)+1]] = res
   }
-  final = trim(all_results, num_results)
-  class(final) = c(class(final), paste0('gmail_', type))
-  final
+  structure(trim(all_results, num_results), class=paste0('gmail_', type))
 }

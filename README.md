@@ -3,35 +3,37 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
 
 ## Features ##
 - retrieve data from your email
-  - drafts
-  - history
-  - labels
-  - messages
-  - threads
-- manage email labels programmatically
-- put mail in the gmail trash and remove it
-- delete mail without sending to the trash
+  - drafts: `my_drafts = drafts()`
+  - history: `my_history = history(start_num)`
+  - labels: `my_labels = labels()`
+  - messages: `my_messages = messages("search query")`
+  - threads: `my_threads = threads("search query")`
+- manage email labels programmatically: `modify_thread(thread_id, add_labels=c("label_1"), remove_labels=c("label_2"))`
+- put things in the gmail trash
+  - messages: `trash_message(message_id)`
+  - threads: `trash_thread(thread_id)`
+- take things out of the gmail trash
+  - messages: `untrash_message(message_id)`
+  - threads: `untrash_thread(thread_id)`
+- delete directly without using the trash
+  - messages: `delete_message(message_id)`
+  - threads: `delete_thread(thread_id)`
 
 ## Setup ##
 This package is still in the rough stages, so getting it setup is a bit of a pain. The steps to do so are detailed below.
 
-1. Setup the oauth endpoint
-
-  ```s
-  oauth_endpoints("google")
-  ```
-2. Register an application at https://cloud.google.com/console#/project
+1. Register an application at https://cloud.google.com/console#/project
    - create a new client ID and download the resulting JSON
    - read your client_id and secret from `file.json`
 
   ```s
   info = fromJSON(readChar('file.json', nchars=100000))
-  myapp <- oauth_app("google", info$installed$client_id, info$installed$client_secret)
+  myapp = oauth_app("google", info$installed$client_id, info$installed$client_secret)
   ```
-3. Get OAuth credentials
+2. Get OAuth credentials
 
   ```s
-  google_token <- oauth2.0_token(oauth_endpoints("google"), myapp,
+  google_token = oauth2.0_token(oauth_endpoints("google"), myapp,
     scope = "https://www.googleapis.com/auth/gmail.readonly")
   ```
 

@@ -21,10 +21,8 @@ draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   req = GET(gmail_path(user_id, "drafts", id),
             query = format,
             config(token = google_token))
-  check(req)
-  cont = content(req)
-  class(cont) = c(class(cont), 'gmail_draft')
-  cont
+  stop_for_status(req)
+  structure(content(req, "parsed"), class='gmail_draft')
 }
 
 #' Get a list of drafts
@@ -51,8 +49,8 @@ send_draft = function(id, upload_type = c("media", "multipart", "resumable"), us
              query=rename(upload_type),
              body=c("id"=id), encode="json",
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Get a list of threads
@@ -78,8 +76,8 @@ threads = function(search = NULL, num_results = NULL, page_token = NULL, label_i
 thread = function(id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "threads", id),
             config(token = google_token))
-  check(req)
-  content(req)
+  stop_for_status(req)
+  content(req, "parsed")
 }
 
 #' Send a single thread to the trash
@@ -91,8 +89,8 @@ thread = function(id, user_id = 'me') {
 trash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "trash"),
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Remove a single thread from the trash.
@@ -104,8 +102,8 @@ trash_thread = function(id, user_id = 'me') {
 untrash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "untrash"),
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Permanently delete a single thread.
@@ -117,8 +115,8 @@ untrash_thread = function(id, user_id = 'me') {
 delete_thread = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "threads", id),
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Modify the labels on a thread
@@ -133,8 +131,8 @@ modify_thread = function(id, add_labels = character(0), remove_labels = characte
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
   req = POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body, encode="json",
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Get a single message
@@ -151,10 +149,8 @@ message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   req = GET(gmail_path(user_id, "messages", id),
             query = format,
             config(token = google_token))
-  check(req)
-  cont = content(req)
-  class(cont) = c(class(cont), 'gmail_message')
-  cont
+  stop_for_status(req)
+  structure(content(req, "parsed"), class='gmail_message')
 }
 
 #' @export
@@ -261,8 +257,8 @@ messages = function(search = NULL, num_results = NULL, page_token = NULL, label_
 trash_message = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Remove a single message from the trash
@@ -274,8 +270,8 @@ trash_message = function(id, user_id = 'me') {
 untrash_message = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Permanently delete a single message
@@ -287,8 +283,8 @@ untrash_message = function(id, user_id = 'me') {
 delete_message = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "messages", id),
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Modify the labels on a message
@@ -303,11 +299,9 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
   req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body,
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
-
-#TODO: message_send
 
 #' Retrieve an attachment to a message
 #'
@@ -322,8 +316,8 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
 attachment = function(id, message_id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "messages", message_id, 'attachments', id),
             config(token = google_token))
-  check(req)
-  content(req)
+  stop_for_status(req)
+  content(req, "parsed")
 }
 
 #' Save all of the attachments to a message
@@ -368,8 +362,8 @@ history = function(start_history_id = NULL, num_results = NULL, label_id = NULL,
 labels = function(user_id = 'me'){
   req = GET(gmail_path(user_id, "labels"),
             config(token = google_token))
-  check(req)
-  content(req)
+  stop_for_status(req)
+  content(req, "parsed")
 }
 
 
@@ -382,8 +376,8 @@ labels = function(user_id = 'me'){
 label = function(id, user_id = 'me') {
   req = GET(gmail_path(user_id, "labels", id),
             config(token = google_token))
-  check(req)
-  content(req)
+  stop_for_status(req)
+  content(req, "parsed")
 }
 
 #' Update a existing label.
@@ -399,8 +393,8 @@ update_label = function(id, label, user_id = 'me') {
   req = POST(gmail_path(user_id, "labels", id),
               body=label, encode='json',
               config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' @rdname update_label
@@ -409,8 +403,8 @@ update_label_patch = function(id, label, user_id = 'me') {
   req = PATCH(gmail_path(user_id, "labels", id),
               body=label, encode='json',
               config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Permanently delete a label
@@ -422,8 +416,8 @@ update_label_patch = function(id, label, user_id = 'me') {
 delete_label = function(id, user_id = 'me') {
   req = DELETE(gmail_path(user_id, "labels", id),
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
 
 #' Create a new label
@@ -441,6 +435,6 @@ create_label = function(name, label_list_visibility=c("hide", "show", "show_unre
   req = POST(gmail_path(user_id, "labels"),
                body=c(rename(name, label_list_visibility, message_list_visibility)), encode="json",
             config(token = google_token))
-  check(req)
-  invisible(content(req))
+  stop_for_status(req)
+  invisible(content(req, "parsed"))
 }
