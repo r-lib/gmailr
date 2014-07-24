@@ -2,12 +2,12 @@
 Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
 
 ## Features ##
-- retrieve data from your email
-  - drafts: `my_drafts = drafts()`
-  - history: `my_history = history(start_num)`
-  - labels: `my_labels = labels()`
-  - messages: `my_messages = messages("search query")`
-  - threads: `my_threads = threads("search query")`
+- Retrieve data from your email
+  - drafts: `drafts()`
+  - history: `history(start_num)`
+  - labels: `labels()`
+  - messages: `messages("search query")`
+  - threads: `threads("search query")`
 - manage email labels programmatically: `modify_thread(thread_id, add_labels="label_1")`
 - put things in the gmail trash
   - messages: `trash_message(message_id)`
