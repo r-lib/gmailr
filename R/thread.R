@@ -1,10 +1,7 @@
 #' Get a list of threads
 #'
 #' Get a list of threads possibly matching a given query string.
-#' @param search query to use, same format as gmail search box.
-#' @param num_results the number of results to return, max per page is 100
-#' @param page_token retrieve a specific page of results
-#' @inheritParams thread
+#' @inheritParams messages
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
 #' @export
 #' @examples

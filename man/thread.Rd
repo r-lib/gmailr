@@ -13,6 +13,11 @@ thread(id, user_id = "me")
 \description{
 Function to retrieve a given thread by id
 }
+\examples{
+\dontrun{
+my_thread = thread(12345)
+}
+}
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/thread}
 }

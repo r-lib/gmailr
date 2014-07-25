@@ -13,6 +13,11 @@ delete_thread(id, user_id = "me")
 \description{
 Function to delete a given thread by id.  This cannot be undone!
 }
+\examples{
+\dontrun{
+delete_thread(12345)
+}
+}
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/delete}
 }

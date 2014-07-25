@@ -7,6 +7,31 @@
 #' @import base64enc
 NULL
 
+
+google_token = NULL
+#' Setup oauth authentication for your gmail
+#' @param secret_file the secret json file downloaded from \url{https://cloud.google.com/console#/project}
+#' @param scope the authentication scope to use
+#' @export
+#' @examples
+#' \dontrun{
+#' body(my_message)
+#' body(my_draft)
+#' }
+gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "full")){
+
+  info = jsonlite::fromJSON(readChar(secret_file, nchars=1e5))
+  myapp = oauth_app("google", info$installed$client_id, info$installed$client_secret)
+
+  scope = switch(match.arg(scope),
+                 read_only = 'https://www.googleapis.com/auth/gmail.readonly',
+                 modify = 'https://www.googleapis.com/auth/gmail.modify',
+                 compose = 'https://www.googleapis.com/auth/gmail.compose',
+                 full = 'https://mail.google.com/'
+                 )
+
+  google_token <<- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
+}
 #' Get the body text of a message or draft
 #' @param x the object from which to retrieve the body
 #' @param ... other parameters passed to methods
@@ -18,13 +43,12 @@ NULL
 #' }
 body = function(x, ...) UseMethod("body")
 
-body.default = base::body
-
 #' Extract the message body from an email message
 #'
 #' If a multipart message was returned each part will be a separate list item.
 #' @param x message to retrieve body for
 #' @param collapse collapse multipart message into one
+#' @param ... other options ignored
 body.gmail_message = function(x, collapse = FALSE, ...){
   res = lapply(x$payload$parts,
          function(x){
@@ -115,6 +139,7 @@ header_value = function(x, name){
 #' Print a gmail_message
 #' @param x the object to print
 #' @param ... other parameters passed to methods
+#' @export
 #' @examples
 #' \dontrun{
 #' my_message
@@ -135,6 +160,7 @@ print.gmail_message = function(x, ...){
 #' Print a gmail_draft
 #' @param x the object to print
 #' @param ... other parameters passed to methods
+#' @export
 #' @examples
 #' \dontrun{
 #' my_message
@@ -146,6 +172,7 @@ print.gmail_draft = print.gmail_message
 #' Prints each message_id and the corresponding thread_id
 #' @param x the object to print
 #' @param ... other parameters passed to methods
+#' @export
 #' @examples
 #' \dontrun{
 #' my_message
@@ -161,6 +188,7 @@ print.gmail_messages = function(x, ...){
 #' Prints each thread_id and the corresponding snippet.
 #' @param x the object to print
 #' @param ... other parameters passed to methods
+#' @export
 #' @examples
 #' \dontrun{
 #' my_message
@@ -170,4 +198,3 @@ print.gmail_threads = function(x, ...){
   snip = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'snippet') }))
   print(data.frame(thread_id=ids, snippet=snip))
 }
-

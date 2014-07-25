@@ -9,14 +9,25 @@ threads(search = NULL, num_results = NULL, page_token = NULL,
 \arguments{
 \item{search}{query to use, same format as gmail search box.}
 
-\item{num_results}{the number of results to return, max per page is 100}
+\item{num_results}{the number of results to return.}
 
 \item{page_token}{retrieve a specific page of results}
+
+\item{label_ids}{restrict search to given labels}
+
+\item{include_spam_trash}{boolean whether to include the spam and trash folders in the search}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
 \description{
 Get a list of threads possibly matching a given query string.
+}
+\examples{
+\dontrun{
+my_threads = threads()
+
+first_10_threads = threads(10)
+}
 }
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}

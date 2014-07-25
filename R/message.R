@@ -116,8 +116,7 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
 #' Retrieve an attachment to a message
 #'
 #' Function to retrieve an attachment to a message by id of the attachment
-#' and message.  This returns the base64 url encoded data, use
-#' \link{\code{base64url_decode}} to get the raw bytes.
+#' and message.  To save the attachment use \code{\link{save_attachment}}.
 #' @param id id of the attachment
 #' @param message_id id of the parent message
 #' @inheritParams message
@@ -138,8 +137,8 @@ attachment = function(id, message_id, user_id = 'me') {
 
 #' save the attachment to a file
 #'
-#' this only works on attachments retrieved with \link{\code{attachment}}.
-#' To save an attachment directly from a message see \link{\code{save_attachments}}
+#' this only works on attachments retrieved with \code{\link{attachment}}.
+#' To save an attachment directly from a message see \code{\link{save_attachments}}
 #' @param x attachment to save
 #' @param filename location to save to
 #' @export
@@ -158,7 +157,7 @@ save_attachment = function(x, filename){
 #' Save attachments to a message
 #'
 #' Function to retrieve and save all of the attachments to a message by id of the message.
-#' @param message_id id of the parent message
+#' @param x message with attachment
 #' @param attachment_id id of the attachment to save, if none specified saves all attachments
 #' @param path where to save the attachments
 #' @inheritParams message

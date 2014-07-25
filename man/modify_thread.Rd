@@ -18,6 +18,14 @@ modify_thread(id, add_labels = character(0), remove_labels = character(0),
 \description{
 Function to modify the labels on a given thread by id.
 }
+\examples{
+\dontrun{
+modify_thread(12345, add_labels='label_1')
+modify_thread(12345, remove_labels='label_1')
+#add and remove at the same time
+modify_thread(12345, add_labels='label_2', remove_labels='label_1')
+}
+}
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/modify}
 }

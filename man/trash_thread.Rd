@@ -13,6 +13,11 @@ trash_thread(id, user_id = "me")
 \description{
 Function to trash a given thread by id.  This can be undone by \code{\link{untrash_thread}}.
 }
+\examples{
+\dontrun{
+trash_thread(12345)
+}
+}
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/trash}
 }
