@@ -16,6 +16,10 @@ NULL
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/get}
 #' @export
+#' @examples
+#' \dontrun{
+#' my_draft = draft('12345')
+#' }
 draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   format = match.arg(format)
   req = GET(gmail_path(user_id, "drafts", id),
@@ -32,6 +36,12 @@ draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
 #' @param page_token retrieve a specific page of results
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
+#' @examples
+#' \dontrun{
+#' my_drafts = drafts()
+#'
+#' first_10_drafts = drafts(10)
+#' }
 drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
   page_and_trim('drafts', user_id, num_results, page_token)
 }
@@ -43,6 +53,10 @@ drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
 #' @param upload_type type of upload request
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
+#' @examples
+#' \dontrun{
+#' send_draft(12345)
+#' }
 send_draft = function(id, upload_type = c("media", "multipart", "resumable"), user_id = 'me') {
   upload_type = match.arg(upload_type)
   req = POST(gmail_path(user_id, "drafts"),
@@ -62,6 +76,12 @@ send_draft = function(id, upload_type = c("media", "multipart", "resumable"), us
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
 #' @export
+#' @examples
+#' \dontrun{
+#' my_threads = threads()
+#'
+#' first_10_threads = threads(10)
+#' }
 threads = function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me'){
   page_and_trim('threads', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
@@ -73,6 +93,10 @@ threads = function(search = NULL, num_results = NULL, page_token = NULL, label_i
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/thread}
 #' @export
+#' @examples
+#' \dontrun{
+#' my_thread = thread(12345)
+#' }
 thread = function(id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "threads", id),
             config(token = google_token))
@@ -86,6 +110,10 @@ thread = function(id, user_id = 'me') {
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/trash}
 #' @export
+#' @examples
+#' \dontrun{
+#' trash_thread(12345)
+#' }
 trash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "trash"),
             config(token = google_token))
@@ -99,6 +127,10 @@ trash_thread = function(id, user_id = 'me') {
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/untrash}
 #' @export
+#' @examples
+#' \dontrun{
+#' untrash_thread(12345)
+#' }
 untrash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "untrash"),
             config(token = google_token))
@@ -112,6 +144,10 @@ untrash_thread = function(id, user_id = 'me') {
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/delete}
 #' @export
+#' @examples
+#' \dontrun{
+#' delete_thread(12345)
+#' }
 delete_thread = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "threads", id),
             config(token = google_token))
@@ -127,6 +163,13 @@ delete_thread = function(id, user_id = 'me') {
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/modify}
 #' @export
+#' @examples
+#' \dontrun{
+#' modify_thread(12345, add_labels='label_1')
+#' modify_thread(12345, remove_labels='label_1')
+#' #add and remove at the same time
+#' modify_thread(12345, add_labels='label_2', remove_labels='label_1')
+#' }
 modify_thread = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
   req = POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body, encode="json",
@@ -144,6 +187,10 @@ modify_thread = function(id, add_labels = character(0), remove_labels = characte
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
 #' @export
+#' @examples
+#' \dontrun{
+#' my_message = message(12345)
+#' }
 message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   format = match.arg(format)
   req = GET(gmail_path(user_id, "messages", id),
@@ -153,7 +200,15 @@ message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   structure(content(req, "parsed"), class='gmail_message')
 }
 
+#' Get the body text of a message or draft
+#' @param x the object from which to retrieve the body
+#' @param ... other parameters passed to methods
 #' @export
+#' @examples
+#' \dontrun{
+#' body(my_message)
+#' body(my_draft)
+#' }
 body = function(x, ...) UseMethod("body")
 
 body.default = base::body
@@ -178,29 +233,69 @@ body.gmail_message = function(x, collapse = FALSE, ...){
 
 body.gmail_draft = function(x, ...){ body.gmail_message(x$message, ...) }
 
+#' Get the id of a message or draft
+#' @param x the object from which to retrieve the id
+#' @param ... other parameters passed to methods
 #' @export
+#' @examples
+#' \dontrun{
+#' id(my_message)
+#' id(my_draft)
+#' }
 id = function(x, ...) UseMethod("id")
 id.gmail_message = function(x, ...) { x$id }
 id.gmail_draft = id.gmail_message
 
+#' Get the to field of a message or draft
+#' @param x the object from which to retrieve the field
+#' @param ... other parameters passed to methods
 #' @export
+#' @examples
+#' \dontrun{
+#' to(my_message)
+#' to(my_draft)
+#' }
 to = function(x, ...) UseMethod("to")
 to.gmail_message = function(x, ...){ header_value(x, "To") }
 to.gmail_draft = function(x, ...){ to.gmail_message(x$message, ...) }
 
+#' Get the from field of a message or draft
+#' @param x the object from which to retrieve the field
+#' @param ... other parameters passed to methods
 #' @export
+#' @examples
+#' \dontrun{
+#' from(my_message)
+#' from(my_draft)
+#' }
 from = function(x, ...) UseMethod("from")
 
 from.gmail_message = function(x, ...){ header_value(x, "From") }
 from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 
+#' Get the date field of a message or draft
+#' @param x the object from which to retrieve the field
+#' @param ... other parameters passed to methods
 #' @export
+#' @examples
+#' \dontrun{
+#' date(my_message)
+#' date(my_draft)
+#' }
 date = function(x, ...) UseMethod("date")
 
 date.gmail_message = function(x, ...){ header_value(x, "Date") }
 date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 
+#' Get the subject field of a message or draft
+#' @param x the object from which to retrieve the field
+#' @param ... other parameters passed to methods
 #' @export
+#' @examples
+#' \dontrun{
+#' subject(my_message)
+#' subject(my_draft)
+#' }
 subject = function(x, ...) UseMethod("subject")
 
 subject.gmail_message = function(x, ...) { header_value(x, "Subject") }
@@ -210,6 +305,13 @@ header_value = function(x, name){
   Find(function(header) identical(header$name, name), x$payload$headers)$value
 }
 
+#' Print a gmail_message
+#' @param x the object to print
+#' @param ... other parameters passed to methods
+#' @examples
+#' \dontrun{
+#' my_message
+#' }
 print.gmail_message = function(x, ...){
   to = to(x)
   from = from(x)
@@ -223,17 +325,43 @@ print.gmail_message = function(x, ...){
   cat("Subject: ", subject, "\n",
       body(x, collapse=TRUE))
 }
+#' Print a gmail_draft
+#' @param x the object to print
+#' @param ... other parameters passed to methods
+#' @examples
+#' \dontrun{
+#' my_message
+#' }
 print.gmail_draft = print.gmail_message
 
+#' Print a list of gmail_messages
+#'
+#' Prints each message_id and the corresponding thread_id
+#' @param x the object to print
+#' @param ... other parameters passed to methods
+#' @examples
+#' \dontrun{
+#' my_message
+#' }
 print.gmail_messages = function(x, ...){
   ids = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'id') }))
   threads = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'threadId') }))
-  print(data.frame(Id=ids, thread=threads))
+  print(data.frame(message_id=ids, thread_id=threads))
 }
+
+#' Print a list of gmail_threads
+#'
+#' Prints each thread_id and the corresponding snippet.
+#' @param x the object to print
+#' @param ... other parameters passed to methods
+#' @examples
+#' \dontrun{
+#' my_message
+#' }
 print.gmail_threads = function(x, ...){
   ids = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'id') }))
   snip = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'snippet') }))
-  print(data.frame(Id=ids, snippet=snip))
+  print(data.frame(thread_id=ids, snippet=snip))
 }
 
 #' Get a list of message
@@ -242,9 +370,16 @@ print.gmail_threads = function(x, ...){
 #' @param search query to use, same format as gmail search box.
 #' @param num_results the number of results to return.
 #' @param page_token retrieve a specific page of results
+#' @param label_ids restrict search to given labels
+#' @param include_spam_trash boolean whether to include the spam and trash folders in the search
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
-messages = function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me'){
+#' @examples
+#' \dontrun{
+#' #Search for R, return 10 results using label 1 including spam and trash folders
+#' my_messages = messages("R", 10, "label_1", TRUE)
+#' }
+messages = function(search = NULL, num_results = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me', page_token = NULL){
   page_and_trim('messages', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
@@ -254,6 +389,10 @@ messages = function(search = NULL, num_results = NULL, page_token = NULL, label_
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
 #' @export
+#' @examples
+#' \dontrun{
+#' trash_message('12345')
+#' }
 trash_message = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
             config(token = google_token))
@@ -267,6 +406,10 @@ trash_message = function(id, user_id = 'me') {
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
 #' @export
+#' @examples
+#' \dontrun{
+#' untrash_message('12345')
+#' }
 untrash_message = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
             config(token = google_token))
@@ -280,6 +423,10 @@ untrash_message = function(id, user_id = 'me') {
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/delete}
 #' @export
+#' @examples
+#' \dontrun{
+#' delete_message('12345')
+#' }
 delete_message = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "messages", id),
             config(token = google_token))
@@ -295,6 +442,13 @@ delete_message = function(id, user_id = 'me') {
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/modify}
 #' @export
+#' @examples
+#' \dontrun{
+#' modify_message(12345, add_labels='label_1')
+#' modify_message(12345, remove_labels='label_1')
+#' #add and remove at the same time
+#' modify_message(12345, add_labels='label_2', remove_labels='label_1')
+#' }
 modify_message = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
   req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body,
@@ -313,29 +467,65 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
 #' @export
+#' @examples
+#' \dontrun{
+#' my_attachment = attachment('a32e324b', '12345')
+#' save attachment to a file
+#' save_attachment(my_attachment, 'photo.jpg')
+#' }
 attachment = function(id, message_id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "messages", message_id, 'attachments', id),
             config(token = google_token))
   stop_for_status(req)
-  content(req, "parsed")
+  structure(content(req, "parsed"), class="gmail_attachment")
 }
 
-#' Save all of the attachments to a message
+#' save the attachment to a file
+#'
+#' this only works on attachments retrieved with \link{\code{attachment}}.
+#' To save an attachment directly from a message see \link{\code{save_attachments}}
+#' @param x attachment to save
+#' @param filename location to save to
+#' @export
+#' @examples
+#' \dontrun{
+#' my_attachment = attachment('a32e324b', '12345')
+#' save attachment to a file
+#' save_attachment(my_attachment, 'photo.jpg')
+#' }
+save_attachment = function(x, filename){
+  data = base64url_decode(x$data)
+  writeBin(object=data, con=filename)
+  invisible()
+}
+
+#' Save attachments to a message
 #'
 #' Function to retrieve and save all of the attachments to a message by id of the message.
 #' @param message_id id of the parent message
+#' @param attachment_id id of the attachment to save, if none specified saves all attachments
 #' @param path where to save the attachments
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
 #' @export
-save_attachments = function(message_id, path='', user_id = 'me'){
-  val = message(message_id, user_id)
-  for(part in val$payload$parts){
+#' @examples
+#' \dontrun{
+#' save all attachments
+#' save_attachments(my_message)
+#' save a specific attachment
+#' save_attachments(my_message, 'a32e324b')
+#' }
+save_attachments = function(x, attachment_id = NULL, path='', user_id = 'me'){
+  attachments_parts = if(!is.null(attachment_id)){
+    Find(function(part){ identical(part$body$attachmentId, attachment_id)}, x$payload$parts)
+  }
+  else {
+    Filter(function(part){ "filename" %in% names(part) && !identical(part$filename, '') }, x$payload$parts)
+  }
+  for(part in x$payload$parts){
     if('filename' %in% names(part) && part[['filename']] != ''){
-      att = attachment(part[['body']][['attachmentId']], message_id, user_id)
-      file = paste0(path, part[['filename']])
-      data = base64url_decode(att[['data']])
-      writeBin(object=data, con=file)
+      att = attachment(part[['body']][['attachmentId']], x$id, user_id)
+      save_attachment(att, paste0(path, part[['filename']]))
     }
   }
 }
@@ -350,6 +540,10 @@ save_attachments = function(message_id, path='', user_id = 'me'){
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/history/list}
 #' @export
+#' @examples
+#' \dontrun{
+#' my_history = history("10")
+#' }
 history = function(start_history_id = NULL, num_results = NULL, label_id = NULL, page_token = NULL,  user_id = 'me'){
   page_and_trim('history', user_id, num_results, label_id, start_history_id, page_token)
 }
@@ -357,8 +551,13 @@ history = function(start_history_id = NULL, num_results = NULL, label_id = NULL,
 #' Get a list of all labels
 #'
 #' Get a list of all labels for a user.
+#' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/list}
 #' @export
+#' @examples
+#' \dontrun{
+#' my_labels = labels()
+#' }
 labels = function(user_id = 'me'){
   req = GET(gmail_path(user_id, "labels"),
             config(token = google_token))
@@ -370,8 +569,9 @@ labels = function(user_id = 'me'){
 #' Get a specific label
 #'
 #' Get a specific label by id and user_id.
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
+#' @param id label id to retrieve
 #' @inheritParams labels
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
 #' @export
 label = function(id, user_id = 'me') {
   req = GET(gmail_path(user_id, "labels", id),
@@ -383,7 +583,7 @@ label = function(id, user_id = 'me') {
 #' Update a existing label.
 #'
 #' Get a specific label by id and user_id.  \code{update_label_patch} is identical to \code{update_label} but the latter uses \href{http://tools.ietf.org/html/rfc5789}{HTTP PATCH} to allow partial update.
-#' @param id label id
+#' @param id label id to update
 #' @param label the label fields to update
 #' @inheritParams labels
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/update}
@@ -410,7 +610,7 @@ update_label_patch = function(id, label, user_id = 'me') {
 #' Permanently delete a label
 #'
 #' Function to delete a label by id.  This cannot be undone!
-#' @inheritParams labels
+#' @inheritParams label
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/delete}
 #' @export
 delete_label = function(id, user_id = 'me') {
