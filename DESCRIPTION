@@ -5,7 +5,7 @@ Maintainer: Jim Hester <james.f.hester@gmail.com>
 Author: Jim Hester
 Title: Access the Gmail RESTful API from R.
 Description: An R interface to the Gmail RESTful API.  Allows access to your
-    gmail messages, threads, drafts and labels from R.
+    Gmail messages, threads, drafts and labels from R.
 Depends:
     R (>= 3.0.0)
 Imports:
