@@ -27,6 +27,7 @@ draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
 #' @param page_token retrieve a specific page of results
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
+#' @export
 #' @examples
 #' \dontrun{
 #' my_drafts = drafts()
@@ -44,6 +45,7 @@ drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
 #' @param upload_type type of upload request
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
+#' @export
 #' @examples
 #' \dontrun{
 #' send_draft(12345)

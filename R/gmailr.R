@@ -46,6 +46,7 @@ body = function(x, ...) UseMethod("body")
 #' Extract the message body from an email message
 #'
 #' If a multipart message was returned each part will be a separate list item.
+#' @export
 #' @param x message to retrieve body for
 #' @param collapse collapse multipart message into one
 #' @param ... other options ignored
@@ -62,6 +63,7 @@ body.gmail_message = function(x, collapse = FALSE, ...){
   }
 }
 
+#' @export
 body.gmail_draft = function(x, ...){ body.gmail_message(x$message, ...) }
 
 #' Get the id of a message or draft
@@ -74,7 +76,11 @@ body.gmail_draft = function(x, ...){ body.gmail_message(x$message, ...) }
 #' id(my_draft)
 #' }
 id = function(x, ...) UseMethod("id")
+
+#' @export
 id.gmail_message = function(x, ...) { x$id }
+
+#' @export
 id.gmail_draft = id.gmail_message
 
 #' Get the to field of a message or draft
@@ -87,7 +93,11 @@ id.gmail_draft = id.gmail_message
 #' to(my_draft)
 #' }
 to = function(x, ...) UseMethod("to")
+
+#' @export
 to.gmail_message = function(x, ...){ header_value(x, "To") }
+
+#' @export
 to.gmail_draft = function(x, ...){ to.gmail_message(x$message, ...) }
 
 #' Get the from field of a message or draft
@@ -101,7 +111,10 @@ to.gmail_draft = function(x, ...){ to.gmail_message(x$message, ...) }
 #' }
 from = function(x, ...) UseMethod("from")
 
+#' @export
 from.gmail_message = function(x, ...){ header_value(x, "From") }
+
+#' @export
 from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 
 #' Get the date field of a message or draft
@@ -115,7 +128,10 @@ from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 #' }
 date = function(x, ...) UseMethod("date")
 
+#' @export
 date.gmail_message = function(x, ...){ header_value(x, "Date") }
+
+#' @export
 date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 
 #' Get the subject field of a message or draft
@@ -129,7 +145,10 @@ date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 #' }
 subject = function(x, ...) UseMethod("subject")
 
+#' @export
 subject.gmail_message = function(x, ...) { header_value(x, "Subject") }
+
+#' @export
 subject.gmail_draft = function(x, ...){ subject.gmail_message(x$message, ...) }
 
 header_value = function(x, name){

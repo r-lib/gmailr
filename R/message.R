@@ -23,6 +23,7 @@ message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
 #' Get a list of messages
 #'
 #' Get a list of messages possibly matching a given query string.
+#' @export
 #' @param search query to use, same format as gmail search box.
 #' @param num_results the number of results to return.
 #' @param page_token retrieve a specific page of results
