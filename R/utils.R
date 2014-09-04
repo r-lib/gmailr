@@ -45,7 +45,7 @@ dots = function (...) { eval(substitute(alist(...))) }
 page_and_trim = function(type, user_id, num_results, ...){
   itr = function(...){
     req = GET(gmail_path(user_id, type),
-             query = not_null(rename(...)), config(token = google_token))
+             query = not_null(rename(...)), config(token = get_token()))
     stop_for_status(req)
     content(req, "parsed")
   }

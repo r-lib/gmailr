@@ -15,7 +15,7 @@ message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   format = match.arg(format)
   req = GET(gmail_path(user_id, "messages", id),
             query = format,
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   structure(content(req, "parsed"), class='gmail_message')
 }
@@ -52,7 +52,7 @@ messages = function(search = NULL, num_results = NULL, label_ids = NULL, include
 #' }
 trash_message = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -69,7 +69,7 @@ trash_message = function(id, user_id = 'me') {
 #' }
 untrash_message = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -86,7 +86,7 @@ untrash_message = function(id, user_id = 'me') {
 #' }
 delete_message = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "messages", id),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -109,7 +109,7 @@ delete_message = function(id, user_id = 'me') {
 modify_message = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
   req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body,
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -131,7 +131,7 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
 #' }
 attachment = function(id, message_id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "messages", message_id, 'attachments', id),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   structure(content(req, "parsed"), class="gmail_attachment")
 }

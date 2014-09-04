@@ -8,7 +8,15 @@
 NULL
 
 
-google_token = NULL
+gmailr_env = new.env(parent = emptyenv())
+
+get_token = function() {
+  if(!exists('token', gmailr_env)){
+    stop("Please register a gmail authentication token (https://cloud.google.com/console#/project) and run gmail_auth")
+  }
+  gmailr_env$token
+}
+
 #' Setup oauth authentication for your gmail
 #' @param secret_file the secret json file downloaded from \url{https://cloud.google.com/console#/project}
 #' @param scope the authentication scope to use
@@ -30,7 +38,7 @@ gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "fu
                  full = 'https://mail.google.com/'
                  )
 
-  google_token <<- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
+  gmailr_env$token = oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
 }
 #' Get the body text of a message or draft
 #' @param x the object from which to retrieve the body

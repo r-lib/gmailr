@@ -15,7 +15,7 @@ draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   format = match.arg(format)
   req = GET(gmail_path(user_id, "drafts", id),
             query = format,
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   structure(content(req, "parsed"), class='gmail_draft')
 }
@@ -55,7 +55,7 @@ send_draft = function(id, upload_type = c("media", "multipart", "resumable"), us
   req = POST(gmail_path(user_id, "drafts"),
              query=rename(upload_type),
              body=c("id"=id), encode="json",
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }

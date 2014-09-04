@@ -10,7 +10,7 @@
 #' }
 labels = function(user_id = 'me'){
   req = GET(gmail_path(user_id, "labels"),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   content(req, "parsed")
 }
@@ -25,7 +25,7 @@ labels = function(user_id = 'me'){
 #' @export
 label = function(id, user_id = 'me') {
   req = GET(gmail_path(user_id, "labels", id),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   content(req, "parsed")
 }
@@ -42,7 +42,7 @@ label = function(id, user_id = 'me') {
 update_label = function(id, label, user_id = 'me') {
   req = POST(gmail_path(user_id, "labels", id),
               body=label, encode='json',
-              config(token = google_token))
+              config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -52,7 +52,7 @@ update_label = function(id, label, user_id = 'me') {
 update_label_patch = function(id, label, user_id = 'me') {
   req = PATCH(gmail_path(user_id, "labels", id),
               body=label, encode='json',
-              config(token = google_token))
+              config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -65,7 +65,7 @@ update_label_patch = function(id, label, user_id = 'me') {
 #' @export
 delete_label = function(id, user_id = 'me') {
   req = DELETE(gmail_path(user_id, "labels", id),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -84,7 +84,7 @@ create_label = function(name, label_list_visibility=c("hide", "show", "show_unre
   message_list_visibility = match.arg(message_list_visibility)
   req = POST(gmail_path(user_id, "labels"),
                body=c(rename(name, label_list_visibility, message_list_visibility)), encode="json",
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }

@@ -27,7 +27,7 @@ threads = function(search = NULL, num_results = NULL, page_token = NULL, label_i
 #' }
 thread = function(id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "threads", id),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   content(req, "parsed")
 }
@@ -44,7 +44,7 @@ thread = function(id, user_id = 'me') {
 #' }
 trash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "trash"),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -61,7 +61,7 @@ trash_thread = function(id, user_id = 'me') {
 #' }
 untrash_thread = function(id, user_id = 'me') {
   req = POST(gmail_path(rename(user_id), "threads", id, "untrash"),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -78,7 +78,7 @@ untrash_thread = function(id, user_id = 'me') {
 #' }
 delete_thread = function(id, user_id = 'me') {
   req = DELETE(gmail_path(rename(user_id), "threads", id),
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -101,7 +101,7 @@ delete_thread = function(id, user_id = 'me') {
 modify_thread = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
   req = POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body, encode="json",
-            config(token = google_token))
+            config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
