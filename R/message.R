@@ -40,6 +40,50 @@ messages = function(search = NULL, num_results = NULL, label_ids = NULL, include
   page_and_trim('messages', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
+#' Extract information from a list of messages
+#'
+#' Extract the message ids, thread ids, the next page token or the result size
+#' estimate from a \code{gmail_messages} object created with \link{messages}.
+#'
+#' @param messages The output from \link{messages}.
+#' @param what Either \code{'id'}, \code{'threadId'}, \code{'nextPageToken'},
+#' \code{'resultSizeEstimate'}.
+#'
+#' @return For \code{what = 'id'} or \code{what = 'threadId'} a vector with the
+#' message ids or thread ids, respectively. Otherwise the next page token or 
+#' result size estimate information.
+#' 
+#' @export
+#' @author L. Collado-Torres <lcollado@@jhu.edu>
+#' @seealso \link{messages}
+#'
+#' @examples
+#' \dontrun{
+#' #Search for R, return 10 results using label 1 including spam and trash folders
+#' my_messages = messages("R", 10, "label_1", TRUE)
+#' 
+#' ## Extract the ids from the messages
+#' ids <- messages_info(my_messages)
+#'
+#' ## You can then use these ids as input for other functions.
+#' }
+
+messages_info <- function(messages, what = 'id') {
+    ## Check inputs
+    stopifnot(class(messages) == 'gmail_messages')
+    stopifnot(what %in% c('id', 'threadId', 'nextPageToken', 'resultSizeEstimate'))
+    
+    ## Extract the required info
+    if(what %in% c('id', 'threadId')) {
+        result <- sapply(messages[[1]]$messages, '[[', what)
+    } else {
+        result <- messages[[1]][[what]]
+    }
+    
+    ## Done
+    return(result)    
+}
+
 #' Send a single message to the trash
 #'
 #' Function to trash a given message by id.  This can be undone by \code{\link{untrash_message}}.
