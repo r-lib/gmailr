@@ -22,7 +22,7 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
 ## Setup ##
 
 Register an application at https://cloud.google.com/console#/project
-  - create a new client ID and download the resulting JSON
+  - create a new client ID (choose 'installed applications') and download the resulting JSON
   - authorize the application using `gmail_auth()`
 
       ```R
