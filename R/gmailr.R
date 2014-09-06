@@ -163,15 +163,8 @@ header_value = function(x, name){
   Find(function(header) identical(header$name, name), x$payload$headers)$value
 }
 
-#' Print a gmail_message
-#' @param x the object to print
-#' @param ... other parameters passed to methods
 #' @export
-#' @examples
-#' \dontrun{
-#' my_message
-#' }
-print.gmail_message = function(x, ...){
+format.gmail_message = function(x, ...){
   to = to(x)
   from = from(x)
   date = date(x)
@@ -184,44 +177,20 @@ print.gmail_message = function(x, ...){
   cat("Subject: ", subject, "\n",
       body(x, collapse=TRUE))
 }
-#' Print a gmail_draft
-#' @param x the object to print
-#' @param ... other parameters passed to methods
-#' @export
-#' @examples
-#' \dontrun{
-#' my_message
-#' }
-print.gmail_draft = print.gmail_message
 
-#' Print a list of gmail_messages
-#'
-#' Prints each message_id and the corresponding thread_id
-#' @param x the object to print
-#' @param ... other parameters passed to methods
 #' @export
-#' @examples
-#' \dontrun{
-#' my_message
-#' }
-print.gmail_messages = function(x, ...){
+format.gmail_draft = format.gmail_message
+
+#' @export
+format.gmail_messages = function(x, ...){
   ids = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'id') }))
   threads = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'threadId') }))
-  print(data.frame(message_id=ids, thread_id=threads))
+  format(data.frame(message_id=ids, thread_id=threads))
 }
 
-#' Print a list of gmail_threads
-#'
-#' Prints each thread_id and the corresponding snippet.
-#' @param x the object to print
-#' @param ... other parameters passed to methods
 #' @export
-#' @examples
-#' \dontrun{
-#' my_message
-#' }
-print.gmail_threads = function(x, ...){
+format.gmail_threads = function(x, ...){
   ids = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'id') }))
   snip = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'snippet') }))
-  print(data.frame(thread_id=ids, snippet=snip))
+  format(data.frame(thread_id=ids, snippet=snip))
 }
