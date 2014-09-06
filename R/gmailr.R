@@ -58,6 +58,7 @@ body = function(x, ...) UseMethod("body")
 #' @param x message to retrieve body for
 #' @param collapse collapse multipart message into one
 #' @param ... other options ignored
+#' @rdname body
 body.gmail_message = function(x, collapse = FALSE, ...){
   res = lapply(x$payload$parts,
          function(x){
@@ -72,9 +73,10 @@ body.gmail_message = function(x, collapse = FALSE, ...){
 }
 
 #' @export
+#' @rdname body
 body.gmail_draft = function(x, ...){ body.gmail_message(x$message, ...) }
 
-#' Get the id of a message or draft
+#' Get the id of a gmailr object
 #' @param x the object from which to retrieve the id
 #' @param ... other parameters passed to methods
 #' @export
@@ -86,10 +88,30 @@ body.gmail_draft = function(x, ...){ body.gmail_message(x$message, ...) }
 id = function(x, ...) UseMethod("id")
 
 #' @export
+#' @rdname id
 id.gmail_message = function(x, ...) { x$id }
 
 #' @export
+#' @rdname id
 id.gmail_draft = id.gmail_message
+
+#' @export
+#' @inheritParams id
+#' @param what the type of id to return
+#' @rdname id
+id.gmail_messages = function(x, what=c('message_id', 'thread_id'), ...){
+  what = switch(match.arg(what),
+    message_id = 'id',
+    thread_id = 'threadId'
+  )
+  unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), what) }))
+}
+
+#' @export
+#' @rdname id
+id.gmail_threads = function(x, ...){
+  unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'id') }))
+}
 
 #' Get the to field of a message or draft
 #' @param x the object from which to retrieve the field
@@ -103,9 +125,11 @@ id.gmail_draft = id.gmail_message
 to = function(x, ...) UseMethod("to")
 
 #' @export
+#' @rdname to
 to.gmail_message = function(x, ...){ header_value(x, "To") }
 
 #' @export
+#' @rdname to
 to.gmail_draft = function(x, ...){ to.gmail_message(x$message, ...) }
 
 #' Get the from field of a message or draft
@@ -120,9 +144,11 @@ to.gmail_draft = function(x, ...){ to.gmail_message(x$message, ...) }
 from = function(x, ...) UseMethod("from")
 
 #' @export
+#' @rdname from
 from.gmail_message = function(x, ...){ header_value(x, "From") }
 
 #' @export
+#' @rdname from
 from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 
 #' Get the date field of a message or draft
@@ -137,9 +163,11 @@ from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 date = function(x, ...) UseMethod("date")
 
 #' @export
+#' @rdname date
 date.gmail_message = function(x, ...){ header_value(x, "Date") }
 
 #' @export
+#' @rdname date
 date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 
 #' Get the subject field of a message or draft
@@ -154,16 +182,25 @@ date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 subject = function(x, ...) UseMethod("subject")
 
 #' @export
+#' @rdname subject
 subject.gmail_message = function(x, ...) { header_value(x, "Subject") }
 
 #' @export
+#' @rdname subject
 subject.gmail_draft = function(x, ...){ subject.gmail_message(x$message, ...) }
 
 header_value = function(x, name){
   Find(function(header) identical(header$name, name), x$payload$headers)$value
 }
 
+#' Format gmailr objects for pretty printing
+#'
+#' @name format
+#' @rdname format
+NULL
+
 #' @export
+#' @rdname format
 format.gmail_message = function(x, ...){
   to = to(x)
   from = from(x)
@@ -179,18 +216,21 @@ format.gmail_message = function(x, ...){
 }
 
 #' @export
+#' @rdname format
 format.gmail_draft = format.gmail_message
 
 #' @export
+#' @rdname format
 format.gmail_messages = function(x, ...){
-  ids = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'id') }))
-  threads = unlist(lapply(x, function(page) { vapply(page$messages, '[[', character(1), 'threadId') }))
-  format(data.frame(message_id=ids, thread_id=threads))
+  message_ids = id(x, 'message_id')
+  thread_ids = id(x, 'thread_id')
+  format(data.frame(message_id=message_ids, thread_id=thread_ids))
 }
 
 #' @export
+#' @rdname format
 format.gmail_threads = function(x, ...){
-  ids = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'id') }))
-  snip = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'snippet') }))
-  format(data.frame(thread_id=ids, snippet=snip))
+  thread_ids = id(x)
+  snippets = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'snippet') }))
+  format(data.frame(thread_id=thread_ids, snippet=snippets))
 }
