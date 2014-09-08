@@ -234,3 +234,17 @@ format.gmail_threads = function(x, ...){
   snippets = unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'snippet') }))
   format(data.frame(thread_id=thread_ids, snippet=snippets))
 }
+
+#' @export
+print.gmail_message = function(x, ...){
+  format(x, ...)
+}
+
+#' @export
+print.gmail_draft = print.gmail_message
+#' @export
+print.gmail_messages = print.gmail_message
+#' @export
+print.gmail_thread = print.gmail_message
+#' @export
+print.gmail_threads = print.gmail_message

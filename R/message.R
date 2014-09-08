@@ -14,7 +14,7 @@
 message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   format = match.arg(format)
   req = GET(gmail_path(user_id, "messages", id),
-            query = format,
+            query = list(format=format),
             config(token = get_token()))
   stop_for_status(req)
   structure(content(req, "parsed"), class='gmail_message')

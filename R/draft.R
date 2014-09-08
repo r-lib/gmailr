@@ -14,7 +14,7 @@
 draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
   format = match.arg(format)
   req = GET(gmail_path(user_id, "drafts", id),
-            query = format,
+            query = list(format=format),
             config(token = get_token()))
   stop_for_status(req)
   structure(content(req, "parsed"), class='gmail_draft')
@@ -38,6 +38,21 @@ drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
   page_and_trim('drafts', user_id, num_results, page_token)
 }
 
+#' @export
+create_draft = function(mail, user_id = 'me', type=c("multipart", "media", "resumable")) {
+  type = match.arg(type)
+  req = POST(gmail_path(user_id, "drafts"),
+            query = list(uploadType=type),
+            body = toJSON(auto_unbox=TRUE,
+                          list(
+                               message=list(raw=base64url_encode(mail)))),
+add_headers('Content-Type' = 'application/json'),
+  verbose(),
+            config(token = get_token()))
+  stop_for_status(req)
+  req
+}
+
 #' Send a draft
 #'
 #' Send a draft to the recipients in the To, CC, and Bcc headers.
@@ -54,9 +69,11 @@ send_draft = function(id, upload_type = c("media", "multipart", "resumable"), us
   upload_type = match.arg(upload_type)
   req = POST(gmail_path(user_id, "drafts"),
              query=rename(upload_type),
-             body=c("id"=id), encode="json",
+             body=c("id"=id),
+             encode="json",
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
 
+#send_draft(mime_message('james.f.hester@gmail.com', 'james.f.hester@gmail.com', 'hi', 'buarsth'))
