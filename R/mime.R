@@ -10,11 +10,13 @@ format_headers = function(x) {
 mime_message = function(from, to, subject, ...){
   boundary = random_hex(32)
 
-  parts = dots(...)
+  parts = list(...)
 
   types = vector(length = length(parts), mode='list')
   texts = vapply(parts, inherits, logical(1), "character")
+  htmls = vapply(parts, inherits, logical(1), "html")
   types[texts] = format_headers(c("Content-Type" = "text/plain; charset=UTF-8"))
+  types[htmls] = format_headers(c("Content-Type" = "text/html; charset=UTF-8"))
   paste0(
     format_headers(c(
                      "MIME-Version" = "1.0",

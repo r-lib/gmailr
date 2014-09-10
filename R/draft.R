@@ -38,19 +38,28 @@ drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
   page_and_trim('drafts', user_id, num_results, page_token)
 }
 
+#' Create a draft from a mime message
+#'
+#' @param mail mime mail message created by mime_message
+#' @param type the type of upload to perform
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/create}
 #' @export
+#' @examples
+#' \dontrun{
+#' create_draft(mime_message(from="you@@me.com", to="any@@one.com",
+#'                           subject='hello", "how are you doing?"))
+#' }
 create_draft = function(mail, user_id = 'me', type=c("multipart", "media", "resumable")) {
   type = match.arg(type)
   req = POST(gmail_path(user_id, "drafts"),
             query = list(uploadType=type),
-            body = toJSON(auto_unbox=TRUE,
+            body = jsonlite::toJSON(auto_unbox=TRUE,
                           list(
                                message=list(raw=base64url_encode(mail)))),
-add_headers('Content-Type' = 'application/json'),
-  verbose(),
-            config(token = get_token()))
+             add_headers('Content-Type' = 'application/json'), config(token = get_token()))
   stop_for_status(req)
-  req
+  invisible(req)
 }
 
 #' Send a draft
