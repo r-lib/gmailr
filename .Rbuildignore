@@ -5,3 +5,4 @@ TODO.md
 setup.R
 .httr-oauth
 ^\.travis\.yml$
+^\.httr-oauth$

@@ -51,6 +51,7 @@ drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
 #'                           subject='hello", "how are you doing?"))
 #' }
 create_draft = function(mail, user_id = 'me', type=c("multipart", "media", "resumable")) {
+  mail = if(!is.character(mail)) as.character(mail) else mail
   type = match.arg(type)
   req = POST(gmail_path(user_id, "drafts"),
             query = list(uploadType=type),
@@ -84,5 +85,3 @@ send_draft = function(id, upload_type = c("media", "multipart", "resumable"), us
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
-
-#send_draft(mime_message('james.f.hester@gmail.com', 'james.f.hester@gmail.com', 'hi', 'buarsth'))

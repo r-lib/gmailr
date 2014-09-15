@@ -27,7 +27,7 @@ mime_message = function(...) {
 #' @param x the object whose fields you are setting
 #' @param val the value to set
 #' @param vals one or more values to use, will be joined by commas
-#' @param ...
+#' @param ... other arguments ignored
 #' @rdname common_fields
 #' @export
 to.mime_message = function(x, vals, ...){
@@ -170,16 +170,19 @@ as.character.mime_message = function(x, ...) {
     x$attr$boundary = boundary
     sep = paste0('--', boundary, '\r\n')
     end = paste0('--', boundary, '--')
-    if(length(x$parts) >= 2){
+    if(length(x$parts) == 2){
       x$attr$content_type = x$attr$content_type %||% "multipart/alternative"
-      x$header$"Content-Type" = parse_content_type(x$attr)
     }
+    else {
+      x$attr$content_type = x$attr$content_type %||% "multipart/mixed"
+    }
+    x$header$"Content-Type" = parse_content_type(x$attr)
   }
   else {
     x$parts[[1]]$header = do.call(with_defaults, list(c(defaults=x$parts[[1]]$header, x$header)))
     return(as.character(x$parts[[1]]))
   }
-  body = paste0(collapse=sep, lapply(x$parts, as.character))
+  body = paste0(collapse=sep, Filter(function(x) length(x) > 0L, lapply(x$parts, as.character )))
   paste0(paste(names(x$header), x$header, sep=': ', collapse='\r\n'), '\r\n\r\n', sep, body, end)
 }
 
@@ -199,7 +202,7 @@ as.character.mime_part = function(x,...) {
 }
 
 parse_content_type = function(header) {
-  paste0(header$content_type,
+  paste0(header$content_type %||% 'text/plain',
          header$charset %|||% paste0('; charset=', header$charset),
          header$format %|||% paste0('; format=', header$format),
          header$name %|||% paste0('; name=', header$name),
@@ -209,7 +212,7 @@ parse_content_type = function(header) {
 
 parse_content_disposition = function(header) {
   paste0(header$disposition %||% 'inline',
-         header$filename %|||% paste0('; charset=', header$filename),
+         header$filename %|||% paste0('; filename=', header$filename),
          header$modification_date %|||% paste0('; modification-date=', header$modification_date))
 }
 

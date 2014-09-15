@@ -186,3 +186,80 @@ save_attachments = function(x, attachment_id = NULL, path='', user_id = 'me'){
   }
 }
 
+#' Insert a message into the gmail mailbox from a mime message
+#'
+#' @param mail mime mail message created by mime_message
+#' @param label_ids optional label ids to apply to the message
+#' @param type the type of upload to perform
+#' @param internal_date_source whether to date the object based on the date of
+#'        the message or when it was received by gmail.
+#' @inheritParams message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/insert}
+#' @export
+#' @examples
+#' \dontrun{
+#' insert_message(mime_message(from="you@@me.com", to="any@@one.com",
+#'                           subject='hello", "how are you doing?"))
+#' }
+insert_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
+  mail = if(!is.character(mail)) as.character(mail) else mail
+  type = match.arg(type)
+  internal_date_source = match.arg(internal_date_source)
+
+  req = POST(gmail_path(user_id, "messages"),
+            query = list(uploadType=type, interalDateSource=internal_date_source),
+            body = jsonlite::toJSON(auto_unbox=TRUE,
+                          c(not_null(rename(label_ids)),
+                            raw=base64url_encode(mail))),
+             add_headers('Content-Type' = 'application/json'), config(token = get_token()))
+  stop_for_status(req)
+  invisible(req)
+}
+
+#' Import a message into the gmail mailbox from a mime message
+#'
+#' @inheritParams insert_message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/import}
+#' @export
+#' @examples
+#' \dontrun{
+#' import_message(mime_message(from="you@@me.com", to="any@@one.com",
+#'                           subject='hello", "how are you doing?"))
+#' }
+import_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
+  mail = if(!is.character(mail)) as.character(mail) else mail
+  type = match.arg(type)
+  internal_date_source = match.arg(internal_date_source)
+
+  req = POST(gmail_path(user_id, "messages", "import"),
+            query = list(uploadType=type, interalDateSource=internal_date_source),
+            body = jsonlite::toJSON(auto_unbox=TRUE,
+                          c(not_null(rename(label_ids)),
+                            raw=base64url_encode(mail))),
+             add_headers('Content-Type' = 'application/json'), config(token = get_token()))
+  stop_for_status(req)
+  invisible(req)
+}
+
+#' Send a message from a mime message
+#'
+#' @inheritParams insert_message
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/send}
+#' @export
+#' @examples
+#' \dontrun{
+#' send_message(mime_message(from="you@@me.com", to="any@@one.com",
+#'                           subject='hello", "how are you doing?"))
+#' }
+send_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable")) {
+  mail = if(!is.character(mail)) as.character(mail) else mail
+  type = match.arg(type)
+
+  req = POST(gmail_path(user_id, "messages", "send"),
+            query = list(uploadType=type),
+            body = jsonlite::toJSON(auto_unbox=TRUE,
+                          list(raw=base64url_encode(mail))),
+             add_headers('Content-Type' = 'application/json'), config(token = get_token()))
+  stop_for_status(req)
+  invisible(req)
+}

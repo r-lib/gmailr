@@ -1,9 +1,0 @@
-Steward|Steward #|Steward Version|Measure Name|Measure Description
-CC|1a||Asthma Management: Two office visits|Patients ages 5 through 56 with a diagnosis of persistent asthma in the year prior to the measurement year with evidence of office visit two times per year
-PQRS|121||Adult Kidney Disease: Laboratory Testing (Lipid Profile)|Percentage of patients aged 18 years and older with a diagnosis of advanced CKD (stage 4 or 5, not receiving Renal Replacement Therapy [RRT]), who had the following laboratory testing ordered within 12 months: serum levels of calcium, phosphorus and intact PTH, and lipid profile 
-Explorys|-||Bed Days per 1000 - LOS|Bed Days per 1000 - Length of stay
-Explorys|-||Consults per 1000|Consults per 1000
-Explorys|-||ED per 1000|ED per 1000
-Explorys|-||Inpatient bed utilization by hospital and nursing unit|Inpatient bed utilization by hospital and nursing unit
-Joint Commission|VTE-1||Venous Thromboembolism Prophylaxis|This measure assesses the number of patients who received VTE prophylaxis or have documentation why no VTE prophylaxis was given the day of or the day after hospital admission or surgery end date for surgeries that start the day of or the day after hospital admission.
-Joint Commission|VTE-4||Venous Thromboembolism Patients Receiving Unfractionated Heparin with Dosages/Platelet Count Monitoring by Protocol or Nomogram|This measure assesses the number of patients diagnosed with confirmed VTE who received intravenous (IV) UFH therapy dosages AND had their platelet counts monitored using defined parameters such as a nomogram or protocol.

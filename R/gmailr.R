@@ -28,7 +28,14 @@ gmailr_env = new.env(parent = emptyenv())
 
 get_token = function() {
   if(!exists('token', gmailr_env)){
-    stop("Please register a gmail authentication token (https://cloud.google.com/console#/project) and run gmail_auth")
+    stop("If this is your first time using Gmailr, Please
+- Register a new project at https://cloud.google.com/console#/project
+- Navigate to `APIs`
+  - Switch the Gmail API status to `On`
+- Navigate to `APIs & auth->Credentials`
+  - Create a new client ID
+- Download the Client ID JSON
+- Use the downloaded JSON as input to `gmail_auth()`")
   }
   gmailr_env$token
 }
@@ -55,6 +62,7 @@ gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "fu
 
   gmailr_env$token = oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
 }
+
 #' Get the body text of a message or draft
 #' @param x the object from which to retrieve the body
 #' @param ... other parameters passed to methods
@@ -120,22 +128,29 @@ id.gmail_messages = function(x, what=c('message_id', 'thread_id'), ...){
 
 #' @export
 #' @rdname id
+id.gmail_drafts = function(x, what=c('draft_id', 'message_id', 'thread_id'), ...){
+  what = switch(match.arg(what),
+    draft_id = return(
+                      unlist(lapply(x, function(page) { vapply(page$drafts, '[[', character(1), 'id')}))
+                      ),
+    message_id = 'id',
+    thread_id = 'threadId'
+  )
+  unlist(lapply(x, function(page) { vapply(page$drafts, function(x){ x$message[[what]] }, character(1)) }))
+}
+
+#' @export
+#' @rdname id
 id.gmail_threads = function(x, ...){
   unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'id') }))
 }
 
-#' Methods to get values from message or grafts or set values in a mime message
+#' Methods to get values from message or drafts
 #' @param x the object from which to get or set the field
 #' @param ... other parameters passed to methods
-#' @param val value to set
-#' @param vals values to set, they will be joined by commas
+#' @seealso \code{\link{common_fields}}
 #' @rdname accessors
 #' @export
-#' @examples
-#' \dontrun{
-#' to(my_message)
-#' to(my_draft)
-#' }
 to = function(x, ...) UseMethod("to")
 
 #' @export
@@ -156,11 +171,26 @@ from.gmail_message = function(x, ...){ header_value(x, "From") }
 
 #' @rdname accessors
 #' @export
-from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
+cc.gmail_message = function(x, ...){ header_value(x, "Cc") }
+
+#' @rdname accessors
+#' @export
+cc.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
+
+#' @rdname accessors
+#' @export
+bcc.gmail_message = function(x, ...){ header_value(x, "Bcc") }
+
+#' @rdname accessors
+#' @export
+bcc.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 
 #' @rdname accessors
 #' @export
 date = function(x, ...) UseMethod("date")
+
+#' @export
+date.default = function(x, ...) { base::date() }
 
 #' @rdname accessors
 #' @export
@@ -170,23 +200,16 @@ date.gmail_message = function(x, ...){ header_value(x, "Date") }
 #' @export
 date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 
-#' Get the subject field of a message or draft
-#' @param x the object from which to retrieve the field
-#' @param ... other parameters passed to methods
+#' @rdname accessors
 #' @export
-#' @examples
-#' \dontrun{
-#' subject(my_message)
-#' subject(my_draft)
-#' }
 subject = function(x, ...) UseMethod("subject")
 
+#' @rdname accessors
 #' @export
-#' @rdname subject
 subject.gmail_message = function(x, ...) { header_value(x, "Subject") }
 
+#' @rdname accessors
 #' @export
-#' @rdname subject
 subject.gmail_draft = function(x, ...){ subject.gmail_message(x$message, ...) }
 
 header_value = function(x, name){
@@ -238,15 +261,44 @@ format.gmail_threads = function(x, ...){
 }
 
 #' @export
+#' @rdname format
+format.gmail_drafts = function(x, ...){
+  draft_ids = id(x, 'draft_id')
+  message_ids = id(x, 'message_id')
+  thread_ids = id(x, 'thread_id')
+  format(data.frame(draft_ids, message_id=message_ids, thread_id=thread_ids))
+}
+
+#' Print gmailr objects
+#'
+#' @param x object to print
+#' @param ... additional arguments ignored
+#' @name print
+#' @rdname print
+NULL
+
+#' @rdname print
+#' @export
 print.gmail_message = function(x, ...){
   format(x, ...)
 }
 
+#' @rdname print
 #' @export
 print.gmail_draft = print.gmail_message
+
+#' @rdname print
+#' @export
+print.gmail_drafts = print.gmail_message
+
+#' @rdname print
 #' @export
 print.gmail_messages = print.gmail_message
+
+#' @rdname print
 #' @export
 print.gmail_thread = print.gmail_message
+
+#' @rdname print
 #' @export
 print.gmail_threads = print.gmail_message

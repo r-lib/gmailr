@@ -14,7 +14,9 @@ Imports:
     magrittr,
     jsonlite
 Suggests:
-    testthat
+    testthat,
+    knitr
 License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr
 BugReports: https://github.com/jimhester/gmailr/issues
+VignetteBuilder: knitr
