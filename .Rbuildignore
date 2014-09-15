@@ -1,0 +1,7 @@
+.R_package
+Makefile
+README.Rmd
+TODO.md
+setup.R
+.httr-oauth
+^\.travis\.yml$
