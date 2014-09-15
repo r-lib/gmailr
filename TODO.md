@@ -1,3 +1,5 @@
 - [x] handle multipage results
 - [x] printing messages
-- [ ] sending email (Punting for now, as there is no Mime formatter for R I have found yet)
+- [x] sending email and attachemnents
+  - [ ] additional tests for generating mime messages
+- [ ] implement the insert and send mail functions for the gmail api
