@@ -15,8 +15,7 @@ Setup oauth authentication for your gmail
 }
 \examples{
 \dontrun{
-body(my_message)
-body(my_draft)
+gmail_auth("file", "compose")
 }
 }
 

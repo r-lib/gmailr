@@ -7,6 +7,22 @@
 #' @import base64enc
 NULL
 
+#' Pipe statements
+#'
+#' Like dplyr and ggvis gmailr also uses the pipe function, \code{\%>\%} to turn
+#' function composition into a series of imperative statements.
+#'
+#' @importFrom magrittr %>%
+#' @name %>%
+#' @rdname pipe
+#' @export
+#' @param lhs,rhs A visualisation and a function to apply to it
+#' @examples
+#' # Instead of
+#' to(mime_message(), 'someone@@somewhere.com')
+#' # you can write
+#' mime_message() %>% to('someone@@somewhere.com')
+NULL
 
 gmailr_env = new.env(parent = emptyenv())
 
@@ -23,8 +39,7 @@ get_token = function() {
 #' @export
 #' @examples
 #' \dontrun{
-#' body(my_message)
-#' body(my_draft)
+#' gmail_auth("file", "compose")
 #' }
 gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "full")){
 
@@ -43,6 +58,8 @@ gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "fu
 #' Get the body text of a message or draft
 #' @param x the object from which to retrieve the body
 #' @param ... other parameters passed to methods
+#' @param collapse if `FALSE` will return each formatted body in list, if
+#'   `TRUE` will collapse them together
 #' @export
 #' @examples
 #' \dontrun{
@@ -51,14 +68,8 @@ gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "fu
 #' }
 body = function(x, ...) UseMethod("body")
 
-#' Extract the message body from an email message
-#'
-#' If a multipart message was returned each part will be a separate list item.
-#' @export
-#' @param x message to retrieve body for
-#' @param collapse collapse multipart message into one
-#' @param ... other options ignored
 #' @rdname body
+#' @export
 body.gmail_message = function(x, collapse = FALSE, ...){
   res = lapply(x$payload$parts,
          function(x){
@@ -113,9 +124,12 @@ id.gmail_threads = function(x, ...){
   unlist(lapply(x, function(page) { vapply(page$threads, '[[', character(1), 'id') }))
 }
 
-#' Get the to field of a message or draft
-#' @param x the object from which to retrieve the field
+#' Methods to get values from message or grafts or set values in a mime message
+#' @param x the object from which to get or set the field
 #' @param ... other parameters passed to methods
+#' @param val value to set
+#' @param vals values to set, they will be joined by commas
+#' @rdname accessors
 #' @export
 #' @examples
 #' \dontrun{
@@ -125,49 +139,35 @@ id.gmail_threads = function(x, ...){
 to = function(x, ...) UseMethod("to")
 
 #' @export
-#' @rdname to
+#' @rdname accessors
 to.gmail_message = function(x, ...){ header_value(x, "To") }
 
 #' @export
-#' @rdname to
+#' @rdname accessors
 to.gmail_draft = function(x, ...){ to.gmail_message(x$message, ...) }
 
-#' Get the from field of a message or draft
-#' @param x the object from which to retrieve the field
-#' @param ... other parameters passed to methods
+#' @rdname accessors
 #' @export
-#' @examples
-#' \dontrun{
-#' from(my_message)
-#' from(my_draft)
-#' }
 from = function(x, ...) UseMethod("from")
 
+#' @rdname accessors
 #' @export
-#' @rdname from
 from.gmail_message = function(x, ...){ header_value(x, "From") }
 
+#' @rdname accessors
 #' @export
-#' @rdname from
 from.gmail_draft = function(x, ...){ from.gmail_message(x$message, ...) }
 
-#' Get the date field of a message or draft
-#' @param x the object from which to retrieve the field
-#' @param ... other parameters passed to methods
+#' @rdname accessors
 #' @export
-#' @examples
-#' \dontrun{
-#' date(my_message)
-#' date(my_draft)
-#' }
 date = function(x, ...) UseMethod("date")
 
+#' @rdname accessors
 #' @export
-#' @rdname date
 date.gmail_message = function(x, ...){ header_value(x, "Date") }
 
+#' @rdname accessors
 #' @export
-#' @rdname date
 date.gmail_draft = function(x, ...){ date.gmail_message(x$message, ...) }
 
 #' Get the subject field of a message or draft
@@ -195,6 +195,8 @@ header_value = function(x, name){
 
 #' Format gmailr objects for pretty printing
 #'
+#' @param x object to format
+#' @param ... additional arguments ignored
 #' @name format
 #' @rdname format
 NULL

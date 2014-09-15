@@ -16,16 +16,11 @@ body(x, ...)
 
 \item{...}{other parameters passed to methods}
 
-\item{collapse}{collapse multipart message into one}
-
-\item{x}{message to retrieve body for}
-
-\item{...}{other options ignored}
+\item{collapse}{if `FALSE` will return each formatted body in list, if
+`TRUE` will collapse them together}
 }
 \description{
 Get the body text of a message or draft
-
-If a multipart message was returned each part will be a separate list item.
 }
 \examples{
 \dontrun{

@@ -11,6 +11,7 @@ Depends:
 Imports:
     httr,
     base64enc,
+    magrittr,
     jsonlite
 License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr

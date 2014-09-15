@@ -80,3 +80,25 @@ page_and_trim = function(type, user_id, num_results, ...){
   }
   structure(trim(all_results, num_results), class=paste0('gmail_', type))
 }
+
+ord = function(x) { strtoi(charToRaw(x), 16L) }
+
+chr = function(x) { rawToChar(as.raw(x)) }
+
+substitute_regex = function(data, pattern, fun, ...) {
+  match = gregexpr(pattern, ..., data)
+  regmatches(data, match) = lapply(regmatches(data, match),
+                                   function(x) { if(length(x) > 0) { vapply(x, function(xx) fun(xx), character(1)) } else { x } })
+  data
+}
+
+# return RHS if LHS is null, else LHS
+"%||%" = function(x, y){ if(is.null(x)){ y } else { x } }
+
+# return LHS if LHS is null, else RHS, usually RHS should also include The LHS
+# value, otherwise this function makes little sense
+"%|||%" = function(x, y){ if(is.null(x)){ x } else { y } }
+
+#' @importFrom magrittr %>%
+#' @export
+NULL

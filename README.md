@@ -1,4 +1,7 @@
 # gmailr #
+
+[![Build Status](https://travis-ci.org/jimhester/gmailr.png?branch=master)](https://travis-ci.org/jimhester/gmailr)
+
 Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
 
 ## Features ##
