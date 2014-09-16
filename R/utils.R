@@ -102,3 +102,21 @@ substitute_regex = function(data, pattern, fun, ...) {
 #' @importFrom magrittr %>%
 #' @export
 NULL
+
+encode_base64 = function(x, line_length = 76L, newline = '\r\n') {
+  if(is.raw(x)) {
+    base64encode(x, 76L, newline)
+  } else {
+    base64encode(charToRaw(x), 76L, '\r\n')
+  }
+}
+
+exists_list = function(data, x){
+  if(is.character(x)){
+    return(exists(x, data))
+  }
+  return(length(data) >= x)
+}
+
+"%==%" = function(x, y) { identical(x, y) }
+"%!=%" = function(x, y) { !identical(x, y) }

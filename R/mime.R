@@ -1,26 +1,28 @@
 #' Create a mime formatted message object
 #'
 #' @param ... You can set header values initially, or use
+#' @param body text to use for the body
 #' \code{\link{common_fields}} set functions to set them after object creation.
 #' @export
 #' @seealso \code{\link{common_fields}}, \code{\link{body}}
 #' @examples
 #' # using the field functions
-#' msg = mime_message() %>%
+#' msg = mime() %>%
 #'  from("james.f.hester@@gmail.com") %>%
 #'  to("CRAN@@R-project.org") %>%
 #'  text_body("Please don't reject my package")
 #'
-#' # alternatively you can set the fields using mime_message, however you hav()e
+#' # alternatively you can set the fields using mime, however you hav()e
 #' #  to use properly formatted MIME names
-#' msg = mime_message(From="james.f.hester@@gmail.com",
+#' msg = mime(From="james.f.hester@@gmail.com",
 #'                    To="CRAN@@R-project.org") %>%
 #'         html_body("<b>Please<\b> don't reject my package")
-mime_message = function(...) {
-  structure(list(parts = list(),
+mime = function(..., attr = NULL, body = NULL, parts = list()) {
+  structure(list(parts = parts,
                  header=with_defaults(c("MIME-Version" = "1.0",
                           Date = http_date(Sys.time())),
-                          ...)), class='mime_message')
+                          ...),
+                 body=body, attr=attr), class="mime")
 }
 
 #' Accessor functions for mime messages
@@ -30,7 +32,7 @@ mime_message = function(...) {
 #' @param ... other arguments ignored
 #' @rdname common_fields
 #' @export
-to.mime_message = function(x, vals, ...){
+to.mime = function(x, vals, ...){
   if(missing(vals)){ return(x$header$To) }
   x$header$To = paste0(collapse=", ", vals)
   x
@@ -39,7 +41,7 @@ to.mime_message = function(x, vals, ...){
 #' @name common_fields
 #' @rdname common_fields
 #' @export
-from.mime_message = function(x, val, ...){
+from.mime = function(x, val, ...){
   if(missing(val)){ return(x$header$From) }
   x$header$From = val
   x
@@ -62,7 +64,7 @@ bcc = function(x, vals, ...){
 
 #' @rdname common_fields
 #' @export
-subject.mime_message = function(x, val, ...){
+subject.mime = function(x, val, ...){
   if(missing(val)){ return(x$header$Subject) }
   x$header$Subject = val
   x
@@ -77,41 +79,31 @@ subject.mime_message = function(x, val, ...){
 #' @rdname mime_body
 #' @export
 text_body = function(mime, body, ...){
-  if(missing(body)){ return(mime$parts[[1]]) }
-  attr = with_defaults(c(
+  if(missing(body)){ return(mime$parts[[TEXT_PART]]) }
+  mime$parts[[TEXT_PART]] = mime(attr=list(
               content_type = 'text/plain',
               charset      = 'utf-8',
               encoding     = 'quoted-printable',
-              format       = 'flowed'
-              ), ...)
-  mime$parts[[1]] =
-    structure(list(
-                   body   = body,
-                   attr = attr,
-                   header = list()
-                  ),
-              class = 'mime_part')
+              format       = 'flowed',
+              ...),
+              body = body)
   mime
 }
+TEXT_PART = 1L
 
 #' @rdname mime_body
 #' @export
 html_body = function(mime, body, ...){
-  if(missing(body)){ return(mime$parts[[2]]) }
-  attr = with_defaults(c(
-              content_type = 'text/html',
-              charset      = 'utf-8',
-              encoding     = 'base64'
-              ), ...)
-  mime$parts[[2]] =
-    structure(list(
-                   body   = body,
-                   attr = attr,
-                   header = list()
-                  ),
-              class = 'mime_part')
+  if(missing(body)){ return(mime$parts[[HTML_PART]]) }
+  mime$parts[[HTML_PART]] = mime(attr=list(
+                         content_type = 'text/html',
+                         charset      = 'utf-8',
+                         encoding     = 'base64',
+                         ...),
+                         body = body)
   mime
 }
+HTML_PART = 2L
 
 #' Attach an object to a mime message
 #' @rdname attach
@@ -122,25 +114,18 @@ html_body = function(mime, body, ...){
 #' @param ... additional arguments put into the attr field of the object
 #' @export
 attach_part = function(mime, body, ...){
-  if(missing(body)){ return(mime$parts[[3:length(mime$parts)]]) }
-  attr = with_defaults(c(
-              encoding = 'base64',
-              NULL
-              ), ...)
-  part_num = if(length(mime$parts) < 3) 3 else length(mime$parts) + 1
-  mime$parts[[part_num]] =
-    structure(list(
-                   body   = body,
-                   attr = attr
-                  ),
-              class = 'mime_part')
+  if(missing(body)){ return(mime$parts[[3L:length(mime$parts)]]) }
+  part_num = if(length(mime$parts) < 3L) 3L else length(mime$parts) + 1L
+  mime$parts[[part_num]] = mime( encoding = 'base64',
+                                ...,
+                                body = body)
   mime
 }
 
 #' @rdname attach
 #' @export
 attach_file = function(mime, filename, type = guess_media(filename), ...){
-  if(missing(filename)){ return(mime$parts[[3:length(mime$parts)]]) }
+  if(missing(filename)){ return(mime$parts[[3L:length(mime$parts)]]) }
   con = file(filename, "rb")
   info = file.info(filename)
   body = readBin(con, "raw", info$size)
@@ -162,43 +147,58 @@ attach_file = function(mime, filename, type = guess_media(filename), ...){
 #' representation.
 #' @param x object to convert
 #' @param ... additional arguments ignored
+#' @param newline value to use as newline character
 #' @rdname as.character.mime
 #' @export
-as.character.mime_message = function(x, ...) {
-  if(length(x$parts) > 1){
-    boundary = random_hex(32)
-    x$attr$boundary = boundary
-    sep = paste0('--', boundary, '\r\n')
-    end = paste0('--', boundary, '--')
-    if(length(x$parts) == 2){
-      x$attr$content_type = x$attr$content_type %||% "multipart/alternative"
-    }
-    else {
-      x$attr$content_type = x$attr$content_type %||% "multipart/mixed"
-    }
-    x$header$"Content-Type" = parse_content_type(x$attr)
+as.character.mime = function(x,..., newline="\r\n") {
+
+  # if we have both the text part and html part, we have to embed them in a multipart/alternative message
+  if(x$attr$content_type %!=% 'multipart/alternative' && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)){
+    new_msg = mime(attr=list(content_type = 'multipart/alternative'),
+                   parts=x$parts[c(TEXT_PART, HTML_PART)])
+    x$parts[[TEXT_PART]] = NULL
+    x$parts[[HTML_PART]] = NULL
+    x$parts[[1]] = new_msg
+  }
+
+  # if a multipart message
+  if(length(x$parts) > 0L){
+
+    x$attr$content_type = x$attr$content_type %||% 'multipart/mixed'
+
+    # random hex boundary if multipart, otherwise nothing
+    boundary = x$attr$boundary = random_hex(32)
+
+    # sep is --boundary newline if multipart, otherwise newline
+    sep = paste0('--', boundary, newline)
+
+    # end is --boundary-- if mulitpart, otherwise nothing
+    end = paste0('--', boundary, '--', newline)
+
+    body_text = paste0(collapse=sep, Filter(function(x) length(x) > 0L, c(lapply(x$parts, as.character ), x$body)))
   }
   else {
-    x$parts[[1]]$header = do.call(with_defaults, list(c(defaults=x$parts[[1]]$header, x$header)))
-    return(as.character(x$parts[[1]]))
-  }
-  body = paste0(collapse=sep, Filter(function(x) length(x) > 0L, lapply(x$parts, as.character )))
-  paste0(paste(names(x$header), x$header, sep=': ', collapse='\r\n'), '\r\n\r\n', sep, body, end)
-}
+    boundary = NULL
+    sep = newline
+    end = newline
 
-#' @rdname as.character.mime
-#' @export
-as.character.mime_part = function(x,...) {
+    body_text = x$body
+  }
+
   x$header$"Content-Type" = parse_content_type(x$attr)
   x$header$"Content-Transfer-Encoding" = x$attr$encoding
   x$header$"Content-Disposition" = parse_content_disposition(x$attr)
+
   encoding = x$attr$encoding %||% ''
-  body = switch(encoding,
-    'base64' = if(is.raw(x$body)) base64encode(x$body, 76L, '\r\n') else base64encode(charToRaw(x$body), 76L, '\r\n'),
-    'quoted-printable' = quoted_printable_encode(x$body),
-    x$body
-    )
-  paste0(paste(sep=': ', names(x$header), x$header, collapse='\r\n'), '\r\n\r\n', body, '\r\n')
+
+  encoded_body = switch(encoding,
+    'base64' = encode_base64(body_text, 76L, newline),
+    'quoted-printable' = quoted_printable_encode(body_text),
+    body_text
+  )
+  headers = format_headers(x$header, newline=newline)
+
+  paste0(headers, sep, encoded_body, end)
 }
 
 parse_content_type = function(header) {
@@ -217,17 +217,16 @@ parse_content_disposition = function(header) {
 }
 
 random_hex = function(width=4) {
-  paste(sprintf("%x", sample(16, size=width, replace=TRUE) - 1), collapse="")
+  paste(sprintf("%x", sample(16, size=width, replace=TRUE) - 1L), collapse="")
 }
 
-format_headers = function(...) {
-  headers = list(...)
-  empty = vapply(headers, function(x) { is.null(x) || length(x) == 0 }, logical(1))
+format_headers = function(headers, newline) {
+  empty = vapply(headers, function(x) { is.null(x) || length(x) %==% 0L }, logical(1L))
   keep_headers = headers[!empty]
-  if(length(keep_headers) == 0){
+  if(length(keep_headers) %==% 0L){
     return(NULL)
   }
-  paste0(paste(sep=": ", collapse="\r\n", names(keep_headers), keep_headers), '\r\n')
+  paste0(paste(sep=": ", collapse=newline, names(keep_headers), keep_headers), newline)
 }
 
 with_defaults = function(defaults, ...){

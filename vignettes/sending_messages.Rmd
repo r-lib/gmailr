@@ -28,16 +28,16 @@ gmail_auth('file.json')
 First we will construct a simple text only message
 
 ```{r sending_messages_simple}
-mime_message() %>%
+mime() %>%
   to("james.f.hester@gmail.com") %>%
   from("me@somewhere.com") %>%
   text_body("Gmailr is a very handy package!") -> text_msg
 ```
 
-You can convert the message to a properly formatted MIME message using `as.character`.
+You can convert the message to a properly formatted MIME message using `as.character()`.
 
 ```{r sending_messages_simple_print}
-as.character(text_msg)
+strwrap(as.character(text_msg))
 ```
 
 ### HTML
@@ -47,7 +47,7 @@ only message along with the html message, but with modern email clients this is
 not strictly necessary.
 
 ```{r sending_messages_html}
-mime_message() %>%
+mime() %>%
   to("james.f.hester@gmail.com") %>%
   from("me@somewhere.com") %>%
   html_body("<b>Gmailr</b> is a <i>very</i> handy package!") -> html_msg
@@ -76,7 +76,7 @@ html_msg %>% attach_part(body=charToRaw('attach me!'), name='please') -> simple_
 ## Uploading
 ### Create Draft
 
-You can upload any mime message into your gmail drafts using `create_draft`.
+You can upload any mime message into your gmail drafts using `create_draft()`.
 Be sure to give yourself at least `compose` permissions first.
 
 ```{r sending_messages_create_draft, eval=FALSE}
@@ -115,7 +115,7 @@ send_draft(id(my_drafts, 'draft_id')[1])
 ```
 ### Message
 
-You can also send an email message directly from a `mime_message` using `send_message()`.
+You can also send an email message directly from a `mime` object using `send_message()`.
 
 ```{r sending_messages_send_message, eval=FALSE}
 send_message(file_attachment)
