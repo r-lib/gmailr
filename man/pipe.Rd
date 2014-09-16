@@ -11,8 +11,8 @@ function composition into a series of imperative statements.
 }
 \examples{
 # Instead of
-to(mime_message(), 'someone@somewhere.com')
+to(mime(), 'someone@somewhere.com')
 # you can write
-mime_message() \%>\% to('someone@somewhere.com')
+mime() \%>\% to('someone@somewhere.com')
 }
 

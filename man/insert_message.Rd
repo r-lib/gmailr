@@ -8,7 +8,7 @@ insert_message(mail, user_id = "me", label_ids = NULL,
   internal_date_source = c("dateHeader", "recievedTime"))
 }
 \arguments{
-\item{mail}{mime mail message created by mime_message}
+\item{mail}{mime mail message created by mime}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 
@@ -24,7 +24,7 @@ Insert a message into the gmail mailbox from a mime message
 }
 \examples{
 \dontrun{
-insert_message(mime_message(from="you@me.com", to="any@one.com",
+insert_message(mime(from="you@me.com", to="any@one.com",
                           subject='hello", "how are you doing?"))
 }
 }

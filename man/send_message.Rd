@@ -7,7 +7,7 @@ send_message(mail, user_id = "me", label_ids = NULL, type = c("multipart",
   "media", "resumable"))
 }
 \arguments{
-\item{mail}{mime mail message created by mime_message}
+\item{mail}{mime mail message created by mime}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 
@@ -20,7 +20,7 @@ Send a message from a mime message
 }
 \examples{
 \dontrun{
-send_message(mime_message(from="you@me.com", to="any@one.com",
+send_message(mime(from="you@me.com", to="any@one.com",
                           subject='hello", "how are you doing?"))
 }
 }

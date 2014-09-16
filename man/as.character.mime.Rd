@@ -4,8 +4,6 @@
 \title{Convert a mime object to character representation}
 \usage{
 \method{as.character}{mime}(x, ..., newline = "\\r\\n")
-
-\method{as.character}{mime}(x, ..., newline = "\\r\\n")
 }
 \arguments{
 \item{x}{object to convert}

@@ -3,12 +3,16 @@
 \alias{mime}
 \title{Create a mime formatted message object}
 \usage{
-mime(..., body = NULL)
+mime(..., attr = NULL, body = NULL, parts = list())
 }
 \arguments{
 \item{...}{You can set header values initially, or use}
 
-\item{body}{text to use for the body
+\item{attr}{attributes to pass to the model}
+
+\item{body}{text to use for the body}
+
+\item{parts}{mime parts to pass to the model
 \code{\link{common_fields}} set functions to set them after object creation.}
 }
 \description{

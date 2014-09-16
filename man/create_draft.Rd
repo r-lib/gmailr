@@ -7,7 +7,7 @@ create_draft(mail, user_id = "me", type = c("multipart", "media",
   "resumable"))
 }
 \arguments{
-\item{mail}{mime mail message created by mime_message}
+\item{mail}{mime mail message created by mime}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 
@@ -18,7 +18,7 @@ Create a draft from a mime message
 }
 \examples{
 \dontrun{
-create_draft(mime_message(from="you@me.com", to="any@one.com",
+create_draft(mime(from="you@me.com", to="any@one.com",
                           subject='hello", "how are you doing?"))
 }
 }

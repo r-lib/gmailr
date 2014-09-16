@@ -19,9 +19,9 @@ NULL
 #' @param lhs,rhs A visualisation and a function to apply to it
 #' @examples
 #' # Instead of
-#' to(mime_message(), 'someone@@somewhere.com')
+#' to(mime(), 'someone@@somewhere.com')
 #' # you can write
-#' mime_message() %>% to('someone@@somewhere.com')
+#' mime() %>% to('someone@@somewhere.com')
 NULL
 
 gmailr_env = new.env(parent = emptyenv())

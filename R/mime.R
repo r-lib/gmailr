@@ -2,6 +2,8 @@
 #'
 #' @param ... You can set header values initially, or use
 #' @param body text to use for the body
+#' @param attr attributes to pass to the model
+#' @param parts mime parts to pass to the model
 #' \code{\link{common_fields}} set functions to set them after object creation.
 #' @export
 #' @seealso \code{\link{common_fields}}, \code{\link{body}}

@@ -40,14 +40,14 @@ drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
 
 #' Create a draft from a mime message
 #'
-#' @param mail mime mail message created by mime_message
+#' @param mail mime mail message created by mime
 #' @param type the type of upload to perform
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/create}
 #' @export
 #' @examples
 #' \dontrun{
-#' create_draft(mime_message(from="you@@me.com", to="any@@one.com",
+#' create_draft(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
 create_draft = function(mail, user_id = 'me', type=c("multipart", "media", "resumable")) {

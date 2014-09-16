@@ -188,7 +188,7 @@ save_attachments = function(x, attachment_id = NULL, path='', user_id = 'me'){
 
 #' Insert a message into the gmail mailbox from a mime message
 #'
-#' @param mail mime mail message created by mime_message
+#' @param mail mime mail message created by mime
 #' @param label_ids optional label ids to apply to the message
 #' @param type the type of upload to perform
 #' @param internal_date_source whether to date the object based on the date of
@@ -198,7 +198,7 @@ save_attachments = function(x, attachment_id = NULL, path='', user_id = 'me'){
 #' @export
 #' @examples
 #' \dontrun{
-#' insert_message(mime_message(from="you@@me.com", to="any@@one.com",
+#' insert_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
 insert_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
@@ -223,7 +223,7 @@ insert_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multip
 #' @export
 #' @examples
 #' \dontrun{
-#' import_message(mime_message(from="you@@me.com", to="any@@one.com",
+#' import_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
 import_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
@@ -248,7 +248,7 @@ import_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multip
 #' @export
 #' @examples
 #' \dontrun{
-#' send_message(mime_message(from="you@@me.com", to="any@@one.com",
+#' send_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
 send_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable")) {
