@@ -118,8 +118,7 @@ HTML_PART = 2L
 attach_part = function(mime, body, ...){
   if(missing(body)){ return(mime$parts[[3L:length(mime$parts)]]) }
   part_num = if(length(mime$parts) < 3L) 3L else length(mime$parts) + 1L
-  mime$parts[[part_num]] = mime( encoding = 'base64',
-                                ...,
+  mime$parts[[part_num]] = mime(attr=c(encoding = 'base64', list(...)),
                                 body = body)
   mime
 }

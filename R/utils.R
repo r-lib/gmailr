@@ -115,7 +115,7 @@ exists_list = function(data, x){
   if(is.character(x)){
     return(exists(x, data))
   }
-  return(length(data) >= x)
+  return(length(data) >= x && !is.null(data[[x]]))
 }
 
 "%==%" = function(x, y) { identical(x, y) }
