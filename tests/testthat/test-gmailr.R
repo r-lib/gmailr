@@ -34,6 +34,11 @@ test_that("MIME - More Complex", {
           TEST_INI='test.ini'
           cat(file=TEST_INI, 'testing')
 
+          on.exit({
+            unlink(TEST_PNG)
+            unlink(TEST_INI)
+          })
+
           rv2 = mime() %>% from('Jim Hester<james.f.hester@gmail.com>') %>%
                            to         ( 'james.f.hester@gmail.com'    ) %>%
                            subject    ( 'Hello To:!'                  ) %>%

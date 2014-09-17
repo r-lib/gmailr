@@ -120,3 +120,7 @@ You can also send an email message directly from a `mime` object using `send_mes
 ```{r sending_messages_send_message, eval=FALSE}
 send_message(file_attachment)
 ```
+
+```{r sending_messages_clenup, include=FALSE}
+unlink('iris.csv')
+```
