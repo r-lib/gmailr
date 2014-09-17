@@ -7,3 +7,4 @@ TODO.md
 ^\.travis\.yml$
 ^\.httr-oauth$
 vignettes/*csv$
+^cran-comments\.md$
