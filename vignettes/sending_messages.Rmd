@@ -2,9 +2,9 @@
 title: "Sending Messages With Gmailr"
 output: rmarkdown::html_vignette
 vignette: >
-  \VignetteEngine{knitr::knitr}
-  \VignetteIndexEntry{Sending Messages With Gmailr}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Sending Messages With Gmailr}
+  %\usepackage[utf8]{inputenc}
 ---
 
 ## Authentication
@@ -16,6 +16,10 @@ vignette: >
     - Create a new client ID
     - Download the Client ID JSON
 - Use the downloaded JSON as input to `gmail_auth()`
+
+```{r, include=FALSE}
+library(gmailr)
+```
 
 ```{r, eval=FALSE}
 gmail_auth('file.json')
