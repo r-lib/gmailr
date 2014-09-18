@@ -3,7 +3,7 @@ Version: 0.5.0
 Date: 2014-7-25
 Maintainer: Jim Hester <james.f.hester@gmail.com>
 Author: Jim Hester
-Title: Access the Gmail RESTful API from R.
+Title: Access the Gmail RESTful API from R
 Description: An R interface to the Gmail RESTful API.  Allows access to your
     Gmail messages, threads, drafts and labels from R.
 Depends:

@@ -8,3 +8,4 @@ TODO.md
 ^\.httr-oauth$
 vignettes/*csv$
 ^cran-comments\.md$
+^NEWS.md$
