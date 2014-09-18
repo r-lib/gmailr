@@ -1,6 +1,6 @@
-The vignettes are not being built.  I am no longer receiving the referenced
-message from the check.  I apologize for overlooking the message on the
-previous submission.
+The vignettes and index are now being properly built, and the referenced
+message is gone from R CMD check.  I apologize for overlooking this
+on the previous submission.
 
 Thanks,
 
