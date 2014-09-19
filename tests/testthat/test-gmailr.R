@@ -23,6 +23,7 @@ test_that("MIME - Basic functions", {
           expect_equal(rv$header$Bcc, 'adam@ali.as, another@ali.as, bob@ali.as', label = 'bcc (multiple) sets To header' )
 })
 
+context("MIME - More Complex")
 test_that("MIME - More Complex", {
           # create test files
           library(graphics)
@@ -67,6 +68,18 @@ test_that("MIME - More Complex", {
           expect_match(rv2_chr, 'I am an email', label = 'Email contains text_body' )
           expect_match(rv2_chr, "Content-Type: text/plain; name=test\\.ini", label = 'Email contains attachment Content-Type' )
 
+          rv2 = mime() %>% from('Jim Hester<james.f.hester@gmail.com>') %>%
+                           to         ( 'james.f.hester@gmail.com'    ) %>%
+                           subject    ( 'Hello To:!'                  ) %>%
+                           text_body  ( 'I am an email'               ) %>%
+                           html_body  ( 'I am an html email<br>'               ) %>%
+                           attach_file( TEST_INI, content_type = 'text/plain')
+
+          expect_match(rv2_chr, 'Jim Hester',    label = 'Email contains from name' )
+          expect_match(rv2_chr, 'gmail',         label = 'Email contains to string' )
+          expect_match(rv2_chr, 'Hello',         label = 'Email contains subject string' )
+          expect_match(rv2_chr, 'I am an email', label = 'Email contains text_body' )
+          expect_match(rv2_chr, "Content-Type: text/plain; name=test\\.ini", label = 'Email contains attachment Content-Type' )
 })
 
 context("MIME - Alternative")

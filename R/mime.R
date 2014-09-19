@@ -156,9 +156,9 @@ as.character.mime = function(x,..., newline="\r\n") {
   # if we have both the text part and html part, we have to embed them in a multipart/alternative message
   if(x$attr$content_type %!=% 'multipart/alternative' && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)){
     new_msg = mime(attr=list(content_type = 'multipart/alternative'),
-                   parts=x$parts[c(TEXT_PART, HTML_PART)])
-    x$parts[[TEXT_PART]] = NULL
-    x$parts[[HTML_PART]] = NULL
+                   parts=c(x$parts[TEXT_PART], x$parts[HTML_PART]))
+    x$parts[TEXT_PART] = list(NULL)
+    x$parts[HTML_PART] = list(NULL)
     x$parts[[1]] = new_msg
   }
 
@@ -176,7 +176,7 @@ as.character.mime = function(x,..., newline="\r\n") {
     # end is --boundary-- if mulitpart, otherwise nothing
     end = paste0('--', boundary, '--', newline)
 
-    body_text = paste0(collapse=sep, Filter(function(x) length(x) > 0L, c(lapply(x$parts, as.character ), x$body)))
+    body_text = paste0(collapse=sep, Filter(function(x) length(x) > 0L, c(lapply(x$parts, as.character), x$body)))
   }
   else {
     boundary = NULL
