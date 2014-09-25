@@ -29,13 +29,20 @@ gmailr_env = new.env(parent = emptyenv())
 get_token = function() {
   if(!exists('token', gmailr_env)){
     stop("If this is your first time using Gmailr, Please
+
 - Register a new project at https://cloud.google.com/console#/project
 - Navigate to `APIs`
-  - Switch the Gmail API status to `On`
+  - Switch the Gmail API status to `On`, and other API status to `Off`
+- Navigate to `APIs & auth->Consent screen`
+  - Name your application
+  - Select an email address for the application
+  - Other fields can be left blank
 - Navigate to `APIs & auth->Credentials`
   - Create a new client ID
-- Download the Client ID JSON
-- Use the downloaded JSON as input to `gmail_auth()`")
+    - Application Type: Installed Application
+    - Installed Application Type: Other
+  - Download the Client ID JSON - can be renamed!
+- Use the downloaded JSON file as input to `gmail_auth()`")
   }
   gmailr_env$token
 }
@@ -262,6 +269,8 @@ format.gmail_message = function(x, ...){
       body(x, collapse=TRUE))
 }
 
+#' @export
+#' @rdname format
 format.gmail_thread = function(x, ...){
   id = id(x)
   p("Thread_Id: ", id, "\n")
