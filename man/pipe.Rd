@@ -2,6 +2,9 @@
 \name{\%>\%}
 \alias{\%>\%}
 \title{Pipe statements}
+\usage{
+lhs \%>\% rhs
+}
 \arguments{
 \item{lhs,rhs}{A visualisation and a function to apply to it}
 }
@@ -15,4 +18,5 @@ to(mime(), 'someone@somewhere.com')
 # you can write
 mime() \%>\% to('someone@somewhere.com')
 }
+\keyword{internal}
 

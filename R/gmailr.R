@@ -280,7 +280,7 @@ NULL
 #' @rdname print
 #' @export
 print.gmail_message = function(x, ...){
-  format(x, ...)
+  print(format(x, ...))
 }
 
 #' @rdname print
