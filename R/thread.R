@@ -29,7 +29,11 @@ thread = function(id, user_id = 'me') {
   req = GET(gmail_path(rename(user_id), "threads", id),
             config(token = get_token()))
   stop_for_status(req)
-  content(req, "parsed")
+  parsed_req = structure(content(req, "parsed"), class='gmail_thread')
+
+  parsed_req$messages[] = lapply(parsed_req$messages, structure, class='gmail_message')
+
+  parsed_req
 }
 
 #' Send a single thread to the trash

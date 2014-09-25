@@ -126,3 +126,5 @@ exists_list = function(data, x){
 
 "%==%" = function(x, y) { identical(x, y) }
 "%!=%" = function(x, y) { !identical(x, y) }
+
+p = function(...) paste(sep='', collapse='', ...)

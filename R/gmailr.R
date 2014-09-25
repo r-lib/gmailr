@@ -68,6 +68,7 @@ gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "fu
 #' @param ... other parameters passed to methods
 #' @param collapse if `FALSE` will return each formatted body in list, if
 #'   `TRUE` will collapse them together
+#' @param type the content type of the body to return (for multipart messages), if NULL returns all types.
 #' @export
 #' @examples
 #' \dontrun{
@@ -78,11 +79,29 @@ body = function(x, ...) UseMethod("body")
 
 #' @rdname body
 #' @export
-body.gmail_message = function(x, collapse = FALSE, ...){
-  res = lapply(x$payload$parts,
-         function(x){
-           base64url_decode_to_char(x$body$data)
-         })
+body.gmail_message = function(x, type='text/plain', collapse = FALSE, ...){
+  if(is.null(type)){
+    good_parts = TRUE
+  }
+  else {
+    good_parts = vapply(x$payload$parts, FUN.VALUE=logical(1),
+      function(part) {
+        any(
+          vapply(part$headers, FUN.VALUE=logical(1),
+            function(header) {
+              tolower(header$name) %==% 'content-type' &&
+                grepl(type, header$value, ignore.case=TRUE)
+            })
+          )
+      })
+  }
+
+  res =
+    lapply(x$payload$parts[good_parts],
+      function(x){
+          base64url_decode_to_char(x$body$data)
+      })
+
   if(collapse){
     paste0(collapse='\n', res)
   }
@@ -109,6 +128,8 @@ id = function(x, ...) UseMethod("id")
 #' @export
 #' @rdname id
 id.gmail_message = function(x, ...) { x$id }
+
+id.gmail_thread = id.gmail_message
 
 #' @export
 #' @rdname id
@@ -232,12 +253,18 @@ format.gmail_message = function(x, ...){
   date = date(x)
   subject = subject(x)
   id = id(x)
-  cat("Id: ", id, "\n")
-  cat("To: ", to, "\n")
-  cat("From: ", from, "\n")
-  cat("Date: ", date, "\n")
-  cat("Subject: ", subject, "\n",
+  p(collapse='', sep='',
+    "Id: ", id, "\n",
+    "To: ", to, "\n",
+    "From: ", from, "\n",
+    "Date: ", date, "\n",
+    "Subject: ", subject, "\n",
       body(x, collapse=TRUE))
+}
+
+format.gmail_thread = function(x, ...){
+  id = id(x)
+  p("Thread_Id: ", id, "\n")
 }
 
 #' @export
@@ -280,7 +307,7 @@ NULL
 #' @rdname print
 #' @export
 print.gmail_message = function(x, ...){
-  print(format(x, ...))
+  cat(format(x, ...))
 }
 
 #' @rdname print

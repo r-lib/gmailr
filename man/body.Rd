@@ -7,7 +7,7 @@
 \usage{
 body(x, ...)
 
-\method{body}{gmail_message}(x, collapse = FALSE, ...)
+\method{body}{gmail_message}(x, type = "text/plain", collapse = FALSE, ...)
 
 \method{body}{gmail_draft}(x, ...)
 }
@@ -15,6 +15,8 @@ body(x, ...)
 \item{x}{the object from which to retrieve the body}
 
 \item{...}{other parameters passed to methods}
+
+\item{type}{the content type of the body to return (for multipart messages), if NULL returns all types.}
 
 \item{collapse}{if `FALSE` will return each formatted body in list, if
 `TRUE` will collapse them together}
