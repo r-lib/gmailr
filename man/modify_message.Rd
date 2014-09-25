@@ -9,14 +9,15 @@ modify_message(id, add_labels = character(0), remove_labels = character(0),
 \arguments{
 \item{id}{message id to access}
 
-\item{add_labels}{labels to add to the specified message}
+\item{add_labels}{label IDs to add to the specified message}
 
-\item{remove_labels}{labels to remove from the specified message}
+\item{remove_labels}{label IDs to remove from the specified message}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
 \description{
-Function to modify the labels on a given message by id.
+Function to modify the labels on a given message by id.  Note you need to
+use the label ID as arguments to this function, not the label name.
 }
 \examples{
 \dontrun{

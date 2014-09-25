@@ -5,10 +5,13 @@
 \alias{format.gmail_drafts}
 \alias{format.gmail_message}
 \alias{format.gmail_messages}
+\alias{format.gmail_thread}
 \alias{format.gmail_threads}
 \title{Format gmailr objects for pretty printing}
 \usage{
 \method{format}{gmail_message}(x, ...)
+
+\method{format}{gmail_thread}(x, ...)
 
 \method{format}{gmail_draft}(x, ...)
 

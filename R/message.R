@@ -93,9 +93,10 @@ delete_message = function(id, user_id = 'me') {
 
 #' Modify the labels on a message
 #'
-#' Function to modify the labels on a given message by id.
-#' @param add_labels labels to add to the specified message
-#' @param remove_labels labels to remove from the specified message
+#' Function to modify the labels on a given message by id.  Note you need to
+#' use the label ID as arguments to this function, not the label name.
+#' @param add_labels label IDs to add to the specified message
+#' @param remove_labels label IDs to remove from the specified message
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/modify}
 #' @export
@@ -107,8 +108,8 @@ delete_message = function(id, user_id = 'me') {
 #' modify_message(12345, add_labels='label_2', remove_labels='label_1')
 #' }
 modify_message = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
-  body = rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
-  req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body,
+  body = rename('add_labels' = add_labels, 'remove_labels' = remove_labels)
+  req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body, verbose(), encode='json',
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
