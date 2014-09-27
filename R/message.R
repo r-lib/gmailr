@@ -109,7 +109,7 @@ delete_message = function(id, user_id = 'me') {
 #' }
 modify_message = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
   body = rename('add_labels' = add_labels, 'remove_labels' = remove_labels)
-  req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body, verbose(), encode='json',
+  req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body, encode='json',
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
