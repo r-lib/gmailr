@@ -16,6 +16,7 @@ name_map = c(
   "label_list_visibility" = "labelListVisibility",
   "message_list_visibility" = "messageListVisibility",
   "upload_type" = "uploadType",
+  "label_ids" = "labelIds",
   NULL
 )
 
