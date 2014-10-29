@@ -260,7 +260,7 @@ format.gmail_message = function(x, ...){
   date = date(x)
   subject = subject(x)
   id = id(x)
-  p(collapse='', sep='',
+  p(
     "Id: ", id, "\n",
     "To: ", to, "\n",
     "From: ", from, "\n",
