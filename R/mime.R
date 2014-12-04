@@ -125,8 +125,13 @@ attach_part = function(mime, body, ...){
 
 #' @rdname attach
 #' @export
-attach_file = function(mime, filename, type = mime::guess_type(filename, empty = NULL), ...){
+attach_file = function(mime, filename, type = NULL, ...){
   if(missing(filename)){ return(mime$parts[[3L:length(mime$parts)]]) }
+
+  if (is.null(type)) {
+    type = mime::guess_type(filename, empty = NULL)
+  }
+
   con = file(filename, "rb")
   info = file.info(filename)
   body = readBin(con, "raw", info$size)

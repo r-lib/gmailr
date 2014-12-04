@@ -7,8 +7,7 @@
 \usage{
 attach_part(mime, body, ...)
 
-attach_file(mime, filename, type = mime::guess_type(filename, empty = NULL),
-  ...)
+attach_file(mime, filename, type = NULL, ...)
 }
 \arguments{
 \item{mime}{object to attach to}
