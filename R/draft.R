@@ -60,7 +60,7 @@ create_draft = function(mail, user_id = 'me', type=c("multipart", "media", "resu
                                message=list(raw=base64url_encode(mail)))),
              add_headers('Content-Type' = 'application/json'), config(token = get_token()))
   stop_for_status(req)
-  invisible(req)
+  structure(content(req, "parsed"), class='gmail_draft')
 }
 
 #' Send a draft
