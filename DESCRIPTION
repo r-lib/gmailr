@@ -12,7 +12,8 @@ Imports:
     httr,
     base64enc,
     magrittr,
-    jsonlite
+    jsonlite,
+    mime
 Suggests:
     testthat,
     knitr

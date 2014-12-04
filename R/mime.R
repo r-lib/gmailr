@@ -125,7 +125,7 @@ attach_part = function(mime, body, ...){
 
 #' @rdname attach
 #' @export
-attach_file = function(mime, filename, type = guess_media(filename), ...){
+attach_file = function(mime, filename, type = mime::guess_type(filename, empty = NULL), ...){
   if(missing(filename)){ return(mime$parts[[3L:length(mime$parts)]]) }
   con = file(filename, "rb")
   info = file.info(filename)
