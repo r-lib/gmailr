@@ -42,3 +42,6 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
       ```R
       gmail_auth('file.json')
       ```
+
+# Examples #
+- [Send Email with R](https://github.com/jennybc/send-email-with-r) - Jenny Bryan (@jennybc)
