@@ -46,3 +46,4 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
 
 # Examples #
 - [Send Email with R](https://github.com/jennybc/send-email-with-r) - Jenny Bryan (@jennybc)
+- [Gmail Stats](https://github.com/alkashef/gmailstats) - Ahmad Al-Kashef (@alkashef)
