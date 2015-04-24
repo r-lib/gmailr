@@ -44,6 +44,16 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
       gmail_auth('file.json')
       ```
 
+## Furture Work ##
+
+- More unit tests and better coverage
+- More (complicated) example is the manual/help
+- Generate statistics
+- Mass emailers
+- Periodic emails
+- Returning data frames in addition to native Gmail API objects which are usually a nested list. 
+- Support all the formats of [users.messages:get](https://developers.google.com/gmail/api/v1/reference/users/messages/get)
+
 # Examples #
 - [Send Email with R](https://github.com/jennybc/send-email-with-r) - Jenny Bryan (@jennybc)
 - [Gmail Stats](https://github.com/alkashef/gmailstats) - Ahmad Al-Kashef (@alkashef)
