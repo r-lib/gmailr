@@ -16,7 +16,8 @@ Imports:
     mime
 Suggests:
     testthat,
-    knitr
+    knitr,
+    argufy
 License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr
 BugReports: https://github.com/jimhester/gmailr/issues
