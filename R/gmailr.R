@@ -24,25 +24,13 @@ NULL
 #' mime() %>% to('someone@@somewhere.com')
 NULL
 
-gmailr_env = new.env(parent = emptyenv())
+gmailr_env <- new.env(parent = emptyenv())
+gmailr_env$id <- "955034766742-huv7d1b1euegvk5vfmfq7v83u4rpdqb0.apps.googleusercontent.com"
+gmailr_env$secret <- "rpJPeEMnDOh7qNAVjUh_aKlO"
 
 get_token = function() {
   if(!exists('token', gmailr_env)){
-    stop("If this is your first time using Gmailr, Please
-
-- Register a new project at https://cloud.google.com/console#/project
-- Navigate to `APIs`
-  - Switch the Gmail API status to `On`, and other API status to `Off`
-- Navigate to `APIs & auth->Consent screen`
-  - Name your application
-  - Select an email address for the application
-  - Other fields can be left blank
-- Navigate to `APIs & auth->Credentials`
-  - Create a new client ID
-    - Application Type: Installed Application
-    - Installed Application Type: Other
-  - Download the Client ID JSON - can be renamed!
-- Use the downloaded JSON file as input to `gmail_auth()`")
+    gmail_auth()
   }
   gmailr_env$token
 }
@@ -55,10 +43,11 @@ get_token = function() {
 #' \dontrun{
 #' gmail_auth("file", "compose")
 #' }
-gmail_auth = function(secret_file, scope=c("read_only", "modify", "compose", "full")){
+gmail_auth <- function(id = gmailr_env$id,
+                      secret = gmailr_env$secret,
+                      scope=c("read_only", "modify", "compose", "full")) {
 
-  info = jsonlite::fromJSON(readChar(secret_file, nchars=1e5))
-  myapp = oauth_app("google", info$installed$client_id, info$installed$client_secret)
+  myapp <- oauth_app("google", id, secret)
 
   scope = switch(match.arg(scope),
                  read_only = 'https://www.googleapis.com/auth/gmail.readonly',
