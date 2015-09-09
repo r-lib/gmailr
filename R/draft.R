@@ -47,7 +47,7 @@ drafts <- function(num_results = NULL, page_token = NULL, user_id = "me" ? is_st
 #' create_draft(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
-create_draft <- function(mail = ? as.character,
+create_draft <- function(mail = ?~ as.character,
                          user_id = "me" ? is_string,
                          type = c("multipart",
                                 "media",

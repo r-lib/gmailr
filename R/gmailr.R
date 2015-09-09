@@ -188,6 +188,10 @@ from.gmail_message <- function(x, ...){ header_value(x, "From") }
 
 #' @rdname accessors
 #' @export
+from.gmail_draft <- from.gmail_message
+
+#' @rdname accessors
+#' @export
 cc.gmail_message <- function(x, ...){ header_value(x, "Cc") }
 
 #' @rdname accessors
