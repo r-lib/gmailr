@@ -40,7 +40,7 @@ base64url_encode <- function(x) { gsub("/", "_", gsub("\\+", "-", base64encode(c
 debug <- function(...){
   args <- dots(...)
 
-  base::message(sprintf(paste0(args, '=%s', collapse=' '), ...))
+  base::message(sprintf(paste0(args, "=%s", collapse=" "), ...))
 }
 
 dots <- function (...) { eval(substitute(alist(...))) }
@@ -77,11 +77,11 @@ page_and_trim <- function(type, user_id, num_results, ...){
   }
   res <- itr(...)
   all_results <- list(res)
-  while(sum(counts(all_results)) < num_results && !is.null(res[['nextPageToken']])){
+  while(sum(counts(all_results)) < num_results && !is.null(res[["nextPageToken"]])){
     res <- itr(...)
-    all_results[[length(all_results)+1]] <- res
+    all_results[[length(all_results) + 1]] <- res
   }
-  structure(trim(all_results, num_results), class=paste0('gmail_', type))
+  structure(trim(all_results, num_results), class=paste0("gmail_", type))
 }
 
 ord <- function(x) { strtoi(charToRaw(x), 16L) }
@@ -110,11 +110,11 @@ substitute_regex <- function(data, pattern, fun, ...) {
 #' @usage lhs \%>\% rhs
 NULL
 
-encode_base64 <- function(x, line_length = 76L, newline = '\r\n') {
+encode_base64 <- function(x, line_length = 76L, newline = "\r\n") {
   if(is.raw(x)) {
     base64encode(x, 76L, newline)
   } else {
-    base64encode(charToRaw(x), 76L, '\r\n')
+    base64encode(charToRaw(x), 76L, "\r\n")
   }
 }
 
@@ -128,4 +128,4 @@ exists_list <- function(data, x){
 "%==%" <- function(x, y) { identical(x, y) }
 "%!=%" <- function(x, y) { !identical(x, y) }
 
-p <- function(...) paste(sep='', collapse='', ...)
+p <- function(...) paste(sep="", collapse="", ...)

@@ -10,8 +10,8 @@
 #'
 #' first_10_threads = threads(10)
 #' }
-threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me'){
-  page_and_trim('threads', user_id, num_results, search, page_token, label_ids, include_spam_trash)
+threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = "me"){
+  page_and_trim("threads", user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
 #' Get a single thread
@@ -25,13 +25,13 @@ threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_
 #' \dontrun{
 #' my_thread = thread(12345)
 #' }
-thread <- function(id, user_id = 'me') {
+thread <- function(id, user_id = "me") {
   req <- GET(gmail_path(rename(user_id), "threads", id),
             config(token = get_token()))
   stop_for_status(req)
-  parsed_req <- structure(content(req, "parsed"), class='gmail_thread')
+  parsed_req <- structure(content(req, "parsed"), class="gmail_thread")
 
-  parsed_req$messages[] <- lapply(parsed_req$messages, structure, class='gmail_message')
+  parsed_req$messages[] <- lapply(parsed_req$messages, structure, class="gmail_message")
 
   parsed_req
 }
@@ -46,7 +46,7 @@ thread <- function(id, user_id = 'me') {
 #' \dontrun{
 #' trash_thread(12345)
 #' }
-trash_thread <- function(id, user_id = 'me') {
+trash_thread <- function(id, user_id = "me") {
   req <- POST(gmail_path(rename(user_id), "threads", id, "trash"),
             config(token = get_token()))
   stop_for_status(req)
@@ -63,7 +63,7 @@ trash_thread <- function(id, user_id = 'me') {
 #' \dontrun{
 #' untrash_thread(12345)
 #' }
-untrash_thread <- function(id, user_id = 'me') {
+untrash_thread <- function(id, user_id = "me") {
   req <- POST(gmail_path(rename(user_id), "threads", id, "untrash"),
             config(token = get_token()))
   stop_for_status(req)
@@ -80,7 +80,7 @@ untrash_thread <- function(id, user_id = 'me') {
 #' \dontrun{
 #' delete_thread(12345)
 #' }
-delete_thread <- function(id, user_id = 'me') {
+delete_thread <- function(id, user_id = "me") {
   req <- DELETE(gmail_path(rename(user_id), "threads", id),
             config(token = get_token()))
   stop_for_status(req)
@@ -102,11 +102,10 @@ delete_thread <- function(id, user_id = 'me') {
 #' #add and remove at the same time
 #' modify_thread(12345, add_labels='label_2', remove_labels='label_1')
 #' }
-modify_thread <- function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
-  body <- rename(list('add_labels' = add_labels, 'remove_labels' = remove_labels))
+modify_thread <- function(id, add_labels = character(0), remove_labels = character(0), user_id = "me") {
+  body <- rename(list("add_labels" = add_labels, "remove_labels" = remove_labels))
   req <- POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body, encode="json",
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
-

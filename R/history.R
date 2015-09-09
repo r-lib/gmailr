@@ -12,6 +12,6 @@
 #' \dontrun{
 #' my_history = history("10")
 #' }
-history <- function(start_history_id = NULL, num_results = NULL, label_id = NULL, page_token = NULL,  user_id = 'me'){
-  page_and_trim('history', user_id, num_results, label_id, start_history_id, page_token)
+history <- function(start_history_id = NULL, num_results = NULL, label_id = NULL, page_token = NULL,  user_id = "me"){
+  page_and_trim("history", user_id, num_results, label_id, start_history_id, page_token)
 }

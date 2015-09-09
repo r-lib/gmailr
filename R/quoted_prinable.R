@@ -14,7 +14,7 @@ quoted_printable_encode <- function(data){
                    )
   res <- substitute_regex(res,
                          "([ \t]+)(?=\n|$)",
-                   function(x) paste0(sprintf("=%02X", ord(x)), collapse=''),
+                   function(x) paste0(sprintf("=%02X", ord(x)), collapse=""),
                    perl = TRUE
                    )
   res

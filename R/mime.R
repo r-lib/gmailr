@@ -83,10 +83,10 @@ subject.mime <- function(x, val, ...){
 text_body <- function(mime, body, ...){
   if(missing(body)){ return(mime$parts[[TEXT_PART]]) }
   mime$parts[[TEXT_PART]] <- mime(attr=list(
-              content_type = 'text/plain',
-              charset      = 'utf-8',
-              encoding     = 'quoted-printable',
-              format       = 'flowed',
+              content_type = "text/plain",
+              charset      = "utf-8",
+              encoding     = "quoted-printable",
+              format       = "flowed",
               ...),
               body = body)
   mime
@@ -98,9 +98,9 @@ TEXT_PART <- 1L
 html_body <- function(mime, body, ...){
   if(missing(body)){ return(mime$parts[[HTML_PART]]) }
   mime$parts[[HTML_PART]] <- mime(attr=list(
-                         content_type = 'text/html',
-                         charset      = 'utf-8',
-                         encoding     = 'base64',
+                         content_type = "text/html",
+                         charset      = "utf-8",
+                         encoding     = "base64",
                          ...),
                          body = body)
   mime
@@ -118,7 +118,7 @@ HTML_PART <- 2L
 attach_part <- function(mime, body, ...){
   if(missing(body)){ return(mime$parts[[3L:length(mime$parts)]]) }
   part_num <- if(length(mime$parts) < 3L) 3L else length(mime$parts) + 1L
-  mime$parts[[part_num]] <- mime(attr=c(encoding = 'base64', list(...)),
+  mime$parts[[part_num]] <- mime(attr=c(encoding = "base64", list(...)),
                                 body = body)
   mime
 }
@@ -159,8 +159,8 @@ attach_file <- function(mime, filename, type = NULL, ...){
 as.character.mime <- function(x,..., newline="\r\n") {
 
   # if we have both the text part and html part, we have to embed them in a multipart/alternative message
-  if(x$attr$content_type %!=% 'multipart/alternative' && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)){
-    new_msg <- mime(attr=list(content_type = 'multipart/alternative'),
+  if(x$attr$content_type %!=% "multipart/alternative" && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)){
+    new_msg <- mime(attr=list(content_type = "multipart/alternative"),
                    parts=c(x$parts[TEXT_PART], x$parts[HTML_PART]))
     x$parts[TEXT_PART] <- list(NULL)
     x$parts[HTML_PART] <- list(NULL)
@@ -170,16 +170,16 @@ as.character.mime <- function(x,..., newline="\r\n") {
   # if a multipart message
   if(length(x$parts) > 0L){
 
-    x$attr$content_type <- x$attr$content_type %||% 'multipart/mixed'
+    x$attr$content_type <- x$attr$content_type %||% "multipart/mixed"
 
     # random hex boundary if multipart, otherwise nothing
     boundary <- x$attr$boundary <- random_hex(32)
 
     # sep is --boundary newline if multipart, otherwise newline
-    sep <- paste0('--', boundary, newline)
+    sep <- paste0("--", boundary, newline)
 
     # end is --boundary-- if mulitpart, otherwise nothing
-    end <- paste0('--', boundary, '--', newline)
+    end <- paste0("--", boundary, "--", newline)
 
     body_text <- paste0(collapse=sep, Filter(function(x) length(x) > 0L, c(lapply(x$parts, as.character), x$body)))
   }
@@ -195,11 +195,11 @@ as.character.mime <- function(x,..., newline="\r\n") {
   x$header$"Content-Transfer-Encoding" <- x$attr$encoding
   x$header$"Content-Disposition" <- parse_content_disposition(x$attr)
 
-  encoding <- x$attr$encoding %||% ''
+  encoding <- x$attr$encoding %||% ""
 
   encoded_body <- switch(encoding,
-    'base64' = encode_base64(body_text, 76L, newline),
-    'quoted-printable' = quoted_printable_encode(body_text),
+    "base64" = encode_base64(body_text, 76L, newline),
+    "quoted-printable" = quoted_printable_encode(body_text),
     body_text
   )
   headers <- format_headers(x$header, newline=newline)
@@ -208,18 +208,18 @@ as.character.mime <- function(x,..., newline="\r\n") {
 }
 
 parse_content_type <- function(header) {
-  paste0(header$content_type %||% 'text/plain',
-         header$charset %|||% paste0('; charset=', header$charset),
-         header$format %|||% paste0('; format=', header$format),
-         header$name %|||% paste0('; name=', header$name),
-         header$boundary %|||% paste0('; boundary=', header$boundary)
+  paste0(header$content_type %||% "text/plain",
+         header$charset %|||% paste0("; charset=", header$charset),
+         header$format %|||% paste0("; format=", header$format),
+         header$name %|||% paste0("; name=", header$name),
+         header$boundary %|||% paste0("; boundary=", header$boundary)
          )
 }
 
 parse_content_disposition <- function(header) {
-  paste0(header$disposition %||% 'inline',
-         header$filename %|||% paste0('; filename=', header$filename),
-         header$modification_date %|||% paste0('; modification-date=', header$modification_date))
+  paste0(header$disposition %||% "inline",
+         header$filename %|||% paste0("; filename=", header$filename),
+         header$modification_date %|||% paste0("; modification-date=", header$modification_date))
 }
 
 random_hex <- function(width=4) {
