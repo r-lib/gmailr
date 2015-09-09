@@ -348,3 +348,6 @@ gmailr_POST <- function(location, user_id, class = NULL, ...) {
 gmailr_GET <- function(location, user_id, class = NULL, ...) {
   gmailr_query(GET, location, user_id, class, ...)
 }
+gmailr_DELETE <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(DELETE, location, user_id, class, ...)
+}
