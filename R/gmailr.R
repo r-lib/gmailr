@@ -327,3 +327,24 @@ print.gmail_thread <- print.gmail_message
 #' @rdname print
 #' @export
 print.gmail_threads <- print.gmail_message
+
+gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
+  req <- fun(gmail_path(user_id, location),
+             config(token = get_token()),
+              ...)
+  stop_for_status(req)
+
+  res <- content(req, "parsed")
+  if (!is.null(class)) {
+    class(res) <- class
+  }
+  res
+}
+
+gmailr_POST <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(POST, location, user_id, class, ...)
+}
+
+gmailr_GET <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(GET, location, user_id, class, ...)
+}
