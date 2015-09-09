@@ -11,9 +11,9 @@
 #' \dontrun{
 #' my_message = message(12345)
 #' }
-message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
-  format = match.arg(format)
-  req = GET(gmail_path(user_id, "messages", id),
+message <- function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
+  format <- match.arg(format)
+  req <- GET(gmail_path(user_id, "messages", id),
             query = list(format=format),
             config(token = get_token()))
   stop_for_status(req)
@@ -36,7 +36,7 @@ message = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
 #' #Search for R, return 10 results using label 1 including spam and trash folders
 #' my_messages = messages("R", 10, "label_1", TRUE)
 #' }
-messages = function(search = NULL, num_results = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me', page_token = NULL){
+messages <- function(search = NULL, num_results = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = 'me', page_token = NULL){
   page_and_trim('messages', user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
 
@@ -50,8 +50,8 @@ messages = function(search = NULL, num_results = NULL, label_ids = NULL, include
 #' \dontrun{
 #' trash_message('12345')
 #' }
-trash_message = function(id, user_id = 'me') {
-  req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
+trash_message <- function(id, user_id = 'me') {
+  req <- POST(gmail_path(rename(user_id), "messages", id, "trash"),
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
@@ -67,8 +67,8 @@ trash_message = function(id, user_id = 'me') {
 #' \dontrun{
 #' untrash_message('12345')
 #' }
-untrash_message = function(id, user_id = 'me') {
-  req = POST(gmail_path(rename(user_id), "messages", id, "trash"),
+untrash_message <- function(id, user_id = 'me') {
+  req <- POST(gmail_path(rename(user_id), "messages", id, "trash"),
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
@@ -84,8 +84,8 @@ untrash_message = function(id, user_id = 'me') {
 #' \dontrun{
 #' delete_message('12345')
 #' }
-delete_message = function(id, user_id = 'me') {
-  req = DELETE(gmail_path(rename(user_id), "messages", id),
+delete_message <- function(id, user_id = 'me') {
+  req <- DELETE(gmail_path(rename(user_id), "messages", id),
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
@@ -107,9 +107,9 @@ delete_message = function(id, user_id = 'me') {
 #' #add and remove at the same time
 #' modify_message(12345, add_labels='label_2', remove_labels='label_1')
 #' }
-modify_message = function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
-  body = rename('add_labels' = add_labels, 'remove_labels' = remove_labels)
-  req = POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body, encode='json',
+modify_message <- function(id, add_labels = character(0), remove_labels = character(0), user_id = 'me') {
+  body <- rename('add_labels' = add_labels, 'remove_labels' = remove_labels)
+  req <- POST(gmail_path(rename(user_id), "messages", id, "modify"), body=body, encode='json',
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
@@ -130,8 +130,8 @@ modify_message = function(id, add_labels = character(0), remove_labels = charact
 #' save attachment to a file
 #' save_attachment(my_attachment, 'photo.jpg')
 #' }
-attachment = function(id, message_id, user_id = 'me') {
-  req = GET(gmail_path(rename(user_id), "messages", message_id, 'attachments', id),
+attachment <- function(id, message_id, user_id = 'me') {
+  req <- GET(gmail_path(rename(user_id), "messages", message_id, 'attachments', id),
             config(token = get_token()))
   stop_for_status(req)
   structure(content(req, "parsed"), class="gmail_attachment")
@@ -150,8 +150,8 @@ attachment = function(id, message_id, user_id = 'me') {
 #' save attachment to a file
 #' save_attachment(my_attachment, 'photo.jpg')
 #' }
-save_attachment = function(x, filename){
-  data = base64url_decode(x$data)
+save_attachment <- function(x, filename){
+  data <- base64url_decode(x$data)
   writeBin(object=data, con=filename)
   invisible()
 }
@@ -172,8 +172,8 @@ save_attachment = function(x, filename){
 #' save a specific attachment
 #' save_attachments(my_message, 'a32e324b')
 #' }
-save_attachments = function(x, attachment_id = NULL, path='', user_id = 'me'){
-  attachments_parts = if(!is.null(attachment_id)){
+save_attachments <- function(x, attachment_id = NULL, path='', user_id = 'me'){
+  attachments_parts <- if(!is.null(attachment_id)){
     Find(function(part){ identical(part$body$attachmentId, attachment_id)}, x$payload$parts)
   }
   else {
@@ -181,7 +181,7 @@ save_attachments = function(x, attachment_id = NULL, path='', user_id = 'me'){
   }
   for(part in x$payload$parts){
     if('filename' %in% names(part) && part[['filename']] != ''){
-      att = attachment(part[['body']][['attachmentId']], x$id, user_id)
+      att <- attachment(part[['body']][['attachmentId']], x$id, user_id)
       save_attachment(att, paste0(path, part[['filename']]))
     }
   }
@@ -202,12 +202,12 @@ save_attachments = function(x, attachment_id = NULL, path='', user_id = 'me'){
 #' insert_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
-insert_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
-  mail = if(!is.character(mail)) as.character(mail) else mail
-  type = match.arg(type)
-  internal_date_source = match.arg(internal_date_source)
+insert_message <- function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
+  mail <- if(!is.character(mail)) as.character(mail) else mail
+  type <- match.arg(type)
+  internal_date_source <- match.arg(internal_date_source)
 
-  req = POST(gmail_path(user_id, "messages"),
+  req <- POST(gmail_path(user_id, "messages"),
             query = list(uploadType=type, interalDateSource=internal_date_source),
             body = jsonlite::toJSON(auto_unbox=TRUE,
                           c(not_null(rename(label_ids)),
@@ -227,12 +227,12 @@ insert_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multip
 #' import_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
-import_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
-  mail = if(!is.character(mail)) as.character(mail) else mail
-  type = match.arg(type)
-  internal_date_source = match.arg(internal_date_source)
+import_message <- function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable"), internal_date_source=c("dateHeader", "recievedTime")) {
+  mail <- if(!is.character(mail)) as.character(mail) else mail
+  type <- match.arg(type)
+  internal_date_source <- match.arg(internal_date_source)
 
-  req = POST(gmail_path(user_id, "messages", "import"),
+  req <- POST(gmail_path(user_id, "messages", "import"),
             query = list(uploadType=type, interalDateSource=internal_date_source),
             body = jsonlite::toJSON(auto_unbox=TRUE,
                           c(not_null(rename(label_ids)),
@@ -252,11 +252,11 @@ import_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multip
 #' send_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
-send_message = function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable")) {
-  mail = if(!is.character(mail)) as.character(mail) else mail
-  type = match.arg(type)
+send_message <- function(mail, user_id = 'me', label_ids = NULL, type=c("multipart", "media", "resumable")) {
+  mail <- if(!is.character(mail)) as.character(mail) else mail
+  type <- match.arg(type)
 
-  req = POST(gmail_path(user_id, "messages", "send"),
+  req <- POST(gmail_path(user_id, "messages", "send"),
             query = list(uploadType=type),
             body = jsonlite::toJSON(auto_unbox=TRUE,
                           list(raw=base64url_encode(mail))),

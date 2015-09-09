@@ -8,8 +8,8 @@
 #' \dontrun{
 #' my_labels = labels()
 #' }
-labels = function(user_id = 'me'){
-  req = GET(gmail_path(user_id, "labels"),
+labels <- function(user_id = 'me'){
+  req <- GET(gmail_path(user_id, "labels"),
             config(token = get_token()))
   stop_for_status(req)
   content(req, "parsed")
@@ -23,8 +23,8 @@ labels = function(user_id = 'me'){
 #' @inheritParams labels
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
 #' @export
-label = function(id, user_id = 'me') {
-  req = GET(gmail_path(user_id, "labels", id),
+label <- function(id, user_id = 'me') {
+  req <- GET(gmail_path(user_id, "labels", id),
             config(token = get_token()))
   stop_for_status(req)
   content(req, "parsed")
@@ -39,8 +39,8 @@ label = function(id, user_id = 'me') {
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/update}
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/patch}
 #' @export
-update_label = function(id, label, user_id = 'me') {
-  req = POST(gmail_path(user_id, "labels", id),
+update_label <- function(id, label, user_id = 'me') {
+  req <- POST(gmail_path(user_id, "labels", id),
               body=label, encode='json',
               config(token = get_token()))
   stop_for_status(req)
@@ -49,8 +49,8 @@ update_label = function(id, label, user_id = 'me') {
 
 #' @rdname update_label
 #' @export
-update_label_patch = function(id, label, user_id = 'me') {
-  req = PATCH(gmail_path(user_id, "labels", id),
+update_label_patch <- function(id, label, user_id = 'me') {
+  req <- PATCH(gmail_path(user_id, "labels", id),
               body=label, encode='json',
               config(token = get_token()))
   stop_for_status(req)
@@ -63,8 +63,8 @@ update_label_patch = function(id, label, user_id = 'me') {
 #' @inheritParams label
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/delete}
 #' @export
-delete_label = function(id, user_id = 'me') {
-  req = DELETE(gmail_path(user_id, "labels", id),
+delete_label <- function(id, user_id = 'me') {
+  req <- DELETE(gmail_path(user_id, "labels", id),
             config(token = get_token()))
   stop_for_status(req)
   invisible(content(req, "parsed"))
@@ -79,10 +79,10 @@ delete_label = function(id, user_id = 'me') {
 #' @inheritParams labels
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/create}
 #' @export
-create_label = function(name, label_list_visibility=c("hide", "show", "show_unread"), message_list_visibility=c("hide", "show"), user_id = 'me') {
-  label_list_visibility = label_value_map[match.arg(label_list_visibility)]
-  message_list_visibility = match.arg(message_list_visibility)
-  req = POST(gmail_path(user_id, "labels"),
+create_label <- function(name, label_list_visibility=c("hide", "show", "show_unread"), message_list_visibility=c("hide", "show"), user_id = 'me') {
+  label_list_visibility <- label_value_map[match.arg(label_list_visibility)]
+  message_list_visibility <- match.arg(message_list_visibility)
+  req <- POST(gmail_path(user_id, "labels"),
                body=c(rename(name, label_list_visibility, message_list_visibility)), encode="json",
             config(token = get_token()))
   stop_for_status(req)

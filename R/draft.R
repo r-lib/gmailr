@@ -1,6 +1,6 @@
 #' Get a single draft
 #'
-#' Function to retrieve a given draft by id
+#' Function to retrieve a given draft by <-
 #' @param id draft id to access
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the draft returned
@@ -11,9 +11,9 @@
 #' \dontrun{
 #' my_draft = draft('12345')
 #' }
-draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
-  format = match.arg(format)
-  req = GET(gmail_path(user_id, "drafts", id),
+draft <- function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
+  format <- match.arg(format)
+  req <- GET(gmail_path(user_id, "drafts", id),
             query = list(format=format),
             config(token = get_token()))
   stop_for_status(req)
@@ -34,7 +34,7 @@ draft = function(id, user_id = 'me', format=c("full", "minimal", "raw")) {
 #'
 #' first_10_drafts = drafts(10)
 #' }
-drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
+drafts <- function(num_results = NULL, page_token = NULL, user_id = 'me'){
   page_and_trim('drafts', user_id, num_results, page_token)
 }
 
@@ -50,10 +50,10 @@ drafts = function(num_results = NULL, page_token = NULL, user_id = 'me'){
 #' create_draft(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
-create_draft = function(mail, user_id = 'me', type=c("multipart", "media", "resumable")) {
-  mail = if(!is.character(mail)) as.character(mail) else mail
-  type = match.arg(type)
-  req = POST(gmail_path(user_id, "drafts"),
+create_draft <- function(mail, user_id = 'me', type=c("multipart", "media", "resumable")) {
+  mail <- if(!is.character(mail)) as.character(mail) else mail
+  type <- match.arg(type)
+  req <- POST(gmail_path(user_id, "drafts"),
             query = list(uploadType=type),
             body = jsonlite::toJSON(auto_unbox=TRUE,
                           list(
@@ -75,9 +75,9 @@ create_draft = function(mail, user_id = 'me', type=c("multipart", "media", "resu
 #' \dontrun{
 #' send_draft(12345)
 #' }
-send_draft = function(id, upload_type = c("media", "multipart", "resumable"), user_id = 'me') {
-  upload_type = match.arg(upload_type)
-  req = POST(gmail_path(user_id, "drafts"),
+send_draft <- function(id, upload_type = c("media", "multipart", "resumable"), user_id = 'me') {
+  upload_type <- match.arg(upload_type)
+  req <- POST(gmail_path(user_id, "drafts"),
              query=rename(upload_type),
              body=c("id"=id),
              encode="json",
