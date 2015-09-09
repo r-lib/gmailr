@@ -31,7 +31,7 @@ draft <- function(id = ? is_string,
 #'
 #' first_10_drafts = drafts(10)
 #' }
-drafts <- function(num_results = NULL, page_token = NULL, user_id = "me" ? is_string){
+drafts <- function(num_results = NULL, page_token = NULL, user_id = "me" ? is_string) {
   page_and_trim("drafts", user_id, num_results, page_token)
 }
 
@@ -74,7 +74,7 @@ create_draft <- function(mail = ? as.character,
 send_draft <- function(id = ? is_string,
                        upload_type = c("media", "multipart", "resumable") ? as_enum,
                        user_id = "me" ? is_string) {
-  gmailr_POST("drafts", user_id,
+  gmailr_POST("drafts", user_id, class = "gmail_draft",
              query = rename(upload_type),
              body = c("id" = id),
              encode = "json")
