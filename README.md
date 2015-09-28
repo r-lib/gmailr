@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/jimhester/gmailr.png?branch=master)](https://travis-ci.org/jimhester/gmailr)
 [![Coverage Status](https://img.shields.io/coveralls/jimhester/gmailr.svg)](https://coveralls.io/r/jimhester/gmailr)
 
-Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
+Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
 
 ## Features ##
 - retrieve data from your email
@@ -26,6 +26,10 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
 
 ## Setup ##
 
+By default gmailr will use a global project.  However if you are going to be
+doing a heavy user and will do a lot of queries _please_ setup your own project
+with the steps below.
+
 - Register a new project at https://cloud.google.com/console#/project
 - Navigate to `APIs`
   - Switch the Gmail API status to `On`, and other API status to `Off`
@@ -44,14 +48,13 @@ Easily exposing the [Gmail API](https://developers.google.com/gmail/api/overview
       gmail_auth('file.json')
       ```
 
-## Furture Work ##
+## Future Work ##
 
 - More unit tests and better coverage
-- More (complicated) example is the manual/help
-- Generate statistics
-- Mass emailers
-- Periodic emails
-- Returning data frames in addition to native Gmail API objects which are usually a nested list. 
+- More (complicated) examples
+- Email statistics
+- Programmatic emailing
+- Returning data frames in addition to native Gmail API objects which are usually a nested list.
 - Support all the formats of [users.messages:get](https://developers.google.com/gmail/api/v1/reference/users/messages/get)
 
 # Examples #
