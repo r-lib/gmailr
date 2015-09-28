@@ -35,6 +35,13 @@ get_token <- function() {
   gmailr_env$token
 }
 
+#' Clear the current oauth token
+#' @export
+clear_token <- function() {
+  unlink(".httr-oauth")
+  gmailr_env$token <- NULL
+}
+
 #' Setup oauth authentication for your gmail
 #' @param secret_file the secret json file downloaded from \url{https://cloud.google.com/console#/project}
 #' @param scope the authentication scope to use
