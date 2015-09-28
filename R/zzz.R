@@ -30,4 +30,5 @@ valid_path <- function(path) {
   is_string(path) && dir.exists(path)
 }
 
-argufy::argufy_package()
+if (requireNamespace(argufy)) argufy::argufy_package()
+else `?` <- function(e1, e2) e1
