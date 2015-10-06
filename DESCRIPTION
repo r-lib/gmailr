@@ -18,6 +18,8 @@ Suggests:
     testthat,
     knitr,
     argufy
+Remotes:
+  gaborcsardi/argufy
 License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr
 BugReports: https://github.com/jimhester/gmailr/issues
