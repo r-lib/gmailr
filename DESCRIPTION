@@ -13,11 +13,11 @@ Imports:
     base64enc,
     magrittr,
     jsonlite,
-    mime
+    mime,
+    argufy
 Suggests:
     testthat,
-    knitr,
-    argufy
+    knitr
 Remotes:
   gaborcsardi/argufy
 License: MIT + file LICENSE

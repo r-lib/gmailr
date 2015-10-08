@@ -260,8 +260,8 @@ send_message <- function(
 
   gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",
     query = list(uploadType = type),
-    body = jsonlite::toJSON(auto_unbox=TRUE,
-      c(threadId = thread_id,
-        raw = base64url_encode(mail))),
+    body = jsonlite::toJSON(auto_unbox=TRUE, null = "null",
+                            c(threadId = thread_id,
+                              list(raw = base64url_encode(mail)))),
     add_headers("Content-Type" = "application/json"))
 }
