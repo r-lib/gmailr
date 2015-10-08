@@ -13,7 +13,7 @@
 #' }
 draft <- function(id = ? is_string,
                   user_id = "me" ? is_string,
-                  format = c("full", "minimal", "raw") ? as_enum) {
+                  format = c("full", "minimal", "raw") ?~ as_enum) {
   gmailr_GET(c("draft", id), user_id, query = list(format=format))
 }
 
@@ -51,7 +51,7 @@ create_draft <- function(mail = ?~ as.character,
                          user_id = "me" ? is_string,
                          type = c("multipart",
                                 "media",
-                                "resumable") ? as_enum) {
+                                "resumable") ?~ as_enum) {
   gmailr_POST("drafts", user_id, class = "gmail_draft",
               query = list(uploadType=type),
               body = jsonlite::toJSON(auto_unbox=TRUE,
@@ -72,7 +72,7 @@ create_draft <- function(mail = ?~ as.character,
 #' send_draft(12345)
 #' }
 send_draft <- function(id = ? is_string,
-                       upload_type = c("media", "multipart", "resumable") ? as_enum,
+                       upload_type = c("media", "multipart", "resumable") ?~ as_enum,
                        user_id = "me" ? is_string) {
   gmailr_POST("drafts", user_id, class = "gmail_draft",
              query = rename(upload_type),

@@ -13,7 +13,7 @@
 #' }
 message <- function(id = ? is_string,
                     user_id = "me" ? is_string,
-                    format = c("full", "minimal", "raw") ? as_enum) {
+                    format = c("full", "minimal", "raw") ?~ as_enum) {
   gmailr_GET(c("messages", id), user_id, class = "gmail_message",
             query = list(format=format))
 }
@@ -204,10 +204,10 @@ save_attachments <- function(x = ? has_class("gmail_message"),
 #' insert_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
-insert_message <- function(mail = ? as.character,
+insert_message <- function(mail = ?~ as.character,
   label_ids = ? nullable(is_strings),
-  type = c("multipart", "media", "resumable") ? as_enum,
-  internal_date_source = c("dateHeader", "recievedTime") ? as_enum,
+  type = c("multipart", "media", "resumable") ?~ as_enum,
+  internal_date_source = c("dateHeader", "recievedTime") ?~ as_enum,
   user_id = "me" ? is_string) {
 
   gmailr_POST("messages", user_id, class = "gmail_message",
@@ -228,10 +228,10 @@ insert_message <- function(mail = ? as.character,
 #' import_message(mime(from="you@@me.com", to="any@@one.com",
 #'                           subject='hello", "how are you doing?"))
 #' }
-import_message <- function(mail = ? as.character,
+import_message <- function(mail = ?~ as.character,
   label_ids = ? nullable(is_strings),
-  type = c("multipart", "media", "resumable") ? as_enum,
-  internal_date_source = c("dateHeader", "recievedTime") ? as_enum,
+  type = c("multipart", "media", "resumable") ?~ as_enum,
+  internal_date_source = c("dateHeader", "recievedTime") ?~ as_enum,
   user_id = "me" ? is_string) {
 
   gmailr_POST(c("messages", "import"), user_id, class = "gmail_message",
@@ -253,8 +253,8 @@ import_message <- function(mail = ? as.character,
 #'                           subject='hello", "how are you doing?"))
 #' }
 send_message <- function(
-  mail = ? as.character,
-  type = c("multipart", "media", "resumable") ? as_enum,
+  mail = ?~ as.character,
+  type = c("multipart", "media", "resumable") ?~ as_enum,
   thread_id = NULL ? nullable(is_string),
   user_id = "me" ? is_string) {
 
