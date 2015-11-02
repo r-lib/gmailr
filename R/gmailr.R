@@ -24,22 +24,22 @@ NULL
 #' mime() %>% to('someone@@somewhere.com')
 NULL
 
-gmailr_env <- new.env(parent = emptyenv())
-gmailr_env$id <- "955034766742-huv7d1b1euegvk5vfmfq7v83u4rpdqb0.apps.googleusercontent.com"
-gmailr_env$secret <- "rpJPeEMnDOh7qNAVjUh_aKlO"
+the <- new.env(parent = emptyenv())
+the$id <- "955034766742-huv7d1b1euegvk5vfmfq7v83u4rpdqb0.apps.googleusercontent.com"
+the$secret <- "rpJPeEMnDOh7qNAVjUh_aKlO"
 
 get_token <- function() {
-  if(!exists("token", gmailr_env)){
+  if(!exists("token", the)){
     gmail_auth()
   }
-  gmailr_env$token
+  the$token
 }
 
 #' Clear the current oauth token
 #' @export
 clear_token <- function() {
   unlink(".httr-oauth")
-  gmailr_env$token <- NULL
+  the$token <- NULL
 }
 
 #' Setup oauth authentication for your gmail
@@ -50,8 +50,8 @@ clear_token <- function() {
 #' \dontrun{
 #' gmail_auth("file", "compose")
 #' }
-gmail_auth <- function(id = gmailr_env$id,
-                      secret = gmailr_env$secret,
+gmail_auth <- function(id = the$id,
+                      secret = the$secret,
                       scope=c("read_only", "modify", "compose", "full")) {
 
   myapp <- oauth_app("google", id, secret)
@@ -63,7 +63,7 @@ gmail_auth <- function(id = gmailr_env$id,
                  full = "https://mail.google.com/"
                  )
 
-  gmailr_env$token <- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
+  the$token <- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
 }
 
 #' Get the body text of a message or draft
@@ -339,20 +339,19 @@ print.gmail_thread <- print.gmail_message
 #' @export
 print.gmail_threads <- print.gmail_message
 
-.last_response <- list()
+the$last_response <- list()
 
 gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
   req <- fun(gmail_path(user_id, location),
              config(token = get_token()),
               ...)
-  .last_response <<- content(req, "parsed")
+  the$last_response <<- content(req, "parsed")
   stop_for_status(req)
-  res <- .last_response
 
   if (!is.null(class)) {
-    class(res) <- class
+    class(the$last_response) <- class
   }
-  res
+  the$last_response
 }
 
 gmailr_POST <- function(location, user_id, class = NULL, ...) {
