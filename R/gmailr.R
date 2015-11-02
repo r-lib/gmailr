@@ -345,7 +345,7 @@ gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
   req <- fun(gmail_path(user_id, location),
              config(token = get_token()),
               ...)
-  the$last_response <<- content(req, "parsed")
+  the$last_response <- content(req, "parsed")
   stop_for_status(req)
 
   if (!is.null(class)) {
