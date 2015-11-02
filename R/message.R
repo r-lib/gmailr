@@ -250,7 +250,7 @@ import_message <- function(mail = ?~ as.character,
 #' @examples
 #' \dontrun{
 #' send_message(mime(from="you@@me.com", to="any@@one.com",
-#'                           subject='hello", "how are you doing?"))
+#'                           subject="hello", "how are you doing?"))
 #' }
 send_message <- function(
   mail = ?~ as.character,

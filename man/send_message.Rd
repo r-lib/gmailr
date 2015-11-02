@@ -20,7 +20,7 @@ Send a message from a mime message
 \examples{
 \dontrun{
 send_message(mime(from="you@me.com", to="any@one.com",
-                          subject='hello", "how are you doing?"))
+                          subject="hello", "how are you doing?"))
 }
 }
 \references{
