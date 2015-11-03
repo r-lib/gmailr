@@ -18,9 +18,9 @@ Imports:
 Suggests:
     testthat,
     knitr
-Remotes:
-  gaborcsardi/argufy
+Remotes: gaborcsardi/argufy
 License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr
 BugReports: https://github.com/jimhester/gmailr/issues
 VignetteBuilder: knitr
+RoxygenNote: 5.0.0

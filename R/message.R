@@ -201,8 +201,8 @@ save_attachments <- function(x = ? has_class("gmail_message"),
 #' @export
 #' @examples
 #' \dontrun{
-#' insert_message(mime(from="you@@me.com", to="any@@one.com",
-#'                           subject='hello", "how are you doing?"))
+#' insert_message(mime(From="you@@me.com", To="any@@one.com",
+#'                           Subject="hello", "how are you doing?"))
 #' }
 insert_message <- function(mail = ?~ as.character,
   label_ids = ? nullable(is_strings),
@@ -225,8 +225,8 @@ insert_message <- function(mail = ?~ as.character,
 #' @export
 #' @examples
 #' \dontrun{
-#' import_message(mime(from="you@@me.com", to="any@@one.com",
-#'                           subject='hello", "how are you doing?"))
+#' import_message(mime(From="you@@me.com", To="any@@one.com",
+#'                           Subject="hello", "how are you doing?"))
 #' }
 import_message <- function(mail = ?~ as.character,
   label_ids = ? nullable(is_strings),

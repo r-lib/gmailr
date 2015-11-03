@@ -44,8 +44,8 @@ drafts <- function(num_results = NULL, page_token = NULL, user_id = "me" ? is_st
 #' @export
 #' @examples
 #' \dontrun{
-#' create_draft(mime(from="you@@me.com", to="any@@one.com",
-#'                           subject='hello", "how are you doing?"))
+#' create_draft(mime(From="you@@me.com", To="any@@one.com",
+#'                           Subject="hello", "how are you doing?"))
 #' }
 create_draft <- function(mail = ?~ as.character,
                          user_id = "me" ? is_string,
