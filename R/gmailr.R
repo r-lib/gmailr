@@ -342,15 +342,23 @@ print.gmail_threads <- print.gmail_message
 the$last_response <- list()
 
 gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
-  req <- fun(gmail_path(user_id, location),
+  response <- fun(gmail_path(user_id, location),
              config(token = get_token()),
               ...)
-  the$last_response <- content(req, "parsed")
-  stop_for_status(req)
+  the$last_response <- response
+  stop_for_status(response)
+  result <- content(response, "parsed")
 
   if (!is.null(class)) {
-    class(the$last_response) <- class
+    class(result) <- class
   }
+  result
+}
+
+#' Response from the last query
+#'
+#' @export
+last_response <- function() {
   the$last_response
 }
 
