@@ -50,11 +50,18 @@ clear_token <- function() {
 #' \dontrun{
 #' gmail_auth("file", "compose")
 #' }
-gmail_auth <- function(id = the$id,
+gmail_auth <- function(secret_file=NULL,
+                      id = the$id,
                       secret = the$secret,
                       scope=c("read_only", "modify", "compose", "full")) {
 
-  myapp <- oauth_app("google", id, secret)
+  if(is.null(secret_file)){
+    myapp <- oauth_app("google", id, secret)
+  } else {
+    info <- jsonlite::fromJSON(readChar(secret_file, nchars=1e5))
+    myapp <- oauth_app("google", info$installed$client_id, info$installed$client_secret)
+  }
+  
 
   scope <- switch(match.arg(scope),
                  read_only = "https://www.googleapis.com/auth/gmail.readonly",
