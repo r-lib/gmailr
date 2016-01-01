@@ -93,7 +93,7 @@ gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
 use_secret_file <- function(filename) {
   info <- jsonlite::fromJSON(readChar(filename, nchars=1e5))
   the$secret <- info$installed$client_secret
-  the$client_id <- info$installed$client_id
+  the$id <- info$installed$client_id
 }
 
 #' Get the body text of a message or draft
