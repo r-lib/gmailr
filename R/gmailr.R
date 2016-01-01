@@ -91,7 +91,7 @@ gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
 #' @param filename the filename of the file
 #' @export
 use_secret_file <- function(filename) {
-  info <- jsonlite::fromJSON(readChar(secret_file, nchars=1e5))
+  info <- jsonlite::fromJSON(readChar(filename, nchars=1e5))
   the$secret <- info$installed$client_secret
   the$client_id <- info$installed$client_id
 }
