@@ -34,11 +34,11 @@ message <- function(id = ? is_string,
 #' #Search for R, return 10 results using label 1 including spam and trash folders
 #' my_messages = messages("R", 10, "label_1", TRUE)
 #' }
-messages <- function(search = NULL ? nullable(is_string),
-  num_results = NULL ? nullable(is_number),
-  label_ids = NULL ? nullable(is_strings),
-  include_spam_trash = NULL ? nullable(is_boolean),
-  page_token = NULL ? nullable(is_string),
+messages <- function(search = NULL ? nullable(is_string)(search),
+  num_results = NULL ? nullable(is_number)(num_results),
+  label_ids = NULL ? nullable(is_strings)(label_ids),
+  include_spam_trash = NULL ? nullable(is_boolean)(include_spam_trash),
+  page_token = NULL ? nullable(is_string)(page_token),
   user_id = "me" ? is_string) {
 
   page_and_trim("messages", user_id, num_results, search, page_token, label_ids, include_spam_trash)
@@ -103,8 +103,8 @@ delete_message <- function(id = ? is_string, user_id = "me" ? is_string) {
 #' modify_message(12345, add_labels='label_2', remove_labels='label_1')
 #' }
 modify_message <- function(id = ? is_string,
-                           add_labels = NULL ? nullable(is_strings),
-                           remove_labels = NULL ? nullable(is_strings),
+                           add_labels = NULL ? nullable(is_strings)(add_labels),
+                           remove_labels = NULL ? nullable(is_strings)(remove_labels),
                            user_id = "me" ? is_string) {
   gmailr_POST(c("messages", id, "modify"), user_id, class = "gmail_message",
     body = rename("add_labels" = add_labels, "remove_labels" = remove_labels),
@@ -171,7 +171,7 @@ save_attachment <- function(x = ? has_class("gmail_attachment"),
 #' save_attachments(my_message, 'a32e324b')
 #' }
 save_attachments <- function(x = ? has_class("gmail_message"),
-                             attachment_id = NULL ? nullable(is_string),
+                             attachment_id = NULL ? nullable(is_string)(attachment_id),
                              path = "." ? valid_path,
                              user_id = "me" ? is_string) {
   attachments_parts <- if (!is.null(attachment_id)) {
@@ -205,7 +205,7 @@ save_attachments <- function(x = ? has_class("gmail_message"),
 #'                           Subject="hello", "how are you doing?"))
 #' }
 insert_message <- function(mail = ?~ as.character,
-  label_ids = ? nullable(is_strings),
+  label_ids = ? nullable(is_strings)(label_ids),
   type = c("multipart", "media", "resumable") ?~ as_enum,
   internal_date_source = c("dateHeader", "recievedTime") ?~ as_enum,
   user_id = "me" ? is_string) {
@@ -229,7 +229,7 @@ insert_message <- function(mail = ?~ as.character,
 #'                           Subject="hello", "how are you doing?"))
 #' }
 import_message <- function(mail = ?~ as.character,
-  label_ids = ? nullable(is_strings),
+  label_ids = ? nullable(is_strings)(label_ids),
   type = c("multipart", "media", "resumable") ?~ as_enum,
   internal_date_source = c("dateHeader", "recievedTime") ?~ as_enum,
   user_id = "me" ? is_string) {
@@ -255,7 +255,7 @@ import_message <- function(mail = ?~ as.character,
 send_message <- function(
   mail = ?~ as.character,
   type = c("multipart", "media", "resumable") ?~ as_enum,
-  thread_id = NULL ? nullable(is_string),
+  thread_id = NULL ? nullable(is_string)(thread_id),
   user_id = "me" ? is_string) {
 
   gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",

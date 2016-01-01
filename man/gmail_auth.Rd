@@ -4,11 +4,15 @@
 \alias{gmail_auth}
 \title{Setup oauth authentication for your gmail}
 \usage{
-gmail_auth(id = the$id, secret = the$secret, scope = c("read_only",
-  "modify", "compose", "full"))
+gmail_auth(scope = c("read_only", "modify", "compose", "full"), id = the$id,
+  secret = the$secret, secret_file = NULL)
 }
 \arguments{
 \item{scope}{the authentication scope to use}
+
+\item{id}{the client_id to use for authentication}
+
+\item{secret}{the client secret to use for authentication}
 
 \item{secret_file}{the secret json file downloaded from \url{https://cloud.google.com/console#/project}}
 }
@@ -17,7 +21,11 @@ Setup oauth authentication for your gmail
 }
 \examples{
 \dontrun{
-gmail_auth("file", "compose")
+gmail_auth("compose")
 }
+}
+\seealso{
+use_secret_file to set the default id and secret to a different
+  value than the default.
 }
 
