@@ -48,9 +48,9 @@ dots <- function (...) { eval(substitute(alist(...))) }
 page_and_trim <- function(type, user_id, num_results, ...){
 
   num_results <- num_results %||% 100
-  itr <- function(...){
+  itr <- function(..., page_token = NULL){
     req <- GET(gmail_path(user_id, type),
-             query = not_null(rename(...)), config(token = get_token()))
+             query = not_null(rename(..., page_token = page_token)), config(token=get_token()))
     stop_for_status(req)
     content(req, "parsed")
   }
@@ -78,7 +78,8 @@ page_and_trim <- function(type, user_id, num_results, ...){
   res <- itr(...)
   all_results <- list(res)
   while(sum(counts(all_results)) < num_results && !is.null(res[["nextPageToken"]])){
-    res <- itr(...)
+    pageToken = res[["nextPageToken"]]
+    res <- itr(page_token = pageToken, ...)
     all_results[[length(all_results) + 1]] <- res
   }
   structure(trim(all_results, num_results), class=paste0("gmail_", type))

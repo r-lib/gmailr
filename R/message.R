@@ -24,7 +24,6 @@ message <- function(id = ? is_string,
 #' @export
 #' @param search query to use, same format as gmail search box.
 #' @param num_results the number of results to return.
-#' @param page_token retrieve a specific page of results
 #' @param label_ids restrict search to given labels
 #' @param include_spam_trash boolean whether to include the spam and trash folders in the search
 #' @inheritParams thread
@@ -38,10 +37,9 @@ messages <- function(search = NULL ? nullable(is_string)(search),
   num_results = NULL ? nullable(is_number)(num_results),
   label_ids = NULL ? nullable(is_strings)(label_ids),
   include_spam_trash = NULL ? nullable(is_boolean)(include_spam_trash),
-  page_token = NULL ? nullable(is_string)(page_token),
   user_id = "me" ? is_string) {
 
-  page_and_trim("messages", user_id, num_results, search, page_token, label_ids, include_spam_trash)
+  page_and_trim("messages", user_id, num_results, search, label_ids, include_spam_trash)
 }
 
 #' Send a single message to the trash

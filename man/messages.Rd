@@ -5,7 +5,7 @@
 \title{Get a list of messages}
 \usage{
 messages(search = NULL, num_results = NULL, label_ids = NULL,
-  include_spam_trash = NULL, page_token = NULL, user_id = "me")
+  include_spam_trash = NULL, user_id = "me")
 }
 \arguments{
 \item{search}{query to use, same format as gmail search box.}
@@ -15,8 +15,6 @@ messages(search = NULL, num_results = NULL, label_ids = NULL,
 \item{label_ids}{restrict search to given labels}
 
 \item{include_spam_trash}{boolean whether to include the spam and trash folders in the search}
-
-\item{page_token}{retrieve a specific page of results}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }

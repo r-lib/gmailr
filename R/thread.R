@@ -10,8 +10,8 @@
 #'
 #' first_10_threads = threads(10)
 #' }
-threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = "me"){
-  page_and_trim("threads", user_id, num_results, search, page_token, label_ids, include_spam_trash)
+threads <- function(search = NULL, num_results = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = "me"){
+  page_and_trim("threads", user_id, num_results, search, label_ids, include_spam_trash)
 }
 
 #' Get a single thread
