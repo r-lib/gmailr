@@ -80,6 +80,7 @@ page_and_trim <- function(type, user_id, num_results, ...){
   page_token <- res[["nextPageToken"]]
   while(sum(counts(all_results)) < num_results && !is.null(page_token)){
     res <- itr(..., page_token = page_token)
+    page_token <- res[["nextPageToken"]]
 
     all_results[[length(all_results) + 1]] <- res
   }
