@@ -77,8 +77,10 @@ page_and_trim <- function(type, user_id, num_results, ...){
   }
   res <- itr(...)
   all_results <- list(res)
-  while(sum(counts(all_results)) < num_results && !is.null(res[["nextPageToken"]])){
-    res <- itr(...)
+  page_token <- res[["nextPageToken"]]
+  while(sum(counts(all_results)) < num_results && !is.null(page_token)){
+    res <- itr(..., page_token = page_token)
+
     all_results[[length(all_results) + 1]] <- res
   }
   structure(trim(all_results, num_results), class=paste0("gmail_", type))
