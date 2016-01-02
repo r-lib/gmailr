@@ -13,7 +13,7 @@
 #' }
 message <- function(id = ? is_string,
                     user_id = "me" ? is_string,
-                    format = c("full", "minimal", "raw") ?~ as_enum) {
+                    format = c("full", "metadata", "minimal", "raw") ?~ as_enum) {
   gmailr_GET(c("messages", id), user_id, class = "gmail_message",
             query = list(format=format))
 }

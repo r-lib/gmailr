@@ -4,7 +4,8 @@
 \alias{message}
 \title{Get a single message}
 \usage{
-message(id, user_id = "me", format = c("full", "minimal", "raw"))
+message(id, user_id = "me", format = c("full", "metadata", "minimal",
+  "raw"))
 }
 \arguments{
 \item{id}{message id to access}
