@@ -4,15 +4,13 @@
 \alias{threads}
 \title{Get a list of threads}
 \usage{
-threads(search = NULL, num_results = NULL, page_token = NULL,
-  label_ids = NULL, include_spam_trash = NULL, user_id = "me")
+threads(search = NULL, num_results = NULL, label_ids = NULL,
+  include_spam_trash = NULL, user_id = "me")
 }
 \arguments{
 \item{search}{query to use, same format as gmail search box.}
 
 \item{num_results}{the number of results to return.}
-
-\item{page_token}{retrieve a specific page of results}
 
 \item{label_ids}{restrict search to given labels}
 
