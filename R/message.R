@@ -189,6 +189,46 @@ save_attachments <- function(x = ? has_class("gmail_message"),
   }
 }
 
+#' Get the attachments from a \code{gmail_message} as a
+#' \code{gmail_attachments} object, which is a list of
+#' \code{gmail_attachment_desc} objects.
+#' @param x a gmail message
+#' @param ... other parameters passed to methods
+#' @export
+#' @examples
+#' \dontrun{
+#' a <- attachments(message(id))
+#' id(a)
+#' id(a[[1L]])
+#' filename(a)
+#' }
+attachments <- function(msg = ? has_class("gmail_message")) {
+    ans <- Filter(function(x) !is.null(x[[c("body", "attachmentId")]]),
+                  msg$payload$parts)
+    ans <- lapply(ans, structure, class="gmail_attachment_desc")
+    structure(ans, class="gmail_attachments")
+}
+
+#' Get the filename of an attachment
+#' @param x list of attachments, or an element of one
+#' @param ... other parameters passed to methods
+#' @export
+#' @examples
+#' \dontrun{
+#' filename(attachments(msg))
+#' }
+filename <- function(x, ...) UseMethod("filename")
+#' @export
+#' @rdname filename
+filename.gmail_attachment_desc <- function(x) {
+    x$filename
+}
+#' @export
+#' @rdname filename
+filename.gmail_attachments <- function(x) {
+    vapply(x, filename, character(1L))
+}
+
 #' Insert a message into the gmail mailbox from a mime message
 #'
 #' @param mail mime mail message created by mime

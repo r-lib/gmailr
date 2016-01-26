@@ -199,6 +199,18 @@ id.gmail_threads <- function(x, ...){
   unlist(lapply(x, function(page) { vapply(page$threads, "[[", character(1), "id") }))
 }
 
+#' @export
+#' @rdname id
+id.gmail_attachment_desc <- function(x) {
+    x[[c("body", "attachmentId")]]
+}
+
+#' @export
+#' @rdname id
+id.gmail_attachments <- function(x) {
+    vapply(x, id, character(1L))
+}
+
 #' Methods to get values from message or drafts
 #' @param x the object from which to get or set the field
 #' @param ... other parameters passed to methods
