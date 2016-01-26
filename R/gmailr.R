@@ -5,6 +5,7 @@
 #' @name gmailr
 #' @import httr
 #' @import base64enc
+#' @import argufy
 NULL
 
 #' Pipe statements
