@@ -13,7 +13,8 @@
 #' }
 message <- function(id = ? is_string,
                     user_id = "me" ? is_string,
-                    format = c("full", "metadata", "minimal", "raw") ?~ as_enum) {
+                    format = c("full", "metadata", "minimal", "raw")) {
+  format <- match.arg(format)
   gmailr_GET(c("messages", id), user_id, class = "gmail_message",
             query = list(format=format))
 }
@@ -206,9 +207,12 @@ save_attachments <- function(x = ? has_class("gmail_message"),
 #' }
 insert_message <- function(mail = ?~ as.character,
   label_ids = ? nullable(is_strings)(label_ids),
-  type = c("multipart", "media", "resumable") ?~ as_enum,
-  internal_date_source = c("dateHeader", "recievedTime") ?~ as_enum,
+  type = c("multipart", "media", "resumable"),
+  internal_date_source = c("dateHeader", "recievedTime"),
   user_id = "me" ? is_string) {
+
+  type <- match.arg(type)
+  internal_date_source <- match.arg(internal_date_source)
 
   gmailr_POST("messages", user_id, class = "gmail_message",
             query = list(uploadType = type, interalDateSource = internal_date_source),
@@ -230,9 +234,12 @@ insert_message <- function(mail = ?~ as.character,
 #' }
 import_message <- function(mail = ?~ as.character,
   label_ids = ? nullable(is_strings)(label_ids),
-  type = c("multipart", "media", "resumable") ?~ as_enum,
-  internal_date_source = c("dateHeader", "recievedTime") ?~ as_enum,
+  type = c("multipart", "media", "resumable"),
+  internal_date_source = c("dateHeader", "recievedTime"),
   user_id = "me" ? is_string) {
+
+  type <- match.arg(type)
+  internal_date_source <- match.arg(internal_date_source)
 
   gmailr_POST(c("messages", "import"), user_id, class = "gmail_message",
     query = list(uploadType = type, interalDateSource = internal_date_source),
@@ -254,9 +261,11 @@ import_message <- function(mail = ?~ as.character,
 #' }
 send_message <- function(
   mail = ?~ as.character,
-  type = c("multipart", "media", "resumable") ?~ as_enum,
+  type = c("multipart", "media", "resumable"),
   thread_id = NULL ? nullable(is_string)(thread_id),
   user_id = "me" ? is_string) {
+
+  type <- match.arg(type)
 
   gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",
     query = list(uploadType = type),
