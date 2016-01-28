@@ -148,7 +148,7 @@ attachment <- function(id = ? is_string,
 #' save attachment to a file
 #' save_attachment(my_attachment, 'photo.jpg')
 #' }
-save_attachment <- function(x = ? has_class("gmail_attachment"),
+save_attachment <- function(x = ? has_class(x, "gmail_attachment"),
                             filename = ? is_string){
   data <- base64url_decode(x$data)
   writeBin(object = data, con = filename)
@@ -171,7 +171,7 @@ save_attachment <- function(x = ? has_class("gmail_attachment"),
 #' save a specific attachment
 #' save_attachments(my_message, 'a32e324b')
 #' }
-save_attachments <- function(x = ? has_class("gmail_message"),
+save_attachments <- function(x = ? has_class(x, "gmail_message"),
                              attachment_id = NULL ? nullable(is_string)(attachment_id),
                              path = "." ? valid_path,
                              user_id = "me" ? is_string) {

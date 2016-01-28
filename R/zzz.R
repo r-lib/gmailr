@@ -14,9 +14,11 @@ is_boolean <- function(x) {
   is.logical(x) && length(x) > 0
 }
 
-has_class <- function(class) {
-  function(x) {
-    if (!isS4(x)) inherits(x, class) else methods::is(x, class)
+has_class <- function(x, class) {
+  if (isNamespaceLoaded("methods")) {
+    methods::is(x, class)
+  } else {
+    inherits(x, class)
   }
 }
 
