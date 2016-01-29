@@ -4,13 +4,10 @@
 \alias{send_draft}
 \title{Send a draft}
 \usage{
-send_draft(id, upload_type = c("media", "multipart", "resumable"),
-  user_id = "me")
+send_draft(draft, user_id = "me")
 }
 \arguments{
-\item{id}{the draft id to send}
-
-\item{upload_type}{type of upload request}
+\item{draft}{the draft to send}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
@@ -19,7 +16,9 @@ Send a draft to the recipients in the To, CC, and Bcc headers.
 }
 \examples{
 \dontrun{
-send_draft(12345)
+draft <- create_draft(mime(From="you@me.com", To="any@one.com",
+                      Subject="hello", "how are you doing?"))
+send_draft(draft)
 }
 }
 \references{
