@@ -21,14 +21,24 @@ name_map <- c(
 )
 
 rename <- function(...) {
-  args <- as.character(dots(...))
-  to_rename <- args %in% names(name_map)
-  args[to_rename] <- name_map[args[to_rename]]
+  args <- dots(...)
+  arg_names <- names(args)
+  missing <-
+    if (is.null(arg_names)) {
+      rep(TRUE, length(args))
+    } else {
+      !nzchar(arg_names)
+    }
+  arg_names[missing] <- vapply(args[missing], deparse, character(1))
+
+  to_rename <- arg_names %in% names(name_map)
+  arg_names[to_rename] <- name_map[arg_names[to_rename]]
 
   vals <- list(...)
-  names(vals) <- args
+  names(vals) <- arg_names
   vals
 }
+
 not_null <- function(x){ Filter(Negate(is.null), x) }
 
 gmail_path <- function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, paste0(..., collapse = "/"), sep = "/") }
