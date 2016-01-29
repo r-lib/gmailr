@@ -108,7 +108,7 @@ modify_message <- function(id = ? is_string,
                            remove_labels = NULL ? nullable(is_strings)(remove_labels),
                            user_id = "me" ? is_string) {
   gmailr_POST(c("messages", id, "modify"), user_id, class = "gmail_message",
-    body = rename("add_labels" = add_labels, "remove_labels" = remove_labels),
+    body = rename("add_labels" = I(add_labels), "remove_labels" = I(remove_labels)),
     encode = "json")
 }
 
