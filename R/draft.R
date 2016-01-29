@@ -15,7 +15,7 @@ draft <- function(id = ? is_string,
                   user_id = "me" ? is_string,
                   format = c("full", "minimal", "raw")) {
   format <- match.arg(format)
-  gmailr_GET(c("drafts", id), user_id, query = list(format=format))
+  gmailr_GET(c("drafts", id), user_id, query = list(format=format), class = "gmail_draft")
 }
 
 #' Get a list of drafts
@@ -74,7 +74,7 @@ create_draft <- function(mail = ?~ as.character,
 #'                       Subject="hello", "how are you doing?"))
 #' send_draft(draft)
 #' }
-send_draft <- function(draft = ? has_class(x, "gmail_draft"),
+send_draft <- function(draft = ? has_class(draft, "gmail_draft"),
                        user_id = "me" ? is_string) {
     gmailr_POST(c("drafts", "send"), user_id, class = "gmail_draft",
                 body = draft,
