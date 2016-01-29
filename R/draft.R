@@ -15,7 +15,7 @@ draft <- function(id = ? is_string,
                   user_id = "me" ? is_string,
                   format = c("full", "minimal", "raw")) {
   format <- match.arg(format)
-  gmailr_GET(c("draft", id), user_id, query = list(format=format))
+  gmailr_GET(c("drafts", id), user_id, query = list(format=format))
 }
 
 #' Get a list of drafts
