@@ -64,21 +64,19 @@ create_draft <- function(mail = ?~ as.character,
 #' Send a draft
 #'
 #' Send a draft to the recipients in the To, CC, and Bcc headers.
-#' @param id the draft id to send
-#' @param upload_type type of upload request
+#' @param draft the draft to send
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
 #' @export
 #' @examples
 #' \dontrun{
-#' send_draft(12345)
+#' draft <- create_draft(mime(From="you@@me.com", To="any@@one.com",
+#'                       Subject="hello", "how are you doing?"))
+#' send_draft(draft)
 #' }
-send_draft <- function(id = ? is_string,
-                       upload_type = c("media", "multipart", "resumable"),
+send_draft <- function(draft = ? has_class(x, "gmail_draft"),
                        user_id = "me" ? is_string) {
-  upload_type <- match.arg(upload_type)
-  gmailr_POST("drafts", user_id, class = "gmail_draft",
-             query = rename(upload_type),
-             body = c("id" = id),
-             encode = "json")
+    gmailr_POST(c("drafts", "send"), user_id, class = "gmail_draft",
+                body = draft,
+                encode = "json")
 }
