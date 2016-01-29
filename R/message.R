@@ -145,7 +145,7 @@ attachment <- function(id = ? is_string,
 #' @examples
 #' \dontrun{
 #' my_attachment = attachment('a32e324b', '12345')
-#' save attachment to a file
+#' # save attachment to a file
 #' save_attachment(my_attachment, 'photo.jpg')
 #' }
 save_attachment <- function(x = ? has_class(x, "gmail_attachment"),
@@ -166,9 +166,9 @@ save_attachment <- function(x = ? has_class(x, "gmail_attachment"),
 #' @export
 #' @examples
 #' \dontrun{
-#' save all attachments
+#' # save all attachments
 #' save_attachments(my_message)
-#' save a specific attachment
+#' # save a specific attachment
 #' save_attachments(my_message, 'a32e324b')
 #' }
 save_attachments <- function(x = ? has_class(x, "gmail_message"),
