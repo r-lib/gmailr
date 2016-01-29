@@ -184,10 +184,10 @@ save_attachments <- function(x = ? has_class(x, "gmail_message"),
       !is.null(part$filename) && part$filename != "",
       x$payload$parts)
   }
-  for (part in x$payload$parts) {
-    att <- attachment(part$body$attachmentId, x$id, user_id)
-    save_attachment(att, file.path(path, part$filename))
-  }
+  invisible(vapply(attachments_parts, function(part) {
+                     att <- attachment(part$body$attachmentId, x$id, user_id)
+                     save_attachment(att, file.path(path, part$filename))
+                   }, character(1L)))
 }
 
 #' Insert a message into the gmail mailbox from a mime message
