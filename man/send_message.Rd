@@ -12,6 +12,8 @@ send_message(mail, type = c("multipart", "media", "resumable"),
 
 \item{type}{the type of upload to perform}
 
+\item{thread_id}{the id of the thread to send from.}
+
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
 \description{

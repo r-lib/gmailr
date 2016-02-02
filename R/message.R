@@ -251,6 +251,7 @@ import_message <- function(mail = ?~ as.character,
 
 #' Send a message from a mime message
 #'
+#' @param thread_id the id of the thread to send from.
 #' @inheritParams insert_message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/send}
 #' @export

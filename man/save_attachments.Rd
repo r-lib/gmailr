@@ -20,9 +20,9 @@ Function to retrieve and save all of the attachments to a message by id of the m
 }
 \examples{
 \dontrun{
-save all attachments
+# save all attachments
 save_attachments(my_message)
-save a specific attachment
+# save a specific attachment
 save_attachments(my_message, 'a32e324b')
 }
 }

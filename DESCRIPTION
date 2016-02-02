@@ -17,8 +17,9 @@ Imports:
     argufy
 Suggests:
     testthat,
-    knitr
-Remotes: gaborcsardi/argufy
+    knitr,
+    methods
+Remotes: gaborcsardi/argufy@173245a7e
 License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr
 BugReports: https://github.com/jimhester/gmailr/issues

@@ -137,7 +137,7 @@ body.gmail_message <- function(x, type="text/plain", collapse = FALSE, ...){
             base64url_decode_to_char(x$body$data)
         })
   } else { # non_multipart
-    res <- gmailr:::base64url_decode_to_char(x$payload$body$data)
+    res <- base64url_decode_to_char(x$payload$body$data)
   }
 
   if (collapse){
