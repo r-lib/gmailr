@@ -113,18 +113,19 @@ body <- function(x, ...) UseMethod("body")
 #' @rdname body
 #' @export
 body.gmail_message <- function(x, type="text/plain", collapse = FALSE, ...){
-  if(!is.null(x$payload$parts)) {
-    if(is.null(type)){
+  is_multipart <- !is.null(x$payload$parts)
+
+  if (is_multipart) {
+    if (is.null(type)){
       good_parts <- TRUE
-    }
-    else {
-      good_parts <- vapply(x$payload$parts, FUN.VALUE=logical(1),
+    } else {
+      good_parts <- vapply(x$payload$parts, FUN.VALUE = logical(1),
         function(part) {
           any(
-            vapply(part$headers, FUN.VALUE=logical(1),
+            vapply(part$headers, FUN.VALUE = logical(1),
               function(header) {
                 tolower(header$name) %==% "content-type" &&
-                  grepl(type, header$value, ignore.case=TRUE)
+                  grepl(type, header$value, ignore.case = TRUE)
               })
             )
         })
@@ -135,16 +136,15 @@ body.gmail_message <- function(x, type="text/plain", collapse = FALSE, ...){
         function(x){
             base64url_decode_to_char(x$body$data)
         })
+  } else { # non_multipart
+    res <- gmailr:::base64url_decode_to_char(x$payload$body$data)
   }
-  else {
-    res = gmailr:::base64url_decode_to_char(x$payload$body$data)
+
+  if (collapse){
+    res <- paste0(collapse = "\n", res)
   }
-  if(collapse){
-    paste0(collapse="\n", res)
-  }
-  else {
-    res
-  }
+
+  res
 }
 
 #' @export
