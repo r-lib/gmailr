@@ -385,11 +385,11 @@ gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
   if (status_code(response) >= 300) {
     cond <- structure(list(
         call = sys.call(-1),
-        content = res,
+        content = result,
         response = response,
-        message = paste0("Gmail API error: ", status_code(response), "\n ", res$message, "\n")),
+        message = paste0("Gmail API error: ", status_code(response) , "\n  ", result$error$message, "\n")),
         class = c("condition", "error", "gmailr_error"))
-    stop(cond)
+    stop(cond, call. = FALSE)
   }
 
   if (!is.null(class)) {
