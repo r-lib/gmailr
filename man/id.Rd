@@ -2,32 +2,14 @@
 % Please edit documentation in R/gmailr.R
 \name{id}
 \alias{id}
-\alias{id.gmail_draft}
-\alias{id.gmail_drafts}
-\alias{id.gmail_message}
-\alias{id.gmail_messages}
-\alias{id.gmail_threads}
 \title{Get the id of a gmailr object}
 \usage{
 id(x, ...)
-
-\method{id}{gmail_message}(x, ...)
-
-\method{id}{gmail_draft}(x, ...)
-
-\method{id}{gmail_messages}(x, what = c("message_id", "thread_id"), ...)
-
-\method{id}{gmail_drafts}(x, what = c("draft_id", "message_id", "thread_id"),
-  ...)
-
-\method{id}{gmail_threads}(x, ...)
 }
 \arguments{
 \item{x}{the object from which to retrieve the id}
 
 \item{...}{other parameters passed to methods}
-
-\item{what}{the type of id to return}
 }
 \description{
 Get the id of a gmailr object

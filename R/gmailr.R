@@ -110,7 +110,6 @@ use_secret_file <- function(filename) {
 #' }
 body <- function(x, ...) UseMethod("body")
 
-#' @rdname body
 #' @export
 body.gmail_message <- function(x, type="text/plain", collapse = FALSE, ...){
   is_multipart <- !is.null(x$payload$parts)
@@ -148,7 +147,6 @@ body.gmail_message <- function(x, type="text/plain", collapse = FALSE, ...){
 }
 
 #' @export
-#' @rdname body
 body.gmail_draft <- function(x, ...){ body.gmail_message(x$message, ...) }
 
 #' Get the id of a gmailr object
@@ -163,19 +161,16 @@ body.gmail_draft <- function(x, ...){ body.gmail_message(x$message, ...) }
 id <- function(x, ...) UseMethod("id")
 
 #' @export
-#' @rdname id
 id.gmail_message <- function(x, ...) { x$id }
 
 id.gmail_thread <- id.gmail_message
 
 #' @export
-#' @rdname id
 id.gmail_draft <- id.gmail_message
 
 #' @export
 #' @inheritParams id
 #' @param what the type of id to return
-#' @rdname id
 id.gmail_messages <- function(x, what=c("message_id", "thread_id"), ...){
   what <- switch(match.arg(what),
     message_id = "id",
@@ -185,7 +180,6 @@ id.gmail_messages <- function(x, what=c("message_id", "thread_id"), ...){
 }
 
 #' @export
-#' @rdname id
 id.gmail_drafts <- function(x, what=c("draft_id", "message_id", "thread_id"), ...){
   what <- switch(match.arg(what),
     draft_id = return(
@@ -198,7 +192,6 @@ id.gmail_drafts <- function(x, what=c("draft_id", "message_id", "thread_id"), ..
 }
 
 #' @export
-#' @rdname id
 id.gmail_threads <- function(x, ...){
   unlist(lapply(x, function(page) { vapply(page$threads, "[[", character(1), "id") }))
 }
@@ -212,65 +205,50 @@ id.gmail_threads <- function(x, ...){
 to <- function(x, ...) UseMethod("to")
 
 #' @export
-#' @rdname accessors
 to.gmail_message <- function(x, ...){ header_value(x, "To") }
 
 #' @export
-#' @rdname accessors
 to.gmail_draft <- function(x, ...){ to.gmail_message(x$message, ...) }
 
-#' @rdname accessors
 #' @export
 from <- function(x, ...) UseMethod("from")
 
-#' @rdname accessors
 #' @export
 from.gmail_message <- function(x, ...){ header_value(x, "From") }
 
-#' @rdname accessors
 #' @export
 from.gmail_draft <- from.gmail_message
 
-#' @rdname accessors
 #' @export
 cc.gmail_message <- function(x, ...){ header_value(x, "Cc") }
 
-#' @rdname accessors
 #' @export
 cc.gmail_draft <- function(x, ...){ from.gmail_message(x$message, ...) }
 
-#' @rdname accessors
 #' @export
 bcc.gmail_message <- function(x, ...){ header_value(x, "Bcc") }
 
-#' @rdname accessors
 #' @export
 bcc.gmail_draft <- function(x, ...){ from.gmail_message(x$message, ...) }
 
-#' @rdname accessors
 #' @export
 date <- function(x, ...) UseMethod("date")
 
 #' @export
 date.default <- function(x, ...) { base::date() }
 
-#' @rdname accessors
 #' @export
 date.gmail_message <- function(x, ...){ header_value(x, "Date") }
 
-#' @rdname accessors
 #' @export
 date.gmail_draft <- function(x, ...){ date.gmail_message(x$message, ...) }
 
-#' @rdname accessors
 #' @export
 subject <- function(x, ...) UseMethod("subject")
 
-#' @rdname accessors
 #' @export
 subject.gmail_message <- function(x, ...) { header_value(x, "Subject") }
 
-#' @rdname accessors
 #' @export
 subject.gmail_draft <- function(x, ...){ subject.gmail_message(x$message, ...) }
 
@@ -278,16 +256,7 @@ header_value <- function(x, name){
   Find(function(header) identical(header$name, name), x$payload$headers)$value
 }
 
-#' Format gmailr objects for pretty printing
-#'
-#' @param x object to format
-#' @param ... additional arguments ignored
-#' @name format
-#' @rdname format
-NULL
-
 #' @export
-#' @rdname format
 format.gmail_message <- function(x, ...){
   to <- to(x)
   from <- from(x)
@@ -304,18 +273,15 @@ format.gmail_message <- function(x, ...){
 }
 
 #' @export
-#' @rdname format
 format.gmail_thread <- function(x, ...){
   id <- id(x)
   strwrap(p("Thread_Id: ", id, "\n"))
 }
 
 #' @export
-#' @rdname format
 format.gmail_draft <- format.gmail_message
 
 #' @export
-#' @rdname format
 format.gmail_messages <- function(x, ...){
   message_ids <- id(x, "message_id")
   thread_ids <- id(x, "thread_id")
@@ -323,7 +289,6 @@ format.gmail_messages <- function(x, ...){
 }
 
 #' @export
-#' @rdname format
 format.gmail_threads <- function(x, ...){
   thread_ids <- id(x)
   snippets <- unlist(lapply(x, function(page) { vapply(page$threads, "[[", character(1), "snippet") }))
@@ -331,7 +296,6 @@ format.gmail_threads <- function(x, ...){
 }
 
 #' @export
-#' @rdname format
 format.gmail_drafts <- function(x, ...){
   draft_ids <- id(x, "draft_id")
   message_ids <- id(x, "message_id")
@@ -344,32 +308,25 @@ format.gmail_drafts <- function(x, ...){
 #' @param x object to print
 #' @param ... additional arguments ignored
 #' @name print
-#' @rdname print
 NULL
 
-#' @rdname print
 #' @export
 print.gmail_message <- function(x, ...){
   print(format(x, ...))
 }
 
-#' @rdname print
 #' @export
 print.gmail_draft <- print.gmail_message
 
-#' @rdname print
 #' @export
 print.gmail_drafts <- print.gmail_message
 
-#' @rdname print
 #' @export
 print.gmail_messages <- print.gmail_message
 
-#' @rdname print
 #' @export
 print.gmail_thread <- print.gmail_message
 
-#' @rdname print
 #' @export
 print.gmail_threads <- print.gmail_message
 

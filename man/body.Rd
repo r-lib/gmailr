@@ -2,25 +2,19 @@
 % Please edit documentation in R/gmailr.R
 \name{body}
 \alias{body}
-\alias{body.gmail_draft}
-\alias{body.gmail_message}
 \title{Get the body text of a message or draft}
 \usage{
 body(x, ...)
-
-\method{body}{gmail_message}(x, type = "text/plain", collapse = FALSE, ...)
-
-\method{body}{gmail_draft}(x, ...)
 }
 \arguments{
 \item{x}{the object from which to retrieve the body}
 
 \item{...}{other parameters passed to methods}
 
-\item{type}{the content type of the body to return (for multipart messages), if NULL returns all types.}
-
 \item{collapse}{if `FALSE` will return each formatted body in list, if
 `TRUE` will collapse them together}
+
+\item{type}{the content type of the body to return (for multipart messages), if NULL returns all types.}
 }
 \description{
 Get the body text of a message or draft
