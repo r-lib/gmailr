@@ -264,12 +264,12 @@ format.gmail_message <- function(x, ...){
   subject <- subject(x)
   id <- id(x)
   p(
-    "Id: ", id, "\n",
-    "To: ", to, "\n",
-    "From: ", from, "\n",
-    "Date: ", date, "\n",
-    "Subject: ", subject, "\n",
-      body(x, collapse=TRUE))
+    crayon::bold("Id: "), id, "\n",
+    crayon::bold("To: "), to, "\n",
+    crayon::bold("From: "), from, "\n",
+    crayon::bold("Date: "), date, "\n",
+    crayon::bold("Subject: "), subject, "\n",
+      body(x, collapse = TRUE))
 }
 
 #' @export
@@ -312,7 +312,7 @@ NULL
 
 #' @export
 print.gmail_message <- function(x, ...){
-  print(format(x, ...))
+  cat(format(x, ...), "\n")
 }
 
 #' @export
