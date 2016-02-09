@@ -3,6 +3,7 @@
 #' Get a list of all labels for a user.
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/list}
+#' @family label
 #' @export
 #' @examples
 #' \dontrun{
@@ -22,6 +23,7 @@ labels <- function(user_id = "me"){
 #' @param id label id to retrieve
 #' @inheritParams labels
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
+#' @family label
 #' @export
 label <- function(id, user_id = "me") {
   req <- GET(gmail_path(user_id, "labels", id),
@@ -38,6 +40,7 @@ label <- function(id, user_id = "me") {
 #' @inheritParams labels
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/update}
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/patch}
+#' @family label
 #' @export
 update_label <- function(id, label, user_id = "me") {
   req <- POST(gmail_path(user_id, "labels", id),
@@ -48,6 +51,7 @@ update_label <- function(id, label, user_id = "me") {
 }
 
 #' @rdname update_label
+#' @family label
 #' @export
 update_label_patch <- function(id, label, user_id = "me") {
   req <- PATCH(gmail_path(user_id, "labels", id),
@@ -62,6 +66,7 @@ update_label_patch <- function(id, label, user_id = "me") {
 #' Function to delete a label by id.  This cannot be undone!
 #' @inheritParams label
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/delete}
+#' @family label
 #' @export
 delete_label <- function(id, user_id = "me") {
   req <- DELETE(gmail_path(user_id, "labels", id),
@@ -78,6 +83,7 @@ delete_label <- function(id, user_id = "me") {
 #' @param message_list_visibility The visibility of messages with this label in the message list in the Gmail web interface.
 #' @inheritParams labels
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/create}
+#' @family label
 #' @export
 create_label <- function(name,
                          label_list_visibility=c("hide", "show", "show_unread"),

@@ -22,4 +22,9 @@ Function to create a label.
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/labels/create}
 }
+\seealso{
+Other label: \code{\link{delete_label}},
+  \code{\link{labels}}, \code{\link{label}},
+  \code{\link{update_label}}
+}
 

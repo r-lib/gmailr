@@ -28,4 +28,15 @@ send_message(mime(from="you@me.com", to="any@one.com",
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages/send}
 }
+\seealso{
+Other message: \code{\link{attachment}},
+  \code{\link{delete_message}},
+  \code{\link{import_message}},
+  \code{\link{insert_message}}, \code{\link{messages}},
+  \code{\link{message}}, \code{\link{modify_message}},
+  \code{\link{save_attachments}},
+  \code{\link{save_attachment}},
+  \code{\link{trash_message}},
+  \code{\link{untrash_message}}
+}
 

@@ -24,4 +24,7 @@ send_draft(draft)
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
 }
+\seealso{
+Other draft: \code{\link{drafts}}, \code{\link{draft}}
+}
 

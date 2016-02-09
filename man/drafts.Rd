@@ -26,4 +26,7 @@ first_10_drafts = drafts(10)
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
 }
+\seealso{
+Other draft: \code{\link{draft}}, \code{\link{send_draft}}
+}
 

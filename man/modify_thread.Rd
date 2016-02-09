@@ -30,4 +30,9 @@ modify_thread(12345, add_labels='label_2', remove_labels='label_1')
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/modify}
 }
+\seealso{
+Other thread: \code{\link{delete_thread}},
+  \code{\link{threads}}, \code{\link{thread}},
+  \code{\link{trash_thread}}, \code{\link{untrash_thread}}
+}
 

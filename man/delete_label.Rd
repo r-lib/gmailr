@@ -17,4 +17,9 @@ Function to delete a label by id.  This cannot be undone!
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/labels/delete}
 }
+\seealso{
+Other label: \code{\link{create_label}},
+  \code{\link{labels}}, \code{\link{label}},
+  \code{\link{update_label}}
+}
 

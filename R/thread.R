@@ -3,6 +3,7 @@
 #' Get a list of threads possibly matching a given query string.
 #' @inheritParams messages
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
+#' @family thread
 #' @export
 #' @examples
 #' \dontrun{
@@ -20,6 +21,7 @@ threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_
 #' @param id thread id to access
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/thread}
+#' @family thread
 #' @export
 #' @examples
 #' \dontrun{
@@ -41,6 +43,7 @@ thread <- function(id, user_id = "me") {
 #' Function to trash a given thread by id.  This can be undone by \code{\link{untrash_thread}}.
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/trash}
+#' @family thread
 #' @export
 #' @examples
 #' \dontrun{
@@ -58,6 +61,7 @@ trash_thread <- function(id, user_id = "me") {
 #' Function to untrash a given thread by id.  This can reverse the results of a previous \code{\link{trash_thread}}.
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/untrash}
+#' @family thread
 #' @export
 #' @examples
 #' \dontrun{
@@ -75,6 +79,7 @@ untrash_thread <- function(id, user_id = "me") {
 #' Function to delete a given thread by id.  This cannot be undone!
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/delete}
+#' @family thread
 #' @export
 #' @examples
 #' \dontrun{
@@ -94,6 +99,7 @@ delete_thread <- function(id, user_id = "me") {
 #' @param remove_labels labels to remove from the specified thread
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads/modify}
+#' @family thread
 #' @export
 #' @examples
 #' \dontrun{

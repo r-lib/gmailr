@@ -379,9 +379,18 @@ gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
   response <- fun(gmail_path(user_id, location),
              config(token = get_token()),
               ...)
-  the$last_response <- response
-  stop_for_status(response)
   result <- content(response, "parsed")
+
+  the$last_response <- response
+  if (status_code(response) >= 300) {
+    cond <- structure(list(
+        call = sys.call(-1),
+        content = res,
+        response = response,
+        message = paste0("Gmail API error: ", status_code(response), "\n ", res$message, "\n")),
+        class = c("condition", "error", "gmailr_error"))
+    stop(cond)
+  }
 
   if (!is.null(class)) {
     class(result) <- class

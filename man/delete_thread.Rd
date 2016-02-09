@@ -22,4 +22,9 @@ delete_thread(12345)
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/delete}
 }
+\seealso{
+Other thread: \code{\link{modify_thread}},
+  \code{\link{threads}}, \code{\link{thread}},
+  \code{\link{trash_thread}}, \code{\link{untrash_thread}}
+}
 

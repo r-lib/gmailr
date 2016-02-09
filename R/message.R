@@ -6,6 +6,7 @@
 #' @param format format of the message returned
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -30,6 +31,7 @@ message <- function(id = ? is_string,
 #' @param include_spam_trash boolean whether to include the spam and trash folders in the search
 #' @inheritParams thread
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
+#' @family message
 #' @examples
 #' \dontrun{
 #' #Search for R, return 10 results using label 1 including spam and trash folders
@@ -51,6 +53,7 @@ messages <- function(search = NULL ? nullable(is_string)(search),
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
 #' @export
+#' @family message
 #' @examples
 #' \dontrun{
 #' trash_message('12345')
@@ -64,6 +67,7 @@ trash_message <- function(id = ? is_string, user_id = "me" ? is_string) {
 #' Function to trash a given message by id.  This can be undone by \code{\link{untrash_message}}.
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -78,6 +82,7 @@ untrash_message <- function(id = ? is_string, user_id = "me" ? is_string) {
 #' Function to delete a given message by id.  This cannot be undone!
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/delete}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -95,6 +100,7 @@ delete_message <- function(id = ? is_string, user_id = "me" ? is_string) {
 #' @param remove_labels label IDs to remove from the specified message
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/modify}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -120,6 +126,7 @@ modify_message <- function(id = ? is_string,
 #' @param message_id id of the parent message
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -141,6 +148,7 @@ attachment <- function(id = ? is_string,
 #' To save an attachment directly from a message see \code{\link{save_attachments}}
 #' @param x attachment to save
 #' @param filename location to save to
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -163,6 +171,7 @@ save_attachment <- function(x = ? has_class(x, "gmail_attachment"),
 #' @param path where to save the attachments
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -199,6 +208,7 @@ save_attachments <- function(x = ? has_class(x, "gmail_message"),
 #'        the message or when it was received by gmail.
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/insert}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -226,6 +236,7 @@ insert_message <- function(mail = ?~ as.character,
 #'
 #' @inheritParams insert_message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/import}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{
@@ -254,6 +265,7 @@ import_message <- function(mail = ?~ as.character,
 #' @param thread_id the id of the thread to send from.
 #' @inheritParams insert_message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/send}
+#' @family message
 #' @export
 #' @examples
 #' \dontrun{

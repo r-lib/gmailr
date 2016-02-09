@@ -31,4 +31,14 @@ insert_message(mime(From="you@me.com", To="any@one.com",
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages/insert}
 }
+\seealso{
+Other message: \code{\link{attachment}},
+  \code{\link{delete_message}},
+  \code{\link{import_message}}, \code{\link{messages}},
+  \code{\link{message}}, \code{\link{modify_message}},
+  \code{\link{save_attachments}},
+  \code{\link{save_attachment}},
+  \code{\link{send_message}}, \code{\link{trash_message}},
+  \code{\link{untrash_message}}
+}
 

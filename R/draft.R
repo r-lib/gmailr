@@ -6,6 +6,7 @@
 #' @param format format of the draft returned
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/get}
+#' @family draft
 #' @export
 #' @examples
 #' \dontrun{
@@ -25,6 +26,7 @@ draft <- function(id = ? is_string,
 #' @param page_token retrieve a specific page of results
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
+#' @family draft
 #' @export
 #' @examples
 #' \dontrun{
@@ -67,6 +69,7 @@ create_draft <- function(mail = ?~ as.character,
 #' @param draft the draft to send
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
+#' @family draft
 #' @export
 #' @examples
 #' \dontrun{

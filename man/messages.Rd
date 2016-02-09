@@ -32,4 +32,15 @@ my_messages = messages("R", 10, "label_1", TRUE)
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
 }
+\seealso{
+Other message: \code{\link{attachment}},
+  \code{\link{delete_message}},
+  \code{\link{import_message}},
+  \code{\link{insert_message}}, \code{\link{message}},
+  \code{\link{modify_message}},
+  \code{\link{save_attachments}},
+  \code{\link{save_attachment}},
+  \code{\link{send_message}}, \code{\link{trash_message}},
+  \code{\link{untrash_message}}
+}
 

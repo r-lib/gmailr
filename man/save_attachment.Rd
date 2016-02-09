@@ -22,4 +22,14 @@ my_attachment = attachment('a32e324b', '12345')
 save_attachment(my_attachment, 'photo.jpg')
 }
 }
+\seealso{
+Other message: \code{\link{attachment}},
+  \code{\link{delete_message}},
+  \code{\link{import_message}},
+  \code{\link{insert_message}}, \code{\link{messages}},
+  \code{\link{message}}, \code{\link{modify_message}},
+  \code{\link{save_attachments}},
+  \code{\link{send_message}}, \code{\link{trash_message}},
+  \code{\link{untrash_message}}
+}
 

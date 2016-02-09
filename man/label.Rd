@@ -17,4 +17,9 @@ Get a specific label by id and user_id.
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
 }
+\seealso{
+Other label: \code{\link{create_label}},
+  \code{\link{delete_label}}, \code{\link{labels}},
+  \code{\link{update_label}}
+}
 

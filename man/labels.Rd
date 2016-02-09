@@ -20,4 +20,9 @@ my_labels = labels()
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/labels/list}
 }
+\seealso{
+Other label: \code{\link{create_label}},
+  \code{\link{delete_label}}, \code{\link{label}},
+  \code{\link{update_label}}
+}
 

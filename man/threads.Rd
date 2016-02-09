@@ -33,4 +33,9 @@ first_10_threads = threads(10)
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
 }
+\seealso{
+Other thread: \code{\link{delete_thread}},
+  \code{\link{modify_thread}}, \code{\link{thread}},
+  \code{\link{trash_thread}}, \code{\link{untrash_thread}}
+}
 

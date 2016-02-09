@@ -24,4 +24,13 @@ Get a specific label by id and user_id.  \code{update_label_patch} is identical 
 
 \url{https://developers.google.com/gmail/api/v1/reference/users/labels/patch}
 }
+\seealso{
+Other label: \code{\link{create_label}},
+  \code{\link{delete_label}}, \code{\link{labels}},
+  \code{\link{label}}
+
+Other label: \code{\link{create_label}},
+  \code{\link{delete_label}}, \code{\link{labels}},
+  \code{\link{label}}
+}
 
