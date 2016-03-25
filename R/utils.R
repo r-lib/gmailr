@@ -104,7 +104,7 @@ chr <- function(x) { rawToChar(as.raw(x)) }
 substitute_regex <- function(data, pattern, fun, ...) {
   match <- gregexpr(pattern, ..., data)
   regmatches(data, match) <- lapply(regmatches(data, match),
-                                   function(x) { if(length(x) > 0) { vapply(x, function(xx) fun(xx), character(1)) } else { x } })
+                                   function(x) { if(length(x) > 0) { vapply(x, function(xx) paste0(fun(xx), collapse=""), character(1)) } else { x } })
   data
 }
 
