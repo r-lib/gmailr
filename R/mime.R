@@ -193,7 +193,7 @@ as.character.mime <- function(x, newline="\r\n") {
   )
   headers <- format_headers(x$header, newline = newline)
 
-  paste0(headers, sep, encoded_body, end)
+  paste0(headers, encoded_body, end)
 }
 
 parse_content_type <- function(header) {
@@ -221,7 +221,7 @@ format_headers <- function(headers, newline) {
   if(length(keep_headers) %==% 0L){
     return(NULL)
   }
-  paste0(paste(sep = ": ", collapse = newline, names(keep_headers), keep_headers), newline)
+  paste0(paste(sep = ": ", collapse = newline, names(keep_headers), keep_headers), newline, newline)
 }
 
 with_defaults <- function(defaults, ...){
