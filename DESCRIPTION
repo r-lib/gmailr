@@ -14,7 +14,8 @@ Imports:
     magrittr,
     jsonlite,
     mime,
-    argufy
+    argufy,
+    crayon
 Suggests:
     testthat,
     knitr,
