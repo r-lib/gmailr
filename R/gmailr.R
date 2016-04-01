@@ -163,6 +163,7 @@ id <- function(x, ...) UseMethod("id")
 #' @export
 id.gmail_message <- function(x, ...) { x$id }
 
+#' @export
 id.gmail_thread <- id.gmail_message
 
 #' @export
@@ -257,78 +258,55 @@ header_value <- function(x, name){
 }
 
 #' @export
-format.gmail_message <- function(x, ...){
+print.gmail_message <- function(x, ...){
   to <- to(x)
   from <- from(x)
   date <- date(x)
   subject <- subject(x)
   id <- id(x)
-  p(
+  cat(p(
     crayon::bold("Id: "), id, "\n",
     crayon::bold("To: "), to, "\n",
     crayon::bold("From: "), from, "\n",
     crayon::bold("Date: "), date, "\n",
     crayon::bold("Subject: "), subject, "\n",
-      body(x, collapse = TRUE))
+      body(x, collapse = TRUE)), "\n")
 }
 
 #' @export
-format.gmail_thread <- function(x, ...){
+print.gmail_thread <- function(x, ...){
   id <- id(x)
-  strwrap(p("Thread_Id: ", id, "\n"))
+  cat(strwrap(p(crayon::bold("Thread Id: "), id, "\n")), "\n")
 }
 
 #' @export
-format.gmail_draft <- format.gmail_message
+print.gmail_draft <- function(x, ...){
+  id <- id(x)
+  cat(strwrap(p(crayon::bold("Draft Id: "), id, "\n")), "\n")
+  print(x$message, ...)
+}
 
 #' @export
-format.gmail_messages <- function(x, ...){
+print.gmail_messages <- function(x, ...){
   message_ids <- id(x, "message_id")
   thread_ids <- id(x, "thread_id")
-  format(data.frame(message_id=message_ids, thread_id=thread_ids))
+  print(format(data.frame(message_id=message_ids, thread_id=thread_ids)), ...)
 }
 
 #' @export
-format.gmail_threads <- function(x, ...){
+print.gmail_threads <- function(x, ...){
   thread_ids <- id(x)
   snippets <- unlist(lapply(x, function(page) { vapply(page$threads, "[[", character(1), "snippet") }))
-  format(data.frame(thread_id=thread_ids, snippet=snippets))
+  print(format(data.frame(thread_id=thread_ids, snippet=snippets)), ...)
 }
 
 #' @export
-format.gmail_drafts <- function(x, ...){
+print.gmail_drafts <- function(x, ...){
   draft_ids <- id(x, "draft_id")
   message_ids <- id(x, "message_id")
   thread_ids <- id(x, "thread_id")
-  format(data.frame(draft_ids, message_id=message_ids, thread_id=thread_ids))
+  print(format(data.frame(draft_ids, message_id=message_ids, thread_id=thread_ids)), ...)
 }
-
-#' Print gmailr objects
-#'
-#' @param x object to print
-#' @param ... additional arguments ignored
-#' @name print
-NULL
-
-#' @export
-print.gmail_message <- function(x, ...){
-  cat(format(x, ...), "\n")
-}
-
-#' @export
-print.gmail_draft <- print.gmail_message
-
-#' @export
-print.gmail_drafts <- print.gmail_message
-
-#' @export
-print.gmail_messages <- print.gmail_message
-
-#' @export
-print.gmail_thread <- print.gmail_message
-
-#' @export
-print.gmail_threads <- print.gmail_message
 
 the$last_response <- list()
 
@@ -344,7 +322,7 @@ gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
         call = sys.call(-1),
         content = result,
         response = response,
-        message = paste0("Gmail API error: ", status_code(response) , "\n  ", result$error$message, "\n")),
+        message = paste0("Gmail API error: ", status_code(response), "\n  ", result$error$message, "\n")),
         class = c("condition", "error", "gmailr_error"))
     stop(cond, call. = FALSE)
   }
@@ -369,6 +347,7 @@ gmailr_POST <- function(location, user_id, class = NULL, ...) {
 gmailr_GET <- function(location, user_id, class = NULL, ...) {
   gmailr_query(GET, location, user_id, class, ...)
 }
+
 gmailr_DELETE <- function(location, user_id, class = NULL, ...) {
   gmailr_query(DELETE, location, user_id, class, ...)
 }

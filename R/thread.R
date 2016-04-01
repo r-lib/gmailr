@@ -28,7 +28,7 @@ threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_
 #' my_thread = thread(12345)
 #' }
 thread <- function(id, user_id = "me") {
-  req <- GET(gmail_path(rename(user_id), "threads", id),
+  req <- GET(gmail_path(user_id, "threads", id),
             config(token = get_token()))
   stop_for_status(req)
   parsed_req <- structure(content(req, "parsed"), class="gmail_thread")

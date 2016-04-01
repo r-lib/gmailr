@@ -16,7 +16,11 @@ draft <- function(id = ? is_string,
                   user_id = "me" ? is_string,
                   format = c("full", "minimal", "raw")) {
   format <- match.arg(format)
-  gmailr_GET(c("drafts", id), user_id, query = list(format=format), class = "gmail_draft")
+  res <- gmailr_GET(c("drafts", id), user_id, query = list(format=format), class = "gmail_draft")
+
+  class(res$message) <- "gmail_message"
+
+  res
 }
 
 #' Get a list of drafts
@@ -56,11 +60,15 @@ create_draft <- function(mail = ?~ as.character,
                                 "media",
                                 "resumable")) {
   type <- match.arg(type)
-  gmailr_POST("drafts", user_id, class = "gmail_draft",
+  res <- gmailr_POST("drafts", user_id, class = "gmail_draft",
               query = list(uploadType=type),
               body = jsonlite::toJSON(auto_unbox=TRUE,
                 list(message=list(raw=base64url_encode(mail)))),
               add_headers("Content-Type" = "application/json"))
+
+  # This is labeled as a message but is really a thread
+  class(res$message) <- "gmail_thread"
+  res
 }
 
 #' Send a draft
