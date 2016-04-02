@@ -2,7 +2,8 @@ language: r
 sudo: false
 cache: packages
 
-github_packages: jimhester/covr
+github_packages:
+  - jimhester/covr
 
 after_success:
   - Rscript -e 'library(covr);coveralls()'
