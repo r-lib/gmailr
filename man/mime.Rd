@@ -64,13 +64,13 @@ These functions create a MIME message. They can be created atomically using
 # using the field functions
 msg = mime() \%>\%
  from("james.f.hester@gmail.com") \%>\%
- to("CRAN@R-project.org") \%>\%
- text_body("Please don't reject my package")
+ to("asdf@asdf.com") \%>\%
+ text_body("Test Message")
 
 # alternatively you can set the fields using mime(), however you have
 #  to use properly formatted MIME names
 msg = mime(From="james.f.hester@gmail.com",
-                   To="CRAN@R-project.org") \%>\%
-        html_body("<b>Please<\\b> don't reject my package")
+                   To="asdf@asdf.com") \%>\%
+        html_body("<b>Test<\\b> Message")
 }
 

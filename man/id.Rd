@@ -2,14 +2,19 @@
 % Please edit documentation in R/gmailr.R
 \name{id}
 \alias{id}
+\alias{id.gmail_messages}
 \title{Get the id of a gmailr object}
 \usage{
 id(x, ...)
+
+\method{id}{gmail_messages}(x, what = c("message_id", "thread_id"), ...)
 }
 \arguments{
 \item{x}{the object from which to retrieve the id}
 
 \item{...}{other parameters passed to methods}
+
+\item{what}{the type of id to return}
 }
 \description{
 Get the id of a gmailr object

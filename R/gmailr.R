@@ -169,6 +169,7 @@ id.gmail_thread <- id.gmail_message
 #' @export
 id.gmail_draft <- id.gmail_message
 
+#' @rdname id
 #' @export
 #' @inheritParams id
 #' @param what the type of id to return
