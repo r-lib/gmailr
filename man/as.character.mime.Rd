@@ -4,12 +4,14 @@
 \alias{as.character.mime}
 \title{Convert a mime object to character representation}
 \usage{
-\method{as.character}{mime}(x, newline = "\\r\\n")
+\method{as.character}{mime}(x, newline = "\\r\\n", ...)
 }
 \arguments{
 \item{x}{object to convert}
 
 \item{newline}{value to use as newline character}
+
+\item{...}{futher arguments ignored}
 }
 \description{
 This function converts a mime object into a character vector

@@ -32,7 +32,7 @@ mime <- function(..., attr = NULL, body = NULL, parts = list()) {
 #' @param vals one or more values to use, will be joined by commas
 #' @rdname mime
 #' @export
-to.mime <- function(x, vals){
+to.mime <- function(x, vals, ...){
   if(missing(vals)){ return(x$header$To) }
   x$header$To <- paste0(collapse = ", ", vals)
   x
@@ -40,7 +40,7 @@ to.mime <- function(x, vals){
 
 #' @rdname mime
 #' @export
-from.mime <- function(x, val){
+from.mime <- function(x, val, ...){
   if(missing(val)){ return(x$header$From) }
   x$header$From <- val
   x
@@ -48,7 +48,7 @@ from.mime <- function(x, val){
 
 #' @rdname mime
 #' @export
-cc <- function(x, vals){
+cc.mime <- function(x, vals, ...){
   if(missing(vals)){ return(x$header$Cc) }
   x$header$Cc <- paste0(collapse = ", ", vals)
   x
@@ -56,7 +56,7 @@ cc <- function(x, vals){
 
 #' @rdname mime
 #' @export
-bcc <- function(x, vals){
+bcc.mime <- function(x, vals, ...){
   if(missing(vals)){ return(x$header$Bcc) }
   x$header$Bcc <- paste0(collapse = ", ", vals)
   x
@@ -64,7 +64,7 @@ bcc <- function(x, vals){
 
 #' @rdname mime
 #' @export
-subject.mime <- function(x, val){
+subject.mime <- function(x, val, ...){
   if(missing(val)){ return(x$header$Subject) }
   x$header$Subject <- val
   x
@@ -144,8 +144,9 @@ attach_file <- function(mime, filename, type = NULL, ...){
 #'
 #' @param x object to convert
 #' @param newline value to use as newline character
+#' @param ... futher arguments ignored
 #' @export
-as.character.mime <- function(x, newline="\r\n") {
+as.character.mime <- function(x, newline="\r\n", ...) {
 
   # if we have both the text part and html part, we have to embed them in a multipart/alternative message
   if(x$attr$content_type %!=% "multipart/alternative" && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)){

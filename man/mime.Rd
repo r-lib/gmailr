@@ -3,8 +3,8 @@
 \name{mime}
 \alias{attach_file}
 \alias{attach_part}
-\alias{bcc}
-\alias{cc}
+\alias{bcc.mime}
+\alias{cc.mime}
 \alias{from.mime}
 \alias{html_body}
 \alias{mime}
@@ -15,15 +15,15 @@
 \usage{
 mime(..., attr = NULL, body = NULL, parts = list())
 
-\method{to}{mime}(x, vals)
+\method{to}{mime}(x, vals, ...)
 
-\method{from}{mime}(x, val)
+\method{from}{mime}(x, val, ...)
 
-cc(x, vals)
+\method{cc}{mime}(x, vals, ...)
 
-bcc(x, vals)
+\method{bcc}{mime}(x, vals, ...)
 
-\method{subject}{mime}(x, val)
+\method{subject}{mime}(x, val, ...)
 
 text_body(mime, body, ...)
 

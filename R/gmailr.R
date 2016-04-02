@@ -99,9 +99,6 @@ use_secret_file <- function(filename) {
 #' Get the body text of a message or draft
 #' @param x the object from which to retrieve the body
 #' @param ... other parameters passed to methods
-#' @param collapse if `FALSE` will return each formatted body in list, if
-#'   `TRUE` will collapse them together
-#' @param type the content type of the body to return (for multipart messages), if NULL returns all types.
 #' @export
 #' @examples
 #' \dontrun{
@@ -201,7 +198,6 @@ id.gmail_threads <- function(x, ...){
 #' Methods to get values from message or drafts
 #' @param x the object from which to get or set the field
 #' @param ... other parameters passed to methods
-#' @seealso \code{\link{common_fields}}
 #' @rdname accessors
 #' @export
 to <- function(x, ...) UseMethod("to")
@@ -212,6 +208,7 @@ to.gmail_message <- function(x, ...){ header_value(x, "To") }
 #' @export
 to.gmail_draft <- function(x, ...){ to.gmail_message(x$message, ...) }
 
+#' @rdname accessors
 #' @export
 from <- function(x, ...) UseMethod("from")
 
@@ -222,10 +219,21 @@ from.gmail_message <- function(x, ...){ header_value(x, "From") }
 from.gmail_draft <- from.gmail_message
 
 #' @export
+from <- function(x, ...) UseMethod("from")
+
+#' @rdname accessors
+#' @export
+cc <- function(x, ...) UseMethod("cc")
+
+#' @export
 cc.gmail_message <- function(x, ...){ header_value(x, "Cc") }
 
 #' @export
 cc.gmail_draft <- function(x, ...){ from.gmail_message(x$message, ...) }
+
+#' @rdname accessors
+#' @export
+bcc <- function(x, ...) UseMethod("bcc")
 
 #' @export
 bcc.gmail_message <- function(x, ...){ header_value(x, "Bcc") }
@@ -233,6 +241,7 @@ bcc.gmail_message <- function(x, ...){ header_value(x, "Bcc") }
 #' @export
 bcc.gmail_draft <- function(x, ...){ from.gmail_message(x$message, ...) }
 
+#' @rdname accessors
 #' @export
 date <- function(x, ...) UseMethod("date")
 
@@ -245,6 +254,7 @@ date.gmail_message <- function(x, ...){ header_value(x, "Date") }
 #' @export
 date.gmail_draft <- function(x, ...){ date.gmail_message(x$message, ...) }
 
+#' @rdname accessors
 #' @export
 subject <- function(x, ...) UseMethod("subject")
 

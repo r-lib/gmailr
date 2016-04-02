@@ -10,11 +10,6 @@ body(x, ...)
 \item{x}{the object from which to retrieve the body}
 
 \item{...}{other parameters passed to methods}
-
-\item{collapse}{if `FALSE` will return each formatted body in list, if
-`TRUE` will collapse them together}
-
-\item{type}{the content type of the body to return (for multipart messages), if NULL returns all types.}
 }
 \description{
 Get the body text of a message or draft
