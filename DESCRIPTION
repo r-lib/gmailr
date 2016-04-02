@@ -19,7 +19,8 @@ Imports:
 Suggests:
     testthat,
     knitr,
-    methods
+    methods,
+    rmarkdown
 Remotes: gaborcsardi/argufy@173245a7e
 License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr
