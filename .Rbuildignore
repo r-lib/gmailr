@@ -10,3 +10,4 @@ TODO.md
 ^NEWS.md$
 ^.*gz$
 ^travis-tool\.sh$
+^\.lintr$
