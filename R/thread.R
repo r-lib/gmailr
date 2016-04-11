@@ -20,7 +20,7 @@ threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_
 #' Function to retrieve a given thread by id
 #' @param id thread id to access
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/thread}
+#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/threads}
 #' @family thread
 #' @export
 #' @examples

@@ -30,7 +30,7 @@ By default gmailr will use a global project.  However if you are going to be
 doing a heavy user and will do a lot of queries _please_ setup your own project
 with the steps below.
 
-- Register a new project at https://cloud.google.com/console#/project
+- Register a new project at https://console.cloud.google.com
 - Navigate to `APIs`
   - Switch the Gmail API status to `On`, and other API status to `Off`
 - Navigate to `APIs & auth->Consent screen`
