@@ -47,7 +47,7 @@ clear_token <- function() {
 #' @param scope the authentication scope to use
 #' @param id the client_id to use for authentication
 #' @param secret the client secret to use for authentication
-#' @param secret_file the secret json file downloaded from \url{https://cloud.google.com/console#/project}
+#' @param secret_file the secret json file downloaded from \url{https://console.cloud.google.com}
 #' @seealso use_secret_file to set the default id and secret to a different
 #'   value than the default.
 #' @export

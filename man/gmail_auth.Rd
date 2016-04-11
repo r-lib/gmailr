@@ -14,7 +14,7 @@ gmail_auth(scope = c("read_only", "modify", "compose", "full"), id = the$id,
 
 \item{secret}{the client secret to use for authentication}
 
-\item{secret_file}{the secret json file downloaded from \url{https://cloud.google.com/console#/project}}
+\item{secret_file}{the secret json file downloaded from \url{https://console.cloud.google.com}}
 }
 \description{
 Setup oauth authentication for your gmail
