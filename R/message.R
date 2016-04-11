@@ -12,9 +12,13 @@
 #' \dontrun{
 #' my_message = message(12345)
 #' }
-message <- function(id = ? is_string,
-                    user_id = "me" ? is_string,
+message <- function(id,
+                    user_id = "me",
                     format = c("full", "metadata", "minimal", "raw")) {
+  stopifnot(
+    is_string(id),
+    is_string(user_id))
+
   format <- match.arg(format)
   gmailr_GET(c("messages", id), user_id, class = "gmail_message",
             query = list(format=format))
@@ -37,12 +41,19 @@ message <- function(id = ? is_string,
 #' #Search for R, return 10 results using label 1 including spam and trash folders
 #' my_messages = messages("R", 10, "label_1", TRUE)
 #' }
-messages <- function(search = NULL ? nullable(is_string)(search),
-  num_results = NULL ? nullable(is_number)(num_results),
-  label_ids = NULL ? nullable(is_strings)(label_ids),
-  include_spam_trash = NULL ? nullable(is_boolean)(include_spam_trash),
-  page_token = NULL ? nullable(is_string)(page_token),
-  user_id = "me" ? is_string) {
+messages <- function(search = NULL,
+  num_results = NULL,
+  label_ids = NULL,
+  include_spam_trash = NULL,
+  page_token = NULL,
+  user_id = "me") {
+  stopifnot(
+    nullable(is_string)(search),
+    nullable(is_number)(num_results),
+    nullable(is_strings)(label_ids),
+    nullable(is_boolean)(include_spam_trash),
+    nullable(is_string)(page_token),
+    is_string(user_id))
 
   page_and_trim("messages", user_id, num_results, search, page_token, label_ids, include_spam_trash)
 }
@@ -58,7 +69,11 @@ messages <- function(search = NULL ? nullable(is_string)(search),
 #' \dontrun{
 #' trash_message('12345')
 #' }
-trash_message <- function(id = ? is_string, user_id = "me" ? is_string) {
+trash_message <- function(id, user_id = "me") {
+  stopifnot(
+    is_string(id),
+    is_string(user_id))
+
   gmailr_POST(c("messages", id, "trash"), user_id, class = "gmail_message")
 }
 
@@ -73,7 +88,11 @@ trash_message <- function(id = ? is_string, user_id = "me" ? is_string) {
 #' \dontrun{
 #' untrash_message('12345')
 #' }
-untrash_message <- function(id = ? is_string, user_id = "me" ? is_string) {
+untrash_message <- function(id, user_id = "me") {
+  stopifnot(
+    is_string(id),
+    is_string(user_id))
+
   gmailr_POST(c("messages", id, "untrash"), user_id, class = "gmail_message")
 }
 
@@ -88,7 +107,11 @@ untrash_message <- function(id = ? is_string, user_id = "me" ? is_string) {
 #' \dontrun{
 #' delete_message('12345')
 #' }
-delete_message <- function(id = ? is_string, user_id = "me" ? is_string) {
+delete_message <- function(id, user_id = "me") {
+  stopifnot(
+    is_string(id),
+    is_string(user_id))
+
   gmailr_DELETE(c("messages", id), user_id, class = "gmail_message")
 }
 
@@ -109,10 +132,16 @@ delete_message <- function(id = ? is_string, user_id = "me" ? is_string) {
 #' #add and remove at the same time
 #' modify_message(12345, add_labels='label_2', remove_labels='label_1')
 #' }
-modify_message <- function(id = ? is_string,
-                           add_labels = NULL ? nullable(is_strings)(add_labels),
-                           remove_labels = NULL ? nullable(is_strings)(remove_labels),
-                           user_id = "me" ? is_string) {
+modify_message <- function(id,
+                           add_labels = NULL,
+                           remove_labels = NULL,
+                           user_id = "me") {
+  stopifnot(
+    is_string(id),
+    nullable(is_strings)(add_labels),
+    nullable(is_strings)(remove_labels),
+    is_string(user_id))
+
   gmailr_POST(c("messages", id, "modify"), user_id, class = "gmail_message",
     body = rename("add_labels" = I(add_labels), "remove_labels" = I(remove_labels)),
     encode = "json")
@@ -134,9 +163,15 @@ modify_message <- function(id = ? is_string,
 #' save attachment to a file
 #' save_attachment(my_attachment, 'photo.jpg')
 #' }
-attachment <- function(id = ? is_string,
-                       message_id = ? is_string,
-                       user_id = "me" ? is_string) {
+attachment <- function(id,
+                       message_id,
+                       user_id = "me") {
+
+  stopifnot(
+    is_string(id),
+    is_string(message_id),
+    is_string(user_id))
+
   gmailr_GET(c("messages", message_id, "attachments", id),
              user_id,
              class = "gmail_attachment")
@@ -156,8 +191,11 @@ attachment <- function(id = ? is_string,
 #' # save attachment to a file
 #' save_attachment(my_attachment, 'photo.jpg')
 #' }
-save_attachment <- function(x = ? has_class(x, "gmail_attachment"),
-                            filename = ? is_string){
+save_attachment <- function(x, filename){
+  stopifnot(
+     has_class(x, "gmail_attachment"),
+     is_string(filename))
+
   data <- base64url_decode(x$data)
   writeBin(object = data, con = filename)
   invisible(filename)
@@ -180,10 +218,16 @@ save_attachment <- function(x = ? has_class(x, "gmail_attachment"),
 #' # save a specific attachment
 #' save_attachments(my_message, 'a32e324b')
 #' }
-save_attachments <- function(x = ? has_class(x, "gmail_message"),
-                             attachment_id = NULL ? nullable(is_string)(attachment_id),
-                             path = "." ? valid_path,
-                             user_id = "me" ? is_string) {
+save_attachments <- function(x,
+                             attachment_id = NULL,
+                             path = ".",
+                             user_id = "me") {
+  stopifnot(
+     has_class(x, "gmail_message"),
+     nullable(is_string)(attachment_id),
+     valid_path(path),
+     is_string(user_id))
+
   attachments_parts <- if (!is.null(attachment_id)) {
     Find(function(part)
       identical(part$body$attachmentId, attachment_id),
@@ -215,11 +259,17 @@ save_attachments <- function(x = ? has_class(x, "gmail_message"),
 #' insert_message(mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
-insert_message <- function(mail = ?~ as.character,
-  label_ids = ? nullable(is_strings)(label_ids),
+insert_message <- function(
+  mail,
+  label_ids,
   type = c("multipart", "media", "resumable"),
   internal_date_source = c("dateHeader", "recievedTime"),
-  user_id = "me" ? is_string) {
+  user_id = "me") {
+
+  mail <- as.character(mail)
+  stopifnot(
+     nullable(is_strings)(label_ids),
+     is_string(user_id))
 
   type <- match.arg(type)
   internal_date_source <- match.arg(internal_date_source)
@@ -243,11 +293,16 @@ insert_message <- function(mail = ?~ as.character,
 #' import_message(mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
-import_message <- function(mail = ?~ as.character,
-  label_ids = ? nullable(is_strings)(label_ids),
+import_message <- function(mail,
+  label_ids,
   type = c("multipart", "media", "resumable"),
   internal_date_source = c("dateHeader", "recievedTime"),
-  user_id = "me" ? is_string) {
+  user_id = "me") {
+
+  mail <- as.character(mail)
+  stopifnot(
+     nullable(is_strings)(label_ids),
+     is_string(user_id))
 
   type <- match.arg(type)
   internal_date_source <- match.arg(internal_date_source)
@@ -273,10 +328,15 @@ import_message <- function(mail = ?~ as.character,
 #'                           subject="hello", "how are you doing?"))
 #' }
 send_message <- function(
-  mail = ?~ as.character,
+  mail,
   type = c("multipart", "media", "resumable"),
-  thread_id = NULL ? nullable(is_string)(thread_id),
-  user_id = "me" ? is_string) {
+  thread_id = NULL,
+  user_id = "me") {
+
+  mail <- as.character(mail)
+  stopifnot(
+     nullable(is_string)(thread_id),
+     is_string(user_id))
 
   type <- match.arg(type)
 
