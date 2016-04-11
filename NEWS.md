@@ -1,3 +1,9 @@
+# gmailr 0.7.1
+
+* Bundle a application token and secret in gmailr so the average user won't need to create an application.
+* Great number of bug fixes
+* Reworking the print functions to provide more useful and easy to read output
+
 # gmailr 0.5.0
 
 ### Major Changes
