@@ -12,9 +12,10 @@
 #' \dontrun{
 #' my_draft = draft('12345')
 #' }
-draft <- function(id = ? is_string,
-                  user_id = "me" ? is_string,
+draft <- function(id,
+                  user_id = "me",
                   format = c("full", "minimal", "raw")) {
+  stopifnot(is_string(id), is_string(user_id))
   format <- match.arg(format)
   res <- gmailr_GET(c("drafts", id), user_id, query = list(format=format), class = "gmail_draft")
 
@@ -38,7 +39,8 @@ draft <- function(id = ? is_string,
 #'
 #' first_10_drafts = drafts(10)
 #' }
-drafts <- function(num_results = NULL, page_token = NULL, user_id = "me" ? is_string) {
+drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
+  stopifnot(is_string(user_id))
   page_and_trim("drafts", user_id, num_results, page_token)
 }
 
@@ -54,11 +56,13 @@ drafts <- function(num_results = NULL, page_token = NULL, user_id = "me" ? is_st
 #' create_draft(mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
-create_draft <- function(mail = ?~ as.character,
-                         user_id = "me" ? is_string,
+create_draft <- function(mail,
+                         user_id = "me",
                          type = c("multipart",
                                 "media",
                                 "resumable")) {
+  mail <- as.character(mail)
+  stopifnot(is_string(user_id))
   type <- match.arg(type)
   res <- gmailr_POST("drafts", user_id, class = "gmail_draft",
               query = list(uploadType=type),
@@ -85,9 +89,10 @@ create_draft <- function(mail = ?~ as.character,
 #'                       Subject="hello", "how are you doing?"))
 #' send_draft(draft)
 #' }
-send_draft <- function(draft = ? has_class(draft, "gmail_draft"),
-                       user_id = "me" ? is_string) {
-    gmailr_POST(c("drafts", "send"), user_id, class = "gmail_draft",
-                body = draft,
-                encode = "json")
+send_draft <- function(draft,
+                       user_id = "me") {
+  stopifnot(has_class(draft, "gmail_draft"), is_string(user_id))
+  gmailr_POST(c("drafts", "send"), user_id, class = "gmail_draft",
+    body = draft,
+    encode = "json")
 }
