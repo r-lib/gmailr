@@ -1,45 +1,29 @@
-The vignettes and index are now being properly built, and the referenced
-message is gone from R CMD check.  I apologize for overlooking this
-on the previous submission.
+## Test environments
+* local OS X install, R 3.2.4
+* ubuntu 12.04 (on travis-ci), R 3.2.4
+* win-builder (devel and release)
 
-Thanks,
+## R CMD check results
 
-Jim
-> Please do check as per the policies.  You missed
-> 
-> Package has a VignetteBuilder field but no prebuilt vignette index.
-> 
-> Had you packed with R CMD build and R-devel (or even current R, I believe) this would have been created.
-> 
-> > Uwe,
-> > 
-> > I removed the final period from the title and the NEWS.md file.  Let me know
-> > there are any other changes needed.
-> > 
-> > Thanks for your time,
-> > 
-> > Jim
-> > > Thank,
-> > > 
-> > > no final dot, please.
-> > > 
-> > > 
-> > > We also see:
-> > > 
-> > > * checking top-level files ... NOTE
-> > > Non-standard file/directory found at top level:
-> > >   'NEWS.md'
-> > > 
-> > > Please fix.
-> > > 
-> > > Best,
-> > > Uwe Ligges
-> > > > This release adds additional functionality to the package, and fixes some
-> > > > overlooked bugs in the initial release.
-> > > > 
-> > > > I have ran cran check on my local OSX install and win builder and did generate any any NOTEs of interest.
-> > > > 
-> > > > Regards,
-> > > > 
-> > > > Jim Hester
+0 errors | 0 warnings | 1 note
 
+Possibly mis-spelled words in DESCRIPTION:
+  API (6:33, 7:48)
+  Gmail (6:19, 7:34, 8:5)
+  RESTful (6:25, 7:40)
+
+These are all words Google uses to talk about their gmail API so I think are
+appropriate spellings.
+
+Found the following (possibly) invalid URLs:
+  URL: https://console.cloud.google.com
+    From: man/gmail_auth.Rd
+    Status: 404
+    Message: Not Found
+
+This link is actually valid for GET requests, but HEAD requests (like the check
+uses) return a 404.
+
+## Reverse dependencies
+
+There are no reverse dependencies.
