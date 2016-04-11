@@ -7,22 +7,8 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-## Authentication
-
-- Register a new project at https://cloud.google.com/console#/project
-- Navigate to `APIs`
-    - Switch the Gmail API status to `On`
-- Navigate to `APIs & auth->Credentials`
-    - Create a new client ID
-    - Download the Client ID JSON
-- Use the downloaded JSON as input to `gmail_auth()`
-
 ```{r, include=FALSE}
 library(gmailr)
-```
-
-```{r, eval=FALSE}
-gmail_auth('file.json')
 ```
 
 ## Constructing a MIME message
