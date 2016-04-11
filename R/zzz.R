@@ -31,5 +31,3 @@ nullable <- function(fun) {
 valid_path <- function(path) {
   is_string(path) && dir.exists(path)
 }
-
-argufy::argufy_package()
