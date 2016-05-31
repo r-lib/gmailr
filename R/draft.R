@@ -19,7 +19,7 @@ draft <- function(id,
   format <- match.arg(format)
   res <- gmailr_GET(c("drafts", id), user_id, query = list(format=format), class = "gmail_draft")
 
-  class(res$message) <- "gmail_message"
+  class(res$message) <- c("gmail_message", "list")
 
   res
 }
@@ -71,7 +71,7 @@ create_draft <- function(mail,
               add_headers("Content-Type" = "application/json"))
 
   # This is labeled as a message but is really a thread
-  class(res$message) <- "gmail_thread"
+  class(res$message) <- c("gmail_thread", "list")
   res
 }
 
