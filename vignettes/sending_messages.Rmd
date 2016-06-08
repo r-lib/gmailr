@@ -114,3 +114,18 @@ send_message(file_attachment)
 ```{r sending_messages_clenup, include=FALSE}
 unlink("iris.csv")
 ```
+
+## Troubleshooting
+
+### Gmail API error 400: Mail service not enabled
+
+It is possible to have a high-functioning Google account that does not have Gmail enabled. For example, your account might be fully operational with respect to Google Drive and yet have no mail capabilities. Such an account cannot be used with the Gmail API and therefore with `gmailr`. However, you will still be able to complete the `gmailr` authorization process via `gmail_auth()`. The problem will only reveal itself upon the first attempt to use the API and it will look something like this:
+
+```
+ Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  : 
+  Gmail API error: 400
+  Mail service not enabled 
+```
+
+You can confirm the account's lack of mail capability by visiting <https://mail.google.com/mail/> while logged in. If you don't already have Gmail, this link gives you the option of adding mail to your existing account or creating a new, mail-capable account.
+
