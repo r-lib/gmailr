@@ -10,3 +10,5 @@ TODO.md
 ^.*gz$
 ^travis-tool\.sh$
 ^\.lintr$
+^.*\.Rproj$
+^\.Rproj\.user$
