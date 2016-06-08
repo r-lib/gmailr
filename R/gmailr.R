@@ -77,7 +77,7 @@ gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
   scope_urls <- c(read_only = "https://www.googleapis.com/auth/gmail.readonly",
                   modify = "https://www.googleapis.com/auth/gmail.modify",
                   compose = "https://www.googleapis.com/auth/gmail.compose",
-                  full = "https://mail.google.com/")  
+                  full = "https://mail.google.com/")
   scope <- scope_urls[match.arg(scope, several.ok=TRUE)]
 
   the$token <- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
@@ -334,7 +334,7 @@ gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
         response = response,
         message = paste0("Gmail API error: ", status_code(response), "\n  ", result$error$message, "\n")),
         class = c("condition", "error", "gmailr_error"))
-    stop(cond, call. = FALSE)
+    stop(cond)
   }
 
   if (!is.null(class)) {
