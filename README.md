@@ -5,6 +5,21 @@
 
 Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
 
+## Installation ##
+
+Get the released version from CRAN:
+
+```R
+install.packages("gmailr")
+```
+
+Or the development version from github with:
+
+```R
+# install.packages("devtools")
+devtools::install_github("jimhester/gmailr")
+```
+
 ## Features ##
 - retrieve data from your email
   - drafts: `my_drafts = drafts()`
