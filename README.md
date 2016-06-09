@@ -1,7 +1,7 @@
 # gmailr #
 
-[![Build Status](https://travis-ci.org/jimhester/gmailr.png?branch=master)](https://travis-ci.org/jimhester/gmailr)
-[![Coverage Status](https://img.shields.io/coveralls/jimhester/gmailr.svg)](https://coveralls.io/r/jimhester/gmailr)
+[![Build Status](https://travis-ci.org/jimhester/gmailr.svg?branch=master)](https://travis-ci.org/jimhester/gmailr)
+[![Coverage Status](https://coveralls.io/repos/jimhester/gmailr/badge.svg)](https://coveralls.io/r/jimhester/gmailr)
 
 Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
 
