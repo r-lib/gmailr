@@ -1,9 +1,24 @@
 # gmailr #
 
-[![Build Status](https://travis-ci.org/jimhester/gmailr.png?branch=master)](https://travis-ci.org/jimhester/gmailr)
-[![Coverage Status](https://img.shields.io/coveralls/jimhester/gmailr.svg)](https://coveralls.io/r/jimhester/gmailr)
+[![Build Status](https://travis-ci.org/jimhester/gmailr.svg?branch=master)](https://travis-ci.org/jimhester/gmailr)
+[![Coverage Status](https://coveralls.io/repos/jimhester/gmailr/badge.svg)](https://coveralls.io/r/jimhester/gmailr)
 
 Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
+
+## Installation ##
+
+Get the released version from CRAN:
+
+```R
+install.packages("gmailr")
+```
+
+Or the development version from github with:
+
+```R
+# install.packages("devtools")
+devtools::install_github("jimhester/gmailr")
+```
 
 ## Features ##
 - retrieve data from your email
@@ -26,26 +41,23 @@ Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from 
 
 ## Setup ##
 
-By default gmailr will use a global project.  However if you are going to be
-doing a heavy user and will do a lot of queries _please_ setup your own project
-with the steps below.
+By default gmailr will use a global project.  However if you are going to be a heavy user and will do a lot of queries _please_ setup your own project with the steps below. This often works best via Google Chrome.
 
-- Register a new project at https://console.cloud.google.com
-- Navigate to `APIs`
-  - Switch the Gmail API status to `On`, and other API status to `Off`
-- Navigate to `APIs & auth->Consent screen`
-  - Name your application
-  - Select an email address for the application
-  - Other fields can be left blank
-- Navigate to `APIs & auth->Credentials`
-  - Create a new client ID
-    - Application Type: Installed Application
-    - Installed Application Type: Other
-  - Download the Client ID JSON - can be renamed!
-- Use the downloaded JSON file as input to `gmail_auth()`
+* Pick a project name; referred to as `PROJ-NAME` from now on.
+* Register a new project at <https://console.developers.google.com/project>.
+* From Overview screen, look at Google Apps APIs and select the Gmail API. Enable it.
+* Click "Go to Credentials" or navigate directly to Credentials.
+* You want a get a client ID and will need to "Configure consent screen".
+  - The email should be pre-filled. Enter `PROJ-NAME` as Product name. Other fields can be left blank.
+* Returning to the "client id" process:
+  - Application Type: "Other"
+  - Enter `PROJ-NAME` again as the name.
+  - Click "Create"
+* Client id and secret will appear in a pop-up which you can dismiss via "OK". Instead use download icon at far right of your project's listing to download a JSON file with all of this info. Move to an appropriate location and consider renaming as `PROJ-NAME.json`.
+* Use the downloaded JSON file as input to `use_secret_file()`, prior to other `gmailr` calls.
 
-      ```R
-      gmail_auth('file.json')
+      ``` r
+      use_secret_file('PROJ-NAME.json')
       ```
 
 ## Future Work ##
