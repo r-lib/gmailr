@@ -320,8 +320,10 @@ print.gmail_drafts <- function(x, ...){
 
 the$last_response <- list()
 
-gmailr_query <- function(fun, location, user_id, class = NULL, ...) {
-  response <- fun(gmail_path(user_id, location),
+gmailr_query <- function(fun, location, user_id, class = NULL, upload = FALSE,
+                         ...) {
+  path_fun <- if (upload) gmail_upload_path else gmail_path
+  response <- fun(path_fun(user_id, location),
              config(token = get_token()),
               ...)
   result <- content(response, "parsed")
