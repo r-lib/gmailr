@@ -57,19 +57,15 @@ drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #'                           Subject="hello", "how are you doing?"))
 #' }
 create_draft <- function(mail,
-                         user_id = "me",
-                         type = c("multipart",
-                                "media",
-                                "resumable")) {
+                         user_id = "me") {
   mail <- as.character(mail)
   stopifnot(is_string(user_id))
-  type <- match.arg(type)
   res <- gmailr_POST("drafts", user_id, class = "gmail_draft",
-              query = list(uploadType=type),
-              body = jsonlite::toJSON(auto_unbox=TRUE,
-                list(message=list(raw=base64url_encode(mail)))),
-              add_headers("Content-Type" = "application/json"))
-
+              query = list(uploadType="media"),
+              body = mail,
+              add_headers("Content-Type" = "message/rfc822"),
+              upload=TRUE)
+  
   # This is labeled as a message but is really a thread
   class(res$message) <- c("gmail_thread", "list")
   res
