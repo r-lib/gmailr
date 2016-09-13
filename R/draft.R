@@ -47,7 +47,6 @@ drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #' Create a draft from a mime message
 #'
 #' @param mail mime mail message created by mime
-#' @param type the type of upload to perform
 #' @inheritParams message
 #' @references \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/create}
 #' @export
