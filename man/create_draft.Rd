@@ -4,15 +4,12 @@
 \alias{create_draft}
 \title{Create a draft from a mime message}
 \usage{
-create_draft(mail, user_id = "me", type = c("multipart", "media",
-  "resumable"))
+create_draft(mail, user_id = "me")
 }
 \arguments{
 \item{mail}{mime mail message created by mime}
 
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
-
-\item{type}{the type of upload to perform}
 }
 \description{
 Create a draft from a mime message
