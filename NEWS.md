@@ -3,6 +3,7 @@
 * Bundle a application token and secret in gmailr so the average user won't need to create an application.
 * Great number of bug fixes
 * Reworking the print functions to provide more useful and easy to read output
+* Added check for null response to fix bug with DELETE requests (#79) @josibake
 
 # gmailr 0.5.0
 
