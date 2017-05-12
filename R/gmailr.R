@@ -339,7 +339,7 @@ gmailr_query <- function(fun, location, user_id, class = NULL, upload = FALSE,
     stop(cond)
   }
 
-  if (!is.null(class) & !is.null(result)) {
+  if (!is.null(class) && !is.null(result)) {
     class(result) <- class
   }
   result
