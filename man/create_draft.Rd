@@ -23,4 +23,3 @@ create_draft(mime(From="you@me.com", To="any@one.com",
 \references{
 \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/create}
 }
-

@@ -29,4 +29,3 @@ first_10_drafts = drafts(10)
 \seealso{
 Other draft: \code{\link{draft}}, \code{\link{send_draft}}
 }
-

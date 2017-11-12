@@ -9,4 +9,3 @@ clear_token()
 \description{
 Clear the current oauth token
 }
-

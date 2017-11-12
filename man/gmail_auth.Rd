@@ -2,30 +2,34 @@
 % Please edit documentation in R/gmailr.R
 \name{gmail_auth}
 \alias{gmail_auth}
-\title{Setup oauth authentication for your gmail}
+\title{Get or activate a gmail token}
 \usage{
-gmail_auth(scope = c("read_only", "modify", "compose", "full"), id = the$id,
-  secret = the$secret, secret_file = NULL)
+gmail_auth(scope = c("read_only", "modify", "compose", "full"),
+  email = NULL, path = NULL, cache = getOption("httr_oauth_cache"),
+  use_oob = getOption("httr_oob_default"))
 }
 \arguments{
 \item{scope}{the authentication scope to use}
 
-\item{id}{the client_id to use for authentication}
+\item{email}{Optional; email address associated with the desired Google user.}
 
-\item{secret}{the client secret to use for authentication}
+\item{path}{Optional; path to the downloaded JSON file for a service token.}
 
-\item{secret_file}{the secret json file downloaded from \url{https://console.cloud.google.com}}
+\item{cache}{A logical value or a string. \code{TRUE} means to cache
+using the default cache file \code{.httr-oauth}, \code{FALSE} means
+don't cache, and \code{NA} means to guess using some sensible heuristics.
+A string mean use the specified path as the cache file.}
+
+\item{use_oob}{if FALSE, use a local webserver for the OAuth dance.
+Otherwise, provide a URL to the user and prompt for a validation
+code. Defaults to the of the \code{"httr_oob_default"} default,
+or \code{TRUE} if \code{httpuv} is not installed.}
 }
 \description{
-Setup oauth authentication for your gmail
+Get or activate a gmail token
 }
 \examples{
 \dontrun{
 gmail_auth("compose")
 }
 }
-\seealso{
-use_secret_file to set the default id and secret to a different
-  value than the default.
-}
-

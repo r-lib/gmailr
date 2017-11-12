@@ -22,4 +22,3 @@ Other label: \code{\link{create_label}},
   \code{\link{labels}}, \code{\link{label}},
   \code{\link{update_label}}
 }
-

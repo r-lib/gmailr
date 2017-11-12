@@ -20,4 +20,3 @@ body(my_message)
 body(my_draft)
 }
 }
-

@@ -2,6 +2,7 @@
 % Please edit documentation in R/gmailr.R, R/utils.R
 \name{\%>\%}
 \alias{\%>\%}
+\alias{\%>\%}
 \title{Pipe statements}
 \usage{
 lhs \%>\% rhs
@@ -20,4 +21,3 @@ to(mime(), 'someone@somewhere.com')
 mime() \%>\% to('someone@somewhere.com')
 }
 \keyword{internal}
-

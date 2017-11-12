@@ -37,4 +37,3 @@ Other message: \code{\link{delete_message}},
   \code{\link{send_message}}, \code{\link{trash_message}},
   \code{\link{untrash_message}}
 }
-

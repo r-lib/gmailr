@@ -24,6 +24,6 @@ License: MIT + file LICENSE
 URL: https://github.com/jimhester/gmailr
 BugReports: https://github.com/jimhester/gmailr/issues
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Remotes:
   r-lib/gargle@gargle2.0-class

@@ -27,4 +27,3 @@ my_draft = draft('12345')
 \seealso{
 Other draft: \code{\link{drafts}}, \code{\link{send_draft}}
 }
-
