@@ -86,18 +86,17 @@ gmail_auth_config <- function(app = NULL,
       stop("Don't provide both 'app' and 'secret_file'. Pick one.\n",
            call. = FALSE)
     }
-    the$oauth_oauth_app <- app %||% the$oauth_app
-    return(invisible())
+    the$oauth_app <- app
+    return(the$oauth_app)
   }
 
-  if (is.null(secret_file)) return(invisible())
+  if (is.null(secret_file)) return(the$oauth_app)
 
   info <- jsonlite::fromJSON(readChar(secret_file, nchars = 1e5))
-  the$oauth_oauth_app <- oauth_app(
+  the$oauth_app <- oauth_app(
     "google",
     info$installed$client_id,
     info$installed$client_secret
   )
-
-  invisible()
+  the$oauth_app
 }
