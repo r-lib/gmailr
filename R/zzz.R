@@ -1,3 +1,9 @@
+.onLoad <- function(libname, pkgname) {
+  the$tidyverse_app <- gargle::tidyverse_app()
+  the$oauth_app <- the$tidyverse_app
+  invisible()
+}
+
 is_number <- function(x) {
   is.numeric(x) || tryCatch(as.numeric(x), warning = function(e) FALSE)
 }
