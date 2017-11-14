@@ -57,46 +57,61 @@ gmail_auth <- function(scope = c("read_only", "modify", "compose", "full"),
 #' View or set auth config
 #'
 #' @description This function gives advanced users more control over auth.
-#' Whereas [gmail_auth()] gives control over tokens, `gmail_auth_config()`
-#' gives control of:
-#'   * The OAuth app. If you want to use your own app, setup a new project in
-#'   [Google Developers Console](https://console.developers.google.com). Follow
-#'   the instructions in
-#'   [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
-#'   to obtain your own client ID and secret. Provide these to
-#'   [httr::oauth_app()].
+#' Whereas \code{\link{gmail_auth}()} gives control over tokens,
+#' \code{gmail_auth_config()} gives control of:
+#' \itemize{
+#' \item The OAuth app. If you want to use your own app, setup a new project
+#' in \href{https://console.developers.google.com}{Google Developers Console}.
+#' Follow the instructions in \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{OAuth 2.0 for Mobile & Desktop Apps}
+#' to obtain your own client ID and secret.
+#' }
+#' Either make an app from your client ID and secret via
+#' \code{\link[httr]{oauth_app}()}
+#' or provide a path the the JSON file containing same, which you can download
+#' from
+#' \href{https://console.developers.google.com}{Google Developers Console}.
 #'
 #' @param app OAuth app. Defaults to a tidyverse app that ships with gmailr.
-#' @param secret_file Alternative way to bring your own app: the secret json
-#'   file downloaded from \url{https://console.cloud.google.com} containing
-#'   a client id and secret.
+#' @inheritParams gargle::oauth_app
 #' @export
 #' @examples
+#' ## this will print current app
 #' gmail_auth_config()
+#'
+#' if (require(httr)) {
+#'   ## bring your own app via client id (aka key) and secret
+#'   google_app <- httr::oauth_app(
+#'     "my-awesome-google-api-wrapping-package",
+#'     key = "123456789.apps.googleusercontent.com",
+#'     secret = "abcdefghijklmnopqrstuvwxyz"
+#'   )
+#'   gmail_auth_config(app = google_app)
+#' }
+#'
+#' \dontrun{
+#'   gmail_auth_config(
+#'     path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+#'   )
+#' }
 gmail_auth_config <- function(app = NULL,
-                              secret_file = NULL) {
+                              path = NULL) {
 
   stopifnot(is.null(app) || inherits(app, "oauth_app"))
-  stopifnot(is.null(secret_file) ||
-              is.character(secret_file) ||
-              length(secret_file) == 1)
+  stopifnot(is.null(path) ||
+              is.character(path) ||
+              length(path) == 1)
 
   if (!is.null(app)) {
-    if (!is.null(secret_file)) {
-      stop("Don't provide both 'app' and 'secret_file'. Pick one.\n",
+    if (!is.null(path)) {
+      stop("Don't provide both 'app' and 'path'. Pick one.\n",
            call. = FALSE)
     }
     the$oauth_app <- app
     return(the$oauth_app)
   }
 
-  if (is.null(secret_file)) return(the$oauth_app)
+  if (is.null(path)) return(the$oauth_app)
 
-  info <- jsonlite::fromJSON(readChar(secret_file, nchars = 1e5))
-  the$oauth_app <- oauth_app(
-    "google",
-    info$installed$client_id,
-    info$installed$client_secret
-  )
+  the$oauth_app <- gargle::oauth_app(path = path)
   the$oauth_app
 }

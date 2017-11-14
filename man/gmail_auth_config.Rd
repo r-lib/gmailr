@@ -4,26 +4,47 @@
 \alias{gmail_auth_config}
 \title{View or set auth config}
 \usage{
-gmail_auth_config(app = NULL, secret_file = NULL)
+gmail_auth_config(app = NULL, path = NULL)
 }
 \arguments{
 \item{app}{OAuth app. Defaults to a tidyverse app that ships with gmailr.}
 
-\item{secret_file}{Alternative way to bring your own app: the secret json
-file downloaded from \url{https://console.cloud.google.com} containing
-a client id and secret.}
+\item{path}{Path to the JSON file. If given, any input provided via \code{key}
+(the "client_id", in Google's vocabulary) and \code{secret} is ignored.}
 }
 \description{
 This function gives advanced users more control over auth.
-Whereas [gmail_auth()] gives control over tokens, `gmail_auth_config()`
-gives control of:
-  * The OAuth app. If you want to use your own app, setup a new project in
-  [Google Developers Console](https://console.developers.google.com). Follow
-  the instructions in
-  [OAuth 2.0 for Mobile & Desktop Apps](https://developers.google.com/identity/protocols/OAuth2InstalledApp)
-  to obtain your own client ID and secret. Provide these to
-  [httr::oauth_app()].
+Whereas \code{\link{gmail_auth}()} gives control over tokens,
+\code{gmail_auth_config()} gives control of:
+\itemize{
+\item The OAuth app. If you want to use your own app, setup a new project
+in \href{https://console.developers.google.com}{Google Developers Console}.
+Follow the instructions in \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{OAuth 2.0 for Mobile & Desktop Apps}
+to obtain your own client ID and secret.
+}
+Either make an app from your client ID and secret via
+\code{\link[httr]{oauth_app}()}
+or provide a path the the JSON file containing same, which you can download
+from
+\href{https://console.developers.google.com}{Google Developers Console}.
 }
 \examples{
+## this will print current app
 gmail_auth_config()
+
+if (require(httr)) {
+  ## bring your own app via client id (aka key) and secret
+  google_app <- httr::oauth_app(
+    "my-awesome-google-api-wrapping-package",
+    key = "123456789.apps.googleusercontent.com",
+    secret = "abcdefghijklmnopqrstuvwxyz"
+  )
+  gmail_auth_config(app = google_app)
+}
+
+\dontrun{
+  gmail_auth_config(
+    path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+  )
+}
 }
