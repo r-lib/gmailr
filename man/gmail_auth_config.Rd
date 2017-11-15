@@ -9,8 +9,7 @@ gmail_auth_config(app = NULL, path = NULL)
 \arguments{
 \item{app}{OAuth app. Defaults to a tidyverse app that ships with gmailr.}
 
-\item{path}{Path to the JSON file. If given, any input provided via \code{key}
-(the "client_id", in Google's vocabulary) and \code{secret} is ignored.}
+\item{path}{Path to the JSON file.}
 }
 \description{
 This function gives advanced users more control over auth.
@@ -43,8 +42,9 @@ if (require(httr)) {
 }
 
 \dontrun{
-  gmail_auth_config(
-    path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
-  )
+## bring your own app via JSON downloaded from Google Developers Console
+gmail_auth_config(
+  path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+)
 }
 }

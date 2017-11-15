@@ -72,7 +72,7 @@ gmail_auth <- function(scope = c("read_only", "modify", "compose", "full"),
 #' \href{https://console.developers.google.com}{Google Developers Console}.
 #'
 #' @param app OAuth app. Defaults to a tidyverse app that ships with gmailr.
-#' @inheritParams gargle::oauth_app
+#' @inheritParams gargle::oauth_app_from_json
 #' @export
 #' @examples
 #' ## this will print current app
@@ -89,9 +89,10 @@ gmail_auth <- function(scope = c("read_only", "modify", "compose", "full"),
 #' }
 #'
 #' \dontrun{
-#'   gmail_auth_config(
-#'     path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
-#'   )
+#' ## bring your own app via JSON downloaded from Google Developers Console
+#' gmail_auth_config(
+#'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+#' )
 #' }
 gmail_auth_config <- function(app = NULL,
                               path = NULL) {
@@ -112,6 +113,6 @@ gmail_auth_config <- function(app = NULL,
 
   if (is.null(path)) return(the$oauth_app)
 
-  the$oauth_app <- gargle::oauth_app(path = path)
+  the$oauth_app <- gargle::oauth_app_from_json(path)
   the$oauth_app
 }
