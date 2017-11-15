@@ -23,7 +23,7 @@ to obtain your own client ID and secret.
 }
 Either make an app from your client ID and secret via
 \code{\link[httr]{oauth_app}()}
-or provide a path the the JSON file containing same, which you can download
+or provide a path to the JSON file containing same, which you can download
 from
 \href{https://console.developers.google.com}{Google Developers Console}.
 }
