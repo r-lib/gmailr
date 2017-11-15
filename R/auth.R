@@ -98,9 +98,7 @@ gmail_auth_config <- function(app = NULL,
                               path = NULL) {
 
   stopifnot(is.null(app) || inherits(app, "oauth_app"))
-  stopifnot(is.null(path) ||
-              is.character(path) ||
-              length(path) == 1)
+  stopifnot(is.null(path) || (is.character(path) && length(path) == 1))
 
   if (!is.null(app)) {
     if (!is.null(path)) {
