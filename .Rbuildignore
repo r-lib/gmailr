@@ -12,3 +12,4 @@ TODO.md
 ^\.lintr$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$
