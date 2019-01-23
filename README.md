@@ -56,9 +56,9 @@ By default gmailr will use a global project.  However if you are going to be a h
 * Client id and secret will appear in a pop-up which you can dismiss via "OK". Instead use download icon at far right of your project's listing to download a JSON file with all of this info. Move to an appropriate location and consider renaming as `PROJ-NAME.json`.
 * Use the downloaded JSON file as input to `use_secret_file()`, prior to other `gmailr` calls.
 
-```R
-use_secret_file('PROJ-NAME.json')
-```
+  ```R
+  gmailr::use_secret_file('PROJ-NAME.json')
+  ```
 
 ## Future Work ##
 
