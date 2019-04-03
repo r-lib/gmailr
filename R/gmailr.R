@@ -58,7 +58,8 @@ clear_token <- function() {
 gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
                       id = the$id,
                       secret = the$secret,
-                      secret_file = NULL) {
+                      secret_file = NULL, 
+                      token = NULL) {
 
   if(!is.null(secret_file)){
     if (!(missing(id) && missing(secret))) {
@@ -71,16 +72,25 @@ gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
     # Use new ID and secret
     id <- the$id
     secret <- the$secret
+  } else if (!is.null(token)) {
+    if(methods::is(token, "character")) {
+      token <- readRDS(token)
+    }
+    
+    the$token <- token
+    
+  } else {
+    myapp <- oauth_app("google", id, secret)
+    
+    scope_urls <- c(read_only = "https://www.googleapis.com/auth/gmail.readonly",
+                    modify = "https://www.googleapis.com/auth/gmail.modify",
+                    compose = "https://www.googleapis.com/auth/gmail.compose",
+                    full = "https://mail.google.com/")
+    scope <- scope_urls[match.arg(scope, several.ok=TRUE)]
+    
+    the$token <- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
   }
-  myapp <- oauth_app("google", id, secret)
-
-  scope_urls <- c(read_only = "https://www.googleapis.com/auth/gmail.readonly",
-                  modify = "https://www.googleapis.com/auth/gmail.modify",
-                  compose = "https://www.googleapis.com/auth/gmail.compose",
-                  full = "https://mail.google.com/")
-  scope <- scope_urls[match.arg(scope, several.ok=TRUE)]
-
-  the$token <- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
+  
 }
 
 #' Use information from a secret file
