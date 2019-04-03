@@ -16,4 +16,3 @@ Implementation derived from the perl MIME::QuotedPrint
 \references{
 \url{http://search.cpan.org/~gaas/MIME-Base64-3.14/QuotedPrint.pm}
 }
-

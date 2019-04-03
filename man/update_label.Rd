@@ -33,4 +33,4 @@ Other label: \code{\link{create_label}},
   \code{\link{delete_label}}, \code{\link{labels}},
   \code{\link{label}}
 }
-
+\concept{label}

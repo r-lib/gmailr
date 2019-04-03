@@ -16,4 +16,3 @@
 \description{
 This function converts a mime object into a character vector
 }
-

@@ -25,4 +25,3 @@ id(my_message)
 id(my_draft)
 }
 }
-

@@ -80,15 +80,16 @@ gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
     the$token <- token
     
   } else {
-    myapp <- oauth_app("google", id, secret)
+    myapp <- httr::oauth_app("google", id, secret)
     
-    scope_urls <- c(read_only = "https://www.googleapis.com/auth/gmail.readonly",
-                    modify = "https://www.googleapis.com/auth/gmail.modify",
-                    compose = "https://www.googleapis.com/auth/gmail.compose",
-                    full = "https://mail.google.com/")
-    scope <- scope_urls[match.arg(scope, several.ok=TRUE)]
+    scope_urls <- data.frame(code = c("read_only", "modify", "compose", "full"), 
+                             scope = c("https://www.googleapis.com/auth/gmail.readonly",
+                                       "https://www.googleapis.com/auth/gmail.modify",
+                                       "https://www.googleapis.com/auth/gmail.compose",
+                                       "https://mail.google.com/"), stringsAsFactors = F)
+    scope <- scope_urls$scope[scope %in% scope_urls$code]
     
-    the$token <- oauth2.0_token(oauth_endpoints("google"), myapp, scope = scope)
+    the$token <- httr::oauth2.0_token(httr::oauth_endpoints("google"), myapp, scope = scope)
   }
   
 }

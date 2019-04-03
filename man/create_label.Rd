@@ -4,8 +4,9 @@
 \alias{create_label}
 \title{Create a new label}
 \usage{
-create_label(name, label_list_visibility = c("hide", "show", "show_unread"),
-  message_list_visibility = c("hide", "show"), user_id = "me")
+create_label(name, label_list_visibility = c("hide", "show",
+  "show_unread"), message_list_visibility = c("hide", "show"),
+  user_id = "me")
 }
 \arguments{
 \item{name}{name to give to the new label}
@@ -27,4 +28,4 @@ Other label: \code{\link{delete_label}},
   \code{\link{labels}}, \code{\link{label}},
   \code{\link{update_label}}
 }
-
+\concept{label}

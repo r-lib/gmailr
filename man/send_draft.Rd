@@ -27,4 +27,4 @@ send_draft(draft)
 \seealso{
 Other draft: \code{\link{drafts}}, \code{\link{draft}}
 }
-
+\concept{draft}

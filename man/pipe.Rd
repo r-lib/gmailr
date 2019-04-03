@@ -20,4 +20,3 @@ to(mime(), 'someone@somewhere.com')
 mime() \%>\% to('someone@somewhere.com')
 }
 \keyword{internal}
-

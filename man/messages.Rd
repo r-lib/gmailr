@@ -43,4 +43,4 @@ Other message: \code{\link{attachment}},
   \code{\link{send_message}}, \code{\link{trash_message}},
   \code{\link{untrash_message}}
 }
-
+\concept{message}

@@ -32,4 +32,4 @@ Other message: \code{\link{attachment}},
   \code{\link{save_attachment}},
   \code{\link{send_message}}, \code{\link{trash_message}}
 }
-
+\concept{message}

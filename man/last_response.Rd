@@ -9,4 +9,3 @@ last_response()
 \description{
 Response from the last query
 }
-
