@@ -48,6 +48,7 @@ clear_token <- function() {
 #' @param id the client_id to use for authentication
 #' @param secret the client secret to use for authentication
 #' @param secret_file the secret json file downloaded from \url{https://console.cloud.google.com}
+#' @param token Token object or the name of a token object \code{.rds} file to be set in the credentialing environment. This is most useful for authentication in a non-interactive setting.
 #' @seealso use_secret_file to set the default id and secret to a different
 #'   value than the default.
 #' @export

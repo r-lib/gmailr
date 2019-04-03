@@ -16,6 +16,8 @@ gmail_auth(scope = c("read_only", "modify", "compose", "full"),
 \item{secret}{the client secret to use for authentication}
 
 \item{secret_file}{the secret json file downloaded from \url{https://console.cloud.google.com}}
+
+\item{token}{Token object or the name of a token object \code{.rds} file to be set in the credentialing environment. This is most useful for authentication in a non-interactive setting.}
 }
 \description{
 Setup oauth authentication for your gmail
