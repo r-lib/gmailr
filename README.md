@@ -1,7 +1,7 @@
 # gmailr #
 
-[![Build Status](https://travis-ci.org/jimhester/gmailr.svg?branch=master)](https://travis-ci.org/jimhester/gmailr)
-[![Coverage Status](https://coveralls.io/repos/jimhester/gmailr/badge.svg)](https://coveralls.io/r/jimhester/gmailr)
+[![Build Status](https://travis-ci.org/r-lib/gmailr.svg?branch=master)](https://travis-ci.org/r-lib/gmailr)
+[![Coverage Status](https://coveralls.io/repos/r-lib/gmailr/badge.svg)](https://coveralls.io/r/r-lib/gmailr)
 
 Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
 
@@ -17,7 +17,7 @@ Or the development version from github with:
 
 ```R
 # install.packages("devtools")
-devtools::install_github("jimhester/gmailr")
+devtools::install_github("r-lib/gmailr")
 ```
 
 ## Features ##
@@ -27,7 +27,7 @@ devtools::install_github("jimhester/gmailr")
   - labels: `my_labels = labels()`
   - messages: `my_messages = messages("search query")`
   - threads: `my_threads = threads("search query")`
-- Create and send emails and drafts: see [sending_messages vignette](https://github.com/jimhester/gmailr/blob/master/vignettes/sending_messages.Rmd)
+- Create and send emails and drafts: see [sending_messages vignette](https://github.com/r-lib/gmailr/blob/master/vignettes/sending_messages.Rmd)
 - manage email labels programmatically: `modify_thread(thread_id, add_labels=c("label_1"), remove_labels=c("label_2"))`
 - put things in the gmail trash
   - messages: `trash_message(message_id)`
