@@ -4,8 +4,8 @@
 \alias{modify_thread}
 \title{Modify the labels on a thread}
 \usage{
-modify_thread(id, add_labels = character(0), remove_labels = character(0),
-  user_id = "me")
+modify_thread(id, add_labels = character(0),
+  remove_labels = character(0), user_id = "me")
 }
 \arguments{
 \item{id}{thread id to access}
@@ -35,4 +35,4 @@ Other thread: \code{\link{delete_thread}},
   \code{\link{threads}}, \code{\link{thread}},
   \code{\link{trash_thread}}, \code{\link{untrash_thread}}
 }
-
+\concept{thread}

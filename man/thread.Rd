@@ -27,4 +27,4 @@ Other thread: \code{\link{delete_thread}},
   \code{\link{modify_thread}}, \code{\link{threads}},
   \code{\link{trash_thread}}, \code{\link{untrash_thread}}
 }
-
+\concept{thread}

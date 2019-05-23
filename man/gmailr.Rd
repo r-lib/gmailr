@@ -8,4 +8,3 @@
 \description{
 \code{gmailr} provides an interface to the gmail api \url{https://developers.google.com/gmail/api/}
 }
-

@@ -4,8 +4,9 @@
 \alias{import_message}
 \title{Import a message into the gmail mailbox from a mime message}
 \usage{
-import_message(mail, label_ids, type = c("multipart", "media", "resumable"),
-  internal_date_source = c("dateHeader", "recievedTime"), user_id = "me")
+import_message(mail, label_ids, type = c("multipart", "media",
+  "resumable"), internal_date_source = c("dateHeader", "recievedTime"),
+  user_id = "me")
 }
 \arguments{
 \item{mail}{mime mail message created by mime}
@@ -41,4 +42,4 @@ Other message: \code{\link{attachment}},
   \code{\link{send_message}}, \code{\link{trash_message}},
   \code{\link{untrash_message}}
 }
-
+\concept{message}
