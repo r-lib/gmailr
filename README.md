@@ -69,6 +69,10 @@ By default gmailr will use a global project.  However if you are going to be a h
 - Returning data frames in addition to native Gmail API objects which are usually a nested list.
 - Support all the formats of [users.messages:get](https://developers.google.com/gmail/api/v1/reference/users/messages/get)
 
+## Policies ##
+
+[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+
 # Examples #
 - [Send Email with R](https://github.com/jennybc/send-email-with-r) - Jenny Bryan (@jennybc)
 - [Gmail Stats](https://github.com/alkashef/gmailstats) - Ahmad Al-Kashef (@alkashef)
