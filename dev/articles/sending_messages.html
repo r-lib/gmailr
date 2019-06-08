@@ -104,14 +104,14 @@
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/mime.html">text_body</a></span>(<span class="st">"Gmailr is a very handy package!"</span>) -&gt;<span class="st"> </span>text_msg</a></code></pre></div>
 <p>You can convert the message to a properly formatted MIME message using <code><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/strwrap">strwrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(text_msg))</a></code></pre></div>
-<pre><code>## [1] "MIME-Version: 1.0\r Date: Thu, 30 May 2019 18:40:05 GMT\r To:"     
+<pre><code>## [1] "MIME-Version: 1.0\r Date: Sat, 08 Jun 2019 17:27:27 GMT\r To:"     
 ## [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:" 
-## [3] "multipart/mixed; boundary=d692956cbdf544df05d2a8ca051491d5\r"      
-## [4] "Content-Disposition: inline\r \r MIME-Version: 1.0\r Date: Thu, 30"
-## [5] "May 2019 18:40:05 GMT\r Content-Type: text/plain; charset=utf-8;"  
+## [3] "multipart/mixed; boundary=fd9def75e674997628b6e20c0f4fa6f9\r"      
+## [4] "Content-Disposition: inline\r \r MIME-Version: 1.0\r Date: Sat, 08"
+## [5] "Jun 2019 17:27:27 GMT\r Content-Type: text/plain; charset=utf-8;"  
 ## [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r"     
 ## [7] "Content-Disposition: inline\r \r Gmailr is a very handy package!\r"
-## [8] "--d692956cbdf544df05d2a8ca051491d5--\r"</code></pre>
+## [8] "--fd9def75e674997628b6e20c0f4fa6f9--\r"</code></pre>
 </div>
 <div id="html" class="section level3">
 <h3 class="hasAnchor">
