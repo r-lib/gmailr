@@ -10,9 +10,7 @@
 #' my_labels = labels()
 #' }
 labels <- function(user_id = "me"){
-  req <- GET(gmail_path(user_id, "labels"), gm_token())
-  stop_for_status(req)
-  content(req, "parsed")
+  gmailr_GET("labels", user_id)
 }
 
 
@@ -25,9 +23,7 @@ labels <- function(user_id = "me"){
 #' @family label
 #' @export
 label <- function(id, user_id = "me") {
-  req <- GET(gmail_path(user_id, "labels", id), gm_token())
-  stop_for_status(req)
-  content(req, "parsed")
+  gmailr_GET(c("labels", id), user_id)
 }
 
 #' Update a existing label.
@@ -41,20 +37,14 @@ label <- function(id, user_id = "me") {
 #' @family label
 #' @export
 update_label <- function(id, label, user_id = "me") {
-  req <- POST(gmail_path(user_id, "labels", id),
-              body=label, encode="json", gm_token())
-  stop_for_status(req)
-  invisible(content(req, "parsed"))
+  gmailr_POST(c("labels", id), user_id, body = label, encode = "json")
 }
 
 #' @rdname update_label
 #' @family label
 #' @export
 update_label_patch <- function(id, label, user_id = "me") {
-  req <- PATCH(gmail_path(user_id, "labels", id),
-               body=label, encode="json", gm_token())
-  stop_for_status(req)
-  invisible(content(req, "parsed"))
+  gmailr_PATCH(c("labels", id), user_id, body = label, encode = "json")
 }
 
 #' Permanently delete a label
@@ -65,9 +55,7 @@ update_label_patch <- function(id, label, user_id = "me") {
 #' @family label
 #' @export
 delete_label <- function(id, user_id = "me") {
-  req <- DELETE(gmail_path(user_id, "labels", id), gm_token())
-  stop_for_status(req)
-  invisible(content(req, "parsed"))
+  gmailr_DELETE(c("labels", id), user_id)
 }
 
 #' Create a new label
@@ -87,11 +75,9 @@ create_label <- function(name,
   label_list_visibility <- label_value_map[match.arg(label_list_visibility)]
   message_list_visibility <- match.arg(message_list_visibility)
 
-  req <- POST(gmail_path(user_id, "labels"),
-              body=c(rename(name, label_list_visibility, message_list_visibility)),
-              encode="json",
-              gm_token())
-
-  stop_for_status(req)
-  invisible(content(req, "parsed"))
+  gmailr_POST(c("labels", id), user_id,
+              body = c(rename(name,
+                              label_list_visibility,
+                              message_list_visibility)),
+              encode = "json")
 }
