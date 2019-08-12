@@ -83,12 +83,7 @@ gm_auth <- function(email = NULL,
 
 #' Clear current token
 #'
-#' Clears any currently stored token. The next time gmailr needs a token, the
-#' token acquisition process starts over, with a fresh call to [gm_auth()] and,
-#' therefore, internally, a call to [gargle::token_fetch()]. Unlike some other
-#' packages that use gargle, gmailr is not usable in a de-authorized state.
-#' Therefore, calling `gm_deauth()` only clears the token, i.e. it does NOT
-#' imply that subsequent requests are made with an API key in lieu of a token.
+#' @eval gargle:::PREFIX_deauth_description_no_api_key(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export
@@ -135,26 +130,12 @@ gm_has_token <- function() {
 
 #' Edit auth configuration
 #'
-#' @description
-#' These functions give the user more control over auth than what is possible
-#' with [gm_auth()]. `gm_auth_configure()` gives control of:
-#'   * The OAuth app, which is used when obtaining a user token.
-#'
-#' See the vignette [How to get your own API
-#' credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) for
-#' more.
-#'
-#' @param app OAuth app.
-#' @inheritParams gargle::oauth_app_from_json
-#'
-#' @return
-#'   * `gm_auth_configure()`: An object of R6 class [gargle::AuthState],
-#'     invisibly.
-#'   * `gm_oauth_app()`: the current user-configured [httr::oauth_app()].
+#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table, .has_api_key = FALSE)
+#' @eval gargle:::PREFIX_auth_configure_params(.has_api_key = FALSE)
+#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key = FALSE)
 #'
 #' @family auth functions
 #' @export
-#' @aliases gm_auth_config
 #' @examples
 #' # see the current user-configured OAuth app (probaby `NULL`)
 #' gm_oauth_app()

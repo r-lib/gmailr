@@ -2,7 +2,6 @@
 % Please edit documentation in R/gm-auth.R
 \name{gm_auth_configure}
 \alias{gm_auth_configure}
-\alias{gm_auth_config}
 \alias{gm_oauth_app}
 \title{Edit auth configuration}
 \usage{
@@ -11,25 +10,29 @@ gm_auth_configure(app, path)
 gm_oauth_app()
 }
 \arguments{
-\item{app}{OAuth app.}
+\item{app}{OAuth app, in the sense of [httr::oauth_app()].}
 
 \item{path}{JSON downloaded from Google Cloud Platform Console, containing a
 client id (aka key) and secret, in one of the forms supported for the \code{txt}
 argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
 }
 \value{
-* `gm_auth_configure()`: An object of R6 class [gargle::AuthState],
-    invisibly.
-  * `gm_oauth_app()`: the current user-configured [httr::oauth_app()].
+* `gm_auth_configure()`: An object of R6 class
+    [gargle::AuthState], invisibly.
+  * `gm_oauth_app()`: the current user-configured
+    [httr::oauth_app()].
 }
 \description{
-These functions give the user more control over auth than what is possible
-with [gm_auth()]. `gm_auth_configure()` gives control of:
-  * The OAuth app, which is used when obtaining a user token.
-
-See the vignette [How to get your own API
-credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) for
-more.
+These functions give more control over and visibility into the auth
+configuration than [gm_auth()] does. `gm_auth_configure()`
+lets the user specify their own:
+  * OAuth app, which is used when obtaining a user token.
+See the vignette
+[How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html)
+for more.
+If the user does not configure these settings, internal defaults
+are used.
+`gm_oauth_app()` retrieves the currently configured OAuth app.
 }
 \examples{
 # see the current user-configured OAuth app (probaby `NULL`)
