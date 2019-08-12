@@ -55,12 +55,12 @@ debug <- function(...){
 
 dots <- function (...) { eval(substitute(alist(...))) }
 
-page_and_trim <- function(type, user_id, num_results, ...){
+page_and_trim <- function(type, user_id, num_results, ..., token){
 
   num_results <- num_results %||% 100
   itr <- function(...){
     req <- GET(gmail_path(user_id, type),
-             query = not_null(rename(...)), config(token = get_token()))
+             query = not_null(rename(...)), config(token = token))
     stop_for_status(req)
     content(req, "parsed")
   }
