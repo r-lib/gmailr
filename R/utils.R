@@ -55,7 +55,7 @@ debug <- function(...){
 
 dots <- function (...) { eval(substitute(alist(...))) }
 
-page_and_trim <- function(type, user_id, num_results, ..., token){
+page_and_trim <- function(type, user_id, num_results, ...){
 
   num_results <- num_results %||% 100
   itr <- function(...){

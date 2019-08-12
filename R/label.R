@@ -10,8 +10,7 @@
 #' my_labels = labels()
 #' }
 labels <- function(user_id = "me"){
-  req <- GET(gmail_path(user_id, "labels"),
-            gm_token())
+  req <- GET(gmail_path(user_id, "labels"), gm_token())
   stop_for_status(req)
   content(req, "parsed")
 }
@@ -53,7 +52,7 @@ update_label <- function(id, label, user_id = "me") {
 #' @export
 update_label_patch <- function(id, label, user_id = "me") {
   req <- PATCH(gmail_path(user_id, "labels", id),
-              body=label, encode="json", gm_token())
+               body=label, encode="json", gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -89,9 +88,9 @@ create_label <- function(name,
   message_list_visibility <- match.arg(message_list_visibility)
 
   req <- POST(gmail_path(user_id, "labels"),
-               body=c(rename(name, label_list_visibility, message_list_visibility)),
-               encode="json",
-               gm_token())
+              body=c(rename(name, label_list_visibility, message_list_visibility)),
+              encode="json",
+              gm_token())
 
   stop_for_status(req)
   invisible(content(req, "parsed"))
