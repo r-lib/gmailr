@@ -29,7 +29,7 @@ threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_
 #' }
 thread <- function(id, user_id = "me") {
   req <- GET(gmail_path(user_id, "threads", id),
-            config(token = gm_token()))
+            gm_token())
   stop_for_status(req)
   parsed_req <- structure(content(req, "parsed"), class="gmail_thread")
 
@@ -50,8 +50,7 @@ thread <- function(id, user_id = "me") {
 #' trash_thread(12345)
 #' }
 trash_thread <- function(id, user_id = "me") {
-  req <- POST(gmail_path(rename(user_id), "threads", id, "trash"),
-            config(token = gm_token()))
+  req <- POST(gmail_path(rename(user_id), "threads", id, "trash"), gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -68,8 +67,7 @@ trash_thread <- function(id, user_id = "me") {
 #' untrash_thread(12345)
 #' }
 untrash_thread <- function(id, user_id = "me") {
-  req <- POST(gmail_path(rename(user_id), "threads", id, "untrash"),
-            config(token = gm_token()))
+  req <- POST(gmail_path(rename(user_id), "threads", id, "untrash"), gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -86,8 +84,7 @@ untrash_thread <- function(id, user_id = "me") {
 #' delete_thread(12345)
 #' }
 delete_thread <- function(id, user_id = "me") {
-  req <- DELETE(gmail_path(rename(user_id), "threads", id),
-            config(token = gm_token()))
+  req <- DELETE(gmail_path(rename(user_id), "threads", id), gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -110,8 +107,7 @@ delete_thread <- function(id, user_id = "me") {
 #' }
 modify_thread <- function(id, add_labels = character(0), remove_labels = character(0), user_id = "me") {
   body <- rename(list("add_labels" = add_labels, "remove_labels" = remove_labels))
-  req <- POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body, encode="json",
-            config(token = gm_token()))
+  req <- POST(gmail_path(rename(user_id), "threads", id, "modify"), body=body, encode="json", gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
