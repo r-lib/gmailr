@@ -2,7 +2,7 @@
 # auth functionality in gargle.
 .auth <- gargle::init_AuthState(
   package     = "gmailr",
-  auth_active = TRUE # TODO: what is this?
+  auth_active = TRUE
 )
 
 # The roxygen comments for these functions are mostly generated from data
@@ -12,8 +12,7 @@ gargle_lookup_table <- list(
   YOUR_STUFF  = "your Gmail projects",
   PRODUCT     = "Google Gmail",
   API         = "Gmail API",
-  PREFIX      = "gm",
-  AUTH_CONFIG_SOURCE = "gmailr" #TODO: what is this?
+  PREFIX      = "gm"
 )
 
 #' Authorize bigrquery
