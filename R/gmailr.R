@@ -278,14 +278,18 @@ last_response <- function() {
   the$last_response
 }
 
-gmailr_POST <- function(location, user_id, class = NULL, ...) {
-  gmailr_query(POST, location, user_id, class, ...)
-}
-
 gmailr_GET <- function(location, user_id, class = NULL, ...) {
   gmailr_query(GET, location, user_id, class, ...)
 }
 
 gmailr_DELETE <- function(location, user_id, class = NULL, ...) {
   gmailr_query(DELETE, location, user_id, class, ...)
+}
+
+gmailr_PATCH <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(PATCH, location, user_id, class, ...)
+}
+
+gmailr_POST <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(POST, location, user_id, class, ...)
 }
