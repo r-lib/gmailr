@@ -62,11 +62,12 @@ gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
 #' @param filename the filename of the file
 #' @export
 use_secret_file <- function(filename) {
-  .Deprecated(msg = glue("
-      Use `gm_auth_configure()` to configure your own OAuth app. That will
-      dictate the app used when `gm_auth()` is called implicitly or explicitly to
-      obtain an OAuth2 token.
-      "))
+  .Deprecated(msg = paste0(
+      "Use `gm_auth_configure()` to configure your own OAuth app. That will\n",
+      "dictate the app used when `gm_auth()` is called implicitly or explicitly to\n",
+      "obtain an OAuth2 token."
+      )
+  )
   info <- jsonlite::fromJSON(readChar(filename, nchars=1e5))
   the$secret <- info$installed$client_secret
   the$id <- info$installed$client_id
