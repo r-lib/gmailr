@@ -249,10 +249,10 @@ print.gmail_drafts <- function(x, ...){
 
 the$last_response <- list()
 
-gmailr_query <- function(fun, location, user_id, class = NULL, ..., upload = FALSE, token = gm_token()) {
+gmailr_query <- function(fun, location, user_id, class = NULL, ..., upload = FALSE) {
   path_fun <- if (upload) gmail_upload_path else gmail_path
   response <- fun(path_fun(user_id, location),
-             config(token = token), ...)
+             config(token = gm_token()), ...)
   result <- content(response, "parsed")
 
   the$last_response <- response
@@ -279,14 +279,14 @@ last_response <- function() {
   the$last_response
 }
 
-gmailr_POST <- function(location, user_id, class = NULL, ..., token) {
-  gmailr_query(POST, location, user_id, class, ..., token = token)
+gmailr_POST <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(POST, location, user_id, class, ...)
 }
 
-gmailr_GET <- function(location, user_id, class = NULL, ..., token) {
-  gmailr_query(GET, location, user_id, class, ..., token = token)
+gmailr_GET <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(GET, location, user_id, class, ...)
 }
 
-gmailr_DELETE <- function(location, user_id, class = NULL, ..., token) {
-  gmailr_query(DELETE, location, user_id, class, ..., token = token)
+gmailr_DELETE <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(DELETE, location, user_id, class, ...)
 }
