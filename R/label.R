@@ -11,7 +11,7 @@
 #' }
 labels <- function(user_id = "me"){
   req <- GET(gmail_path(user_id, "labels"),
-            config(token = gm_token()))
+            gm_token())
   stop_for_status(req)
   content(req, "parsed")
 }
@@ -26,8 +26,7 @@ labels <- function(user_id = "me"){
 #' @family label
 #' @export
 label <- function(id, user_id = "me") {
-  req <- GET(gmail_path(user_id, "labels", id),
-            config(token = gm_token()))
+  req <- GET(gmail_path(user_id, "labels", id), gm_token())
   stop_for_status(req)
   content(req, "parsed")
 }
@@ -44,8 +43,7 @@ label <- function(id, user_id = "me") {
 #' @export
 update_label <- function(id, label, user_id = "me") {
   req <- POST(gmail_path(user_id, "labels", id),
-              body=label, encode="json",
-              config(token = gm_token()))
+              body=label, encode="json", gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -55,8 +53,7 @@ update_label <- function(id, label, user_id = "me") {
 #' @export
 update_label_patch <- function(id, label, user_id = "me") {
   req <- PATCH(gmail_path(user_id, "labels", id),
-              body=label, encode="json",
-              config(token = gm_token()))
+              body=label, encode="json", gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -69,8 +66,7 @@ update_label_patch <- function(id, label, user_id = "me") {
 #' @family label
 #' @export
 delete_label <- function(id, user_id = "me") {
-  req <- DELETE(gmail_path(user_id, "labels", id),
-            config(token = gm_token()))
+  req <- DELETE(gmail_path(user_id, "labels", id), gm_token())
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }
@@ -95,7 +91,7 @@ create_label <- function(name,
   req <- POST(gmail_path(user_id, "labels"),
                body=c(rename(name, label_list_visibility, message_list_visibility)),
                encode="json",
-            config(token = gm_token()))
+               gm_token())
 
   stop_for_status(req)
   invisible(content(req, "parsed"))

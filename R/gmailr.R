@@ -251,8 +251,7 @@ the$last_response <- list()
 
 gmailr_query <- function(fun, location, user_id, class = NULL, ..., upload = FALSE) {
   path_fun <- if (upload) gmail_upload_path else gmail_path
-  response <- fun(path_fun(user_id, location),
-             config(token = gm_token()), ...)
+  response <- fun(path_fun(user_id, location), gm_token(), ...)
   result <- content(response, "parsed")
 
   the$last_response <- response
