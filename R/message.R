@@ -14,14 +14,15 @@
 #' }
 message <- function(id,
                     user_id = "me",
-                    format = c("full", "metadata", "minimal", "raw")) {
+                    format = c("full", "metadata", "minimal", "raw"),
+                    token = gm_token()) {
   stopifnot(
     is_string(id),
     is_string(user_id))
 
   format <- match.arg(format)
   gmailr_GET(c("messages", id), user_id, class = "gmail_message",
-            query = list(format=format))
+            query = list(format=format), token = token)
 }
 
 #' Get a list of messages
@@ -46,7 +47,8 @@ messages <- function(search = NULL,
   label_ids = NULL,
   include_spam_trash = NULL,
   page_token = NULL,
-  user_id = "me") {
+  user_id = "me",
+  token = gm_token()) {
   stopifnot(
     nullable(is_string)(search),
     nullable(is_number)(num_results),
@@ -55,7 +57,7 @@ messages <- function(search = NULL,
     nullable(is_string)(page_token),
     is_string(user_id))
 
-  page_and_trim("messages", user_id, num_results, search, page_token, label_ids, include_spam_trash)
+  page_and_trim("messages", user_id, num_results, search, page_token, label_ids, include_spam_trash, token = token)
 }
 
 #' Send a single message to the trash
@@ -69,12 +71,12 @@ messages <- function(search = NULL,
 #' \dontrun{
 #' trash_message('12345')
 #' }
-trash_message <- function(id, user_id = "me") {
+trash_message <- function(id, user_id = "me", token = gm_token()) {
   stopifnot(
     is_string(id),
     is_string(user_id))
 
-  gmailr_POST(c("messages", id, "trash"), user_id, class = "gmail_message")
+  gmailr_POST(c("messages", id, "trash"), user_id, class = "gmail_message", token = token)
 }
 
 #' Remove a single message from the trash
@@ -88,12 +90,12 @@ trash_message <- function(id, user_id = "me") {
 #' \dontrun{
 #' untrash_message('12345')
 #' }
-untrash_message <- function(id, user_id = "me") {
+untrash_message <- function(id, user_id = "me", token = gm_token()) {
   stopifnot(
     is_string(id),
     is_string(user_id))
 
-  gmailr_POST(c("messages", id, "untrash"), user_id, class = "gmail_message")
+  gmailr_POST(c("messages", id, "untrash"), user_id, class = "gmail_message", token = token)
 }
 
 #' Permanently delete a single message
@@ -107,12 +109,12 @@ untrash_message <- function(id, user_id = "me") {
 #' \dontrun{
 #' delete_message('12345')
 #' }
-delete_message <- function(id, user_id = "me") {
+delete_message <- function(id, user_id = "me", token = gm_token()) {
   stopifnot(
     is_string(id),
     is_string(user_id))
 
-  gmailr_DELETE(c("messages", id), user_id, class = "gmail_message")
+  gmailr_DELETE(c("messages", id), user_id, class = "gmail_message", token = token)
 }
 
 #' Modify the labels on a message
@@ -135,7 +137,8 @@ delete_message <- function(id, user_id = "me") {
 modify_message <- function(id,
                            add_labels = NULL,
                            remove_labels = NULL,
-                           user_id = "me") {
+                           user_id = "me",
+                           token = gm_token()) {
   stopifnot(
     is_string(id),
     nullable(is_strings)(add_labels),
@@ -144,7 +147,7 @@ modify_message <- function(id,
 
   gmailr_POST(c("messages", id, "modify"), user_id, class = "gmail_message",
     body = rename("add_labels" = I(add_labels), "remove_labels" = I(remove_labels)),
-    encode = "json")
+    encode = "json", token = token)
 }
 
 #' Retrieve an attachment to a message
@@ -165,7 +168,8 @@ modify_message <- function(id,
 #' }
 attachment <- function(id,
                        message_id,
-                       user_id = "me") {
+                       user_id = "me",
+                       token = gm_token()) {
 
   stopifnot(
     is_string(id),
@@ -173,7 +177,7 @@ attachment <- function(id,
     is_string(user_id))
 
   gmailr_GET(c("messages", message_id, "attachments", id),
-             user_id,
+             user_id, token = token,
              class = "gmail_attachment")
 }
 
@@ -264,7 +268,8 @@ insert_message <- function(
   label_ids,
   type = c("multipart", "media", "resumable"),
   internal_date_source = c("dateHeader", "recievedTime"),
-  user_id = "me") {
+  user_id = "me",
+  token = gm_token()) {
 
   mail <- as.character(mail)
   stopifnot(
@@ -279,7 +284,9 @@ insert_message <- function(
             body = jsonlite::toJSON(auto_unbox=TRUE,
                           c(not_null(rename(label_ids)),
                             raw=base64url_encode(mail))),
-             add_headers("Content-Type" = "application/json"))
+             add_headers("Content-Type" = "application/json"),
+             token = token
+  )
 }
 
 #' Import a message into the gmail mailbox from a mime message
@@ -297,7 +304,8 @@ import_message <- function(mail,
   label_ids,
   type = c("multipart", "media", "resumable"),
   internal_date_source = c("dateHeader", "recievedTime"),
-  user_id = "me") {
+  user_id = "me",
+  token = gm_token() ) {
 
   mail <- as.character(mail)
   stopifnot(
@@ -312,7 +320,9 @@ import_message <- function(mail,
     body = jsonlite::toJSON(auto_unbox=TRUE,
       c(not_null(rename(label_ids)),
         raw=base64url_encode(mail))),
-    add_headers("Content-Type" = "application/json"))
+    add_headers("Content-Type" = "application/json"),
+    token = token
+  )
 }
 
 #' Send a message from a mime message
@@ -331,7 +341,8 @@ send_message <- function(
   mail,
   type = c("multipart", "media", "resumable"),
   thread_id = NULL,
-  user_id = "me") {
+  user_id = "me",
+  token = gm_token() ) {
 
   mail <- as.character(mail)
   stopifnot(
@@ -345,5 +356,7 @@ send_message <- function(
     body = jsonlite::toJSON(auto_unbox=TRUE, null = "null",
                             c(threadId = thread_id,
                               list(raw = base64url_encode(mail)))),
-    add_headers("Content-Type" = "application/json"))
+    add_headers("Content-Type" = "application/json"),
+    token = token
+  )
 }
