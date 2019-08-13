@@ -4,7 +4,7 @@
 \alias{gm_auth}
 \title{Authorize bigrquery}
 \usage{
-gm_auth(email = NULL, path = NULL,
+gm_auth(email = gm_default_email(), path = NULL,
   scopes = c("https://www.googleapis.com/auth/gmail.readonly",
   "https://www.googleapis.com/auth/gmail.modify",
   "https://www.googleapis.com/auth/gmail.compose",

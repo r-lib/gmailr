@@ -45,7 +45,7 @@ gargle_lookup_table <- list(
 #' ## use a service account token
 #' gm_auth(path = "foofy-83ee9e7c9c48.json")
 #' }
-gm_auth <- function(email = NULL,
+gm_auth <- function(email = gm_default_email(),
                     path = NULL,
                     scopes = c(
                       "https://www.googleapis.com/auth/gmail.readonly",
@@ -78,6 +78,14 @@ gm_auth <- function(email = NULL,
   .auth$set_auth_active(TRUE)
 
   invisible()
+}
+
+gm_default_email <- function() {
+  user <- Sys.getenv("GMAILR_EMAIL")
+  if (nzchar(user)) {
+    return(user)
+  }
+  NULL
 }
 
 #' Clear current token
@@ -133,9 +141,12 @@ gm_has_token <- function() {
 #' @eval gargle:::PREFIX_auth_configure_params(.has_api_key = FALSE)
 #' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key = FALSE)
 #'
+#' @inheritParams httr::oauth_app
+#' @param ... Additional arguments passed to [httr::oauth_app()]
 #' @family auth functions
 #' @export
 #' @examples
+#' \dontrun{
 #' # see the current user-configured OAuth app (probaby `NULL`)
 #' gm_oauth_app()
 #'
@@ -160,20 +171,21 @@ gm_has_token <- function() {
 #'   gm_oauth_app()
 #' }
 #'
-#' \dontrun{
 #' # bring your own app via JSON downloaded from Google Developers Console
 #' gm_auth_configure(
 #'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 #' )
 #' }
 #'
-gm_auth_configure <- function(app, path) {
-  if (!xor(missing(app), missing(path))) {
-    stop("Must supply exactly one of `app` and `path`", call. = FALSE)
+gm_auth_configure <- function(key = Sys.getenv("GMAILR_APP_KEY"), secret = Sys.getenv("GMAILR_APP_SECRET"), path = "", appname = "gmailr", ...) {
+  if (!((nzchar(key) && nzchar(secret)) || nzchar(path))) {
+    stop("Must supply either `key` and `secret` or `path`", call. = FALSE)
   }
-  if (!missing(path)) {
+  if (!nzchar(path)) {
     stopifnot(is_string(path))
     app <- gargle::oauth_app_from_json(path)
+  } else {
+    app <- httr::oauth_app(appname, key, secret, ...)
   }
   stopifnot(is.null(app) || inherits(app, "oauth_app"))
 
@@ -184,4 +196,9 @@ gm_auth_configure <- function(app, path) {
 
 #' @export
 #' @rdname gm_auth_configure
-gm_oauth_app <- function() .auth$app
+gm_oauth_app <- function() {
+  if (!is.null(.auth$app)) {
+    return(.auth$app)
+  }
+  stop("Must create an app and register it with `gm_auth_configure()`", call. = FALSE)
+}
