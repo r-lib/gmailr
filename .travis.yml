@@ -1,12 +1,5 @@
 language: r
-sudo: false
 cache: packages
-
-github_packages:
-  - jimhester/covr
-
-after_success:
-  - Rscript -e 'library(covr);coveralls()'
 
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
