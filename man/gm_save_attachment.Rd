@@ -12,8 +12,8 @@ gm_save_attachment(x, filename)
 \item{filename}{location to save to}
 }
 \description{
-this only works on attachments retrieved with \code{\link[=attachment]{attachment()}}.
-To save an attachment directly from a message see \code{\link[=save_attachments]{save_attachments()}}
+this only works on attachments retrieved with \code{\link[=gm_attachment]{gm_attachment()}}.
+To save an attachment directly from a message see \code{\link[=gm_save_attachments]{gm_save_attachments()}}
 }
 \examples{
 \dontrun{

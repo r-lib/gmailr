@@ -84,7 +84,7 @@ gm_create_draft <- function(mail,
 #'                       Subject="hello", "how are you doing?"))
 #' send_draft(draft)
 #' }
-send_draft <- function(draft,
+gm_send_draft <- function(draft,
                        user_id = "me") {
   stopifnot(has_class(draft, "gmail_draft"), is_string(user_id))
   gmailr_POST(c("drafts", "send"), user_id, class = "gmail_draft",

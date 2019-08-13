@@ -106,7 +106,7 @@ HTML_PART <- 2L
 #' @param type mime type of the attached file
 #' @rdname gm_mime
 #' @export
-attach_part <- function(mime, part, ...){
+gm_attach_part <- function(mime, part, ...){
   if(missing(part)){ return(mime$parts[[3L:length(mime$parts)]]) }
   part_num <- if(length(mime$parts) < 3L) 3L else length(mime$parts) + 1L
   mime$parts[[part_num]] <- mime(attr = c(encoding = "base64", list(...)),
@@ -116,7 +116,7 @@ attach_part <- function(mime, part, ...){
 
 #' @rdname gm_mime
 #' @export
-attach_file <- function(mime, filename, type = NULL, ...){
+gm_attach_file <- function(mime, filename, type = NULL, ...){
   if(missing(filename)){ return(mime$parts[[3L:length(mime$parts)]]) }
 
   if (is.null(type)) {

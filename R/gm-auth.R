@@ -15,7 +15,7 @@ gargle_lookup_table <- list(
   PREFIX      = "gm"
 )
 
-#' @rdname rdname gm_auth
+#' @rdname gm_auth
 #' @export
 gm_scopes <- function() {
   c(labels = "https://www.googleapis.com/auth/gmail.labels",
@@ -38,8 +38,8 @@ gm_scopes <- function() {
 #' @eval gargle:::PREFIX_auth_params()
 #'
 #' @family auth functions
-#' @param A gmail API scope to use, one of 'labels', 'send', 'readonly',
-#'   'compose', 'insert', 'modify', 'metadata', 'settings_basic',
+#' @param scopes One or more gmail API scope to use, one of 'labels', 'send',
+#'   'readonly', 'compose', 'insert', 'modify', 'metadata', 'settings_basic',
 #'   'settings_sharing' or 'full' (default: 'full'). See
 #'   <https://developers.google.com/gmail/api/auth/scopes> for details on the
 #'   permissions for each scope. and `gm_scopes()` to return a vector of the

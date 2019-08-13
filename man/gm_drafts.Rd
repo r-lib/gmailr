@@ -28,6 +28,6 @@ first_10_drafts = drafts(10)
 }
 \seealso{
 Other draft: \code{\link{gm_draft}},
-  \code{\link{send_draft}}
+  \code{\link{gm_send_draft}}
 }
 \concept{draft}

@@ -60,7 +60,7 @@ gm_messages <- function(search = NULL,
 
 #' Send a single message to the trash
 #'
-#' Function to trash a given message by id.  This can be undone by [untrash_message()].
+#' Function to trash a given message by id.  This can be undone by [gm_untrash_message()].
 #' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/trash>
 #' @export
@@ -79,7 +79,7 @@ gm_trash_message <- function(id, user_id = "me") {
 
 #' Remove a single message from the trash
 #'
-#' Function to trash a given message by id.  This can be undone by [untrash_message()].
+#' Function to trash a given message by id.  This can be undone by [gm_untrash_message()].
 #' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/trash>
 #' @family message
@@ -150,7 +150,7 @@ gm_modify_message <- function(id,
 #' Retrieve an attachment to a message
 #'
 #' Function to retrieve an attachment to a message by id of the attachment
-#' and message.  To save the attachment use [save_attachment()].
+#' and message.  To save the attachment use [gm_save_attachment()].
 #' @param id id of the attachment
 #' @param message_id id of the parent message
 #' @inheritParams gm_message
@@ -179,8 +179,8 @@ gm_attachment <- function(id,
 
 #' save the attachment to a file
 #'
-#' this only works on attachments retrieved with [attachment()].
-#' To save an attachment directly from a message see [save_attachments()]
+#' this only works on attachments retrieved with [gm_attachment()].
+#' To save an attachment directly from a message see [gm_save_attachments()]
 #' @param x attachment to save
 #' @param filename location to save to
 #' @family message

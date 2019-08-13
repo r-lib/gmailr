@@ -15,7 +15,7 @@ gm_attachment(id, message_id, user_id = "me")
 }
 \description{
 Function to retrieve an attachment to a message by id of the attachment
-and message.  To save the attachment use \code{\link[=save_attachment]{save_attachment()}}.
+and message.  To save the attachment use \code{\link[=gm_save_attachment]{gm_save_attachment()}}.
 }
 \examples{
 \dontrun{

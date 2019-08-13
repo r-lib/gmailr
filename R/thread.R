@@ -39,7 +39,7 @@ gm_thread <- function(id, user_id = "me") {
 
 #' Send a single thread to the trash
 #'
-#' Function to trash a given thread by id.  This can be undone by [untrash_thread()].
+#' Function to trash a given thread by id.  This can be undone by [gm_untrash_thread()].
 #' @inheritParams gm_thread
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/threads/trash>
 #' @family thread

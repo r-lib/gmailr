@@ -9,8 +9,8 @@
 \alias{gm_subject.mime}
 \alias{gm_text_body}
 \alias{gm_html_body}
-\alias{attach_part}
-\alias{attach_file}
+\alias{gm_attach_part}
+\alias{gm_attach_file}
 \title{Create a mime formatted message object}
 \usage{
 gm_mime(..., attr = NULL, body = NULL, parts = list())
@@ -29,9 +29,9 @@ gm_text_body(mime, body, ...)
 
 gm_html_body(mime, body, ...)
 
-attach_part(mime, part, ...)
+gm_attach_part(mime, part, ...)
 
-attach_file(mime, filename, type = NULL, ...)
+gm_attach_file(mime, filename, type = NULL, ...)
 }
 \arguments{
 \item{...}{additional parameters to put in the attr field}

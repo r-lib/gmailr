@@ -22,6 +22,6 @@ gm_deauth()
 }
 \seealso{
 Other auth functions: \code{\link{gm_auth_configure}},
-  \code{\link{gm_auth}}
+  \code{\link{gm_scopes}}
 }
 \concept{auth functions}

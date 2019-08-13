@@ -26,6 +26,6 @@ my_draft = draft('12345')
 }
 \seealso{
 Other draft: \code{\link{gm_drafts}},
-  \code{\link{send_draft}}
+  \code{\link{gm_send_draft}}
 }
 \concept{draft}
