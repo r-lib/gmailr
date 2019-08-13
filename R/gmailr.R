@@ -203,13 +203,16 @@ print.gmail_message <- function(x, ...){
   date <- date(x)
   subject <- subject(x)
   id <- id(x)
+  body <- body(x, collapse = TRUE)
   cat(p(
+    c(
     crayon::bold("Id: "), id, "\n",
-    crayon::bold("To: "), to, "\n",
-    crayon::bold("From: "), from, "\n",
-    crayon::bold("Date: "), date, "\n",
-    crayon::bold("Subject: "), subject, "\n",
-      body(x, collapse = TRUE)), "\n")
+      if (!is.null(to)) { c(crayon::bold("To: "), to, "\n") },
+    if (!is.null(from)) c(crayon::bold("From: "), from, "\n"),
+    if (!is.null(date)) c(crayon::bold("Date: "), date, "\n"),
+    if (!is.null(subject)) c(crayon::bold("Subject: "), subject, "\n"),
+    if (!is.null(body)) c(body)
+  )))
 }
 
 #' @export
