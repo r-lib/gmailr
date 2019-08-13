@@ -132,7 +132,7 @@
       <tr>
         
         <td>
-          <p><code><a href="accessors.html">to()</a></code> <code><a href="accessors.html">from()</a></code> <code><a href="accessors.html">cc()</a></code> <code><a href="accessors.html">bcc()</a></code> <code><a href="accessors.html">date()</a></code> <code><a href="accessors.html">subject()</a></code> </p>
+          <p><code><a href="accessors.html">gm_to()</a></code> <code><a href="accessors.html">gm_from()</a></code> <code><a href="accessors.html">gm_cc()</a></code> <code><a href="accessors.html">gm_bcc()</a></code> <code><a href="accessors.html">gm_date()</a></code> <code><a href="accessors.html">gm_subject()</a></code> </p>
         </td>
         <td><p>Methods to get values from message or drafts</p></td>
       </tr><tr>
@@ -144,67 +144,19 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="attachment.html">attachment()</a></code> </p>
-        </td>
-        <td><p>Retrieve an attachment to a message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="body.html">body()</a></code> </p>
-        </td>
-        <td><p>Get the body text of a message or draft</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="clear_token.html">clear_token()</a></code> </p>
         </td>
         <td><p>Clear the current oauth token</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="create_draft.html">create_draft()</a></code> </p>
+          <p><code><a href="gm_attachment.html">gm_attachment()</a></code> </p>
         </td>
-        <td><p>Create a draft from a mime message</p></td>
+        <td><p>Retrieve an attachment to a message</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="create_label.html">create_label()</a></code> </p>
-        </td>
-        <td><p>Create a new label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delete_label.html">delete_label()</a></code> </p>
-        </td>
-        <td><p>Permanently delete a label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delete_message.html">delete_message()</a></code> </p>
-        </td>
-        <td><p>Permanently delete a single message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="delete_thread.html">delete_thread()</a></code> </p>
-        </td>
-        <td><p>Permanently delete a single thread.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="draft.html">draft()</a></code> </p>
-        </td>
-        <td><p>Get a single draft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="drafts.html">drafts()</a></code> </p>
-        </td>
-        <td><p>Get a list of drafts</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_auth.html">gm_auth()</a></code> </p>
+          <p><code><a href="gm_auth.html">gm_scopes()</a></code> <code><a href="gm_auth.html">gm_auth()</a></code> </p>
         </td>
         <td><p>Authorize bigrquery</p></td>
       </tr><tr>
@@ -216,9 +168,57 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="gm_body.html">gm_body()</a></code> </p>
+        </td>
+        <td><p>Get the body text of a message or draft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_create_draft.html">gm_create_draft()</a></code> </p>
+        </td>
+        <td><p>Create a draft from a mime message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_create_label.html">gm_create_label()</a></code> </p>
+        </td>
+        <td><p>Create a new label</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="gm_deauth.html">gm_deauth()</a></code> </p>
         </td>
         <td><p>Clear current token</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_delete_label.html">gm_delete_label()</a></code> </p>
+        </td>
+        <td><p>Permanently delete a label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_delete_message.html">gm_delete_message()</a></code> </p>
+        </td>
+        <td><p>Permanently delete a single message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_delete_thread.html">gm_delete_thread()</a></code> </p>
+        </td>
+        <td><p>Permanently delete a single thread.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_draft.html">gm_draft()</a></code> </p>
+        </td>
+        <td><p>Get a single draft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_drafts.html">gm_drafts()</a></code> </p>
+        </td>
+        <td><p>Get a list of drafts</p></td>
       </tr><tr>
         
         <td>
@@ -228,9 +228,147 @@
       </tr><tr>
         
         <td>
+          <p><code><a href="gm_history.html">gm_history()</a></code> </p>
+        </td>
+        <td><p>Retrieve change history for the inbox</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_id.html">gm_id()</a></code> </p>
+        </td>
+        <td><p>Get the id of a gmailr object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_import_message.html">gm_import_message()</a></code> </p>
+        </td>
+        <td><p>Import a message into the gmail mailbox from a mime message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_insert_message.html">gm_insert_message()</a></code> </p>
+        </td>
+        <td><p>Insert a message into the gmail mailbox from a mime message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_label.html">gm_label()</a></code> </p>
+        </td>
+        <td><p>Get a specific label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_labels.html">gm_labels()</a></code> </p>
+        </td>
+        <td><p>Get a list of all labels</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_last_response.html">gm_last_response()</a></code> </p>
+        </td>
+        <td><p>Response from the last query</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_message.html">gm_message()</a></code> </p>
+        </td>
+        <td><p>Get a single message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_messages.html">gm_messages()</a></code> </p>
+        </td>
+        <td><p>Get a list of messages</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_mime.html">gm_mime()</a></code> <code><a href="gm_mime.html">gm_to(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_from(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_cc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_bcc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_subject(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_text_body()</a></code> <code><a href="gm_mime.html">gm_html_body()</a></code> <code><a href="gm_mime.html">gm_attach_part()</a></code> <code><a href="gm_mime.html">gm_attach_file()</a></code> </p>
+        </td>
+        <td><p>Create a mime formatted message object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_modify_message.html">gm_modify_message()</a></code> </p>
+        </td>
+        <td><p>Modify the labels on a message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_modify_thread.html">gm_modify_thread()</a></code> </p>
+        </td>
+        <td><p>Modify the labels on a thread</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_save_attachment.html">gm_save_attachment()</a></code> </p>
+        </td>
+        <td><p>save the attachment to a file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_save_attachments.html">gm_save_attachments()</a></code> </p>
+        </td>
+        <td><p>Save attachments to a message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_send_draft.html">gm_send_draft()</a></code> </p>
+        </td>
+        <td><p>Send a draft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_send_message.html">gm_send_message()</a></code> </p>
+        </td>
+        <td><p>Send a message from a mime message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_thread.html">gm_thread()</a></code> </p>
+        </td>
+        <td><p>Get a single thread</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_threads.html">gm_threads()</a></code> </p>
+        </td>
+        <td><p>Get a list of threads</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="gm_token.html">gm_token()</a></code> </p>
         </td>
         <td><p>Produce configured token</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_trash_message.html">gm_trash_message()</a></code> </p>
+        </td>
+        <td><p>Send a single message to the trash</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_trash_thread.html">gm_trash_thread()</a></code> </p>
+        </td>
+        <td><p>Send a single thread to the trash</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_untrash_message.html">gm_untrash_message()</a></code> </p>
+        </td>
+        <td><p>Remove a single message from the trash</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_untrash_thread.html">gm_untrash_thread()</a></code> </p>
+        </td>
+        <td><p>Remove a single thread from the trash.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_update_label.html">gm_update_label()</a></code> <code><a href="gm_update_label.html">gm_update_label_patch()</a></code> </p>
+        </td>
+        <td><p>Update a existing label.</p></td>
       </tr><tr>
         
         <td>
@@ -246,147 +384,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="history.html">history()</a></code> </p>
-        </td>
-        <td><p>Retrieve change history for the inbox</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="id.html">id()</a></code> </p>
-        </td>
-        <td><p>Get the id of a gmailr object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="import_message.html">import_message()</a></code> </p>
-        </td>
-        <td><p>Import a message into the gmail mailbox from a mime message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="insert_message.html">insert_message()</a></code> </p>
-        </td>
-        <td><p>Insert a message into the gmail mailbox from a mime message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="label.html">label()</a></code> </p>
-        </td>
-        <td><p>Get a specific label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="labels.html">labels()</a></code> </p>
-        </td>
-        <td><p>Get a list of all labels</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="last_response.html">last_response()</a></code> </p>
-        </td>
-        <td><p>Response from the last query</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="message.html">message()</a></code> </p>
-        </td>
-        <td><p>Get a single message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="messages.html">messages()</a></code> </p>
-        </td>
-        <td><p>Get a list of messages</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="mime.html">mime()</a></code> <code><a href="mime.html">to(<i>&lt;mime&gt;</i>)</a></code> <code><a href="mime.html">from(<i>&lt;mime&gt;</i>)</a></code> <code><a href="mime.html">cc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="mime.html">bcc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="mime.html">subject(<i>&lt;mime&gt;</i>)</a></code> <code><a href="mime.html">text_body()</a></code> <code><a href="mime.html">html_body()</a></code> <code><a href="mime.html">attach_part()</a></code> <code><a href="mime.html">attach_file()</a></code> </p>
-        </td>
-        <td><p>Create a mime formatted message object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="modify_message.html">modify_message()</a></code> </p>
-        </td>
-        <td><p>Modify the labels on a message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="modify_thread.html">modify_thread()</a></code> </p>
-        </td>
-        <td><p>Modify the labels on a thread</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="quoted_printable_encode.html">quoted_printable_encode()</a></code> </p>
         </td>
         <td><p>Encode text using quoted printable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="save_attachment.html">save_attachment()</a></code> </p>
-        </td>
-        <td><p>save the attachment to a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="save_attachments.html">save_attachments()</a></code> </p>
-        </td>
-        <td><p>Save attachments to a message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="send_draft.html">send_draft()</a></code> </p>
-        </td>
-        <td><p>Send a draft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="send_message.html">send_message()</a></code> </p>
-        </td>
-        <td><p>Send a message from a mime message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="thread.html">thread()</a></code> </p>
-        </td>
-        <td><p>Get a single thread</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="threads.html">threads()</a></code> </p>
-        </td>
-        <td><p>Get a list of threads</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="trash_message.html">trash_message()</a></code> </p>
-        </td>
-        <td><p>Send a single message to the trash</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="trash_thread.html">trash_thread()</a></code> </p>
-        </td>
-        <td><p>Send a single thread to the trash</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="untrash_message.html">untrash_message()</a></code> </p>
-        </td>
-        <td><p>Remove a single message from the trash</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="untrash_thread.html">untrash_thread()</a></code> </p>
-        </td>
-        <td><p>Remove a single thread from the trash.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="update_label.html">update_label()</a></code> <code><a href="update_label.html">update_label_patch()</a></code> </p>
-        </td>
-        <td><p>Update a existing label.</p></td>
       </tr><tr>
         
         <td>

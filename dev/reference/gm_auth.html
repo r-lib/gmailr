@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Authorize bigrquery — gm_auth • gmailr</title>
+<title>Authorize bigrquery — gm_scopes • gmailr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Authorize bigrquery — gm_auth" />
+<meta property="og:title" content="Authorize bigrquery — gm_scopes" />
 
 <meta property="og:description" content="Authorize gmailr to view and manage your Gmail projects. This function is a
 wrapper around gargle::token_fetch().
@@ -141,11 +141,10 @@ tokens are less likely to be synced to the cloud by accident.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gm_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='fu'>gm_default_email</span>(), <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scopes</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"https://www.googleapis.com/auth/gmail.readonly"</span>,
-  <span class='st'>"https://www.googleapis.com/auth/gmail.modify"</span>,
-  <span class='st'>"https://www.googleapis.com/auth/gmail.compose"</span>,
-  <span class='st'>"https://mail.google.com/"</span>), <span class='kw'>cache</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_cache</a></span>(),
+    <pre class="usage"><span class='fu'>gm_scopes</span>()
+
+<span class='fu'>gm_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='fu'>gm_default_email</span>(), <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>scopes</span> <span class='kw'>=</span> <span class='st'>"full"</span>,
+  <span class='kw'>cache</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_cache</a></span>(),
   <span class='kw'>use_oob</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oob_default</a></span>(), <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -172,14 +171,12 @@ file path or JSON string).</p></td>
     </tr>
     <tr>
       <th>scopes</th>
-      <td><p>A character vector of scopes to request. Pick from those listed
-at <a href='https://developers.google.com/identity/protocols/googlescopes'>https://developers.google.com/identity/protocols/googlescopes</a>.</p>
-<p>For certain token flows, the
-<code>"https://www.googleapis.com/auth/userinfo.email"</code> scope is unconditionally
-included. This grants permission to retrieve the email address associated
-with a token; gargle uses this to index cached OAuth tokens. This grants no
-permission to view or send email. It is considered a low value scope and
-does not appear on the consent screen.</p></td>
+      <td><p>One or more gmail API scope to use, one of 'labels', 'send',
+'readonly', 'compose', 'insert', 'modify', 'metadata', 'settings_basic',
+'settings_sharing' or 'full' (default: 'full'). See
+<a href='https://developers.google.com/gmail/api/auth/scopes'>https://developers.google.com/gmail/api/auth/scopes</a> for details on the
+permissions for each scope. and <code>gm_scopes()</code> to return a vector of the
+available scopes.</p></td>
     </tr>
     <tr>
       <th>cache</th>

@@ -98,46 +98,78 @@
 <h3 class="hasAnchor">
 <a href="#text" class="anchor"></a>Text</h3>
 <p>First we will construct a simple text only message</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/mime.html">mime</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">to</a></span>(<span class="st">"james.f.hester@gmail.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/mime.html">text_body</a></span>(<span class="st">"Gmailr is a very handy package!"</span>) -&gt;<span class="st"> </span>text_msg</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/gmailr-deprecated.html">mime</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">to</a></span>(<span class="st">"james.f.hester@gmail.com"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">text_body</a></span>(<span class="st">"Gmailr is a very handy package!"</span>) -&gt;<span class="st"> </span>text_msg</a></code></pre></div>
+<pre><code>## Warning: `mime()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_mime()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## Warning: `to()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_to()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## Warning: `from()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_from()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## Warning: `text_body()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_text_body()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <p>You can convert the message to a properly formatted MIME message using <code><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character()</a></code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/strwrap">strwrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(text_msg))</a></code></pre></div>
-<pre><code>## [1] "MIME-Version: 1.0\r Date: Tue, 13 Aug 2019 14:52:47 GMT\r To:"     
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/strwrap">strwrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(text_msg))</a></code></pre></div>
+<pre><code>## [1] "MIME-Version: 1.0\r Date: Tue, 13 Aug 2019 18:24:49 GMT\r To:"     
 ## [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:" 
-## [3] "multipart/mixed; boundary=82531fbd3039e5f2cd404432933b0969\r"      
+## [3] "multipart/mixed; boundary=c61686fe0692a1490931236a4e014795\r"      
 ## [4] "Content-Disposition: inline\r \r MIME-Version: 1.0\r Date: Tue, 13"
-## [5] "Aug 2019 14:52:47 GMT\r Content-Type: text/plain; charset=utf-8;"  
+## [5] "Aug 2019 18:24:49 GMT\r Content-Type: text/plain; charset=utf-8;"  
 ## [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r"     
 ## [7] "Content-Disposition: inline\r \r Gmailr is a very handy package!\r"
-## [8] "--82531fbd3039e5f2cd404432933b0969--\r"</code></pre>
+## [8] "--c61686fe0692a1490931236a4e014795--\r"</code></pre>
 </div>
 <div id="html" class="section level3">
 <h3 class="hasAnchor">
 <a href="#html" class="anchor"></a>HTML</h3>
 <p>You can also construct html messages. It is customary to provide a text only message along with the html message, but with modern email clients this is not strictly necessary.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/mime.html">mime</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">to</a></span>(<span class="st">"james.f.hester@gmail.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/mime.html">html_body</a></span>(<span class="st">"&lt;b&gt;Gmailr&lt;/b&gt; is a &lt;i&gt;very&lt;/i&gt; handy package!"</span>) -&gt;<span class="st"> </span>html_msg</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/gmailr-deprecated.html">mime</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">to</a></span>(<span class="st">"james.f.hester@gmail.com"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">html_body</a></span>(<span class="st">"&lt;b&gt;Gmailr&lt;/b&gt; is a &lt;i&gt;very&lt;/i&gt; handy package!"</span>) -&gt;<span class="st"> </span>html_msg</a></code></pre></div>
+<pre><code>## Warning: `html_body()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_html_body()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 </div>
 <div id="attachments" class="section level3">
 <h3 class="hasAnchor">
 <a href="#attachments" class="anchor"></a>Attachments</h3>
 <p>You can add attachments to your message in two ways.</p>
 <ol style="list-style-type: decimal">
-<li>If the data is in a file, use <code><a href="../reference/mime.html">attach_file()</a></code>. The mime type is automatically guessed by <code><a href="https://www.rdocumentation.org/packages/mime/topics/guess_type">mime::guess_type</a></code>, or you can specify it yourself with the <code>type</code> parameter.</li>
+<li>If the data is in a file, use <code><a href="../reference/gmailr-deprecated.html">attach_file()</a></code>. The mime type is automatically guessed by <code><a href="https://www.rdocumentation.org/packages/mime/topics/guess_type">mime::guess_type</a></code>, or you can specify it yourself with the <code>type</code> parameter.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(<span class="dt">file =</span> <span class="st">"iris.csv"</span>, iris)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">html_msg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">subject</a></span>(<span class="st">"Here are some flowers"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/mime.html">attach_file</a></span>(<span class="st">"iris.csv"</span>) -&gt;<span class="st"> </span>file_attachment</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(<span class="dt">file =</span> <span class="st">"iris.csv"</span>, iris)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">html_msg <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">subject</a></span>(<span class="st">"Here are some flowers"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/gmailr-deprecated.html">attach_file</a></span>(<span class="st">"iris.csv"</span>) -&gt;<span class="st"> </span>file_attachment</a></code></pre></div>
+<pre><code>## Warning: `subject()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_subject()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<pre><code>## Warning: `attach_file()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_attach_file()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li>If the data are already loaded into R, you can use <code><a href="../reference/mime.html">attach_part()</a></code> to attach the binary data to your file.</li>
+<li>If the data are already loaded into R, you can use <code><a href="../reference/gmailr-deprecated.html">attach_part()</a></code> to attach the binary data to your file.</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">html_msg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/mime.html">attach_part</a></span>(<span class="dt">part =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rawConversion">charToRaw</a></span>(<span class="st">"attach me!"</span>), <span class="dt">name =</span> <span class="st">"please"</span>) -&gt;<span class="st"> </span>simple_attachment</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">html_msg <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../reference/gmailr-deprecated.html">attach_part</a></span>(<span class="dt">part =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rawConversion">charToRaw</a></span>(<span class="st">"attach me!"</span>), <span class="dt">name =</span> <span class="st">"please"</span>) -&gt;<span class="st"> </span>simple_attachment</a></code></pre></div>
+<pre><code>## Warning: `attach_part()` is deprecated as of gmailr 1.0.0.
+## Please use `gm_attach_part()` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 </div>
 </div>
 <div id="uploading" class="section level2">
@@ -146,20 +178,20 @@
 <div id="create-draft" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-draft" class="anchor"></a>Create Draft</h3>
-<p>You can upload any mime message into your gmail drafts using <code><a href="../reference/create_draft.html">create_draft()</a></code>. Be sure to give yourself at least <code>compose</code> permissions first.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/create_draft.html">create_draft</a></span>(file_attachment)</a></code></pre></div>
+<p>You can upload any mime message into your gmail drafts using <code><a href="../reference/gmailr-deprecated.html">create_draft()</a></code>. Be sure to give yourself at least <code>compose</code> permissions first.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="../reference/gmailr-deprecated.html">create_draft</a></span>(file_attachment)</a></code></pre></div>
 </div>
 <div id="insert" class="section level3">
 <h3 class="hasAnchor">
 <a href="#insert" class="anchor"></a>Insert</h3>
 <p>This inserts the message directly into your mailbox, bypassing gmail’s default scanning and classification algorithms.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/insert_message.html">insert_message</a></span>(file_attachment)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="../reference/gmailr-deprecated.html">insert_message</a></span>(file_attachment)</a></code></pre></div>
 </div>
 <div id="import" class="section level3">
 <h3 class="hasAnchor">
 <a href="#import" class="anchor"></a>Import</h3>
 <p>This imports the email as though it was a normal message, with the same scanning and classification as normal email.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="../reference/insert_message.html">insert_message</a></span>(file_attachment)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="../reference/gmailr-deprecated.html">insert_message</a></span>(file_attachment)</a></code></pre></div>
 </div>
 </div>
 <div id="sending" class="section level2">
@@ -168,16 +200,16 @@
 <div id="draft" class="section level3">
 <h3 class="hasAnchor">
 <a href="#draft" class="anchor"></a>Draft</h3>
-<p><code><a href="../reference/send_draft.html">send_draft()</a></code> sends an email using the <code>draft_id</code> of an existing draft (possibly created with <code><a href="../reference/create_draft.html">create_draft()</a></code>).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">my_drafts &lt;-<span class="st"> </span><span class="kw"><a href="../reference/drafts.html">drafts</a></span>()</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="../reference/send_draft.html">send_draft</a></span>(<span class="kw"><a href="../reference/id.html">id</a></span>(my_drafts, <span class="st">"draft_id"</span>)[<span class="dv">1</span>])</a></code></pre></div>
+<p><code><a href="../reference/gmailr-deprecated.html">send_draft()</a></code> sends an email using the <code>draft_id</code> of an existing draft (possibly created with <code><a href="../reference/gmailr-deprecated.html">create_draft()</a></code>).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">my_drafts &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gmailr-deprecated.html">drafts</a></span>()</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw"><a href="../reference/gmailr-deprecated.html">send_draft</a></span>(<span class="kw"><a href="../reference/gmailr-deprecated.html">id</a></span>(my_drafts, <span class="st">"draft_id"</span>)[<span class="dv">1</span>])</a></code></pre></div>
 </div>
 <div id="message" class="section level3">
 <h3 class="hasAnchor">
 <a href="#message" class="anchor"></a>Message</h3>
-<p>You can also send an email message directly from a <code>mime</code> object using <code><a href="../reference/send_message.html">send_message()</a></code>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/send_message.html">send_message</a></span>(file_attachment)</a></code></pre></div>
+<p>You can also send an email message directly from a <code>mime</code> object using <code><a href="../reference/gmailr-deprecated.html">send_message()</a></code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="../reference/gmailr-deprecated.html">send_message</a></span>(file_attachment)</a></code></pre></div>
 </div>
 </div>
 <div id="troubleshooting" class="section level2">

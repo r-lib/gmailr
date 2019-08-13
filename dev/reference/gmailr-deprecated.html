@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Methods to get values from message or drafts — gm_to • gmailr</title>
+<title>These functions are deprecated and will be removed in a future release of
+gmailr
+#' <img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /> — gmailr-deprecated • gmailr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +32,13 @@
 
 
 
-<meta property="og:title" content="Methods to get values from message or drafts — gm_to" />
+<meta property="og:title" content="These functions are deprecated and will be removed in a future release of
+gmailr
+#' <img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /> — gmailr-deprecated" />
 
-<meta property="og:description" content="Methods to get values from message or drafts" />
+<meta property="og:description" content="These functions are deprecated and will be removed in a future release of
+gmailr
+#' " />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -114,48 +120,110 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Methods to get values from message or drafts</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/gmailr.R'><code>R/gmailr.R</code></a></small>
-    <div class="hidden name"><code>accessors.Rd</code></div>
+    <h1>These functions are deprecated and will be removed in a future release of
+gmailr
+#' <img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /></h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>gmailr-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Methods to get values from message or drafts</p>
+    <p>These functions are deprecated and will be removed in a future release of
+gmailr
+#' <img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /></p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gm_to</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>id</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_from</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>to</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_cc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>from</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_bcc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>cc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_date</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+<span class='fu'>bcc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_subject</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>the object from which to get or set the field</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>other parameters passed to methods</p></td>
-    </tr>
-    </table>
-    
+<span class='fu'>date</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>subject</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>body</span>(<span class='no'>x</span>, <span class='no'>...</span>)
+
+<span class='fu'>message</span>(<span class='no'>...</span>)
+
+<span class='fu'>messages</span>(<span class='no'>...</span>)
+
+<span class='fu'>trash_message</span>(<span class='no'>...</span>)
+
+<span class='fu'>untrash_message</span>(<span class='no'>...</span>)
+
+<span class='fu'>delete_message</span>(<span class='no'>...</span>)
+
+<span class='fu'>modify_message</span>(<span class='no'>...</span>)
+
+<span class='fu'>attachment</span>(<span class='no'>...</span>)
+
+<span class='fu'>save_attachment</span>(<span class='no'>...</span>)
+
+<span class='fu'>save_attachments</span>(<span class='no'>...</span>)
+
+<span class='fu'>insert_message</span>(<span class='no'>...</span>)
+
+<span class='fu'>import_message</span>(<span class='no'>...</span>)
+
+<span class='fu'>send_message</span>(<span class='no'>...</span>)
+
+<span class='fu'>threads</span>(<span class='no'>...</span>)
+
+<span class='fu'>thread</span>(<span class='no'>...</span>)
+
+<span class='fu'>trash_thread</span>(<span class='no'>...</span>)
+
+<span class='fu'>untrash_thread</span>(<span class='no'>...</span>)
+
+<span class='fu'>delete_thread</span>(<span class='no'>...</span>)
+
+<span class='fu'>modify_thread</span>(<span class='no'>...</span>)
+
+<span class='fu'>draft</span>(<span class='no'>...</span>)
+
+<span class='fu'>drafts</span>(<span class='no'>...</span>)
+
+<span class='fu'>create_draft</span>(<span class='no'>...</span>)
+
+<span class='fu'>send_draft</span>(<span class='no'>...</span>)
+
+<span class='fu'>labels</span>(<span class='no'>...</span>)
+
+<span class='fu'>label</span>(<span class='no'>...</span>)
+
+<span class='fu'>update_label</span>(<span class='no'>...</span>)
+
+<span class='fu'>update_label_patch</span>(<span class='no'>...</span>)
+
+<span class='fu'>delete_label</span>(<span class='no'>...</span>)
+
+<span class='fu'>create_label</span>(<span class='no'>...</span>)
+
+<span class='fu'>history</span>(<span class='no'>...</span>)
+
+<span class='fu'>mime</span>(<span class='no'>...</span>)
+
+<span class='fu'>text_body</span>(<span class='no'>...</span>)
+
+<span class='fu'>html_body</span>(<span class='no'>...</span>)
+
+<span class='fu'>attach_part</span>(<span class='no'>...</span>)
+
+<span class='fu'>attach_file</span>(<span class='no'>...</span>)</pre>
+        
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
   </div>

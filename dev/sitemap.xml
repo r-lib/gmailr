@@ -10,34 +10,10 @@
     <loc>http://vroom.r-lib.org/reference/as.character.mime.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/attachment.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/body.html</loc>
-  </url>
-  <url>
     <loc>http://vroom.r-lib.org/reference/clear_token.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/create_draft.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/create_label.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/delete_label.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/delete_message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/delete_thread.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/draft.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/drafts.html</loc>
+    <loc>http://vroom.r-lib.org/reference/gm_attachment.html</loc>
   </url>
   <url>
     <loc>http://vroom.r-lib.org/reference/gm_auth.html</loc>
@@ -46,94 +22,121 @@
     <loc>http://vroom.r-lib.org/reference/gm_auth_configure.html</loc>
   </url>
   <url>
+    <loc>http://vroom.r-lib.org/reference/gm_body.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_create_draft.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_create_label.html</loc>
+  </url>
+  <url>
     <loc>http://vroom.r-lib.org/reference/gm_deauth.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_delete_label.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_delete_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_delete_thread.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_draft.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_drafts.html</loc>
   </url>
   <url>
     <loc>http://vroom.r-lib.org/reference/gm_has_token.html</loc>
   </url>
   <url>
+    <loc>http://vroom.r-lib.org/reference/gm_history.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_id.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_import_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_insert_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_label.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_labels.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_last_response.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_messages.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_mime.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_modify_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_modify_thread.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_save_attachment.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_save_attachments.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_send_draft.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_send_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_thread.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_threads.html</loc>
+  </url>
+  <url>
     <loc>http://vroom.r-lib.org/reference/gm_token.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_trash_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_trash_thread.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_untrash_message.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_untrash_thread.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_update_label.html</loc>
   </url>
   <url>
     <loc>http://vroom.r-lib.org/reference/gmail_auth.html</loc>
   </url>
   <url>
+    <loc>http://vroom.r-lib.org/reference/gmailr-deprecated.html</loc>
+  </url>
+  <url>
     <loc>http://vroom.r-lib.org/reference/gmailr.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/history.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/id.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/import_message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/insert_message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/label.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/labels.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/last_response.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/messages.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/mime.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/modify_message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/modify_thread.html</loc>
   </url>
   <url>
     <loc>http://vroom.r-lib.org/reference/pipe.html</loc>
   </url>
   <url>
     <loc>http://vroom.r-lib.org/reference/quoted_printable_encode.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/save_attachment.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/save_attachments.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/send_draft.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/send_message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/thread.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/threads.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/trash_message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/trash_thread.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/untrash_message.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/untrash_thread.html</loc>
-  </url>
-  <url>
-    <loc>http://vroom.r-lib.org/reference/update_label.html</loc>
   </url>
   <url>
     <loc>http://vroom.r-lib.org/reference/use_secret_file.html</loc>

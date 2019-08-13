@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Methods to get values from message or drafts — gm_to • gmailr</title>
+<title>Get a list of all labels — gm_labels • gmailr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Methods to get values from message or drafts — gm_to" />
+<meta property="og:title" content="Get a list of all labels — gm_labels" />
 
-<meta property="og:description" content="Methods to get values from message or drafts" />
+<meta property="og:description" content="Get a list of all labels for a user." />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -114,49 +114,55 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Methods to get values from message or drafts</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/gmailr.R'><code>R/gmailr.R</code></a></small>
-    <div class="hidden name"><code>accessors.Rd</code></div>
+    <h1>Get a list of all labels</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/label.R'><code>R/label.R</code></a></small>
+    <div class="hidden name"><code>gm_labels.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Methods to get values from message or drafts</p>
+    <p>Get a list of all labels for a user.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gm_to</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='fu'>gm_from</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='fu'>gm_cc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='fu'>gm_bcc</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='fu'>gm_date</span>(<span class='no'>x</span>, <span class='no'>...</span>)
-
-<span class='fu'>gm_subject</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>gm_labels</span>(<span class='kw'>user_id</span> <span class='kw'>=</span> <span class='st'>"me"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>the object from which to get or set the field</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>other parameters passed to methods</p></td>
+      <th>user_id</th>
+      <td><p>gmail user_id to access, special value of 'me' indicates the authenticated user.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
+    <p><a href='https://developers.google.com/gmail/api/v1/reference/users/labels/list'>https://developers.google.com/gmail/api/v1/reference/users/labels/list</a></p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other label: <code><a href='gm_create_label.html'>gm_create_label</a></code>,
+  <code><a href='gm_delete_label.html'>gm_delete_label</a></code>, <code><a href='gm_label.html'>gm_label</a></code>,
+  <code><a href='gm_update_label.html'>gm_update_label</a></code></p></div>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>my_labels</span> <span class='kw'>=</span> <span class='fu'><a href='gmailr-deprecated.html'>labels</a></span>()
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

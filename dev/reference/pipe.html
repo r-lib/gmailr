@@ -141,7 +141,7 @@ function composition into a series of imperative statements.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Instead of</span>
-<span class='fu'><a href='accessors.html'>to</a></span>(<span class='fu'><a href='mime.html'>mime</a></span>(), <span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
+<span class='fu'><a href='gmailr-deprecated.html'>to</a></span>(<span class='fu'><a href='gmailr-deprecated.html'>mime</a></span>(), <span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
 #&gt; list()
 #&gt; 
 #&gt; $header
@@ -149,7 +149,7 @@ function composition into a series of imperative statements.</p>
 #&gt; [1] "1.0"
 #&gt; 
 #&gt; $header$Date
-#&gt; [1] "Tue, 13 Aug 2019 14:52:45 GMT"
+#&gt; [1] "Tue, 13 Aug 2019 18:24:47 GMT"
 #&gt; 
 #&gt; $header$To
 #&gt; [1] "someone@somewhere.com"
@@ -163,7 +163,7 @@ function composition into a series of imperative statements.</p>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "mime"</div><div class='input'><span class='co'># you can write</span>
-<span class='fu'><a href='mime.html'>mime</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='accessors.html'>to</a></span>(<span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
+<span class='fu'><a href='gmailr-deprecated.html'>mime</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='gmailr-deprecated.html'>to</a></span>(<span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
 #&gt; list()
 #&gt; 
 #&gt; $header
@@ -171,7 +171,7 @@ function composition into a series of imperative statements.</p>
 #&gt; [1] "1.0"
 #&gt; 
 #&gt; $header$Date
-#&gt; [1] "Tue, 13 Aug 2019 14:52:45 GMT"
+#&gt; [1] "Tue, 13 Aug 2019 18:24:47 GMT"
 #&gt; 
 #&gt; $header$To
 #&gt; [1] "someone@somewhere.com"
