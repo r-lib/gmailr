@@ -26,5 +26,5 @@ gmail_auth("compose")
 }
 \seealso{
 use_secret_file to set the default id and secret to a different
-  value than the default.
+value than the default.
 }

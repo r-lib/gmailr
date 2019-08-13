@@ -12,7 +12,7 @@ trash_thread(id, user_id = "me")
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
 \description{
-Function to trash a given thread by id.  This can be undone by \code{\link{untrash_thread}}.
+Function to trash a given thread by id.  This can be undone by \code{\link[=untrash_thread]{untrash_thread()}}.
 }
 \examples{
 \dontrun{

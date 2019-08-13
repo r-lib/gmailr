@@ -5,7 +5,7 @@
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the message returned
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages>
 #' @family message
 #' @export
 #' @examples
@@ -34,7 +34,7 @@ message <- function(id,
 #' @param label_ids restrict search to given labels
 #' @param include_spam_trash boolean whether to include the spam and trash folders in the search
 #' @inheritParams thread
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/list>
 #' @family message
 #' @examples
 #' \dontrun{
@@ -60,9 +60,9 @@ messages <- function(search = NULL,
 
 #' Send a single message to the trash
 #'
-#' Function to trash a given message by id.  This can be undone by \code{\link{untrash_message}}.
+#' Function to trash a given message by id.  This can be undone by [untrash_message()].
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/trash>
 #' @export
 #' @family message
 #' @examples
@@ -79,9 +79,9 @@ trash_message <- function(id, user_id = "me") {
 
 #' Remove a single message from the trash
 #'
-#' Function to trash a given message by id.  This can be undone by \code{\link{untrash_message}}.
+#' Function to trash a given message by id.  This can be undone by [untrash_message()].
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/trash>
 #' @family message
 #' @export
 #' @examples
@@ -100,7 +100,7 @@ untrash_message <- function(id, user_id = "me") {
 #'
 #' Function to delete a given message by id.  This cannot be undone!
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/delete}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/delete>
 #' @family message
 #' @export
 #' @examples
@@ -122,7 +122,7 @@ delete_message <- function(id, user_id = "me") {
 #' @param add_labels label IDs to add to the specified message
 #' @param remove_labels label IDs to remove from the specified message
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/modify}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/modify>
 #' @family message
 #' @export
 #' @examples
@@ -143,18 +143,18 @@ modify_message <- function(id,
     is_string(user_id))
 
   gmailr_POST(c("messages", id, "modify"), user_id, class = "gmail_message",
-    body = rename("add_labels" = I(add_labels), "remove_labels" = I(remove_labels)),
+    body = rename("add_labels" = as.list(add_labels), "remove_labels" = as.list(remove_labels)),
     encode = "json")
 }
 
 #' Retrieve an attachment to a message
 #'
 #' Function to retrieve an attachment to a message by id of the attachment
-#' and message.  To save the attachment use \code{\link{save_attachment}}.
+#' and message.  To save the attachment use [save_attachment()].
 #' @param id id of the attachment
 #' @param message_id id of the parent message
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get>
 #' @family message
 #' @export
 #' @examples
@@ -179,8 +179,8 @@ attachment <- function(id,
 
 #' save the attachment to a file
 #'
-#' this only works on attachments retrieved with \code{\link{attachment}}.
-#' To save an attachment directly from a message see \code{\link{save_attachments}}
+#' this only works on attachments retrieved with [attachment()].
+#' To save an attachment directly from a message see [save_attachments()]
 #' @param x attachment to save
 #' @param filename location to save to
 #' @family message
@@ -208,7 +208,7 @@ save_attachment <- function(x, filename){
 #' @param attachment_id id of the attachment to save, if none specified saves all attachments
 #' @param path where to save the attachments
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get>
 #' @family message
 #' @export
 #' @examples
@@ -251,7 +251,7 @@ save_attachments <- function(x,
 #' @param internal_date_source whether to date the object based on the date of
 #'        the message or when it was received by gmail.
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/insert}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/insert>
 #' @family message
 #' @export
 #' @examples
@@ -286,7 +286,7 @@ insert_message <- function(
 #' Import a message into the gmail mailbox from a mime message
 #'
 #' @inheritParams insert_message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/import}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/import>
 #' @family message
 #' @export
 #' @examples
@@ -321,7 +321,7 @@ import_message <- function(mail,
 #'
 #' @param thread_id the id of the thread to send from.
 #' @inheritParams insert_message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/messages/send}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/send>
 #' @family message
 #' @export
 #' @examples
