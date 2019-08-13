@@ -293,3 +293,7 @@ gmailr_PATCH <- function(location, user_id, class = NULL, ...) {
 gmailr_POST <- function(location, user_id, class = NULL, ...) {
   gmailr_query(POST, location, user_id, class, ...)
 }
+
+gmailr_PUT <- function(location, user_id, class = NULL, ...) {
+  gmailr_query(PUT, location, user_id, class, ...)
+}
