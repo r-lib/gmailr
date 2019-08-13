@@ -1,3 +1,8 @@
+# gmailr (development)
+
+* The authentication has been completely redone to utilize the
+  [gargle](https://cran.r-project.org/package=gargle) package.
+
 # gmailr 0.7.1
 
 * Bundle a application token and secret in gmailr so the average user won't need to create an application.
