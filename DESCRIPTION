@@ -16,6 +16,7 @@ Imports:
     gargle,
     httr,
     jsonlite,
+    lifecycle,
     magrittr,
     mime
 Suggests:

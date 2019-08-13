@@ -19,7 +19,7 @@
 #' msg = mime(From="james.f.hester@@gmail.com",
 #'                    To="asdf@asdf.com") %>%
 #'         html_body("<b>Test<\b> Message")
-mime <- function(..., attr = NULL, body = NULL, parts = list()) {
+gm_mime <- function(..., attr = NULL, body = NULL, parts = list()) {
   structure(list(parts = parts,
                  header = with_defaults(c("MIME-Version" = "1.0",
                           Date = http_date(Sys.time())),
@@ -30,41 +30,41 @@ mime <- function(..., attr = NULL, body = NULL, parts = list()) {
 #' @param x the object whose fields you are setting
 #' @param val the value to set
 #' @param vals one or more values to use, will be joined by commas
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
-to.mime <- function(x, vals, ...){
+gm_to.mime <- function(x, vals, ...){
   if(missing(vals)){ return(x$header$To) }
   x$header$To <- paste0(collapse = ", ", vals)
   x
 }
 
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
-from.mime <- function(x, val, ...){
+gm_from.mime <- function(x, val, ...){
   if(missing(val)){ return(x$header$From) }
   x$header$From <- val
   x
 }
 
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
-cc.mime <- function(x, vals, ...){
+gm_cc.mime <- function(x, vals, ...){
   if(missing(vals)){ return(x$header$Cc) }
   x$header$Cc <- paste0(collapse = ", ", vals)
   x
 }
 
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
-bcc.mime <- function(x, vals, ...){
+gm_bcc.mime <- function(x, vals, ...){
   if(missing(vals)){ return(x$header$Bcc) }
   x$header$Bcc <- paste0(collapse = ", ", vals)
   x
 }
 
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
-subject.mime <- function(x, val, ...){
+gm_subject.mime <- function(x, val, ...){
   if(missing(val)){ return(x$header$Subject) }
   x$header$Subject <- val
   x
@@ -72,9 +72,9 @@ subject.mime <- function(x, val, ...){
 
 #' @param mime message.
 #' @param ... additional parameters to put in the attr field
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
-text_body <- function(mime, body, ...){
+gm_text_body <- function(mime, body, ...){
   if(missing(body)){ return(mime$parts[[TEXT_PART]]) }
   mime$parts[[TEXT_PART]] <- mime(attr = list(
               content_type = "text/plain",
@@ -87,9 +87,9 @@ text_body <- function(mime, body, ...){
 }
 TEXT_PART <- 1L
 
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
-html_body <- function(mime, body, ...){
+gm_html_body <- function(mime, body, ...){
   if(missing(body)){ return(mime$parts[[HTML_PART]]) }
   mime$parts[[HTML_PART]] <- mime(attr = list(
                          content_type = "text/html",
@@ -104,7 +104,7 @@ HTML_PART <- 2L
 #' @param part Message part to attach
 #' @param filename name of file to attach
 #' @param type mime type of the attached file
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
 attach_part <- function(mime, part, ...){
   if(missing(part)){ return(mime$parts[[3L:length(mime$parts)]]) }
@@ -114,7 +114,7 @@ attach_part <- function(mime, part, ...){
   mime
 }
 
-#' @rdname mime
+#' @rdname gm_mime
 #' @export
 attach_file <- function(mime, filename, type = NULL, ...){
   if(missing(filename)){ return(mime$parts[[3L:length(mime$parts)]]) }
@@ -144,7 +144,7 @@ attach_file <- function(mime, filename, type = NULL, ...){
 #'
 #' @param x object to convert
 #' @param newline value to use as newline character
-#' @param ... futher arguments ignored
+#' @param ... further arguments ignored
 #' @export
 as.character.mime <- function(x, newline="\r\n", ...) {
 

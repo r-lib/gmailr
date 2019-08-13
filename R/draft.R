@@ -4,7 +4,7 @@
 #' @param id draft id to access
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the draft returned
-#' @inheritParams message
+#' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/get>
 #' @family draft
 #' @export
@@ -12,7 +12,7 @@
 #' \dontrun{
 #' my_draft = draft('12345')
 #' }
-draft <- function(id,
+gm_draft <- function(id,
                   user_id = "me",
                   format = c("full", "minimal", "raw")) {
   stopifnot(is_string(id), is_string(user_id))
@@ -29,7 +29,7 @@ draft <- function(id,
 #' Get a list of drafts possibly matching a given query string.
 #' @param num_results the number of results to return.
 #' @param page_token retrieve a specific page of results
-#' @inheritParams message
+#' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/list>
 #' @family draft
 #' @export
@@ -39,7 +39,7 @@ draft <- function(id,
 #'
 #' first_10_drafts = drafts(10)
 #' }
-drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
+gm_drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
   stopifnot(is_string(user_id))
   page_and_trim("drafts", user_id, num_results, page_token)
 }
@@ -47,7 +47,7 @@ drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #' Create a draft from a mime message
 #'
 #' @param mail mime mail message created by mime
-#' @inheritParams message
+#' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/create>
 #' @export
 #' @examples
@@ -55,7 +55,7 @@ drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #' create_draft(mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
-create_draft <- function(mail,
+gm_create_draft <- function(mail,
                          user_id = "me") {
   mail <- as.character(mail)
   stopifnot(is_string(user_id))
@@ -74,7 +74,7 @@ create_draft <- function(mail,
 #'
 #' Send a draft to the recipients in the To, CC, and Bcc headers.
 #' @param draft the draft to send
-#' @inheritParams message
+#' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/send>
 #' @family draft
 #' @export

@@ -1,5 +1,8 @@
 # gmailr (development)
 
+* All functions are now prefixed with `gm_*()` to avoid name conflicts with
+  other packages, the previous names have been deprecated (#95)
+
 * The authentication has been completely redone to utilize the
   [gargle](https://cran.r-project.org/package=gargle) package.
 

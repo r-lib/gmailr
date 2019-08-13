@@ -11,7 +11,7 @@
 
 \item{newline}{value to use as newline character}
 
-\item{...}{futher arguments ignored}
+\item{...}{further arguments ignored}
 }
 \description{
 This function converts a mime object into a character vector
