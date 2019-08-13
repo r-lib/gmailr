@@ -142,7 +142,8 @@ gm_has_token <- function() {
 #' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key = FALSE)
 #'
 #' @inheritParams httr::oauth_app
-#' @param ... Additional arguments passed to [httr::oauth_app()]
+#' @param secret consumer secret, also sometimes called the client secret.
+#' @param ... Additional arguments passed to \code{\link[httr:oauth_app]{httr::oauth_app()}}
 #' @family auth functions
 #' @export
 #' @examples
@@ -176,17 +177,21 @@ gm_has_token <- function() {
 #'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 #' )
 #' }
-#'
-gm_auth_configure <- function(key = Sys.getenv("GMAILR_APP_KEY"), secret = Sys.getenv("GMAILR_APP_SECRET"), path = "", appname = "gmailr", ...) {
+gm_auth_configure <- function(key = Sys.getenv("GMAILR_APP_KEY"),
+                              secret = Sys.getenv("GMAILR_APP_SECRET"),
+                              path = "",
+                              appname = "gmailr",
+                              ...,
+                              app = httr::oauth_app(appname, key, secret, ...)) {
+
   if (!((nzchar(key) && nzchar(secret)) || nzchar(path))) {
     stop("Must supply either `key` and `secret` or `path`", call. = FALSE)
   }
-  if (!nzchar(path)) {
+  if (nzchar(path)) {
     stopifnot(is_string(path))
     app <- gargle::oauth_app_from_json(path)
-  } else {
-    app <- httr::oauth_app(appname, key, secret, ...)
   }
+
   stopifnot(is.null(app) || inherits(app, "oauth_app"))
 
   .auth$set_app(app)

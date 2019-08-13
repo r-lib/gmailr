@@ -7,19 +7,15 @@
 \usage{
 gm_auth_configure(key = Sys.getenv("GMAILR_APP_KEY"),
   secret = Sys.getenv("GMAILR_APP_SECRET"), path = "",
-  appname = "gmailr", ...)
+  appname = "gmailr", ..., app = httr::oauth_app(appname, key, secret,
+  ...))
 
 gm_oauth_app()
 }
 \arguments{
 \item{key}{consumer key, also sometimes called the client ID}
 
-\item{secret}{consumer secret, also sometimes called the client secret.
-Despite its name, this does not necessarily need to be protected like a
-password, i.e. the user still has to authenticate themselves and grant the
-app permission to access resources on their behalf. For example, see
-Google's docs for
-\href{{https://developers.google.com/identity/protocols/OAuth2#installed}{OAuth2 for installed applications}}.}
+\item{secret}{consumer secret, also sometimes called the client secret.}
 
 \item{path}{JSON downloaded from Google Cloud Platform Console, containing a
 client id (aka key) and secret, in one of the forms supported for the \code{txt}
@@ -85,7 +81,6 @@ gm_auth_configure(
   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 )
 }
-
 }
 \seealso{
 Other auth functions: \code{\link{gm_auth}},
