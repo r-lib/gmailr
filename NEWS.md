@@ -1,5 +1,8 @@
 # gmailr (development)
 
+* New `gm_scopes()` function to list the available scopes, and gmailr now
+  requests only the full scope by default (#90)
+
 * All functions are now prefixed with `gm_*()` to avoid name conflicts with
   other packages, the previous names have been deprecated (#95)
 

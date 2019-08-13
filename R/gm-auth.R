@@ -15,6 +15,22 @@ gargle_lookup_table <- list(
   PREFIX      = "gm"
 )
 
+#' @rdname rdname gm_auth
+#' @export
+gm_scopes <- function() {
+  c(labels = "https://www.googleapis.com/auth/gmail.labels",
+    send = "https://www.googleapis.com/auth/gmail.send",
+    readonly = "https://www.googleapis.com/auth/gmail.readonly",
+    compose = "https://www.googleapis.com/auth/gmail.compose",
+    insert = "https://www.googleapis.com/auth/gmail.insert",
+    modify = "https://www.googleapis.com/auth/gmail.modify",
+    metadata = "https://www.googleapis.com/auth/gmail.metadata",
+    settings_basic = "https://www.googleapis.com/auth/gmail.settings.basic",
+    settings_sharing = "https://www.googleapis.com/auth/gmail.settings.sharing",
+    full = "https://mail.google.com/"
+  )
+}
+
 #' Authorize bigrquery
 #'
 #' @eval gargle:::PREFIX_auth_description(gargle_lookup_table)
@@ -22,6 +38,12 @@ gargle_lookup_table <- list(
 #' @eval gargle:::PREFIX_auth_params()
 #'
 #' @family auth functions
+#' @param A gmail API scope to use, one of 'labels', 'send', 'readonly',
+#'   'compose', 'insert', 'modify', 'metadata', 'settings_basic',
+#'   'settings_sharing' or 'full' (default: 'full'). See
+#'   <https://developers.google.com/gmail/api/auth/scopes> for details on the
+#'   permissions for each scope. and `gm_scopes()` to return a vector of the
+#'   available scopes.
 #' @export
 #'
 #' @examples
@@ -47,15 +69,13 @@ gargle_lookup_table <- list(
 #' }
 gm_auth <- function(email = gm_default_email(),
                     path = NULL,
-                    scopes = c(
-                      "https://www.googleapis.com/auth/gmail.readonly",
-                      "https://www.googleapis.com/auth/gmail.modify",
-                      "https://www.googleapis.com/auth/gmail.compose",
-                      "https://mail.google.com/"
-                    ),
+                    scopes = "full",
                     cache = gargle::gargle_oauth_cache(),
                     use_oob = gargle::gargle_oob_default(),
                     token = NULL) {
+
+  scopes <- gm_scopes()[match.arg(scopes, names(gm_scopes()), several.ok = TRUE)]
+
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = gm_oauth_app(),

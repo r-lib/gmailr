@@ -4,11 +4,8 @@
 \alias{gm_auth}
 \title{Authorize bigrquery}
 \usage{
-gm_auth(email = gm_default_email(), path = NULL,
-  scopes = c("https://www.googleapis.com/auth/gmail.readonly",
-  "https://www.googleapis.com/auth/gmail.modify",
-  "https://www.googleapis.com/auth/gmail.compose",
-  "https://mail.google.com/"), cache = gargle::gargle_oauth_cache(),
+gm_auth(email = gm_default_email(), path = NULL, scopes = "full",
+  cache = gargle::gargle_oauth_cache(),
   use_oob = gargle::gargle_oob_default(), token = NULL)
 }
 \arguments{
@@ -48,6 +45,13 @@ the option named "gargle_oob_default", retrieved via
 httr's class \code{request}, i.e. a token that has been prepared with
 \code{\link[httr:config]{httr::config()}} and has a \link[httr:Token-class]{Token2.0} in the
 \code{auth_token} component.}
+
+\item{A}{gmail API scope to use, one of 'labels', 'send', 'readonly',
+'compose', 'insert', 'modify', 'metadata', 'settings_basic',
+'settings_sharing' or 'full' (default: 'full'). See
+\url{https://developers.google.com/gmail/api/auth/scopes} for details on the
+permissions for each scope. and \code{gm_scopes()} to return a vector of the
+available scopes.}
 }
 \description{
 Authorize gmailr to view and manage your Gmail projects. This function is a
