@@ -1,5 +1,8 @@
 # gmailr (development)
 
+* New `gm_profile()` function to return the gmail profile of the currently
+  logged in user (#114)
+
 * New `gm_scopes()` function to list the available scopes, and gmailr now
   requests only the full scope by default (#90)
 

@@ -227,3 +227,45 @@ gm_oauth_app <- function() {
   }
   stop("Must create an app and register it with `gm_auth_configure()`", call. = FALSE)
 }
+
+#' Get info on current gmail profile
+#'
+#' Reveals information about the profile associated with the current token.
+#'
+#' @seealso Wraps the `getProfile` endpoint:
+#'   * <https://developers.google.com/gmail/api/v1/reference/users/getProfile>
+#'
+#' @return A list of class `gmail_profile`.
+#' @export
+#' @examples
+#' \dontrun{
+#' gm_profile()
+#'
+#' ## more info is returned than is printed
+#' prof <- gm_profile()
+#' prof[["historyId"]]
+#' }
+gm_profile <- function(user_id = "me", verbose = TRUE) {
+  if (isFALSE(.auth$auth_active)) {
+    if (verbose) {
+      message("Not logged in as any specific Google user.")
+    }
+    return(invisible())
+  }
+  gmailr_GET("profile", user_id, class = "gmail_profile")
+}
+
+#' @export
+print.gmail_profile <- function(x, ...) {
+  cat(
+    sprintf(paste0(
+      "Logged in as:\n",
+      "  * emailAddress: %s\n",
+      "  * num_messages: %i\n",
+      "  * num_threads: %i"
+    ), x[["emailAddress"]], x[["messagesTotal"]], x[["threadsTotal"]]
+    ),
+    sep = "\n"
+  )
+  invisible(x)
+}
