@@ -23,7 +23,8 @@ Suggests:
     knitr,
     methods,
     rmarkdown,
-    testthat
+    testthat,
+    xml2
 VignetteBuilder: 
     knitr
 Encoding: UTF-8

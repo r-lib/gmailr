@@ -17,3 +17,4 @@ TODO.md
 ^docs$
 ^pkgdown$
 ^tools$
+^azure-pipelines\.yml$
