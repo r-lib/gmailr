@@ -37,7 +37,7 @@ label <- function(id, user_id = "me") {
 #' @family label
 #' @export
 update_label <- function(id, label, user_id = "me") {
-  gmailr_POST(c("labels", id), user_id, body = label, encode = "json")
+  gmailr_PUT(c("labels", id), user_id, body = label, encode = "json")
 }
 
 #' @rdname update_label
@@ -69,13 +69,13 @@ delete_label <- function(id, user_id = "me") {
 #' @family label
 #' @export
 create_label <- function(name,
-                         label_list_visibility=c("hide", "show", "show_unread"),
-                         message_list_visibility=c("hide", "show"),
+                         label_list_visibility=c("show", "hide", "show_unread"),
+                         message_list_visibility=c("show", "hide"),
                          user_id = "me") {
   label_list_visibility <- label_value_map[match.arg(label_list_visibility)]
   message_list_visibility <- match.arg(message_list_visibility)
 
-  gmailr_POST(c("labels", id), user_id,
+  gmailr_POST("labels", user_id,
               body = c(rename(name,
                               label_list_visibility,
                               message_list_visibility)),
