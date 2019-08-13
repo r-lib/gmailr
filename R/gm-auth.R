@@ -235,6 +235,9 @@ gm_oauth_app <- function() {
 #' @seealso Wraps the `getProfile` endpoint:
 #'   * <https://developers.google.com/gmail/api/v1/reference/users/getProfile>
 #'
+#' @param verbose Logical, indicating whether to print informative messages
+#'   (default `TRUE`).
+#' @inheritParams gm_message
 #' @return A list of class `gmail_profile`.
 #' @export
 #' @examples

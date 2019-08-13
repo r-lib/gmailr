@@ -6,6 +6,12 @@
 \usage{
 gm_profile(user_id = "me", verbose = TRUE)
 }
+\arguments{
+\item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
+
+\item{verbose}{Logical, indicating whether to print informative messages
+(default \code{TRUE}).}
+}
 \value{
 A list of class \code{gmail_profile}.
 }
