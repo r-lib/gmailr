@@ -5,36 +5,57 @@
 \alias{gm_oauth_app}
 \title{Edit auth configuration}
 \usage{
-gm_auth_configure(app, path)
+gm_auth_configure(key = Sys.getenv("GMAILR_APP_KEY"),
+  secret = Sys.getenv("GMAILR_APP_SECRET"), path = "",
+  appname = "gmailr", ...)
 
 gm_oauth_app()
 }
 \arguments{
-\item{app}{OAuth app, in the sense of [httr::oauth_app()].}
+\item{key}{consumer key, also sometimes called the client ID}
+
+\item{secret}{consumer secret, also sometimes called the client secret.
+Despite its name, this does not necessarily need to be protected like a
+password, i.e. the user still has to authenticate themselves and grant the
+app permission to access resources on their behalf. For example, see
+Google's docs for
+\href{{https://developers.google.com/identity/protocols/OAuth2#installed}{OAuth2 for installed applications}}.}
 
 \item{path}{JSON downloaded from Google Cloud Platform Console, containing a
 client id (aka key) and secret, in one of the forms supported for the \code{txt}
 argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
+
+\item{appname}{name of the application.  This is not used for OAuth, but is
+used to make it easier to identify different applications.}
+
+\item{...}{Additional arguments passed to \code{\link[httr:oauth_app]{httr::oauth_app()}}}
+
+\item{app}{OAuth app, in the sense of \code{\link[httr:oauth_app]{httr::oauth_app()}}.}
 }
 \value{
-* `gm_auth_configure()`: An object of R6 class
-    [gargle::AuthState], invisibly.
-  * `gm_oauth_app()`: the current user-configured
-    [httr::oauth_app()].
+\itemize{
+\item \code{gm_auth_configure()}: An object of R6 class
+\link[gargle:AuthState]{gargle::AuthState}, invisibly.
+\item \code{gm_oauth_app()}: the current user-configured
+\code{\link[httr:oauth_app]{httr::oauth_app()}}.
+}
 }
 \description{
 These functions give more control over and visibility into the auth
-configuration than [gm_auth()] does. `gm_auth_configure()`
+configuration than \code{\link[=gm_auth]{gm_auth()}} does. \code{gm_auth_configure()}
 lets the user specify their own:
-  * OAuth app, which is used when obtaining a user token.
+\itemize{
+\item OAuth app, which is used when obtaining a user token.
 See the vignette
-[How to get your own API credentials](https://gargle.r-lib.org/articles/get-api-credentials.html)
+\href{https://gargle.r-lib.org/articles/get-api-credentials.html}{How to get your own API credentials}
 for more.
 If the user does not configure these settings, internal defaults
 are used.
-`gm_oauth_app()` retrieves the currently configured OAuth app.
+\code{gm_oauth_app()} retrieves the currently configured OAuth app.
+}
 }
 \examples{
+\dontrun{
 # see the current user-configured OAuth app (probaby `NULL`)
 gm_oauth_app()
 
@@ -59,7 +80,6 @@ if (require(httr)) {
   gm_oauth_app()
 }
 
-\dontrun{
 # bring your own app via JSON downloaded from Google Developers Console
 gm_auth_configure(
   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"

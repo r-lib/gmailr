@@ -1,6 +1,6 @@
 #' \pkg{gmailr} makes gmail access easy.
 #'
-#' \code{gmailr} provides an interface to the gmail api \url{https://developers.google.com/gmail/api/}
+#' `gmailr` provides an interface to the gmail api <https://developers.google.com/gmail/api/>
 #' @docType package
 #' @name gmailr
 #' @import httr
@@ -9,7 +9,7 @@ NULL
 
 #' Pipe statements
 #'
-#' Like dplyr and ggvis gmailr also uses the pipe function, \code{\%>\%} to turn
+#' Like dplyr and ggvis gmailr also uses the pipe function, `\%>\%` to turn
 #' function composition into a series of imperative statements.
 #'
 #' @importFrom magrittr %>%

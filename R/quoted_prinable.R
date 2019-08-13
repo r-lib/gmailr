@@ -3,7 +3,7 @@
 #' Does no do any line wrapping of the output to 76 characters
 #' Implementation derived from the perl MIME::QuotedPrint
 #' @param data data to encode
-#' @references \url{http://search.cpan.org/~gaas/MIME-Base64-3.14/QuotedPrint.pm}
+#' @references <http://search.cpan.org/~gaas/MIME-Base64-3.14/QuotedPrint.pm>
 #' @export
 quoted_printable_encode <- function(data){
   # All printable ASCII characters (decimal values between 33 and 126) may be represented by themselves, except "=" (decimal 61).

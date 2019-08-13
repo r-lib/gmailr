@@ -58,7 +58,7 @@ attach_file(mime, filename, type = NULL, ...)
 }
 \description{
 These functions create a MIME message. They can be created atomically using
-`mime()` or iteratively using the various accessors.
+\code{mime()} or iteratively using the various accessors.
 }
 \examples{
 # using the field functions

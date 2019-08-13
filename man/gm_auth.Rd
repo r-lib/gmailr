@@ -51,34 +51,36 @@ httr's class \code{request}, i.e. a token that has been prepared with
 }
 \description{
 Authorize gmailr to view and manage your Gmail projects. This function is a
-wrapper around [gargle::token_fetch()].
+wrapper around \code{\link[gargle:token_fetch]{gargle::token_fetch()}}.
 
 By default, you are directed to a web browser, asked to sign in to your
 Google account, and to grant gmailr permission to operate on your
 behalf with Google Gmail. By default, these user credentials are cached in a
-folder below your home directory, `~/.R/gargle/gargle-oauth`, from where
+folder below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
 }
 \details{
-Most users, most of the time, do not need to call `gm_auth()`
+Most users, most of the time, do not need to call \code{gm_auth()}
 explicitly -- it is triggered by the first action that requires
 authorization. Even when called, the default arguments often suffice.
 However, when necessary, this function allows the user to explicitly:
-  * Declare which Google identity to use, via an email address. If there
-    are multiple cached tokens, this can clarify which one to use. It can
-    also force gmailr to switch from one identity to another. If
-    there's no cached token for the email, this triggers a return to the
-    browser to choose the identity and give consent.
-  * Use a service account token.
-  * Bring their own [Token2.0][httr::Token-class].
-  * Specify non-default behavior re: token caching and out-of-bound
-    authentication.
+\itemize{
+\item Declare which Google identity to use, via an email address. If there
+are multiple cached tokens, this can clarify which one to use. It can
+also force gmailr to switch from one identity to another. If
+there's no cached token for the email, this triggers a return to the
+browser to choose the identity and give consent.
+\item Use a service account token.
+\item Bring their own \link[httr:Token-class]{Token2.0}.
+\item Specify non-default behavior re: token caching and out-of-bound
+authentication.
+}
 
 For details on the many ways to find a token, see
-[gargle::token_fetch()]. For deeper control over auth, use
-[gm_auth_configure()] to bring your own OAuth app or API key.
+\code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
+\code{\link[=gm_auth_configure]{gm_auth_configure()}} to bring your own OAuth app or API key.
 }
 \examples{
 \dontrun{

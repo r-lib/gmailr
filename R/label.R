@@ -2,7 +2,7 @@
 #'
 #' Get a list of all labels for a user.
 #' @inheritParams message
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/list}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/labels/list>
 #' @family label
 #' @export
 #' @examples
@@ -19,7 +19,7 @@ labels <- function(user_id = "me"){
 #' Get a specific label by id and user_id.
 #' @param id label id to retrieve
 #' @inheritParams labels
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/labels/get>
 #' @family label
 #' @export
 label <- function(id, user_id = "me") {
@@ -28,12 +28,12 @@ label <- function(id, user_id = "me") {
 
 #' Update a existing label.
 #'
-#' Get a specific label by id and user_id.  \code{update_label_patch} is identical to \code{update_label} but the latter uses \href{http://tools.ietf.org/html/rfc5789}{HTTP PATCH} to allow partial update.
+#' Get a specific label by id and user_id.  `update_label_patch` is identical to `update_label` but the latter uses [HTTP PATCH](http://tools.ietf.org/html/rfc5789) to allow partial update.
 #' @param id label id to update
 #' @param label the label fields to update
 #' @inheritParams labels
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/update}
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/patch}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/labels/update>
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/labels/patch>
 #' @family label
 #' @export
 update_label <- function(id, label, user_id = "me") {
@@ -51,7 +51,7 @@ update_label_patch <- function(id, label, user_id = "me") {
 #'
 #' Function to delete a label by id.  This cannot be undone!
 #' @inheritParams label
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/delete}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/labels/delete>
 #' @family label
 #' @export
 delete_label <- function(id, user_id = "me") {
@@ -65,7 +65,7 @@ delete_label <- function(id, user_id = "me") {
 #' @param label_list_visibility The visibility of the label in the label list in the Gmail web interface.
 #' @param message_list_visibility The visibility of messages with this label in the message list in the Gmail web interface.
 #' @inheritParams labels
-#' @references \url{https://developers.google.com/gmail/api/v1/reference/users/labels/create}
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/labels/create>
 #' @family label
 #' @export
 create_label <- function(name,
