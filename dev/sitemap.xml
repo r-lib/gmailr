@@ -40,6 +40,21 @@
     <loc>http://vroom.r-lib.org/reference/drafts.html</loc>
   </url>
   <url>
+    <loc>http://vroom.r-lib.org/reference/gm_auth.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_auth_configure.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_deauth.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_has_token.html</loc>
+  </url>
+  <url>
+    <loc>http://vroom.r-lib.org/reference/gm_token.html</loc>
+  </url>
+  <url>
     <loc>http://vroom.r-lib.org/reference/gmail_auth.html</loc>
   </url>
   <url>

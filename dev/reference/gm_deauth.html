@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remove a single thread from the trash. — untrash_thread • gmailr</title>
+<title>Clear current token — gm_deauth • gmailr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,15 @@
 
 
 
-<meta property="og:title" content="Remove a single thread from the trash. — untrash_thread" />
+<meta property="og:title" content="Clear current token — gm_deauth" />
 
-<meta property="og:description" content="Function to untrash a given thread by id.  This can reverse the results of a previous trash_thread()." />
+<meta property="og:description" content="Clears any currently stored token. The next time gmailr needs a token,
+the token acquisition process starts over, with a fresh call to
+gm_auth() and, therefore, internally, a call to
+gargle::token_fetch(). Unlike some other packages that use gargle,
+gmailr is not usable in a de-authorized state. Therefore, calling
+gm_deauth() only clears the token, i.e. it does NOT imply that
+subsequent requests are made with an API key in lieu of a token." />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -114,55 +120,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remove a single thread from the trash.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/thread.R'><code>R/thread.R</code></a></small>
-    <div class="hidden name"><code>untrash_thread.Rd</code></div>
+    <h1>Clear current token</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/gm-auth.R'><code>R/gm-auth.R</code></a></small>
+    <div class="hidden name"><code>gm_deauth.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Function to untrash a given thread by id.  This can reverse the results of a previous <code><a href='trash_thread.html'>trash_thread()</a></code>.</p>
+    <p>Clears any currently stored token. The next time gmailr needs a token,
+the token acquisition process starts over, with a fresh call to
+<code><a href='gm_auth.html'>gm_auth()</a></code> and, therefore, internally, a call to
+<code><a href='https://gargle.r-lib.org/reference/token_fetch.html'>gargle::token_fetch()</a></code>. Unlike some other packages that use gargle,
+gmailr is not usable in a de-authorized state. Therefore, calling
+<code>gm_deauth()</code> only clears the token, i.e. it does NOT imply that
+subsequent requests are made with an API key in lieu of a token.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>untrash_thread</span>(<span class='no'>id</span>, <span class='kw'>user_id</span> <span class='kw'>=</span> <span class='st'>"me"</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>id</th>
-      <td><p>thread id to access</p></td>
-    </tr>
-    <tr>
-      <th>user_id</th>
-      <td><p>gmail user_id to access, special value of 'me' indicates the authenticated user.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p><a href='https://developers.google.com/gmail/api/v1/reference/users/threads/untrash'>https://developers.google.com/gmail/api/v1/reference/users/threads/untrash</a></p>
-    
+    <pre class="usage"><span class='fu'>gm_deauth</span>()</pre>
+        
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other thread: <code><a href='delete_thread.html'>delete_thread</a></code>,
-  <code><a href='modify_thread.html'>modify_thread</a></code>, <code><a href='threads.html'>threads</a></code>,
-  <code><a href='thread.html'>thread</a></code>, <code><a href='trash_thread.html'>trash_thread</a></code></p></div>
+    <div class='dont-index'><p>Other auth functions: <code><a href='gm_auth_configure.html'>gm_auth_configure</a></code>,
+  <code><a href='gm_auth.html'>gm_auth</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>untrash_thread</span>(<span class='fl'>12345</span>)
+<span class='fu'>gm_deauth</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
