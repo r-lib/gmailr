@@ -4,8 +4,8 @@
 \alias{create_label}
 \title{Create a new label}
 \usage{
-create_label(name, label_list_visibility = c("hide", "show",
-  "show_unread"), message_list_visibility = c("hide", "show"),
+create_label(name, label_list_visibility = c("show", "hide",
+  "show_unread"), message_list_visibility = c("show", "hide"),
   user_id = "me")
 }
 \arguments{
