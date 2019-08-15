@@ -148,3 +148,5 @@ exists_list <- function(data, x){
 p <- function(...) paste(sep="", collapse="", ...)
 
 vcapply <- function(...) vapply(..., FUN.VALUE = character(1))
+
+iSFALSE <- funciton(x) is.logical(x) && length(x) == 1L && !is.na(x) && !x
