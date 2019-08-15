@@ -8,19 +8,35 @@ test_that("MIME - Basic functions", {
           expect_true(length(msg$header) > 0, label = "Even the default object has headers")
 
           rv <- msg %>% to("adam@ali.as")
-          expect_equal(rv$header$To, "adam@ali.as", label = "to sets To Header")
+          expect_equal(header_encode(rv$header$To), "adam@ali.as", label = "to sets To Header")
 
           rv <- msg %>% from("bob@ali.as")
-          expect_equal(rv$header$From, "bob@ali.as", label = "from sets From Header")
+          expect_equal(header_encode(rv$header$From), "bob@ali.as", label = "from sets From Header")
 
           rv <- msg %>% to(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
-          expect_equal(rv$header$To, "adam@ali.as, another@ali.as, bob@ali.as", label = "to (multiple) sets To header" )
+          expect_equal(header_encode(rv$header$To), "adam@ali.as, another@ali.as, bob@ali.as", label = "to (multiple) sets To header" )
 
           rv <- msg %>% cc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
-          expect_equal(rv$header$Cc, "adam@ali.as, another@ali.as, bob@ali.as", label = "cc (multiple) sets To header" )
+          expect_equal(header_encode(rv$header$Cc), "adam@ali.as, another@ali.as, bob@ali.as", label = "cc (multiple) sets To header" )
 
           rv <- msg %>% bcc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
-          expect_equal(rv$header$Bcc, "adam@ali.as, another@ali.as, bob@ali.as", label = "bcc (multiple) sets To header" )
+          expect_equal(header_encode(rv$header$Bcc), "adam@ali.as, another@ali.as, bob@ali.as", label = "bcc (multiple) sets To header" )
+})
+
+test_that("header_encode encodes non-ascii values as base64", {
+  expect_equal(header_encode("f\U00F6\U00F6"), "=?utf-8?B?ZsO2w7Y=?=")
+
+  expect_equal(header_encode('"f\U00F6\U00F6 b\U00E1r" <baz@qux.com>'), "=?utf-8?B?ImbDtsO2IGLDoXIiIA==?= <baz@qux.com>")
+
+  res <- header_encode(
+    c('"f\U00F6\U00F6 b\U00E1r" <baz@qux.com>',
+      '"foo bar" <foo.bar@baz.com>',
+      "qux@baz.com",
+      '"q\U00FBx " <qux@foo.com>'
+    )
+  )
+
+  expect_equal(res, "=?utf-8?B?ImbDtsO2IGLDoXIiIA==?= <baz@qux.com>, \"foo bar\"  <foo.bar@baz.com>, qux@baz.com, =?utf-8?B?InHDu3ggIiA=?= <qux@foo.com>")
 })
 
 context("MIME - More Complex")

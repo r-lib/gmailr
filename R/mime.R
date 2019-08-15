@@ -28,13 +28,12 @@ gm_mime <- function(..., attr = NULL, body = NULL, parts = list()) {
 }
 
 #' @param x the object whose fields you are setting
-#' @param val the value to set
-#' @param vals one or more values to use, will be joined by commas
+#' @param val the value to set, can be a vector, in which case the values will be joined by ", ".
 #' @rdname gm_mime
 #' @export
-gm_to.mime <- function(x, vals, ...){
-  if(missing(vals)){ return(x$header$To) }
-  x$header$To <- paste0(collapse = ", ", vals)
+gm_to.mime <- function(x, val, ...){
+  if(missing(val)){ return(x$header$To) }
+  x$header$To <- val
   x
 }
 
@@ -48,17 +47,17 @@ gm_from.mime <- function(x, val, ...){
 
 #' @rdname gm_mime
 #' @export
-gm_cc.mime <- function(x, vals, ...){
-  if(missing(vals)){ return(x$header$Cc) }
-  x$header$Cc <- paste0(collapse = ", ", vals)
+gm_cc.mime <- function(x, val, ...){
+  if(missing(val)){ return(x$header$Cc) }
+  x$header$Cc <- val
   x
 }
 
 #' @rdname gm_mime
 #' @export
-gm_bcc.mime <- function(x, vals, ...){
-  if(missing(vals)){ return(x$header$Bcc) }
-  x$header$Bcc <- paste0(collapse = ", ", vals)
+gm_bcc.mime <- function(x, val, ...){
+  if(missing(val)){ return(x$header$Bcc) }
+  x$header$Bcc <- val
   x
 }
 
@@ -138,6 +137,29 @@ gm_attach_file <- function(mime, filename, type = NULL, ...){
          ...)
 }
 
+header_encode <- function(x) {
+  x <- enc2utf8(unlist(strsplit(as.character(x), ", ?")))
+
+  # this won't deal with <> used in quotes, but I think it is rare enough that
+  # is ok
+  m <- rematch2::re_match(x, "^(?<phrase>[^<]+)(?: *<(?<addr_spec>[^>]+)>)?$")
+  res <- character(length(x))
+
+  # simple addresses contain no <>, so we don't need to do anything further
+  simple <- !nzchar(m$addr_spec)
+  res[simple] <- m$phrase[simple]
+
+  # complex addresses may need to be base64-encoded
+  needs_encoding <- Encoding(m$phrase) != "unknown"
+  res[needs_encoding] <- sprintf("=?utf-8?B?%s?=", vcapply(m$phrase[needs_encoding], encode_base64))
+  res[!needs_encoding] <- m$phrase[!needs_encoding]
+
+  # Add the addr_spec onto non-simple examples
+  res[!simple] <- sprintf("%s <%s>", res[!simple], m$addr_spec[!simple])
+
+  paste0(res, collapse = ", ")
+}
+
 #' Convert a mime object to character representation
 #'
 #' This function converts a mime object into a character vector
@@ -147,6 +169,9 @@ gm_attach_file <- function(mime, filename, type = NULL, ...){
 #' @param ... further arguments ignored
 #' @export
 as.character.mime <- function(x, newline="\r\n", ...) {
+
+  # encode headers
+  x$header <- lapply(x$header, header_encode)
 
   # if we have both the text part and html part, we have to embed them in a multipart/alternative message
   if(x$attr$content_type %!=% "multipart/alternative" && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)){

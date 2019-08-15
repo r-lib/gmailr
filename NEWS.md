@@ -1,5 +1,8 @@
 # gmailr (development)
 
+* Unicode text can now be used in email headers, including the Subject and
+  address fields, like To and Cc (#76, #78)
+
 * New `gm_profile()` function to return the gmail profile of the currently
   logged in user (#114)
 

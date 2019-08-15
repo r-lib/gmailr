@@ -124,6 +124,10 @@ substitute_regex <- function(data, pattern, fun, ...) {
 NULL
 
 encode_base64 <- function(x, line_length = 76L, newline = "\r\n") {
+  if (length(x) == 0) {
+    return(x)
+  }
+
   if(is.raw(x)) {
     base64encode(x, 76L, newline)
   } else {
@@ -142,3 +146,5 @@ exists_list <- function(data, x){
 "%!=%" <- function(x, y) { !identical(x, y) }
 
 p <- function(...) paste(sep="", collapse="", ...)
+
+vcapply <- function(...) vapply(..., FUN.VALUE = character(1))
