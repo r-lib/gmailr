@@ -1,5 +1,7 @@
 # gmailr (development)
 
+* Quoted-printable now works with smart quotes (#77)
+
 * Unicode text can now be used in email headers, including the Subject and
   address fields, like To and Cc (#76, #78)
 
