@@ -15,13 +15,13 @@
 \usage{
 gm_mime(..., attr = NULL, body = NULL, parts = list())
 
-\method{gm_to}{mime}(x, vals, ...)
+\method{gm_to}{mime}(x, val, ...)
 
 \method{gm_from}{mime}(x, val, ...)
 
-\method{gm_cc}{mime}(x, vals, ...)
+\method{gm_cc}{mime}(x, val, ...)
 
-\method{gm_bcc}{mime}(x, vals, ...)
+\method{gm_bcc}{mime}(x, val, ...)
 
 \method{gm_subject}{mime}(x, val, ...)
 
@@ -44,9 +44,7 @@ gm_attach_file(mime, filename, type = NULL, ...)
 
 \item{x}{the object whose fields you are setting}
 
-\item{vals}{one or more values to use, will be joined by commas}
-
-\item{val}{the value to set}
+\item{val}{the value to set, can be a vector, in which case the values will be joined by ", ".}
 
 \item{mime}{message.}
 
