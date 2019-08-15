@@ -149,4 +149,6 @@ p <- function(...) paste(sep="", collapse="", ...)
 
 vcapply <- function(...) vapply(..., FUN.VALUE = character(1))
 
-iSFALSE <- funciton(x) is.logical(x) && length(x) == 1L && !is.na(x) && !x
+iSFALSE <- function(x) {
+  is.logical(x) && length(x) == 1L && !is.na(x) && !x
+}
