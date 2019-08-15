@@ -130,16 +130,16 @@ mime() or iteratively using the various accessors." />
     <pre class="usage"><span class='fu'>gm_mime</span>(<span class='no'>...</span>, <span class='kw'>attr</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>body</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parts</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>())
 
 <span class='co'># S3 method for mime</span>
-<span class='fu'><a href='accessors.html'>gm_to</a></span>(<span class='no'>x</span>, <span class='no'>vals</span>, <span class='no'>...</span>)
+<span class='fu'><a href='accessors.html'>gm_to</a></span>(<span class='no'>x</span>, <span class='no'>val</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for mime</span>
 <span class='fu'><a href='accessors.html'>gm_from</a></span>(<span class='no'>x</span>, <span class='no'>val</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for mime</span>
-<span class='fu'><a href='accessors.html'>gm_cc</a></span>(<span class='no'>x</span>, <span class='no'>vals</span>, <span class='no'>...</span>)
+<span class='fu'><a href='accessors.html'>gm_cc</a></span>(<span class='no'>x</span>, <span class='no'>val</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for mime</span>
-<span class='fu'><a href='accessors.html'>gm_bcc</a></span>(<span class='no'>x</span>, <span class='no'>vals</span>, <span class='no'>...</span>)
+<span class='fu'><a href='accessors.html'>gm_bcc</a></span>(<span class='no'>x</span>, <span class='no'>val</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for mime</span>
 <span class='fu'><a href='accessors.html'>gm_subject</a></span>(<span class='no'>x</span>, <span class='no'>val</span>, <span class='no'>...</span>)
@@ -176,12 +176,8 @@ mime() or iteratively using the various accessors." />
       <td><p>the object whose fields you are setting</p></td>
     </tr>
     <tr>
-      <th>vals</th>
-      <td><p>one or more values to use, will be joined by commas</p></td>
-    </tr>
-    <tr>
       <th>val</th>
-      <td><p>the value to set</p></td>
+      <td><p>the value to set, can be a vector, in which case the values will be joined by ", ".</p></td>
     </tr>
     <tr>
       <th>mime</th>
