@@ -18,7 +18,8 @@ Imports:
     jsonlite,
     lifecycle,
     magrittr,
-    mime
+    mime,
+    rematch2
 Suggests:
     covr,
     knitr,
