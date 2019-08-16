@@ -1,17 +1,18 @@
 # R package
 # Test an R package
 
-variables:
-  GMAILR_APP: $(GMAILR_APP)
-  GMAILR_EMAIL: $(GMAILR_EMAIL)
-  GMAILR_PASSWORD: $(GMAILR_PASSWORD)
-
 resources:
   repositories:
     - repository: r-azure-pipelines
       type: github
       name: r-lib/r-azure-pipelines
       endpoint: r-lib
+      ref: refs/heads/test-env
 
 jobs:
   - template: azure-tidyverse.yml@r-azure-pipelines
+    parameters:
+      env:
+        GMAILR_APP: $(GMAILR_APP)
+        GMAILR_EMAIL: $(GMAILR_EMAIL)
+        GMAILR_PASSWORD: $(GMAILR_PASSWORD)
