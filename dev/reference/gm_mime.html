@@ -148,9 +148,9 @@ mime() or iteratively using the various accessors." />
 
 <span class='fu'>gm_html_body</span>(<span class='no'>mime</span>, <span class='no'>body</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_attach_part</span>(<span class='no'>mime</span>, <span class='no'>part</span>, <span class='no'>...</span>)
+<span class='fu'>gm_attach_part</span>(<span class='no'>mime</span>, <span class='no'>part</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_attach_file</span>(<span class='no'>mime</span>, <span class='no'>filename</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>gm_attach_file</span>(<span class='no'>mime</span>, <span class='no'>filename</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,6 +186,10 @@ mime() or iteratively using the various accessors." />
     <tr>
       <th>part</th>
       <td><p>Message part to attach</p></td>
+    </tr>
+    <tr>
+      <th>id</th>
+      <td><p>The content ID of the attachment</p></td>
     </tr>
     <tr>
       <th>filename</th>
