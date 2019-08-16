@@ -1,8 +1,7 @@
 variables:
-  global_variable: value    # this is available to all jobs
-
-  # R package
-# Test an R package
+  GMAILR_APP: $(GMAILR_APP_SECRET)
+  GMAILR_EMAIL: $(GMAILR_EMAIL_SECRET)
+  GMAILR_PASSWORD: $(GMAILR_PASSWORD_SECRET)
 
 resources:
   repositories:
@@ -14,8 +13,3 @@ resources:
 
 jobs:
   - template: azure-tidyverse.yml@r-azure-pipelines
-    parameters:
-      env:
-        GMAILR_APP: $(GMAILR_APP_SECRET)
-        GMAILR_EMAIL: $(GMAILR_EMAIL_SECRET)
-        GMAILR_PASSWORD: $(GMAILR_PASSWORD_SECRET)
