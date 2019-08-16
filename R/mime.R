@@ -104,6 +104,7 @@ HTML_PART <- 2L
 #' @param part Message part to attach
 #' @param filename name of file to attach
 #' @param type mime type of the attached file
+#' @param id The content ID of the attachment
 #' @rdname gm_mime
 #' @export
 gm_attach_part <- function(mime, part, id = NULL, ...){

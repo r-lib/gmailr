@@ -50,6 +50,8 @@ gm_attach_file(mime, filename, type = NULL, id = NULL, ...)
 
 \item{part}{Message part to attach}
 
+\item{id}{The content ID of the attachment}
+
 \item{filename}{name of file to attach}
 
 \item{type}{mime type of the attached file}
