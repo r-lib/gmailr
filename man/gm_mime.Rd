@@ -29,9 +29,9 @@ gm_text_body(mime, body, ...)
 
 gm_html_body(mime, body, ...)
 
-gm_attach_part(mime, part, ...)
+gm_attach_part(mime, part, id = NULL, ...)
 
-gm_attach_file(mime, filename, type = NULL, ...)
+gm_attach_file(mime, filename, type = NULL, id = NULL, ...)
 }
 \arguments{
 \item{...}{additional parameters to put in the attr field}
