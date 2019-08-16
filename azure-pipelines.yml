@@ -17,8 +17,6 @@ resources:
 jobs:
   - job: 'Linux'
     variables:
-      CRAN: ${{parameters.CRAN}}
-      R_LIBS_USER: ${{parameters.R_LIBS_USER}}
       TZ: UTC
     pool:
       vmImage: 'Ubuntu-16.04'
@@ -44,22 +42,15 @@ jobs:
 
 
   - job: 'macOS'
-    variables:
-      CRAN: ${{parameters.CRAN}}
-      R_LIBS_USER: ${{parameters.R_LIBS_USER}}
-      ${{ insert }}: ${{ parameters.env }}
     pool:
       vmImage: 'macOS-10.13'
     steps:
       - template: templates/r-setup-macOS.yml
       - template: templates/pkg-workflow.yml
         parameters:
-          coverage: ${{parameters.coverage}}
+          coverage: true
 
   - job: 'Windows'
-    variables:
-      CRAN: ${{parameters.CRAN}}
-      R_LIBS_USER: ${{parameters.R_LIBS_USER}}
     pool:
       vmImage: 'vs2017-win2016'
     steps:
