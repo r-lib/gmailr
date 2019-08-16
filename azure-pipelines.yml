@@ -2,6 +2,9 @@ variables:
   GMAILR_APP: $(GMAILR_APP_SECRET)
   GMAILR_EMAIL: $(GMAILR_EMAIL_SECRET)
   GMAILR_PASSWORD: $(GMAILR_PASSWORD_SECRET)
+  R_LIBS_USER: '$(Agent.BuildDirectory)/R/library'
+  CRAN: 'https://cloud.r-project.org'
+  coverage: true
 
 resources:
   repositories:
@@ -10,12 +13,6 @@ resources:
       name: r-lib/r-azure-pipelines
       endpoint: r-lib
       ref: refs/heads/test-env
-
-
-parameters:
-  R_LIBS_USER: '$(Agent.BuildDirectory)/R/library'
-  CRAN: 'https://cloud.r-project.org'
-  coverage: true
 
 jobs:
   - job: 'Linux'
