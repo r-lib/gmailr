@@ -13,6 +13,6 @@ jobs:
   - template: azure-tidyverse.yml@r-azure-pipelines
     parameters:
       env:
-        GMAILR_APP: $(GMAILR_APP)
-        GMAILR_EMAIL: $(GMAILR_EMAIL)
-        GMAILR_PASSWORD: $(GMAILR_PASSWORD)
+        GMAILR_APP: $(GMAILR_APP_SECRET)
+        GMAILR_EMAIL: $(GMAILR_EMAIL_SECRET)
+        GMAILR_PASSWORD: $(GMAILR_PASSWORD_SECRET)
