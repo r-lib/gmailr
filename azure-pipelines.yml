@@ -9,7 +9,6 @@ resources:
       type: github
       name: r-lib/r-azure-pipelines
       endpoint: r-lib
-      ref: refs/heads/test-env
 
 jobs:
   - job: 'Linux'
