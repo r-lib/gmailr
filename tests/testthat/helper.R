@@ -1,5 +1,5 @@
 str(Sys.getenv("GMAILR_EMAIL"))
-  options(gargle_quiet = FALSE)
+options(gargle_quiet = FALSE)
 if (gargle:::secret_can_decrypt("gmailr")) {
   # we want to use the oauth token directly, this avoids the need to reproduce the token filename
   token <- unserialize(gzcon(rawConnection(gargle:::secret_read("gmailr", "rpkgtester@gmail.com"))))
