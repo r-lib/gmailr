@@ -35,7 +35,7 @@ jobs:
     container: $[ variables['containerImage'] ]
     steps:
       - template: templates/r-setup-linux.yml@r-azure-pipelines
-      - bash: apt-get install -y libsodium-dev
+      - bash: sudo apt-get install -y libsodium-dev
         displayName: "Install libsodium"
       - template: templates/pkg-workflow.yml@r-azure-pipelines
         parameters:
