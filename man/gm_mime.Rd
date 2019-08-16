@@ -29,9 +29,9 @@ gm_text_body(mime, body, ...)
 
 gm_html_body(mime, body, ...)
 
-gm_attach_part(mime, part, ...)
+gm_attach_part(mime, part, id = NULL, ...)
 
-gm_attach_file(mime, filename, type = NULL, ...)
+gm_attach_file(mime, filename, type = NULL, id = NULL, ...)
 }
 \arguments{
 \item{...}{additional parameters to put in the attr field}
@@ -49,6 +49,8 @@ gm_attach_file(mime, filename, type = NULL, ...)
 \item{mime}{message.}
 
 \item{part}{Message part to attach}
+
+\item{id}{The content ID of the attachment}
 
 \item{filename}{name of file to attach}
 

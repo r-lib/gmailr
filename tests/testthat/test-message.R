@@ -1,5 +1,5 @@
 test_that("messages and message work", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   msgs <- messages()
   expect_is(msgs, "gmail_messages")
@@ -19,7 +19,7 @@ test_that("messages and message work", {
 })
 
 test_that("messages and message work", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   msgs <- messages()
   expect_is(msgs, "gmail_messages")
@@ -39,12 +39,14 @@ test_that("messages and message work", {
 })
 
 test_that("import_message works", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   new_id <- id(import_message(
     mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
+  on.exit(delete_message(new_id))
+
   expect_is(new_id, "character")
 
   # Doing the scanning takes some time, so we can't retrieve the message
@@ -59,7 +61,7 @@ test_that("import_message works", {
 })
 
 test_that("insert_message, modify_message, trash_message and untrash_message work", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   new_id <- id(insert_message(
     mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
@@ -94,7 +96,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
 })
 
 test_that("send_message works", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   msg <- mime(From=Sys.getenv("GMAILR_EMAIL"), To=Sys.getenv("GMAILR_EMAIL"), Subject="hello myself", body = "how are you doing? I am doing well!")
   sent_id <- id(send_message(msg))

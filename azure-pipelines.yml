@@ -1,5 +1,7 @@
-# R package
-# Test an R package
+variables:
+  R_LIBS_USER: '$(Agent.BuildDirectory)/R/library'
+  CRAN: 'https://cloud.r-project.org'
+  coverage: true
 
 resources:
   repositories:
@@ -7,6 +9,56 @@ resources:
       type: github
       name: r-lib/r-azure-pipelines
       endpoint: r-lib
+      ref: refs/heads/test-env
 
 jobs:
-  - template: azure-tidyverse.yml@r-azure-pipelines
+  - job: 'Linux'
+    variables:
+      TZ: UTC
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    strategy:
+      matrix:
+        R-3.2:
+          containerImage: rstudio/r-base:3.2-xenial
+        R-3.3:
+          containerImage: rstudio/r-base:3.3-xenial
+        R-3.4:
+          containerImage: rstudio/r-base:3.4-xenial
+        R-3.5:
+          containerImage: rstudio/r-base:3.5-xenial
+        R-3.6:
+          containerImage: rstudio/r-base:3.6-xenial
+    container: $[ variables['containerImage'] ]
+    steps:
+      - template: templates/r-setup-linux.yml@r-azure-pipelines
+      - bash: sudo apt-get install -y libsodium-dev
+        displayName: "Install libsodium"
+      - template: templates/pkg-workflow.yml@r-azure-pipelines
+        parameters:
+          coverage: false
+
+
+  - job: 'macOS'
+    variables:
+      GMAILR_APP: $(GMAILR_APP_SECRET)
+      GMAILR_EMAIL: $(GMAILR_EMAIL_SECRET)
+      GMAILR_PASSWORD: $(GMAILR_PASSWORD_SECRET)
+    pool:
+      vmImage: 'macOS-10.13'
+    steps:
+      - template: templates/r-setup-macOS.yml@r-azure-pipelines
+      - template: templates/pkg-workflow.yml@r-azure-pipelines
+        parameters:
+          coverage: true
+
+  - job: 'Windows'
+    pool:
+      vmImage: 'vs2017-win2016'
+    steps:
+      - template: templates/r-setup-windows.yml@r-azure-pipelines
+      - template: templates/pkg-workflow.yml@r-azure-pipelines
+        parameters:
+          args: "c('--no-manual', '--no-multiarch')"
+          coverage: false
+          cache: false

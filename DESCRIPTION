@@ -24,6 +24,7 @@ Suggests:
     covr,
     knitr,
     methods,
+    sodium,
     rmarkdown,
     testthat,
     xml2

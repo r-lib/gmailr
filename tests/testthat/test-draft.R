@@ -1,5 +1,5 @@
 test_that("create_draft, drafts, draft and send_draft", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   my_email <- Sys.getenv("GMAILR_EMAIL")
 

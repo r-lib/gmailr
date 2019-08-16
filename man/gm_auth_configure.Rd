@@ -5,10 +5,9 @@
 \alias{gm_oauth_app}
 \title{Edit auth configuration}
 \usage{
-gm_auth_configure(key = Sys.getenv("GMAILR_APP_KEY"),
-  secret = Sys.getenv("GMAILR_APP_SECRET"), path = "",
-  appname = "gmailr", ..., app = httr::oauth_app(appname, key, secret,
-  ...))
+gm_auth_configure(key = "", secret = "",
+  path = Sys.getenv("GMAILR_APP"), appname = "gmailr", ...,
+  app = httr::oauth_app(appname, key, secret, ...))
 
 gm_oauth_app()
 }

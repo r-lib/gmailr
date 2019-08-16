@@ -197,9 +197,9 @@ gm_has_token <- function() {
 #'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 #' )
 #' }
-gm_auth_configure <- function(key = Sys.getenv("GMAILR_APP_KEY"),
-                              secret = Sys.getenv("GMAILR_APP_SECRET"),
-                              path = "",
+gm_auth_configure <- function(key = "",
+                              secret = "",
+                              path = Sys.getenv("GMAILR_APP"),
                               appname = "gmailr",
                               ...,
                               app = httr::oauth_app(appname, key, secret, ...)) {
