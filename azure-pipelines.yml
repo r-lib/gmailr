@@ -1,4 +1,7 @@
-# R package
+variables:
+  global_variable: value    # this is available to all jobs
+
+  # R package
 # Test an R package
 
 resources:
