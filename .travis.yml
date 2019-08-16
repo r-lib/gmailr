@@ -1,6 +1,11 @@
 language: r
 cache: packages
 
+addons:
+  apt:
+    packages:
+      - libsodium-dev
+
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 deploy:
   provider: script
