@@ -8,9 +8,10 @@ resources:
       name: r-lib/r-azure-pipelines
       endpoint: r-lib
 
+variables:
+  GMAILR_APP: $(GMAILR_APP)
+  GMAILR_EMAIL: $(GMAILR_EMAIL)
+  GMAILR_PASSWORD: $(GMAILR_PASSWORD)
+
 jobs:
-  - env:
-      GMAILR_APP: $(GMAILR_APP)
-      GMAILR_EMAIL: $(GMAILR_EMAIL)
-      GMAILR_PASSWORD: $(GMAILR_PASSWORD)
   - template: azure-tidyverse.yml@r-azure-pipelines
