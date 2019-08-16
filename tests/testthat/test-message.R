@@ -45,6 +45,8 @@ test_that("import_message works", {
     mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
+  on.exit(delete_message(new_id))
+
   expect_is(new_id, "character")
 
   # Doing the scanning takes some time, so we can't retrieve the message
