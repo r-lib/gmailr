@@ -1,5 +1,5 @@
 test_that("threads and thread work", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   thrds <- threads()
   expect_is(thrds, "gmail_threads")

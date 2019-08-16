@@ -1,5 +1,5 @@
 test_that("labels work", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   my_labels <- labels()
   label_names <- vapply(my_labels$labels, `[[`, character(1), "name")
@@ -11,7 +11,7 @@ test_that("labels work", {
 })
 
 test_that("label works", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   my_label <- label("SENT")
 
@@ -21,7 +21,7 @@ test_that("label works", {
 })
 
 test_that("create_label, update_label, update_label_patch and delete_label work", {
-  skip_unless_authenticated()
+  skip_if_no_token()
 
   new_label <- create_label("foo")
   expect_equal(new_label$name, "foo")
