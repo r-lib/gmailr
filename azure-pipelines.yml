@@ -1,7 +1,4 @@
 variables:
-  GMAILR_APP: $(GMAILR_APP_SECRET)
-  GMAILR_EMAIL: $(GMAILR_EMAIL_SECRET)
-  GMAILR_PASSWORD: $(GMAILR_PASSWORD_SECRET)
   R_LIBS_USER: '$(Agent.BuildDirectory)/R/library'
   CRAN: 'https://cloud.r-project.org'
   coverage: true
@@ -43,6 +40,10 @@ jobs:
 
 
   - job: 'macOS'
+    variables:
+      GMAILR_APP: $(GMAILR_APP_SECRET)
+      GMAILR_EMAIL: $(GMAILR_EMAIL_SECRET)
+      GMAILR_PASSWORD: $(GMAILR_PASSWORD_SECRET)
     pool:
       vmImage: 'macOS-10.13'
     steps:
