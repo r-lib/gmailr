@@ -218,13 +218,7 @@ print.gmail_message <- function(x, ...){
 #' @export
 print.gmail_thread <- function(x, ...){
   id <- id(x)
-  subject <- gm_subject(x$messages[[1]])
-  cat(
-    p(crayon::bold("Thread Id: "), id, "\n"),
-    p(crayon::bold("Last Subject: "), subject, "\n"),
-    p(crayon::bold("Num Messages: "), length(x$messages), "\n"),
-    sep = "")
-
+  cat(strwrap(p(crayon::bold("Thread Id: "), id, "\n")), "\n")
 }
 
 #' @export

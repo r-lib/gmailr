@@ -59,7 +59,7 @@ test_that("MIME - More Complex", {
           rv2 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
-                           html_body  ( "I am an <b>email</b>"        ) %>%
+                           text_body  ( "I am an email"               ) %>%
                            attach_file( TEST_PNG                      )
 
           rv2_chr <- as.character(rv2)
