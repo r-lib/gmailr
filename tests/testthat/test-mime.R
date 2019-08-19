@@ -70,32 +70,43 @@ test_that("MIME - More Complex", {
           expect_match(rv2_chr, "I am an email", label = "Email contains text_body" )
           expect_match(rv2_chr, "volcano",       label = "Email contains file name" )
 
-          rv2 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
+          rv3 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
                            attach_file( TEST_INI, content_type = "text/plain")
 
-          rv2_chr <- as.character(rv2)
+          rv3_chr <- as.character(rv3)
 
-          expect_match(rv2_chr, "Jim Hester",    label = "Email contains from name" )
-          expect_match(rv2_chr, "gmail",         label = "Email contains to string" )
-          expect_match(rv2_chr, "Hello",         label = "Email contains subject string" )
-          expect_match(rv2_chr, "I am an email", label = "Email contains text_body" )
-          expect_match(rv2_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type" )
+          expect_match(rv3_chr, "Jim Hester",    label = "Email contains from name" )
+          expect_match(rv3_chr, "gmail",         label = "Email contains to string" )
+          expect_match(rv3_chr, "Hello",         label = "Email contains subject string" )
+          expect_match(rv3_chr, "I am an email", label = "Email contains text_body" )
+          expect_match(rv3_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type" )
 
-          rv2 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
+          rv4 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
                            html_body  ( "I am an html email<br>"               ) %>%
                            attach_file( TEST_INI, content_type = "application/octet-stream")
 
-          expect_match(rv2_chr, "Jim Hester",    label = "Email contains from name" )
-          expect_match(rv2_chr, "gmail",         label = "Email contains to string" )
-          expect_match(rv2_chr, "Hello",         label = "Email contains subject string" )
-          expect_match(rv2_chr, "I am an email", label = "Email contains text_body" )
-          expect_match(rv2_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type" )
+          rv4_chr <- as.character(rv4)
+
+          expect_match(rv4_chr, "Jim Hester",    label = "Email contains from name" )
+          expect_match(rv4_chr, "gmail",         label = "Email contains to string" )
+          expect_match(rv4_chr, "Hello",         label = "Email contains subject string" )
+          expect_match(rv4_chr, "I am an email", label = "Email contains text_body" )
+          expect_match(rv4_chr, base64url_encode("I am an html email<br>"), label = "Email contains html_body" )
+          expect_match(rv4_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type" )
+
+          skip_if_no_token()
+          for (email in c(rv2_chr, rv3_chr, rv4_chr)) {
+            expect_error_free({
+              draft <- gm_create_draft(email)
+              gm_delete_draft(gm_id(draft))
+            })
+          }
 })
 
 context("MIME - Alternative")

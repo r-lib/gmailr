@@ -9,3 +9,7 @@ if (gargle:::secret_can_decrypt("gmailr")) {
 skip_if_no_token <- function() {
   testthat::skip_if_not(gm_has_token(), "No Gmail token")
 }
+
+expect_error_free <- function(...) {
+  expect_error(regexp = NA, ...)
+}
