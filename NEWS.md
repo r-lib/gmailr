@@ -1,5 +1,8 @@
 # gmailr (development)
 
+* `print.gmail_thread()` now prints the most recent subject in the thread and the
+  total number of messages (#26)
+
 * New `gm_delete_draft()` added to delete a draft email without sending it to the trash.
 
 * Quoted-printable now works with smart quotes (#77)
