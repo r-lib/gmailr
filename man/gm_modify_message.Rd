@@ -33,6 +33,7 @@ modify_message(12345, add_labels='label_2', remove_labels='label_1')
 }
 \seealso{
 Other message: \code{\link{gm_attachment}},
+  \code{\link{gm_delete_draft}},
   \code{\link{gm_delete_message}},
   \code{\link{gm_import_message}},
   \code{\link{gm_insert_message}},

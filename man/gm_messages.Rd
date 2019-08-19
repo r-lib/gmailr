@@ -34,6 +34,7 @@ my_messages = messages("R", 10, "label_1", TRUE)
 }
 \seealso{
 Other message: \code{\link{gm_attachment}},
+  \code{\link{gm_delete_draft}},
   \code{\link{gm_delete_message}},
   \code{\link{gm_import_message}},
   \code{\link{gm_insert_message}},
