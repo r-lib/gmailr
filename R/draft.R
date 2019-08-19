@@ -91,3 +91,22 @@ gm_send_draft <- function(draft,
     body = draft,
     encode = "json")
 }
+
+#' Permanently delete a single draft
+#'
+#' Function to delete a given draft by id.  This cannot be undone!
+#' @inheritParams gm_message
+#' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/delete>
+#' @family message
+#' @export
+#' @examples
+#' \dontrun{
+#' delete_draft('12345')
+#' }
+gm_delete_draft <- function(id, user_id = "me") {
+  stopifnot(
+    is_string(id),
+    is_string(user_id))
+
+  gmailr_DELETE(c("drafts", id), user_id, class = "gmail_message")
+}

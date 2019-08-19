@@ -1,5 +1,7 @@
 # gmailr (development)
 
+* New `gm_delete_draft()` added to delete a draft email without sending it to the trash.
+
 * Quoted-printable now works with smart quotes (#77)
 
 * Unicode text can now be used in email headers, including the Subject and
