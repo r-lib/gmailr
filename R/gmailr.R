@@ -204,6 +204,12 @@ print.gmail_message <- function(x, ...){
   subject <- subject(x)
   id <- id(x)
   body <- body(x, collapse = TRUE)
+  attached_files <- unlist(lapply(x$payload$parts, function(part) {
+    if (!is.null(part$filename) && part$filename != "") {
+      part$filename
+    }
+  }))
+
   cat(p(
     c(
     crayon::bold("Id: "), id, "\n",
@@ -211,7 +217,8 @@ print.gmail_message <- function(x, ...){
     if (!is.null(from)) c(crayon::bold("From: "), from, "\n"),
     if (!is.null(date)) c(crayon::bold("Date: "), date, "\n"),
     if (!is.null(subject)) c(crayon::bold("Subject: "), subject, "\n"),
-    if (!is.null(body)) c(body)
+    if (!is.null(body)) c(body),
+    if (!is.null(attached_files)) c(crayon::bold("Attachments: "), paste0("'", attached_files, "'", collapse = ", "), "\n")
   )))
 }
 

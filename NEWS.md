@@ -1,5 +1,7 @@
 # gmailr (development)
 
+* `print.gmail_message()` now prints out the filenames of attachments (if any).
+
 * New `gm_delete_draft()` added to delete a draft email without sending it to the trash.
 
 * Quoted-printable now works with smart quotes (#77)
