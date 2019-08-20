@@ -18,10 +18,10 @@ library(gmailr)
 First we will construct a simple text only message
 
 ```{r sending_messages_simple}
-mime() %>%
+text_msg <- mime() %>%
   to("james.f.hester@gmail.com") %>%
   from("me@somewhere.com") %>%
-  text_body("Gmailr is a very handy package!") -> text_msg
+  text_body("Gmailr is a very handy package!")
 ```
 
 You can convert the message to a properly formatted MIME message using `as.character()`.
@@ -37,10 +37,10 @@ only message along with the html message, but with modern email clients this is
 not strictly necessary.
 
 ```{r sending_messages_html}
-mime() %>%
+html_msg <- mime() %>%
   to("james.f.hester@gmail.com") %>%
   from("me@somewhere.com") %>%
-  html_body("<b>Gmailr</b> is a <i>very</i> handy package!") -> html_msg
+  html_body("<b>Gmailr</b> is a <i>very</i> handy package!")
 ```
 
 ### Attachments
@@ -53,14 +53,59 @@ You can add attachments to your message in two ways.
 ```{r sending_messages_attachments_2}
 write.csv(file = "iris.csv", iris)
 
-html_msg %>%
+msg <- html_msg %>%
   subject("Here are some flowers") %>%
-  attach_file("iris.csv") -> file_attachment
+  attach_file("iris.csv")
 ```
 
 2. If the data are already loaded into R, you can use `attach_part()` to attach the binary data to your file.
 ```{r sending_messages_attachments_1}
-html_msg %>% attach_part(part = charToRaw("attach me!"), name = "please") -> simple_attachment
+msg <- html_msg %>%
+  attach_part(part = charToRaw("attach me!"), name = "please")
+```
+
+### Including images
+
+You can also add use attached images in HTML by setting the Content ID feature
+of mime emails. This can be done by referencing the image via a `<img
+src=cid:xyz>` tag using the `id` argument of `send_file()`. The tag value can
+by any unique identifier. E.g. here is an example of including a ggplot2 image
+
+
+```{r}
+# First create a plot to send, and save it to mtcars.png
+mtcars$gear <- as.factor(mtcars$gear)
+
+png("mtcars.png", width = 400, height = 400, pointsize = 12)
+with(mtcars,
+  plot(hp,
+    mpg,
+    col = as.factor(gear),
+    pch = 19,
+    xlab = "Horsepower",
+    ylab = "Miles / gallon"
+  )
+)
+legend("topright", title = "# gears",
+  pch = 19,
+  col = seq_along(levels(mtcars$gear)),
+  legend = levels(mtcars$gear)
+)
+dev.off()
+
+# Next create an HTML email that references the plot as 'foobar'
+email <- gm_mime() %>%
+  gm_to('someaddress@somewhere.com') %>%
+  gm_from("someaddress@somewhere.com") %>%
+  gm_subject("Cars report") %>%
+  gm_html_body(
+    '<h1>A plot of <b>MotorTrend</b> data <i>(1974)</i></h1>
+    <br><img src="cid:foobar">') %>%
+  attach_file("mtcars.png", id = "foobar")
+```
+
+```{r, include = FALSE}
+unlink("mtcars.png")
 ```
 
 ## Uploading
@@ -119,7 +164,13 @@ unlink("iris.csv")
 
 ### Gmail API error 400: Mail service not enabled
 
-It is possible to have a high-functioning Google account that does not have Gmail enabled. For example, your account might be fully operational with respect to Google Drive and yet have no mail capabilities. Such an account cannot be used with the Gmail API and therefore with `gmailr`. However, you will still be able to complete the `gmailr` authorization process via `gmail_auth()`. The problem will only reveal itself upon the first attempt to use the API and it will look something like this:
+It is possible to have a high-functioning Google account that does not have
+Gmail enabled. For example, your account might be fully operational with
+respect to Google Drive and yet have no mail capabilities. Such an account
+cannot be used with the Gmail API and therefore with `gmailr`. However, you
+will still be able to complete the `gmailr` authorization process via
+`gmail_auth()`. The problem will only reveal itself upon the first attempt to
+use the API and it will look something like this:
 
 ```
  Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  : 
@@ -127,5 +178,8 @@ It is possible to have a high-functioning Google account that does not have Gmai
   Mail service not enabled 
 ```
 
-You can confirm the account's lack of mail capability by visiting <https://mail.google.com/mail/> while logged in. If you don't already have Gmail, this link gives you the option of adding mail to your existing account or creating a new, mail-capable account.
+You can confirm the account's lack of mail capability by visiting
+<https://mail.google.com/mail/> while logged in. If you don't already have
+Gmail, this link gives you the option of adding mail to your existing account
+or creating a new, mail-capable account.
 
