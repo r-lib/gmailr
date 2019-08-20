@@ -97,7 +97,7 @@ gm_send_draft <- function(draft,
 #' Function to delete a given draft by id.  This cannot be undone!
 #' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/delete>
-#' @family message
+#' @family draft
 #' @export
 #' @examples
 #' \dontrun{

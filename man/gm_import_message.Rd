@@ -34,7 +34,6 @@ import_message(mime(From="you@me.com", To="any@one.com",
 }
 \seealso{
 Other message: \code{\link{gm_attachment}},
-  \code{\link{gm_delete_draft}},
   \code{\link{gm_delete_message}},
   \code{\link{gm_insert_message}},
   \code{\link{gm_messages}}, \code{\link{gm_message}},

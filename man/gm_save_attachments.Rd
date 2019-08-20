@@ -32,7 +32,6 @@ save_attachments(my_message, 'a32e324b')
 }
 \seealso{
 Other message: \code{\link{gm_attachment}},
-  \code{\link{gm_delete_draft}},
   \code{\link{gm_delete_message}},
   \code{\link{gm_import_message}},
   \code{\link{gm_insert_message}},

@@ -30,7 +30,6 @@ send_message(mime(from="you@me.com", to="any@one.com",
 }
 \seealso{
 Other message: \code{\link{gm_attachment}},
-  \code{\link{gm_delete_draft}},
   \code{\link{gm_delete_message}},
   \code{\link{gm_import_message}},
   \code{\link{gm_insert_message}},

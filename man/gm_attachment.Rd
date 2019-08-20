@@ -28,8 +28,7 @@ save_attachment(my_attachment, 'photo.jpg')
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
 }
 \seealso{
-Other message: \code{\link{gm_delete_draft}},
-  \code{\link{gm_delete_message}},
+Other message: \code{\link{gm_delete_message}},
   \code{\link{gm_import_message}},
   \code{\link{gm_insert_message}},
   \code{\link{gm_messages}}, \code{\link{gm_message}},
