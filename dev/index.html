@@ -210,7 +210,8 @@
 <li>Set the <code>GMAILR_APP</code> environment variable to the location of the JSON file, it is convienent to do this in your <code>.Renviron</code> file with <code>usethis::edit_r_environ()</code>. Then calling <code><a href="reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments.</li>
 </ol>
 </li>
-<li>Call <code><a href="reference/gm_auth.html">gm_auth()</a></code> to start the OAuth flow to verify to google that you would like your gmailr project to have access to your email. You will get a scary warning about an untrusted application, this is because the application is the one you just created, click advanced and proceed to do the oauth flow.</li>
+<li>Call <code><a href="reference/gm_auth.html">gm_auth()</a></code> to start the OAuth flow to verify to google that you would like your gmailr project to have access to your email. You will get a scary warning about an untrusted application, this is because the application is the one you just created, click advanced and <code>Go to gmailr</code> to proceed to do the oauth flow.</li>
+<li>If you want to authenticate with fewer scopes than the default use the <code>scopes</code> parameter to <code><a href="reference/gm_auth.html">gm_auth()</a></code>. You can see a full list of available scopes from <code><a href="reference/gm_auth.html">gm_scopes()</a></code>.</li>
 </ul>
 </div>
 <div id="policies" class="section level2">
