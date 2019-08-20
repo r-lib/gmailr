@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Retrieve an attachment to a message — gm_attachment • gmailr</title>
+<title>Retrieve information about attachments — gm_attachments • gmailr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Retrieve an attachment to a message — gm_attachment" />
+<meta property="og:title" content="Retrieve information about attachments — gm_attachments" />
 
-<meta property="og:description" content="This is a low level function to retrieve an attachment to a message by id of the attachment
-and message. Most users are better off using gm_save_attachments() to
-automatically save all the attachments in a given message." />
+<meta property="og:description" content="Retrieve information about attachments" />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -116,75 +114,46 @@ automatically save all the attachments in a given message." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Retrieve an attachment to a message</h1>
+    <h1>Retrieve information about attachments</h1>
     <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/message.R'><code>R/message.R</code></a></small>
-    <div class="hidden name"><code>gm_attachment.Rd</code></div>
+    <div class="hidden name"><code>gm_attachments.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>This is a low level function to retrieve an attachment to a message by id of the attachment
-and message. Most users are better off using <code><a href='gm_save_attachments.html'>gm_save_attachments()</a></code> to
-automatically save all the attachments in a given message.</p>
+    <p>Retrieve information about attachments</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>gm_attachment</span>(<span class='no'>id</span>, <span class='no'>message_id</span>, <span class='kw'>user_id</span> <span class='kw'>=</span> <span class='st'>"me"</span>)</pre>
+    <pre class="usage"><span class='fu'>gm_attachments</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>id</th>
-      <td><p>id of the attachment</p></td>
+      <th>x</th>
+      <td><p>An object from which to retrieve the attachment information.</p></td>
     </tr>
     <tr>
-      <th>message_id</th>
-      <td><p>id of the parent message</p></td>
-    </tr>
-    <tr>
-      <th>user_id</th>
-      <td><p>gmail user_id to access, special value of 'me' indicates the authenticated user.</p></td>
+      <th>...</th>
+      <td><p>other parameters passed to methods</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><a href='https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get'>https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get</a></p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other message: <code><a href='gm_delete_message.html'>gm_delete_message</a></code>,
-  <code><a href='gm_import_message.html'>gm_import_message</a></code>,
-  <code><a href='gm_insert_message.html'>gm_insert_message</a></code>,
-  <code><a href='gm_messages.html'>gm_messages</a></code>, <code><a href='gm_message.html'>gm_message</a></code>,
-  <code><a href='gm_modify_message.html'>gm_modify_message</a></code>,
-  <code><a href='gm_save_attachments.html'>gm_save_attachments</a></code>,
-  <code><a href='gm_save_attachment.html'>gm_save_attachment</a></code>,
-  <code><a href='gm_send_message.html'>gm_send_message</a></code>,
-  <code><a href='gm_trash_message.html'>gm_trash_message</a></code>,
-  <code><a href='gm_untrash_message.html'>gm_untrash_message</a></code></p></div>
+    <p>A data.frame with the <code>filename</code>, <code>type</code>, <code>size</code> and <code>id</code> of each
+attachment in the message.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"># NOT RUN {
-my_attachment = attachment('a32e324b', '12345')
-save attachment to a file
-save_attachment(my_attachment, 'photo.jpg')
-# }
-</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#references">References</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
