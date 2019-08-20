@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe statements — %&gt;% • gmailr</title>
+<title>Permanently delete a single draft — gm_delete_draft • gmailr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,9 @@
 
 
 
-<meta property="og:title" content="Pipe statements — %&gt;%" />
+<meta property="og:title" content="Permanently delete a single draft — gm_delete_draft" />
 
-<meta property="og:description" content="Like dplyr and ggvis gmailr also uses the pipe function, \%&amp;gt;\% to turn
-function composition into a series of imperative statements." />
+<meta property="og:description" content="Function to delete a given draft by id.  This cannot be undone!" />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -115,82 +114,56 @@ function composition into a series of imperative statements." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe statements</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/gmailr.R'><code>R/gmailr.R</code></a>, <a href='https://github.com/r-lib/gmailr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Permanently delete a single draft</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-lib/gmailr/blob/master/R/draft.R'><code>R/draft.R</code></a></small>
+    <div class="hidden name"><code>gm_delete_draft.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Like dplyr and ggvis gmailr also uses the pipe function, <code>\%&gt;\%</code> to turn
-function composition into a series of imperative statements.</p>
+    <p>Function to delete a given draft by id.  This cannot be undone!</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>gm_delete_draft</span>(<span class='no'>id</span>, <span class='kw'>user_id</span> <span class='kw'>=</span> <span class='st'>"me"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>lhs, rhs</th>
-      <td><p>A visualisation and a function to apply to it</p></td>
+      <th>id</th>
+      <td><p>message id to access</p></td>
+    </tr>
+    <tr>
+      <th>user_id</th>
+      <td><p>gmail user_id to access, special value of 'me' indicates the authenticated user.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p><a href='https://developers.google.com/gmail/api/v1/reference/users/drafts/delete'>https://developers.google.com/gmail/api/v1/reference/users/drafts/delete</a></p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other draft: <code><a href='gm_drafts.html'>gm_drafts</a></code>,
+  <code><a href='gm_draft.html'>gm_draft</a></code>, <code><a href='gm_send_draft.html'>gm_send_draft</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Instead of</span>
-<span class='fu'><a href='gmailr-deprecated.html'>to</a></span>(<span class='fu'><a href='gmailr-deprecated.html'>mime</a></span>(), <span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
-#&gt; list()
-#&gt; 
-#&gt; $header
-#&gt; $header$`MIME-Version`
-#&gt; [1] "1.0"
-#&gt; 
-#&gt; $header$Date
-#&gt; [1] "Tue, 20 Aug 2019 13:18:54 GMT"
-#&gt; 
-#&gt; $header$To
-#&gt; [1] "someone@somewhere.com"
-#&gt; 
-#&gt; 
-#&gt; $body
-#&gt; NULL
-#&gt; 
-#&gt; $attr
-#&gt; NULL
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "mime"</div><div class='input'><span class='co'># you can write</span>
-<span class='fu'><a href='gmailr-deprecated.html'>mime</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='gmailr-deprecated.html'>to</a></span>(<span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
-#&gt; list()
-#&gt; 
-#&gt; $header
-#&gt; $header$`MIME-Version`
-#&gt; [1] "1.0"
-#&gt; 
-#&gt; $header$Date
-#&gt; [1] "Tue, 20 Aug 2019 13:18:54 GMT"
-#&gt; 
-#&gt; $header$To
-#&gt; [1] "someone@somewhere.com"
-#&gt; 
-#&gt; 
-#&gt; $body
-#&gt; NULL
-#&gt; 
-#&gt; $attr
-#&gt; NULL
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "mime"</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>delete_draft</span>(<span class='st'>'12345'</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#references">References</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
