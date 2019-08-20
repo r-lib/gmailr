@@ -97,6 +97,58 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"r-lib/gmailr"</span>)</a></code></pre></div>
 </div>
+<div id="writing-new-emails" class="section level2">
+<h2 class="hasAnchor">
+<a href="#writing-new-emails" class="anchor"></a>Writing new emails</h2>
+<p>Create a new email with <code><a href="reference/gm_mime.html">gm_mime()</a></code> and the helper functions. When testing it is recommended to use <code><a href="reference/gm_create_draft.html">gm_create_draft()</a></code> to verify your email is formatted as you expect before automating it (if desired) with <code><a href="reference/gm_send_message.html">gm_send_message()</a></code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">test_email &lt;-</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/gm_mime.html">gm_mime</a></span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/accessors.html">gm_to</a></span>(<span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="reference/accessors.html">gm_from</a></span>(<span class="st">"PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="reference/accessors.html">gm_subject</a></span>(<span class="st">"this is just a gmailr test"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="reference/gm_mime.html">gm_text_body</a></span>(<span class="st">"Can you hear me now?"</span>)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co"># Verify it looks correct</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw"><a href="reference/gm_create_draft.html">gm_create_draft</a></span>(test_email)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co"># If all is good with your draft, then you can send it</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw"><a href="reference/gm_send_message.html">gm_send_message</a></span>(test_email)</a></code></pre></div>
+<p>You can add a file attachment to your message with <code><a href="reference/gm_mime.html">gm_attach_file()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(<span class="st">"mtcars.csv"</span>, mtcars)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">test_email &lt;-<span class="st"> </span><span class="kw"><a href="reference/gm_mime.html">gm_attach_file</a></span>(<span class="st">"mtcars.csv"</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># Verify it looks correct</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw"><a href="reference/gm_create_draft.html">gm_create_draft</a></span>(test_email)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co"># If so, send it</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw"><a href="reference/gm_send_message.html">gm_send_message</a></span>(test_email)</a></code></pre></div>
+</div>
+<div id="reading-emails" class="section level2">
+<h2 class="hasAnchor">
+<a href="#reading-emails" class="anchor"></a>Reading emails</h2>
+<p>gmail shows you threads of messages in the web UI, you can retrieve all threads with <code><a href="reference/gm_threads.html">gm_threads()</a></code>, and retrieve a specific thread with <code><a href="reference/gm_thread.html">gm_thread()</a></code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># view the latest thread</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">my_threads &lt;-<span class="st"> </span><span class="kw"><a href="reference/gm_threads.html">gm_threads</a></span>(<span class="dt">num_results =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># retrieve the latest thread by retrieving the first ID</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">latest_thread &lt;-<span class="st"> </span><span class="kw"><a href="reference/gm_thread.html">gm_thread</a></span>(<span class="kw"><a href="reference/gmailr-deprecated.html">id</a></span>(my_threads)[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co"># The messages in the thread will now be in a list</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">latest_thread<span class="op">$</span>messages</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co"># Retrieve parts of a specific message with the accessors</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">my_msg &lt;-<span class="st"> </span>latest_thread<span class="op">$</span>messages[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="kw"><a href="reference/accessors.html">gm_to</a></span>(my_msg)</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw"><a href="reference/accessors.html">gm_from</a></span>(my_msg)</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="kw"><a href="reference/accessors.html">gm_date</a></span>(my_msg)</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="kw"><a href="reference/accessors.html">gm_subject</a></span>(my_msg)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="kw"><a href="reference/gm_body.html">gm_body</a></span>(my_msg)</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co"># If a message has attachments, download them all locally with `gm_save_attachments()`.</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="kw"><a href="reference/gm_save_attachments.html">gm_save_attachments</a></span>(my_msg)</a></code></pre></div>
+</div>
 <div id="features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#features" class="anchor"></a>Features</h2>
@@ -148,42 +200,17 @@
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
-<p>By default gmailr will use a global project. However if you are going to be a heavy user and will do a lot of queries <em>please</em> setup your own project with the steps below. This often works best via Google Chrome.</p>
+<p>In order to use gmailr you will need to create a google project for it. The easiest way to do this is via the <a href="https://developers.google.com/gmail/api/quickstart/python">Python Quickstart</a>. Light to moderate usage will fall within the free tier of projects, so use of the API for most people should be free.</p>
 <ul>
-<li>Pick a project name; referred to as <code>PROJ-NAME</code> from now on.</li>
-<li>Register a new project at <a href="https://console.developers.google.com/project" class="uri">https://console.developers.google.com/project</a>.</li>
-<li>From Overview screen, look at Google Apps APIs and select the Gmail API. Enable it.</li>
-<li>Click “Go to Credentials” or navigate directly to Credentials.</li>
-<li>You want a get a client ID and will need to “Configure consent screen”.
-<ul>
-<li>The email should be pre-filled. Enter <code>PROJ-NAME</code> as Product name. Other fields can be left blank.</li>
-</ul>
+<li>Click the <code>Enable the Gmail API</code> button.</li>
+<li>In the resulting dialog click the <code>DOWNLOAD CLIENT CONFIGURATION</code> on your computer.</li>
+<li>Tell gmailr where the JSON lives, by doing one of the two things
+<ol>
+<li>Call `gm_auth_configure(path = “path/to/downloaded/json”)</li>
+<li>Set the <code>GMAILR_APP</code> environment variable to the location of the JSON file, it is convienent to do this in your <code>.Renviron</code> file with <code>usethis::edit_r_environ()</code>. Then calling <code><a href="reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments.</li>
+</ol>
 </li>
-<li>Returning to the “client id” process:
-<ul>
-<li>Application Type: “Other”</li>
-<li>Enter <code>PROJ-NAME</code> again as the name.</li>
-<li>Click “Create”</li>
-</ul>
-</li>
-<li>Client id and secret will appear in a pop-up which you can dismiss via “OK”. Instead use download icon at far right of your project’s listing to download a JSON file with all of this info. Move to an appropriate location and consider renaming as <code>PROJ-NAME.json</code>.</li>
-<li>
-<p>Use the downloaded JSON file as input to <code><a href="reference/use_secret_file.html">use_secret_file()</a></code>, prior to other <code>gmailr</code> calls.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">gmailr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/gmailr/topics/use_secret_file">use_secret_file</a></span>(<span class="st">'PROJ-NAME.json'</span>)</a></code></pre></div>
-</li>
-</ul>
-</div>
-<div id="future-work" class="section level2">
-<h2 class="hasAnchor">
-<a href="#future-work" class="anchor"></a>Future Work</h2>
-<ul>
-<li>More unit tests and better coverage</li>
-<li>More (complicated) examples</li>
-<li>Email statistics</li>
-<li>Programmatic emailing</li>
-<li>Returning data frames in addition to native Gmail API objects which are usually a nested list.</li>
-<li>Support all the formats of <a href="https://developers.google.com/gmail/api/v1/reference/users/messages/get">users.messages:get</a>
-</li>
+<li>Call <code><a href="reference/gm_auth.html">gm_auth()</a></code> to start the OAuth flow to verify to google that you would like your gmailr project to have access to your email. You will get a scary warning about an untrusted application, this is because the application is the one you just created, click advanced and proceed to do the oauth flow.</li>
 </ul>
 </div>
 <div id="policies" class="section level2">
@@ -192,9 +219,9 @@
 <p><a href="https://www.tidyverse.org/google_privacy_policy">Privacy policy</a></p>
 </div>
 </div>
-<div id="examples" class="section level1">
+<div id="community-examples" class="section level1">
 <h1 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h1>
+<a href="#community-examples" class="anchor"></a>Community Examples</h1>
 <ul>
 <li>
 <a href="https://github.com/jennybc/send-email-with-r">Send Email with R</a> - Jenny Bryan (@jennybc)</li>
