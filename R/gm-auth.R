@@ -76,9 +76,11 @@ gm_auth <- function(email = gm_default_email(),
 
   scopes <- gm_scopes()[match.arg(scopes, names(gm_scopes()), several.ok = TRUE)]
 
+  app <- gm_oauth_app()
+
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = gm_oauth_app(),
+    app = app,
     email = email,
     path = path,
     package = "gmailr",
