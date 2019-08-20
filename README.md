@@ -123,7 +123,11 @@ for most people should be free.
 * Call `gm_auth()` to start the OAuth flow to verify to google that you would
   like your gmailr project to have access to your email. You will get a scary
   warning about an untrusted application, this is because the application is
-  the one you just created, click advanced and proceed to do the oauth flow.
+  the one you just created, click advanced and `Go to gmailr` to proceed to do
+  the oauth flow.
+* If you want to authenticate with fewer scopes than the default use the
+  `scopes` parameter to `gm_auth()`. You can see a full list of available
+  scopes from `gm_scopes()`.
 
 ## Policies ##
 
