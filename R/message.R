@@ -149,8 +149,9 @@ gm_modify_message <- function(id,
 
 #' Retrieve an attachment to a message
 #'
-#' Function to retrieve an attachment to a message by id of the attachment
-#' and message.  To save the attachment use [gm_save_attachment()].
+#' This is a low level function to retrieve an attachment to a message by id of the attachment
+#' and message. Most users are better off using [gm_save_attachments()] to
+#' automatically save all the attachments in a given message.
 #' @param id id of the attachment
 #' @param message_id id of the parent message
 #' @inheritParams gm_message
@@ -177,10 +178,11 @@ gm_attachment <- function(id,
              class = "gmail_attachment")
 }
 
-#' save the attachment to a file
+#' Save the attachment to a file
 #'
-#' this only works on attachments retrieved with [gm_attachment()].
-#' To save an attachment directly from a message see [gm_save_attachments()]
+#' This is a low level function that only works on attachments retrieved with [gm_attachment()].
+#' To save an attachment directly from a message see [gm_save_attachments()],
+#' which is a higher level interface more suitable for most uses.
 #' @param x attachment to save
 #' @param filename location to save to
 #' @family message
@@ -242,6 +244,38 @@ gm_save_attachments <- function(x,
                      save_attachment(att, file.path(path, part$filename))
                    }, character(1L)))
 }
+
+
+#' Retrieve information about attachments
+#'
+#' @inheritParams gm_body
+#' @param x An object from which to retrieve the attachment information.
+#' @return A data.frame with the `filename`, `type`, `size` and `id` of each
+#' attachment in the message.
+#' @export
+gm_attachments <- function(x, ...) {
+  UseMethod("gm_attachments")
+}
+
+#' @export
+gm_attachments.gmail_message <- function(x, ...) {
+  has_attachments <- vlapply(x$payload$parts, function(part) {
+    !is.null(part$filename) && part$filename != ""
+  })
+
+  filename <- vcapply(x$payload$parts[has_attachments], function(part) part$filename)
+  type <- vcapply(x$payload$parts[has_attachments], function(part) part$mimeType)
+  size <- vnapply(x$payload$parts[has_attachments], function(part) as.numeric(part$body$size))
+  id <- vcapply(x$payload$parts[has_attachments], function(part) part$body$attachmentId)
+
+  return(data.frame(filename = filename, type = type, size = size, id = id))
+}
+
+#' @export
+gm_attachments.gmail_draft <- function(x, ...) {
+  gm_attachments.gmail_message(x$message)
+}
+
 
 #' Insert a message into the gmail mailbox from a mime message
 #'

@@ -1,5 +1,8 @@
 # gmailr (development)
 
+* New `gm_attachements()` returns a data.frame of attachment information from a
+  message or draft (#10, #24).
+
 * `print.gmail_message()` now prints out the filenames of attachments (if any).
 
 * New `gm_delete_draft()` added to delete a draft email without sending it to the trash.

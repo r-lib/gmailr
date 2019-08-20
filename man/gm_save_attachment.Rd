@@ -2,7 +2,7 @@
 % Please edit documentation in R/message.R
 \name{gm_save_attachment}
 \alias{gm_save_attachment}
-\title{save the attachment to a file}
+\title{Save the attachment to a file}
 \usage{
 gm_save_attachment(x, filename)
 }
@@ -12,8 +12,9 @@ gm_save_attachment(x, filename)
 \item{filename}{location to save to}
 }
 \description{
-this only works on attachments retrieved with \code{\link[=gm_attachment]{gm_attachment()}}.
-To save an attachment directly from a message see \code{\link[=gm_save_attachments]{gm_save_attachments()}}
+This is a low level function that only works on attachments retrieved with \code{\link[=gm_attachment]{gm_attachment()}}.
+To save an attachment directly from a message see \code{\link[=gm_save_attachments]{gm_save_attachments()}},
+which is a higher level interface more suitable for most uses.
 }
 \examples{
 \dontrun{

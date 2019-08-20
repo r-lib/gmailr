@@ -14,8 +14,9 @@ gm_attachment(id, message_id, user_id = "me")
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
 \description{
-Function to retrieve an attachment to a message by id of the attachment
-and message.  To save the attachment use \code{\link[=gm_save_attachment]{gm_save_attachment()}}.
+This is a low level function to retrieve an attachment to a message by id of the attachment
+and message. Most users are better off using \code{\link[=gm_save_attachments]{gm_save_attachments()}} to
+automatically save all the attachments in a given message.
 }
 \examples{
 \dontrun{
