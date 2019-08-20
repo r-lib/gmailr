@@ -23,6 +23,69 @@ Or the development version from github with:
 devtools::install_github("r-lib/gmailr")
 ```
 
+## Writing new emails ##
+
+Create a new email with `gm_mime()` and the helper functions. When testing it
+is recommended to use `gm_create_draft()` to verify your email is formatted as you
+expect before automating it (if desired) with `gm_send_message()`.
+
+```r
+test_email <-
+  gm_mime() %>%
+  gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") %>%
+  gm_from("PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE") %>%
+  gm_subject("this is just a gmailr test") %>%
+  gm_text_body("Can you hear me now?")
+
+# Verify it looks correct
+gm_create_draft(test_email)
+
+# If all is good with your draft, then you can send it
+gm_send_message(test_email)
+```
+
+You can add a file attachment to your message with `gm_attach_file()`.
+
+```r
+write.csv("mtcars.csv", mtcars)
+test_email <- gm_attach_file("mtcars.csv")
+
+# Verify it looks correct
+gm_create_draft(test_email)
+
+# If so, send it
+gm_send_message(test_email)
+```
+
+## Reading emails ##
+
+gmail shows you threads of messages in the web UI, you can retrieve all threads
+with `gm_threads()`, and retrieve a specific thread with `gm_thread()`
+
+```r
+# view the latest thread
+my_threads <- gm_threads(num_results = 10)
+
+# retrieve the latest thread by retrieving the first ID
+
+latest_thread <- gm_thread(id(my_threads)[[1]])
+
+# The messages in the thread will now be in a list
+latest_thread$messages
+
+# Retrieve parts of a specific message with the accessors
+my_msg <- latest_thread$messages[[1]]
+
+gm_to(my_msg)
+gm_from(my_msg)
+gm_date(my_msg)
+gm_subject(my_msg)
+gm_body(my_msg)
+
+# If a message has attachments, download them all locally with `gm_save_attachments()`.
+gm_save_attachments(my_msg)
+```
+
 ## Features ##
 - retrieve data from your email
   - drafts: `my_drafts = drafts()`
@@ -44,38 +107,28 @@ devtools::install_github("r-lib/gmailr")
 
 ## Setup ##
 
-By default gmailr will use a global project.  However if you are going to be a heavy user and will do a lot of queries _please_ setup your own project with the steps below. This often works best via Google Chrome.
+In order to use gmailr you will need to create a google project for it. The
+easiest way to do this is via the [Python
+Quickstart](https://developers.google.com/gmail/api/quickstart/python). Light
+to moderate usage will fall within the free tier of projects, so use of the API
+for most people should be free.
 
-* Pick a project name; referred to as `PROJ-NAME` from now on.
-* Register a new project at <https://console.developers.google.com/project>.
-* From Overview screen, look at Google Apps APIs and select the Gmail API. Enable it.
-* Click "Go to Credentials" or navigate directly to Credentials.
-* You want a get a client ID and will need to "Configure consent screen".
-  - The email should be pre-filled. Enter `PROJ-NAME` as Product name. Other fields can be left blank.
-* Returning to the "client id" process:
-  - Application Type: "Other"
-  - Enter `PROJ-NAME` again as the name.
-  - Click "Create"
-* Client id and secret will appear in a pop-up which you can dismiss via "OK". Instead use download icon at far right of your project's listing to download a JSON file with all of this info. Move to an appropriate location and consider renaming as `PROJ-NAME.json`.
-* Use the downloaded JSON file as input to `use_secret_file()`, prior to other `gmailr` calls.
-
-  ```R
-  gmailr::use_secret_file('PROJ-NAME.json')
-  ```
-
-## Future Work ##
-
-- More unit tests and better coverage
-- More (complicated) examples
-- Email statistics
-- Programmatic emailing
-- Returning data frames in addition to native Gmail API objects which are usually a nested list.
-- Support all the formats of [users.messages:get](https://developers.google.com/gmail/api/v1/reference/users/messages/get)
+* Click the `Enable the Gmail API` button.
+* In the resulting dialog click the `DOWNLOAD CLIENT CONFIGURATION` on your computer.
+* Tell gmailr where the JSON lives, by doing one of the two things
+  1. Call `gm_auth_configure(path = "path/to/downloaded/json")
+  2. Set the `GMAILR_APP` environment variable to the location of the JSON
+     file, it is convienent to do this in your `.Renviron` file with
+     `usethis::edit_r_environ()`. Then calling `gm_auth_configure()` with no arguments.
+* Call `gm_auth()` to start the OAuth flow to verify to google that you would
+  like your gmailr project to have access to your email. You will get a scary
+  warning about an untrusted application, this is because the application is
+  the one you just created, click advanced and proceed to do the oauth flow.
 
 ## Policies ##
 
 [Privacy policy](https://www.tidyverse.org/google_privacy_policy)
 
-# Examples #
+# Community Examples #
 - [Send Email with R](https://github.com/jennybc/send-email-with-r) - Jenny Bryan (@jennybc)
 - [Gmail Stats](https://github.com/alkashef/gmailstats) - Ahmad Al-Kashef (@alkashef)
