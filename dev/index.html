@@ -214,6 +214,38 @@
 <li>If you want to authenticate with fewer scopes than the default use the <code>scopes</code> parameter to <code><a href="reference/gm_auth.html">gm_auth()</a></code>. You can see a full list of available scopes from <code><a href="reference/gm_auth.html">gm_scopes()</a></code>.</li>
 </ul>
 </div>
+<div id="using-gmailr-in-deployed-applications" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-gmailr-in-deployed-applications" class="anchor"></a>Using gmailr in deployed applications</h2>
+<p>If you are using gmailr in a deployed application you will need to copy two pieces to your deployed location.</p>
+<ol>
+<li>The application JSON file, that you setup in the local setup.</li>
+<li>The oauth token cache, by default this is <code>~/.R/gargle/gargle-oauth</code>
+</li>
+</ol>
+<p>The easiest thing to do to ensure you are copying only the gmailr oauth token is to set this explicitly locally, e.g. do the following.</p>
+<div id="run-locally" class="section level3">
+<h3 class="hasAnchor">
+<a href="#run-locally" class="anchor"></a>Run locally</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># Configure your app</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span>(<span class="dt">path =</span> <span class="st">"credentials.json"</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># Authenticate with the new cache, store tokens in .secret</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="reference/gm_auth.html">gm_auth</a></span>(<span class="dt">cache =</span> <span class="st">".secret"</span>)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co"># Go through the oauth flow</span></a></code></pre></div>
+<p>Then copy <code>credentials.json</code> <em>and</em> the <code>.secret</code> directory to your remote location.</p>
+</div>
+<div id="run-remotely" class="section level3">
+<h3 class="hasAnchor">
+<a href="#run-remotely" class="anchor"></a>Run remotely</h3>
+<pre><code><a href="reference/gm_auth_configure.html"># Configure your app
+gm_auth_configure(path = "credentials.json")
+
+# Authenticate with the tokens in the copied cache
+gm_auth(email = TRUE, cache = ".secret")</a></code></pre>
+<p>There are additional details on dealing with <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-an-oauth-token-directly">non-interactive auth</a> in the gargle documentation.</p>
+</div>
+</div>
 <div id="policies" class="section level2">
 <h2 class="hasAnchor">
 <a href="#policies" class="anchor"></a>Policies</h2>
