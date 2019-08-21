@@ -129,6 +129,41 @@ for most people should be free.
   `scopes` parameter to `gm_auth()`. You can see a full list of available
   scopes from `gm_scopes()`.
 
+## Using gmailr in deployed applications ##
+
+If you are using gmailr in a deployed application you will need to copy two pieces to your deployed location.
+
+1. The application JSON file, that you setup in the local setup.
+2. The oauth token cache, by default this is `~/.R/gargle/gargle-oauth`
+
+The easiest thing to do to ensure you are copying only the gmailr oauth token
+is to set this explicitly locally, e.g. do the following.
+
+### Run locally
+```r
+# Configure your app
+gm_auth_configure(path = "credentials.json")
+
+# Authenticate with the new cache, store tokens in .secret
+gm_auth(cache = ".secret")
+# Go through the oauth flow
+```
+
+Then copy `credentials.json` _and_ the `.secret` directory to your remote location.
+
+### Run remotely
+```
+# Configure your app
+gm_auth_configure(path = "credentials.json")
+
+# Authenticate with the tokens in the copied cache
+gm_auth(email = TRUE, cache = ".secret")
+```
+
+There are additional details on dealing with [non-interactive
+auth](https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-an-oauth-token-directly)
+in the gargle documentation.
+
 ## Policies ##
 
 [Privacy policy](https://www.tidyverse.org/google_privacy_policy)
