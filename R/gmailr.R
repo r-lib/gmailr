@@ -201,7 +201,7 @@ print.gmail_message <- function(x, ...){
   to <- gm_to(x)
   from <- gm_from(x)
   date <- date(x)
-  subject <- subject(x)
+  subject <- gm_subject(x)
   id <- id(x)
   body <- gm_body(x, collapse = TRUE)
   attached_files <- unlist(lapply(x$payload$parts, function(part) {

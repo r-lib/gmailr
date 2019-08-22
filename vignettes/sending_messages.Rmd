@@ -54,7 +54,7 @@ You can add attachments to your message in two ways.
 write.csv(file = "iris.csv", iris)
 
 msg <- html_msg %>%
-  subject("Here are some flowers") %>%
+  gm_subject("Here are some flowers") %>%
   attach_file("iris.csv")
 ```
 

@@ -60,7 +60,7 @@ gm_bcc(x, ...)
 
 date(x, ...)
 
-subject(x, ...)
+gm_subject(x, ...)
 
 gm_body(x, ...)
 
