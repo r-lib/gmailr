@@ -6,3 +6,4 @@ setup.R
 script.R
 docs/
 tools/
+.secrets

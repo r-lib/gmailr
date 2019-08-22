@@ -18,6 +18,6 @@ TODO.md
 ^pkgdown$
 ^tools$
 ^azure-pipelines\.yml$
-^\.secrets$
+\.secrets$
 ^tests/testthat/\.secrets$
 ^revdep$
