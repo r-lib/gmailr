@@ -115,6 +115,41 @@
       <small>Source: <a href='https://github.com/r-lib/gmailr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="gmailr-1-0-0" class="section level1">
+<h1 class="page-header">
+<a href="#gmailr-1-0-0" class="anchor"></a>gmailr 1.0.0<small> Unreleased </small>
+</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li><p>All functions are now prefixed with <code>gm_*()</code> to avoid name conflicts with other packages (including the base package), the previous names have been deprecated and will be removed in future releases. Use <code>gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))</code> to convert all R files in the current directory to the new names. (<a href='https://github.com/r-lib/gmailr/issues/95'>#95</a>)</p></li>
+<li><p>New <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> and <code><a href="../reference/gm_auth.html">gm_auth()</a></code> functions added conforming to the conventions in the <a href="https://cran.r-project.org/package=gargle">gargle</a> package. <code><a href="../reference/gmail_auth.html">gmail_auth()</a></code> and <code>use_secret_token()</code> are now deprecated and will be removed in a future release.</p></li>
+<li><p>The google application bundled in previous gmailr releases has been removed, users will now need to create their own applications in order to use gmailr. See the <a href="https://github.com/r-lib/gmailr/blob/master/README.md#setup">Setup</a> section in the readme for details. This was nessesary to comply with stricter enforement of the API terms of service.</p></li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li><p>New <code>gm_attachements()</code> returns a data.frame of attachment information from a message or draft (<a href='https://github.com/r-lib/gmailr/issues/10'>#10</a>, <a href='https://github.com/r-lib/gmailr/issues/24'>#24</a>).</p></li>
+<li><p>New <code><a href="../reference/gm_delete_draft.html">gm_delete_draft()</a></code> added to delete a draft email without sending it to the trash.</p></li>
+<li><p>New <code><a href="../reference/gm_profile.html">gm_profile()</a></code> function to return the gmail profile of the currently logged in user (<a href='https://github.com/r-lib/gmailr/issues/114'>#114</a>)</p></li>
+<li><p>New <code><a href="../reference/gm_auth.html">gm_scopes()</a></code> function to list the available scopes, and gmailr now requests only the full scope by default (<a href='https://github.com/r-lib/gmailr/issues/90'>#90</a>)</p></li>
+<li><p>More detailed examples added to the README and the vignette, including adding and referencing attachments in HTML email.</p></li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li><p><code><a href="../reference/gm_body.html">gm_body()</a></code>, <code><a href="../reference/accessors.html">gm_to()</a></code>, <code><a href="../reference/accessors.html">gm_from()</a></code>, <code><a href="../reference/accessors.html">gm_cc()</a></code>, <code><a href="../reference/accessors.html">gm_bcc()</a></code> and <code><a href="../reference/accessors.html">gm_subject()</a></code> now automatically mark their output as UTF-8 (<a href='https://github.com/r-lib/gmailr/issues/47'>#47</a>, <a href='https://github.com/r-lib/gmailr/issues/86'>#86</a>)</p></li>
+<li><p>Quoted-printable now works with smart quotes (<a href='https://github.com/r-lib/gmailr/issues/77'>#77</a>)</p></li>
+<li><p>Unicode text can now be used in email headers, including the Subject and address fields, like To and Cc (<a href='https://github.com/r-lib/gmailr/issues/76'>#76</a>, <a href='https://github.com/r-lib/gmailr/issues/78'>#78</a>)</p></li>
+<li><p><code>print.gmail_message()</code> now only prints the parts of the message that are defined (<a href='https://github.com/r-lib/gmailr/issues/88'>#88</a>) and now prints out the filenames of attachments (if any).</p></li>
+</ul>
+</div>
+</div>
     <div id="gmailr-0-7-1" class="section level1">
 <h1 class="page-header">
 <a href="#gmailr-0-7-1" class="anchor"></a>gmailr 0.7.1<small> 2016-04-12 </small>
@@ -161,6 +196,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#gmailr-1-0-0">1.0.0</a></li>
         <li><a href="#gmailr-0-7-1">0.7.1</a></li>
         <li><a href="#gmailr-0-5-0">0.5.0</a></li>
         <li><a href="#gmailr-0-0-1">0.0.1</a></li>
