@@ -193,7 +193,7 @@ gm_subject.gmail_message <- function(x, ...) { header_value(x, "Subject") }
 gm_subject.gmail_draft <- function(x, ...){ gm_subject.gmail_message(x$message, ...) }
 
 header_value <- function(x, name){
-  Find(function(header) identical(header$name, name), x$payload$headers)$value
+  mark_utf8(Find(function(header) identical(header$name, name), x$payload$headers)$value)
 }
 
 #' @export

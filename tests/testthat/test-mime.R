@@ -26,7 +26,7 @@ test_that("MIME - Basic functions", {
 test_that("header_encode encodes non-ascii values as base64", {
   expect_equal(header_encode("f\U00F6\U00F6"), "=?utf-8?B?ZsO2w7Y=?=")
 
-  expect_equal(header_encode('"f\U00F6\U00F6 b\U00E1r" <baz@qux.com>'), "=?utf-8?B?ImbDtsO2IGLDoXIiIA==?= <baz@qux.com>")
+  expect_equal(header_encode('"f\U00F6\U00F6 b\U00Er1" <baz@qux.com>'), "=?utf-8?B?ImbDtsO2IGIOcjEi?= <baz@qux.com>")
 
   res <- header_encode(
     c('"f\U00F6\U00F6 b\U00E1r" <baz@qux.com>',
@@ -36,7 +36,7 @@ test_that("header_encode encodes non-ascii values as base64", {
     )
   )
 
-  expect_equal(res, "=?utf-8?B?ImbDtsO2IGLDoXIiIA==?= <baz@qux.com>, \"foo bar\"  <foo.bar@baz.com>, qux@baz.com, =?utf-8?B?InHDu3ggIiA=?= <qux@foo.com>")
+  expect_equal(res, "=?utf-8?B?ImbDtsO2IGLDoXIi?= <baz@qux.com>, \"foo bar\" <foo.bar@baz.com>, qux@baz.com, =?utf-8?B?InHDu3ggIg==?= <qux@foo.com>")
 })
 
 context("MIME - More Complex")

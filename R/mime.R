@@ -74,13 +74,13 @@ gm_subject.mime <- function(x, val, ...){
 #' @param ... additional parameters to put in the attr field
 #' @rdname gm_mime
 #' @export
-gm_text_body <- function(mime, body, ...){
+gm_text_body <- function(mime, body, content_type = "text/plain", charset = "utf-8", encoding = "quoted-printable", format = "flowed", ...){
   if(missing(body)){ return(mime$parts[[TEXT_PART]]) }
   mime$parts[[TEXT_PART]] <- mime(attr = list(
-              content_type = "text/plain",
-              charset      = "utf-8",
-              encoding     = "quoted-printable",
-              format       = "flowed",
+              content_type = content_type,
+              charset      = charset,
+              encoding     = encoding,
+              format       = format,
               ...),
               body = body)
   mime
@@ -149,7 +149,7 @@ header_encode <- function(x) {
 
   # this won't deal with <> used in quotes, but I think it is rare enough that
   # is ok
-  m <- rematch2::re_match(x, "^(?<phrase>[^<]*)(?: *<(?<addr_spec>[^>]+)>)?$")
+  m <- rematch2::re_match(x, "^(?<phrase>[^<]*?)(?: *<(?<addr_spec>[^>]+)>)?$")
   res <- character(length(x))
 
   # simple addresses contain no <>, so we don't need to do anything further

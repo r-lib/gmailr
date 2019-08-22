@@ -1,5 +1,8 @@
 # gmailr (development)
 
+* `gm_body()`, `gm_to()`, `gm_from()`, `gm_cc()`, `gm_bcc()` and `gm_subject()`
+  now automatically mark their output as UTF-8 (#47, #86)
+
 * New `gm_attachements()` returns a data.frame of attachment information from a
   message or draft (#10, #24).
 

@@ -43,7 +43,16 @@ not_null <- function(x){ Filter(Negate(is.null), x) }
 
 gmail_path <- function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, paste0(unlist(list(...)), collapse = "/"), sep = "/") }
 gmail_upload_path <- function(user, ...) { paste("https://www.googleapis.com/upload/gmail/v1/users", user, paste0(list(...), collapse = "/"), sep = "/") }
-base64url_decode_to_char <- function(x) { rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))) }
+mark_utf8 <- function(x) {
+  if (length(x)) {
+    Encoding(x) <- "UTF-8"
+  }
+
+  x
+}
+base64url_decode_to_char <- function(x) {
+  mark_utf8(rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))))
+}
 base64url_decode <- function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
 base64url_encode <- function(x) { gsub("/", "_", gsub("\\+", "-", base64encode(charToRaw(as.character(x))))) }
 
