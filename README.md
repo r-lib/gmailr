@@ -96,10 +96,10 @@ gm_save_attachments(my_msg)
 - Create and send emails and drafts: see [sending_messages vignette](https://github.com/r-lib/gmailr/blob/master/vignettes/sending_messages.Rmd)
 - manage email labels programmatically: `modify_thread(thread_id, add_labels=c("label_1"), remove_labels=c("label_2"))`
 - put things in the gmail trash
-  - messages: `trash_message(message_id)`
+  - messages: `gm_trash_message(message_id)`
   - threads: `trash_thread(thread_id)`
 - take things out of the gmail trash
-  - messages: `untrash_message(message_id)`
+  - messages: `gm_untrash_message(message_id)`
   - threads: `untrash_thread(thread_id)`
 - delete directly without using the trash
   - messages: `delete_message(message_id)`

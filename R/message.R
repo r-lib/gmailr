@@ -67,7 +67,7 @@ gm_messages <- function(search = NULL,
 #' @family message
 #' @examples
 #' \dontrun{
-#' trash_message('12345')
+#' gm_trash_message('12345')
 #' }
 gm_trash_message <- function(id, user_id = "me") {
   stopifnot(
@@ -86,7 +86,7 @@ gm_trash_message <- function(id, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' untrash_message('12345')
+#' gm_untrash_message('12345')
 #' }
 gm_untrash_message <- function(id, user_id = "me") {
   stopifnot(

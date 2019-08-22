@@ -68,9 +68,9 @@ gm_message(...)
 
 gm_messages(...)
 
-trash_message(...)
+gm_trash_message(...)
 
-untrash_message(...)
+gm_untrash_message(...)
 
 delete_message(...)
 

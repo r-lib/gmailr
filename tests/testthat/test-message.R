@@ -82,12 +82,12 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
   expect_equal(msg2$labelIds[[1]], "INBOX")
 
   # now trash the message
-  trash_message(new_id)
+  gm_trash_message(new_id)
   msg3 <- gm_message(new_id)
   expect_equal(msg3$labelIds[[1]], "TRASH")
 
   # now untrash the message, this does not restore the labels, but removes the trash label
-  untrash_message(new_id)
+  gm_untrash_message(new_id)
   msg4 <- gm_message(new_id)
   expect_equal(msg4$labelIds[[1]], NULL)
 
