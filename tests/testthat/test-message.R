@@ -99,7 +99,7 @@ test_that("send_message works", {
   skip_if_no_token()
 
   msg <- gm_mime(From=Sys.getenv("GMAILR_EMAIL"), To=Sys.getenv("GMAILR_EMAIL"), Subject="hello myself", body = "how are you doing? I am doing well!")
-  sent_id <- gm_id(send_message(msg))
+  sent_id <- gm_id(gm_send_message(msg))
   msg1 <- gm_message(sent_id)
 
   expect_true("SENT" %in% msg1$labelIds)
