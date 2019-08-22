@@ -8,3 +8,70 @@ destination: docs
 
 development:
   mode: auto
+
+reference:
+- title: Authentication
+  desc: >
+    These functions are used to configure and establish authentication to the gmail API. `gm_auth_configure()` and `gm_auth()` are the most important for most users.
+  contents:
+  - matches("auth")
+  - gm_scopes
+  - gm_has_token
+  - gm_profile
+  - gm_token
+  - gm_has_token
+- title: Messages
+  desc: >
+    These functions create, modify, query and delete email messages.
+  contents:
+  - matches("message")
+- title: Threads
+  desc: >
+    These functions create, modify, query and delete email threads.
+  contents:
+  - matches("thread")
+- title: Drafts
+  desc: >
+    These functions create, modify, query and delete email drafts.
+  contents:
+  - matches("draft")
+- title: Labels
+  desc: >
+    These functions create, modify, query and delete email labels.
+  contents:
+  - matches("label")
+- title: Attachments
+  desc: >
+    These functions work with email attachments. `gm_attchments()` to list the attachments of a message and `gm_save_attachments()` are generally the most useful for most users.
+  contents:
+  - gm_save_attachments
+  - gm_save_attachment
+  - gm_attachments
+  - gm_attachment
+
+
+- title: Email creation (MIME)
+  desc: >
+    These functions are used to query or set parts of a Multipurpose Internet Mail Extensions (MIME) messages. They can be used to generate new emails from scratch.
+  contents:
+  - gm_to
+  - gm_from
+  - gm_cc
+  - gm_bcc
+  - gm_subject
+  - gm_date
+  - gm_body
+  - gm_mime
+  - gm_text_body
+  - gm_html_body
+  - as.character.mime
+
+- title: Miscellaneous tools
+  desc: >
+    These functions don't fit neatly into the above categories and are generally used internally or for debugging.
+  contents:
+  - gm_history
+  - gm_last_response
+  - quoted_printable_encode
+  - gm_last_response
+  -
