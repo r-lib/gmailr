@@ -111,11 +111,11 @@ unlink("mtcars.png")
 ## Uploading
 ### Create Draft
 
-You can upload any mime message into your gmail drafts using `create_draft()`.
+You can upload any mime message into your gmail drafts using `gm_create_draft()`.
 Be sure to give yourself at least `compose` permissions first.
 
 ```{r sending_messages_create_draft, eval=FALSE}
-create_draft(file_attachment)
+gm_create_draft(file_attachment)
 ```
 
 ### Insert
@@ -140,13 +140,13 @@ gm_insert_message(file_attachment)
 
 ### Draft
 
-`send_draft()` sends an email using the `draft_id` of an existing draft
-(possibly created with `create_draft()`).
+`gm_send_draft()` sends an email using the `draft_id` of an existing draft
+(possibly created with `gm_create_draft()`).
 
 ```{r sending_messages_send_draft, eval=FALSE}
 my_drafts <- gm_drafts()
 
-send_draft(gm_id(my_drafts, "draft_id")[1])
+gm_send_draft(gm_id(my_drafts, "draft_id")[1])
 ```
 ### Message
 

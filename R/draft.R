@@ -52,7 +52,7 @@ gm_drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' create_draft(gm_mime(From="you@@me.com", To="any@@one.com",
+#' gm_create_draft(gm_mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
 gm_create_draft <- function(mail,
@@ -80,9 +80,9 @@ gm_create_draft <- function(mail,
 #' @export
 #' @examples
 #' \dontrun{
-#' draft <- create_draft(gm_mime(From="you@@me.com", To="any@@one.com",
+#' draft <- gm_create_draft(gm_mime(From="you@@me.com", To="any@@one.com",
 #'                       Subject="hello", "how are you doing?"))
-#' send_draft(draft)
+#' gm_send_draft(draft)
 #' }
 gm_send_draft <- function(draft,
                        user_id = "me") {

@@ -16,7 +16,7 @@ Create a draft from a mime message
 }
 \examples{
 \dontrun{
-create_draft(gm_mime(From="you@me.com", To="any@one.com",
+gm_create_draft(gm_mime(From="you@me.com", To="any@one.com",
                           Subject="hello", "how are you doing?"))
 }
 }

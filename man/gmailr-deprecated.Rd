@@ -104,9 +104,9 @@ gm_draft(...)
 
 gm_drafts(...)
 
-create_draft(...)
+gm_create_draft(...)
 
-send_draft(...)
+gm_send_draft(...)
 
 gm_labels(...)
 
