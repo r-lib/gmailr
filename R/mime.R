@@ -134,7 +134,7 @@ gm_attach_file <- function(mime, filename, type = NULL, id = NULL, ...){
 
   base_name <- basename(filename)
 
-  attach_part(mime, body,
+  gm_attach_part(mime, body,
          content_type = type,
          name = base_name,
          filename = base_name,

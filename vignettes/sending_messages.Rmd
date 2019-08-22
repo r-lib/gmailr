@@ -58,10 +58,10 @@ msg <- html_msg %>%
   attach_file("iris.csv")
 ```
 
-2. If the data are already loaded into R, you can use `attach_part()` to attach the binary data to your file.
+2. If the data are already loaded into R, you can use `gm_attach_part()` to attach the binary data to your file.
 ```{r sending_messages_attachments_1}
 msg <- html_msg %>%
-  attach_part(part = charToRaw("attach me!"), name = "please")
+  gm_attach_part(part = charToRaw("attach me!"), name = "please")
 ```
 
 ### Including images

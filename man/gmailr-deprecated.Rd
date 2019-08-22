@@ -128,7 +128,7 @@ gm_text_body(...)
 
 gm_html_body(...)
 
-attach_part(...)
+gm_attach_part(...)
 
 attach_file(...)
 }
