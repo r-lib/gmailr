@@ -10,7 +10,7 @@
 
 * New `gm_auth_configure()` and `gm_auth()` functions added conforming to the
   conventions in the [gargle](https://cran.r-project.org/package=gargle) package.
-  `gmail_auth()` and `use_secret_token()` are now deprecated and will be removed
+  `gmail_auth()`, `clear_token()` and `use_secret_token()` are now deprecated and will be removed
   in a future release.
 
 * The google application bundled in previous gmailr releases has been removed,
