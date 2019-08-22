@@ -125,41 +125,11 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-authentication" class="hasAnchor"><a href="#section-authentication" class="anchor"></a>Authentication</h2>
+          <p class="section-desc"><p>These functions are used to configure and establish authentication to the gmail API. <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> and <code><a href="../reference/gm_auth.html">gm_auth()</a></code> are the most important for most users.</p></p>
         </th>
       </tr>
       <tr>
-        
-        <td>
-          <p><code><a href="accessors.html">gm_to()</a></code> <code><a href="accessors.html">gm_from()</a></code> <code><a href="accessors.html">gm_cc()</a></code> <code><a href="accessors.html">gm_bcc()</a></code> <code><a href="accessors.html">gm_date()</a></code> <code><a href="accessors.html">gm_subject()</a></code> </p>
-        </td>
-        <td><p>Methods to get values from message or drafts</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="as.character.mime.html">as.character(<i>&lt;mime&gt;</i>)</a></code> </p>
-        </td>
-        <td><p>Convert a mime object to character representation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="clear_token.html">clear_token()</a></code> </p>
-        </td>
-        <td><p>Clear the current oauth token</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_attachment.html">gm_attachment()</a></code> </p>
-        </td>
-        <td><p>Retrieve an attachment to a message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_attachments.html">gm_attachments()</a></code> </p>
-        </td>
-        <td><p>Retrieve information about attachments</p></td>
-      </tr><tr>
         
         <td>
           <p><code><a href="gm_auth.html">gm_scopes()</a></code> <code><a href="gm_auth.html">gm_auth()</a></code> </p>
@@ -174,63 +144,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="gm_body.html">gm_body()</a></code> </p>
-        </td>
-        <td><p>Get the body text of a message or draft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_create_draft.html">gm_create_draft()</a></code> </p>
-        </td>
-        <td><p>Create a draft from a mime message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_create_label.html">gm_create_label()</a></code> </p>
-        </td>
-        <td><p>Create a new label</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="gm_deauth.html">gm_deauth()</a></code> </p>
         </td>
         <td><p>Clear current token</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_delete_draft.html">gm_delete_draft()</a></code> </p>
-        </td>
-        <td><p>Permanently delete a single draft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_delete_label.html">gm_delete_label()</a></code> </p>
-        </td>
-        <td><p>Permanently delete a label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_delete_message.html">gm_delete_message()</a></code> </p>
-        </td>
-        <td><p>Permanently delete a single message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_delete_thread.html">gm_delete_thread()</a></code> </p>
-        </td>
-        <td><p>Permanently delete a single thread.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_draft.html">gm_draft()</a></code> </p>
-        </td>
-        <td><p>Get a single draft</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_drafts.html">gm_drafts()</a></code> </p>
-        </td>
-        <td><p>Get a list of drafts</p></td>
       </tr><tr>
         
         <td>
@@ -240,9 +156,29 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="gm_history.html">gm_history()</a></code> </p>
+          <p><code><a href="gm_profile.html">gm_profile()</a></code> </p>
         </td>
-        <td><p>Retrieve change history for the inbox</p></td>
+        <td><p>Get info on current gmail profile</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_token.html">gm_token()</a></code> </p>
+        </td>
+        <td><p>Produce configured token</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-messages" class="hasAnchor"><a href="#section-messages" class="anchor"></a>Messages</h2>
+          <p class="section-desc"><p>These functions create, modify, query and delete email messages.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="gm_delete_message.html">gm_delete_message()</a></code> </p>
+        </td>
+        <td><p>Permanently delete a single message</p></td>
       </tr><tr>
         
         <td>
@@ -264,24 +200,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="gm_label.html">gm_label()</a></code> </p>
-        </td>
-        <td><p>Get a specific label</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_labels.html">gm_labels()</a></code> </p>
-        </td>
-        <td><p>Get a list of all labels</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_last_response.html">gm_last_response()</a></code> </p>
-        </td>
-        <td><p>Response from the last query</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="gm_message.html">gm_message()</a></code> </p>
         </td>
         <td><p>Get a single message</p></td>
@@ -294,51 +212,47 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="gm_mime.html">gm_mime()</a></code> <code><a href="gm_mime.html">gm_to(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_from(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_cc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_bcc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_subject(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_text_body()</a></code> <code><a href="gm_mime.html">gm_html_body()</a></code> <code><a href="gm_mime.html">gm_attach_part()</a></code> <code><a href="gm_mime.html">gm_attach_file()</a></code> </p>
-        </td>
-        <td><p>Create a mime formatted message object</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="gm_modify_message.html">gm_modify_message()</a></code> </p>
         </td>
         <td><p>Modify the labels on a message</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gm_modify_thread.html">gm_modify_thread()</a></code> </p>
-        </td>
-        <td><p>Modify the labels on a thread</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_profile.html">gm_profile()</a></code> </p>
-        </td>
-        <td><p>Get info on current gmail profile</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_save_attachment.html">gm_save_attachment()</a></code> </p>
-        </td>
-        <td><p>Save the attachment to a file</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_save_attachments.html">gm_save_attachments()</a></code> </p>
-        </td>
-        <td><p>Save attachments to a message</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_send_draft.html">gm_send_draft()</a></code> </p>
-        </td>
-        <td><p>Send a draft</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="gm_send_message.html">gm_send_message()</a></code> </p>
         </td>
         <td><p>Send a message from a mime message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_trash_message.html">gm_trash_message()</a></code> </p>
+        </td>
+        <td><p>Send a single message to the trash</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_untrash_message.html">gm_untrash_message()</a></code> </p>
+        </td>
+        <td><p>Remove a single message from the trash</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-threads" class="hasAnchor"><a href="#section-threads" class="anchor"></a>Threads</h2>
+          <p class="section-desc"><p>These functions create, modify, query and delete email threads.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="gm_delete_thread.html">gm_delete_thread()</a></code> </p>
+        </td>
+        <td><p>Permanently delete a single thread.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_modify_thread.html">gm_modify_thread()</a></code> </p>
+        </td>
+        <td><p>Modify the labels on a thread</p></td>
       </tr><tr>
         
         <td>
@@ -354,63 +268,181 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="gm_token.html">gm_token()</a></code> </p>
-        </td>
-        <td><p>Produce configured token</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="gm_trash_message.html">gm_trash_message()</a></code> </p>
-        </td>
-        <td><p>Send a single message to the trash</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="gm_trash_thread.html">gm_trash_thread()</a></code> </p>
         </td>
         <td><p>Send a single thread to the trash</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gm_untrash_message.html">gm_untrash_message()</a></code> </p>
-        </td>
-        <td><p>Remove a single message from the trash</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="gm_untrash_thread.html">gm_untrash_thread()</a></code> </p>
         </td>
         <td><p>Remove a single thread from the trash.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-drafts" class="hasAnchor"><a href="#section-drafts" class="anchor"></a>Drafts</h2>
+          <p class="section-desc"><p>These functions create, modify, query and delete email drafts.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="gm_create_draft.html">gm_create_draft()</a></code> </p>
+        </td>
+        <td><p>Create a draft from a mime message</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_delete_draft.html">gm_delete_draft()</a></code> </p>
+        </td>
+        <td><p>Permanently delete a single draft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_draft.html">gm_draft()</a></code> </p>
+        </td>
+        <td><p>Get a single draft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_drafts.html">gm_drafts()</a></code> </p>
+        </td>
+        <td><p>Get a list of drafts</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_send_draft.html">gm_send_draft()</a></code> </p>
+        </td>
+        <td><p>Send a draft</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-labels" class="hasAnchor"><a href="#section-labels" class="anchor"></a>Labels</h2>
+          <p class="section-desc"><p>These functions create, modify, query and delete email labels.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="gm_create_label.html">gm_create_label()</a></code> </p>
+        </td>
+        <td><p>Create a new label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_delete_label.html">gm_delete_label()</a></code> </p>
+        </td>
+        <td><p>Permanently delete a label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_label.html">gm_label()</a></code> </p>
+        </td>
+        <td><p>Get a specific label</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_labels.html">gm_labels()</a></code> </p>
+        </td>
+        <td><p>Get a list of all labels</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="gm_update_label.html">gm_update_label()</a></code> <code><a href="gm_update_label.html">gm_update_label_patch()</a></code> </p>
         </td>
         <td><p>Update a existing label.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-attachments" class="hasAnchor"><a href="#section-attachments" class="anchor"></a>Attachments</h2>
+          <p class="section-desc"><p>These functions work with email attachments. <code>gm_attchments()</code> to list the attachments of a message and <code><a href="../reference/gm_save_attachments.html">gm_save_attachments()</a></code> are generally the most useful for most users.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="gm_save_attachments.html">gm_save_attachments()</a></code> </p>
+        </td>
+        <td><p>Save attachments to a message</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gmail_auth.html">gmail_auth()</a></code> </p>
+          <p><code><a href="gm_save_attachment.html">gm_save_attachment()</a></code> </p>
         </td>
-        <td><p>Setup oauth authentication for your gmail</p></td>
+        <td><p>Save the attachment to a file</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="gmailr.html">gmailr</a></code> </p>
+          <p><code><a href="gm_attachments.html">gm_attachments()</a></code> </p>
         </td>
-        <td><p><span class="pkg">gmailr</span> makes gmail access easy.</p></td>
+        <td><p>Retrieve information about attachments</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_attachment.html">gm_attachment()</a></code> </p>
+        </td>
+        <td><p>Retrieve an attachment to a message</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-email-creation-mime-" class="hasAnchor"><a href="#section-email-creation-mime-" class="anchor"></a>Email creation (MIME)</h2>
+          <p class="section-desc"><p>These functions are used to query or set parts of a Multipurpose Internet Mail Extensions (MIME) messages. They can be used to generate new emails from scratch.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="accessors.html">gm_to()</a></code> <code><a href="accessors.html">gm_from()</a></code> <code><a href="accessors.html">gm_cc()</a></code> <code><a href="accessors.html">gm_bcc()</a></code> <code><a href="accessors.html">gm_date()</a></code> <code><a href="accessors.html">gm_subject()</a></code> </p>
+        </td>
+        <td><p>Methods to get values from message or drafts</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_body.html">gm_body()</a></code> </p>
+        </td>
+        <td><p>Get the body text of a message or draft</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_mime.html">gm_mime()</a></code> <code><a href="gm_mime.html">gm_to(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_from(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_cc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_bcc(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_subject(<i>&lt;mime&gt;</i>)</a></code> <code><a href="gm_mime.html">gm_text_body()</a></code> <code><a href="gm_mime.html">gm_html_body()</a></code> <code><a href="gm_mime.html">gm_attach_part()</a></code> <code><a href="gm_mime.html">gm_attach_file()</a></code> </p>
+        </td>
+        <td><p>Create a mime formatted message object</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="as.character.mime.html">as.character(<i>&lt;mime&gt;</i>)</a></code> </p>
+        </td>
+        <td><p>Convert a mime object to character representation</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-miscellaneous-tools" class="hasAnchor"><a href="#section-miscellaneous-tools" class="anchor"></a>Miscellaneous tools</h2>
+          <p class="section-desc"><p>These functions don’t fit neatly into the above categories and are generally used internally or for debugging.</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="gm_history.html">gm_history()</a></code> </p>
+        </td>
+        <td><p>Retrieve change history for the inbox</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gm_last_response.html">gm_last_response()</a></code> </p>
+        </td>
+        <td><p>Response from the last query</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="quoted_printable_encode.html">quoted_printable_encode()</a></code> </p>
         </td>
         <td><p>Encode text using quoted printable</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="use_secret_file.html">use_secret_file()</a></code> </p>
-        </td>
-        <td><p>Use information from a secret file</p></td>
       </tr>
     </tbody>
     </table>
@@ -419,7 +451,14 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-authentication">Authentication</a></li>
+      <li><a href="#section-messages">Messages</a></li>
+      <li><a href="#section-threads">Threads</a></li>
+      <li><a href="#section-drafts">Drafts</a></li>
+      <li><a href="#section-labels">Labels</a></li>
+      <li><a href="#section-attachments">Attachments</a></li>
+      <li><a href="#section-email-creation-mime-">Email creation (MIME)</a></li>
+      <li><a href="#section-miscellaneous-tools">Miscellaneous tools</a></li>
     </ul>
   </div>
 </div>
