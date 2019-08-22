@@ -16,7 +16,7 @@ Get the body text of a message or draft
 }
 \examples{
 \dontrun{
-body(my_message)
-body(my_draft)
+gm_body(my_message)
+gm_body(my_draft)
 }
 }

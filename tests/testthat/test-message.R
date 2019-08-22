@@ -15,7 +15,7 @@ test_that("messages and message work", {
   expect_true(nzchar(from(msg)))
   expect_true(nzchar(date(msg)))
   expect_true(nzchar(subject(msg)))
-  expect_true(nzchar(body(msg)))
+  expect_true(nzchar(gm_body(msg)))
 })
 
 test_that("messages and message work", {
@@ -35,7 +35,7 @@ test_that("messages and message work", {
   expect_true(nzchar(from(msg)))
   expect_true(nzchar(date(msg)))
   expect_true(nzchar(subject(msg)))
-  expect_true(nzchar(body(msg)))
+  expect_true(nzchar(gm_body(msg)))
 })
 
 test_that("import_message works", {
@@ -57,7 +57,7 @@ test_that("import_message works", {
   #expect_equal(to(msg), "any@one.com")
   #expect_equal(from(msg), "you@me.com")
   #expect_equal(subject(msg), "hello")
-  #expect_equal(body(msg), "how are you doing?\r\n")
+  #expect_equal(gm_body(msg), "how are you doing?\r\n")
 })
 
 test_that("insert_message, modify_message, trash_message and untrash_message work", {
@@ -73,7 +73,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
   expect_equal(to(msg), "any@one.com")
   expect_equal(from(msg), "you@me.com")
   expect_equal(subject(msg), "hello")
-  expect_equal(body(msg), "how are you doing?\r\n")
+  expect_equal(gm_body(msg), "how are you doing?\r\n")
   expect_equal(msg$labelIds[[1]], NULL)
 
   # now modify the labels on the message to put it in the inbox

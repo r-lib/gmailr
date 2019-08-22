@@ -30,8 +30,8 @@ NULL
 #' @export
 #' @examples
 #' \dontrun{
-#' body(my_message)
-#' body(my_draft)
+#' gm_body(my_message)
+#' gm_body(my_draft)
 #' }
 gm_body <- function(x, ...) UseMethod("gm_body")
 
@@ -203,7 +203,7 @@ print.gmail_message <- function(x, ...){
   date <- date(x)
   subject <- subject(x)
   id <- id(x)
-  body <- body(x, collapse = TRUE)
+  body <- gm_body(x, collapse = TRUE)
   attached_files <- unlist(lapply(x$payload$parts, function(part) {
     if (!is.null(part$filename) && part$filename != "") {
       part$filename

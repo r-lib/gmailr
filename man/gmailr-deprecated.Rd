@@ -62,7 +62,7 @@ date(x, ...)
 
 subject(x, ...)
 
-body(x, ...)
+gm_body(x, ...)
 
 message(...)
 
