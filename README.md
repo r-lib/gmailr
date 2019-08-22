@@ -90,7 +90,7 @@ gm_save_attachments(my_msg)
 - retrieve data from your email
   - drafts: `my_drafts = gm_drafts()`
   - history: `my_history = history(start_num)`
-  - labels: `my_labels = labels()`
+  - labels: `my_labels = gm_labels()`
   - messages: `my_messages = gm_messages("search query")`
   - threads: `my_threads = gm_threads("search query")`
 - Create and send emails and drafts: see [sending_messages vignette](https://github.com/r-lib/gmailr/blob/master/vignettes/sending_messages.Rmd)

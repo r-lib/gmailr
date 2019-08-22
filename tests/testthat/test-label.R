@@ -1,7 +1,7 @@
 test_that("labels work", {
   skip_if_no_token()
 
-  my_labels <- labels()
+  my_labels <- gm_labels()
   label_names <- vapply(my_labels$labels, `[[`, character(1), "name")
   expect_true("SENT" %in% label_names)
   expect_true("TRASH" %in% label_names)

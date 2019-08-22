@@ -108,7 +108,7 @@ create_draft(...)
 
 send_draft(...)
 
-labels(...)
+gm_labels(...)
 
 label(...)
 

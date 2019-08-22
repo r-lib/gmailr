@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' my_labels = labels()
+#' my_labels = gm_labels()
 #' }
 gm_labels <- function(user_id = "me"){
   gmailr_GET("labels", user_id)
