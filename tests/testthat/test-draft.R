@@ -13,7 +13,7 @@ test_that("create_draft, drafts, draft and send_draft", {
   d2 <- draft(id(d1))
   expect_equal(id(d2), id(d1))
 
-  expect_equal(to(d2), my_email)
+  expect_equal(gm_to(d2), my_email)
   expect_equal(subject(d2), "hello")
   expect_equal(gm_body(d2), "how are you doing?\r\n")
 

@@ -19,7 +19,7 @@ First we will construct a simple text only message
 
 ```{r sending_messages_simple}
 text_msg <- mime() %>%
-  to("james.f.hester@gmail.com") %>%
+  gm_to("james.f.hester@gmail.com") %>%
   from("me@somewhere.com") %>%
   text_body("Gmailr is a very handy package!")
 ```
@@ -38,7 +38,7 @@ not strictly necessary.
 
 ```{r sending_messages_html}
 html_msg <- mime() %>%
-  to("james.f.hester@gmail.com") %>%
+  gm_to("james.f.hester@gmail.com") %>%
   from("me@somewhere.com") %>%
   html_body("<b>Gmailr</b> is a <i>very</i> handy package!")
 ```

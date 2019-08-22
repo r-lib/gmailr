@@ -64,7 +64,7 @@ These functions create a MIME message. They can be created atomically using
 # using the field functions
 msg = mime() \%>\%
  from("james.f.hester@gmail.com") \%>\%
- to("asdf@asdf.com") \%>\%
+ gm_to("asdf@asdf.com") \%>\%
  text_body("Test Message")
 
 # alternatively you can set the fields using mime(), however you have

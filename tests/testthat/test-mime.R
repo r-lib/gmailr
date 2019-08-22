@@ -7,13 +7,13 @@ test_that("MIME - Basic functions", {
 
           expect_true(length(msg$header) > 0, label = "Even the default object has headers")
 
-          rv <- msg %>% to("adam@ali.as")
+          rv <- msg %>% gm_to("adam@ali.as")
           expect_equal(header_encode(rv$header$To), "adam@ali.as", label = "to sets To Header")
 
           rv <- msg %>% from("bob@ali.as")
           expect_equal(header_encode(rv$header$From), "bob@ali.as", label = "from sets From Header")
 
-          rv <- msg %>% to(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
+          rv <- msg %>% gm_to(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
           expect_equal(header_encode(rv$header$To), "adam@ali.as, another@ali.as, bob@ali.as", label = "to (multiple) sets To header" )
 
           rv <- msg %>% cc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
@@ -114,7 +114,7 @@ context("MIME - Alternative")
 test_that("MIME - Alternative emails contain correct parts", {
           email <- mime() %>%
             from("Jim Hester<james.f.hester@gmail.com>") %>%
-            to("james.f.hester@gmail.com") %>%
+            gm_to("james.f.hester@gmail.com") %>%
             subject("Hello To:!") %>%
             text_body("I am an email") %>%
             html_body("<b>I am a html email</b>")

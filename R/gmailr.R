@@ -19,9 +19,9 @@ NULL
 #' @param lhs,rhs A visualisation and a function to apply to it
 #' @examples
 #' # Instead of
-#' to(mime(), 'someone@@somewhere.com')
+#' gm_to(mime(), 'someone@@somewhere.com')
 #' # you can write
-#' mime() %>% to('someone@@somewhere.com')
+#' mime() %>% gm_to('someone@@somewhere.com')
 NULL
 
 #' Get the body text of a message or draft
@@ -198,7 +198,7 @@ header_value <- function(x, name){
 
 #' @export
 print.gmail_message <- function(x, ...){
-  to <- to(x)
+  to <- gm_to(x)
   from <- from(x)
   date <- date(x)
   subject <- subject(x)

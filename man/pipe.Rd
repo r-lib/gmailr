@@ -15,8 +15,8 @@ function composition into a series of imperative statements.
 }
 \examples{
 # Instead of
-to(mime(), 'someone@somewhere.com')
+gm_to(mime(), 'someone@somewhere.com')
 # you can write
-mime() \%>\% to('someone@somewhere.com')
+mime() \%>\% gm_to('someone@somewhere.com')
 }
 \keyword{internal}

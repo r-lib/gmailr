@@ -50,7 +50,7 @@ gmailr
 \usage{
 id(x, ...)
 
-to(x, ...)
+gm_to(x, ...)
 
 from(x, ...)
 
