@@ -116,7 +116,7 @@ test_that("MIME - Alternative emails contain correct parts", {
             gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
             gm_to("james.f.hester@gmail.com") %>%
             gm_subject("Hello To:!") %>%
-            text_body("I am an email") %>%
+            gm_text_body("I am an email") %>%
             html_body("<b>I am a html email</b>")
 
           email_chr <- as.character(email)

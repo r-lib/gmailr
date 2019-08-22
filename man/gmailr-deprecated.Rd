@@ -124,7 +124,7 @@ history(...)
 
 mime(...)
 
-text_body(...)
+gm_text_body(...)
 
 html_body(...)
 
