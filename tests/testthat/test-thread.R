@@ -7,7 +7,7 @@ test_that("threads and thread work", {
   ids <- id(thrds)
   expect_true(length(ids) > 0)
 
-  thr <- thread(ids[[1]])
+  thr <- gm_thread(ids[[1]])
 
   expect_equal(id(thr), ids[[1]])
 })

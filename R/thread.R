@@ -25,7 +25,7 @@ gm_threads <- function(search = NULL, num_results = NULL, page_token = NULL, lab
 #' @export
 #' @examples
 #' \dontrun{
-#' my_thread = thread(12345)
+#' my_thread = gm_thread(12345)
 #' }
 gm_thread <- function(id, user_id = "me") {
   req <- GET(gmail_path(user_id, "threads", id), gm_token())

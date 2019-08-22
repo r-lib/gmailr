@@ -90,7 +90,7 @@ send_message(...)
 
 gm_threads(...)
 
-thread(...)
+gm_thread(...)
 
 trash_thread(...)
 
