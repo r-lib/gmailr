@@ -170,4 +170,3 @@ in the gargle documentation.
 
 # Community Examples #
 - [Send Email with R](https://github.com/jennybc/send-email-with-r) - Jenny Bryan (@jennybc)
-- [Gmail Stats](https://github.com/alkashef/gmailstats) - Ahmad Al-Kashef (@alkashef)
