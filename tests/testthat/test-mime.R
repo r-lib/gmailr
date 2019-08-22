@@ -19,7 +19,7 @@ test_that("MIME - Basic functions", {
           rv <- msg %>% gm_cc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
           expect_equal(header_encode(rv$header$Cc), "adam@ali.as, another@ali.as, bob@ali.as", label = "cc (multiple) sets To header" )
 
-          rv <- msg %>% bcc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
+          rv <- msg %>% gm_bcc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
           expect_equal(header_encode(rv$header$Bcc), "adam@ali.as, another@ali.as, bob@ali.as", label = "bcc (multiple) sets To header" )
 })
 

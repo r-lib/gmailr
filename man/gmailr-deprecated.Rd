@@ -56,7 +56,7 @@ gm_from(x, ...)
 
 gm_cc(x, ...)
 
-bcc(x, ...)
+gm_bcc(x, ...)
 
 date(x, ...)
 
