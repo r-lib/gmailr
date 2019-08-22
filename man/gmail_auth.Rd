@@ -28,3 +28,4 @@ gmail_auth("compose")
 use_secret_file to set the default id and secret to a different
 value than the default.
 }
+\keyword{internal}

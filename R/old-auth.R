@@ -8,6 +8,7 @@ get_token <- function() {
 }
 
 #' Clear the current oauth token
+#' @keywords internal
 #' @export
 clear_token <- function() {
   .Deprecated("gm_deauth()", package = "gmailr")
@@ -24,6 +25,7 @@ clear_token <- function() {
 #' @seealso use_secret_file to set the default id and secret to a different
 #'   value than the default.
 #' @export
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' gmail_auth("compose")
@@ -62,6 +64,7 @@ gmail_auth <- function(scope=c("read_only", "modify", "compose", "full"),
 #' This function sets the default secret and client_id to those in the secret
 #' file
 #' @param filename the filename of the file
+#' @keywords internal
 #' @export
 use_secret_file <- function(filename) {
   .Deprecated(msg = paste0(
