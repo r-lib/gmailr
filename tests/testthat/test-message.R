@@ -13,7 +13,7 @@ test_that("messages and message work", {
 
   expect_true(nzchar(gm_to(msg)))
   expect_true(nzchar(gm_from(msg)))
-  expect_true(nzchar(date(msg)))
+  expect_true(nzchar(gm_date(msg)))
   expect_true(nzchar(gm_subject(msg)))
   expect_true(nzchar(gm_body(msg)))
 })
@@ -33,7 +33,7 @@ test_that("messages and message work", {
 
   expect_true(nzchar(gm_to(msg)))
   expect_true(nzchar(gm_from(msg)))
-  expect_true(nzchar(date(msg)))
+  expect_true(nzchar(gm_date(msg)))
   expect_true(nzchar(gm_subject(msg)))
   expect_true(nzchar(gm_body(msg)))
 })

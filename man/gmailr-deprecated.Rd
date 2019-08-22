@@ -58,7 +58,7 @@ gm_cc(x, ...)
 
 gm_bcc(x, ...)
 
-date(x, ...)
+gm_date(x, ...)
 
 gm_subject(x, ...)
 

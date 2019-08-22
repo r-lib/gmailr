@@ -200,7 +200,7 @@ header_value <- function(x, name){
 print.gmail_message <- function(x, ...){
   to <- gm_to(x)
   from <- gm_from(x)
-  date <- date(x)
+  date <- gm_date(x)
   subject <- gm_subject(x)
   id <- gm_id(x)
   body <- gm_body(x, collapse = TRUE)
