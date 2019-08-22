@@ -21,3 +21,4 @@ TODO.md
 \.secrets$
 ^tests/testthat/\.secrets$
 ^revdep$
+^script[.]R$

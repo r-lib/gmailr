@@ -327,7 +327,7 @@ get_deprecated_funs <- function() {
   file <- system.file(package = "gmailr", "R", "deprecated.R")
   lines <- readLines(file)
   res <- rematch2::re_match(lines, 'deprecate_.*gmailr::(?<old>[^(]+).*(?<new>gm_[^(]+)')
-  na.omit(res)[c("old", "new")]
+  stats::na.omit(res)[c("old", "new")]
 }
 
 # nocov end
