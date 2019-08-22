@@ -127,10 +127,10 @@ gm_delete_message <- function(id, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' modify_message(12345, add_labels='label_1')
-#' modify_message(12345, remove_labels='label_1')
+#' gm_modify_message(12345, add_labels='label_1')
+#' gm_modify_message(12345, remove_labels='label_1')
 #' #add and remove at the same time
-#' modify_message(12345, add_labels='label_2', remove_labels='label_1')
+#' gm_modify_message(12345, add_labels='label_2', remove_labels='label_1')
 #' }
 gm_modify_message <- function(id,
                            add_labels = NULL,

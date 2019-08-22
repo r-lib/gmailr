@@ -74,7 +74,7 @@ gm_untrash_message(...)
 
 gm_delete_message(...)
 
-modify_message(...)
+gm_modify_message(...)
 
 attachment(...)
 

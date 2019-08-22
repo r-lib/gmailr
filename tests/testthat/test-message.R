@@ -77,7 +77,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
   expect_equal(msg$labelIds[[1]], NULL)
 
   # now modify the labels on the message to put it in the inbox
-  modify_message(new_id, add_labels = "INBOX")
+  gm_modify_message(new_id, add_labels = "INBOX")
   msg2 <- gm_message(new_id)
   expect_equal(msg2$labelIds[[1]], "INBOX")
 
