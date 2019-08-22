@@ -59,9 +59,9 @@ test_that("MIME - More Complex", {
 
   rv2 <- gm_mime() %>%
     gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
-    to("james.f.hester@gmail.com") %>%
-    subject("Hello To:!") %>%
-    text_body("I am an email") %>%
+    gm_to("james.f.hester@gmail.com") %>%
+    gm_subject("Hello To:!") %>%
+    gm_text_body("I am an email") %>%
     gm_attach_file(TEST_PNG)
 
   rv2_chr <- as.character(rv2)
@@ -74,9 +74,9 @@ test_that("MIME - More Complex", {
 
   rv3 <- gm_mime() %>%
     gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
-    to("james.f.hester@gmail.com") %>%
-    subject("Hello To:!") %>%
-    text_body("I am an email") %>%
+    gm_to("james.f.hester@gmail.com") %>%
+    gm_subject("Hello To:!") %>%
+    gm_text_body("I am an email") %>%
     gm_attach_file(TEST_INI, content_type = "text/plain")
 
   rv3_chr <- as.character(rv3)
@@ -89,10 +89,10 @@ test_that("MIME - More Complex", {
 
   rv4 <- gm_mime() %>%
     gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
-    to("james.f.hester@gmail.com") %>%
-    subject("Hello To:!") %>%
-    text_body("I am an email") %>%
-    html_body("I am an html email<br>") %>%
+    gm_to("james.f.hester@gmail.com") %>%
+    gm_subject("Hello To:!") %>%
+    gm_text_body("I am an email") %>%
+    gm_html_body("I am an html email<br>") %>%
     gm_attach_file(TEST_INI, content_type = "application/octet-stream")
 
   rv4_chr <- as.character(rv4)
