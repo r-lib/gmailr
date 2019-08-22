@@ -309,7 +309,7 @@ attach_file <- function(...) {
   gm_attach_file(...)
 }
 
-// helper to convert deprecated functions to new names.
+# helper to convert deprecated functions to new names.
 gm_convert_file <- function(file) {
   gm_funs <- get_deprecated_funs()
 
