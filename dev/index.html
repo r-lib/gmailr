@@ -132,7 +132,7 @@
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># retrieve the latest thread by retrieving the first ID</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">latest_thread &lt;-<span class="st"> </span><span class="kw"><a href="reference/gm_thread.html">gm_thread</a></span>(<span class="kw"><a href="reference/gmailr-deprecated.html">id</a></span>(my_threads)[[<span class="dv">1</span>]])</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">latest_thread &lt;-<span class="st"> </span><span class="kw"><a href="reference/gm_thread.html">gm_thread</a></span>(<span class="kw"><a href="reference/gm_id.html">gm_id</a></span>(my_threads)[[<span class="dv">1</span>]])</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co"># The messages in the thread will now be in a list</span></a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">latest_thread<span class="op">$</span>messages</a>
@@ -155,15 +155,15 @@
 <ul>
 <li>retrieve data from your email
 <ul>
-<li>drafts: <code>my_drafts = drafts()</code>
+<li>drafts: <code>my_drafts = gm_drafts()</code>
 </li>
 <li>history: <code>my_history = history(start_num)</code>
 </li>
-<li>labels: <code>my_labels = labels()</code>
+<li>labels: <code>my_labels = gm_labels()</code>
 </li>
-<li>messages: <code>my_messages = messages("search query")</code>
+<li>messages: <code>my_messages = gm_messages("search query")</code>
 </li>
-<li>threads: <code>my_threads = threads("search query")</code>
+<li>threads: <code>my_threads = gm_threads("search query")</code>
 </li>
 </ul>
 </li>
@@ -173,7 +173,7 @@
 </li>
 <li>put things in the gmail trash
 <ul>
-<li>messages: <code><a href="reference/gmailr-deprecated.html">trash_message(message_id)</a></code>
+<li>messages: <code><a href="reference/gm_trash_message.html">gm_trash_message(message_id)</a></code>
 </li>
 <li>threads: <code><a href="reference/gmailr-deprecated.html">trash_thread(thread_id)</a></code>
 </li>
@@ -181,7 +181,7 @@
 </li>
 <li>take things out of the gmail trash
 <ul>
-<li>messages: <code><a href="reference/gmailr-deprecated.html">untrash_message(message_id)</a></code>
+<li>messages: <code><a href="reference/gm_untrash_message.html">gm_untrash_message(message_id)</a></code>
 </li>
 <li>threads: <code><a href="reference/gmailr-deprecated.html">untrash_thread(thread_id)</a></code>
 </li>
@@ -189,7 +189,7 @@
 </li>
 <li>delete directly without using the trash
 <ul>
-<li>messages: <code><a href="reference/gmailr-deprecated.html">delete_message(message_id)</a></code>
+<li>messages: <code><a href="reference/gm_delete_message.html">gm_delete_message(message_id)</a></code>
 </li>
 <li>threads: <code><a href="reference/gmailr-deprecated.html">delete_thread(thread_id)</a></code>
 </li>

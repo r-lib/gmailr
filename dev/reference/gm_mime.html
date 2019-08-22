@@ -33,7 +33,7 @@
 <meta property="og:title" content="Create a mime formatted message object — gm_mime" />
 
 <meta property="og:description" content="These functions create a MIME message. They can be created atomically using
-mime() or iteratively using the various accessors." />
+gm_mime() or iteratively using the various accessors." />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -123,7 +123,7 @@ mime() or iteratively using the various accessors." />
     <div class="ref-description">
     
     <p>These functions create a MIME message. They can be created atomically using
-<code><a href='gmailr-deprecated.html'>mime()</a></code> or iteratively using the various accessors.</p>
+<code>gm_mime()</code> or iteratively using the various accessors.</p>
     
     </div>
 
@@ -144,9 +144,12 @@ mime() or iteratively using the various accessors." />
 <span class='co'># S3 method for mime</span>
 <span class='fu'><a href='accessors.html'>gm_subject</a></span>(<span class='no'>x</span>, <span class='no'>val</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_text_body</span>(<span class='no'>mime</span>, <span class='no'>body</span>, <span class='no'>...</span>)
+<span class='fu'>gm_text_body</span>(<span class='no'>mime</span>, <span class='no'>body</span>, <span class='kw'>content_type</span> <span class='kw'>=</span> <span class='st'>"text/plain"</span>,
+  <span class='kw'>charset</span> <span class='kw'>=</span> <span class='st'>"utf-8"</span>, <span class='kw'>encoding</span> <span class='kw'>=</span> <span class='st'>"quoted-printable"</span>,
+  <span class='kw'>format</span> <span class='kw'>=</span> <span class='st'>"flowed"</span>, <span class='no'>...</span>)
 
-<span class='fu'>gm_html_body</span>(<span class='no'>mime</span>, <span class='no'>body</span>, <span class='no'>...</span>)
+<span class='fu'>gm_html_body</span>(<span class='no'>mime</span>, <span class='no'>body</span>, <span class='kw'>content_type</span> <span class='kw'>=</span> <span class='st'>"text/html"</span>, <span class='kw'>charset</span> <span class='kw'>=</span> <span class='st'>"utf-8"</span>,
+  <span class='kw'>encoding</span> <span class='kw'>=</span> <span class='st'>"base64"</span>, <span class='no'>...</span>)
 
 <span class='fu'>gm_attach_part</span>(<span class='no'>mime</span>, <span class='no'>part</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
@@ -184,6 +187,22 @@ mime() or iteratively using the various accessors." />
       <td><p>message.</p></td>
     </tr>
     <tr>
+      <th>content_type</th>
+      <td><p>The content type to use for the body.</p></td>
+    </tr>
+    <tr>
+      <th>charset</th>
+      <td><p>The character set to use for the body.</p></td>
+    </tr>
+    <tr>
+      <th>encoding</th>
+      <td><p>The transfer encoding to use for the body.</p></td>
+    </tr>
+    <tr>
+      <th>format</th>
+      <td><p>The mime format to use for the body.</p></td>
+    </tr>
+    <tr>
       <th>part</th>
       <td><p>Message part to attach</p></td>
     </tr>
@@ -204,30 +223,16 @@ mime() or iteratively using the various accessors." />
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># using the field functions</span>
-<span class='no'>msg</span> <span class='kw'>=</span> <span class='fu'><a href='gmailr-deprecated.html'>mime</a></span>() <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='gmailr-deprecated.html'>from</a></span>(<span class='st'>"james.f.hester@gmail.com"</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='gmailr-deprecated.html'>to</a></span>(<span class='st'>"asdf@asdf.com"</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'><a href='gmailr-deprecated.html'>text_body</a></span>(<span class='st'>"Test Message"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `mime()` is deprecated as of gmailr 1.0.0.</span>
-#&gt; <span class='warning'>Please use `gm_mime()` instead.</span>
-#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once per session.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: `from()` is deprecated as of gmailr 1.0.0.</span>
-#&gt; <span class='warning'>Please use `gm_from()` instead.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: `to()` is deprecated as of gmailr 1.0.0.</span>
-#&gt; <span class='warning'>Please use `gm_to()` instead.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: `text_body()` is deprecated as of gmailr 1.0.0.</span>
-#&gt; <span class='warning'>Please use `gm_text_body()` instead.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='input'>
-<span class='co'># alternatively you can set the fields using mime(), however you have</span>
+<span class='no'>msg</span> <span class='kw'>=</span> <span class='fu'>gm_mime</span>() <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='accessors.html'>gm_from</a></span>(<span class='st'>"james.f.hester@gmail.com"</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='accessors.html'>gm_to</a></span>(<span class='st'>"asdf@asdf.com"</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'>gm_text_body</span>(<span class='st'>"Test Message"</span>)
+
+<span class='co'># alternatively you can set the fields using gm_mime(), however you have</span>
 <span class='co'>#  to use properly formatted MIME names</span>
-<span class='no'>msg</span> <span class='kw'>=</span> <span class='fu'><a href='gmailr-deprecated.html'>mime</a></span>(<span class='kw'>From</span><span class='kw'>=</span><span class='st'>"james.f.hester@gmail.com"</span>,
+<span class='no'>msg</span> <span class='kw'>=</span> <span class='fu'>gm_mime</span>(<span class='kw'>From</span><span class='kw'>=</span><span class='st'>"james.f.hester@gmail.com"</span>,
                    <span class='kw'>To</span><span class='kw'>=</span><span class='st'>"asdf@asdf.com"</span>) <span class='kw'>%&gt;%</span>
-        <span class='fu'><a href='gmailr-deprecated.html'>html_body</a></span>(<span class='st'>"&lt;b&gt;Test&lt;\b&gt; Message"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `html_body()` is deprecated as of gmailr 1.0.0.</span>
-#&gt; <span class='warning'>Please use `gm_html_body()` instead.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div></span></pre>
+        <span class='fu'>gm_html_body</span>(<span class='st'>"&lt;b&gt;Test&lt;\b&gt; Message"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
