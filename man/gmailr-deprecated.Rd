@@ -72,7 +72,7 @@ gm_trash_message(...)
 
 gm_untrash_message(...)
 
-delete_message(...)
+gm_delete_message(...)
 
 modify_message(...)
 

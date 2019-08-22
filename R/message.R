@@ -105,7 +105,7 @@ gm_untrash_message <- function(id, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' delete_message('12345')
+#' gm_delete_message('12345')
 #' }
 gm_delete_message <- function(id, user_id = "me") {
   stopifnot(

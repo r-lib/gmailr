@@ -45,7 +45,7 @@ test_that("import_message works", {
     gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
-  on.exit(delete_message(new_id))
+  on.exit(gm_delete_message(new_id))
 
   expect_is(new_id, "character")
 
@@ -91,7 +91,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
   msg4 <- gm_message(new_id)
   expect_equal(msg4$labelIds[[1]], NULL)
 
-  delete_message(new_id)
+  gm_delete_message(new_id)
   expect_error(gm_message(new_id), "404", class = "gmailr_error")
 })
 

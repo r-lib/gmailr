@@ -102,7 +102,7 @@ gm_save_attachments(my_msg)
   - messages: `gm_untrash_message(message_id)`
   - threads: `untrash_thread(thread_id)`
 - delete directly without using the trash
-  - messages: `delete_message(message_id)`
+  - messages: `gm_delete_message(message_id)`
   - threads: `delete_thread(thread_id)`
 
 ## Setup ##

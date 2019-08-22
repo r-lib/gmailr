@@ -16,7 +16,7 @@ Function to delete a given message by id.  This cannot be undone!
 }
 \examples{
 \dontrun{
-delete_message('12345')
+gm_delete_message('12345')
 }
 }
 \references{
