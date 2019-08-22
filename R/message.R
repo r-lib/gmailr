@@ -39,7 +39,7 @@ gm_message <- function(id,
 #' @examples
 #' \dontrun{
 #' #Search for R, return 10 results using label 1 including spam and trash folders
-#' my_messages = messages("R", 10, "label_1", TRUE)
+#' my_messages = gm_messages("R", 10, "label_1", TRUE)
 #' }
 gm_messages <- function(search = NULL,
   num_results = NULL,

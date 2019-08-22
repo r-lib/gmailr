@@ -66,7 +66,7 @@ gm_body(x, ...)
 
 message(...)
 
-messages(...)
+gm_messages(...)
 
 trash_message(...)
 

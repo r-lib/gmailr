@@ -1,7 +1,7 @@
 test_that("messages and message work", {
   skip_if_no_token()
 
-  msgs <- messages()
+  msgs <- gm_messages()
   expect_is(msgs, "gmail_messages")
 
   ids <- id(msgs)
@@ -21,7 +21,7 @@ test_that("messages and message work", {
 test_that("messages and message work", {
   skip_if_no_token()
 
-  msgs <- messages()
+  msgs <- gm_messages()
   expect_is(msgs, "gmail_messages")
 
   ids <- id(msgs)
