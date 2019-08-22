@@ -52,7 +52,7 @@ id(x, ...)
 
 gm_to(x, ...)
 
-from(x, ...)
+gm_from(x, ...)
 
 cc(x, ...)
 

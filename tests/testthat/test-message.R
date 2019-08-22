@@ -12,7 +12,7 @@ test_that("messages and message work", {
   expect_equal(id(msg), ids[[1]])
 
   expect_true(nzchar(gm_to(msg)))
-  expect_true(nzchar(from(msg)))
+  expect_true(nzchar(gm_from(msg)))
   expect_true(nzchar(date(msg)))
   expect_true(nzchar(subject(msg)))
   expect_true(nzchar(gm_body(msg)))
@@ -32,7 +32,7 @@ test_that("messages and message work", {
   expect_equal(id(msg), ids[[1]])
 
   expect_true(nzchar(gm_to(msg)))
-  expect_true(nzchar(from(msg)))
+  expect_true(nzchar(gm_from(msg)))
   expect_true(nzchar(date(msg)))
   expect_true(nzchar(subject(msg)))
   expect_true(nzchar(gm_body(msg)))
@@ -55,7 +55,7 @@ test_that("import_message works", {
 
   #expect_equal(id(msg), new_id)
   #expect_equal(gm_to(msg), "any@one.com")
-  #expect_equal(from(msg), "you@me.com")
+  #expect_equal(gm_from(msg), "you@me.com")
   #expect_equal(subject(msg), "hello")
   #expect_equal(gm_body(msg), "how are you doing?\r\n")
 })
@@ -71,7 +71,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
 
   expect_equal(id(msg), new_id)
   expect_equal(gm_to(msg), "any@one.com")
-  expect_equal(from(msg), "you@me.com")
+  expect_equal(gm_from(msg), "you@me.com")
   expect_equal(subject(msg), "hello")
   expect_equal(gm_body(msg), "how are you doing?\r\n")
   expect_equal(msg$labelIds[[1]], NULL)

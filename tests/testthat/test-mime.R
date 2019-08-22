@@ -10,7 +10,7 @@ test_that("MIME - Basic functions", {
           rv <- msg %>% gm_to("adam@ali.as")
           expect_equal(header_encode(rv$header$To), "adam@ali.as", label = "to sets To Header")
 
-          rv <- msg %>% from("bob@ali.as")
+          rv <- msg %>% gm_from("bob@ali.as")
           expect_equal(header_encode(rv$header$From), "bob@ali.as", label = "from sets From Header")
 
           rv <- msg %>% gm_to(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
@@ -56,7 +56,7 @@ test_that("MIME - More Complex", {
             unlink(TEST_INI)
           })
 
-          rv2 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
+          rv2 <- mime() %>% gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
@@ -70,7 +70,7 @@ test_that("MIME - More Complex", {
           expect_match(rv2_chr, "I am an email", label = "Email contains text_body" )
           expect_match(rv2_chr, "volcano",       label = "Email contains file name" )
 
-          rv3 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
+          rv3 <- mime() %>% gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
@@ -84,7 +84,7 @@ test_that("MIME - More Complex", {
           expect_match(rv3_chr, "I am an email", label = "Email contains text_body" )
           expect_match(rv3_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type" )
 
-          rv4 <- mime() %>% from("Jim Hester<james.f.hester@gmail.com>") %>%
+          rv4 <- mime() %>% gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
@@ -113,7 +113,7 @@ context("MIME - Alternative")
 
 test_that("MIME - Alternative emails contain correct parts", {
           email <- mime() %>%
-            from("Jim Hester<james.f.hester@gmail.com>") %>%
+            gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
             gm_to("james.f.hester@gmail.com") %>%
             subject("Hello To:!") %>%
             text_body("I am an email") %>%

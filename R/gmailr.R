@@ -199,7 +199,7 @@ header_value <- function(x, name){
 #' @export
 print.gmail_message <- function(x, ...){
   to <- gm_to(x)
-  from <- from(x)
+  from <- gm_from(x)
   date <- date(x)
   subject <- subject(x)
   id <- id(x)
