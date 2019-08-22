@@ -144,7 +144,7 @@ insert_message(file_attachment)
 (possibly created with `create_draft()`).
 
 ```{r sending_messages_send_draft, eval=FALSE}
-my_drafts <- drafts()
+my_drafts <- gm_drafts()
 
 send_draft(id(my_drafts, "draft_id")[1])
 ```

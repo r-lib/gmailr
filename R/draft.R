@@ -35,9 +35,9 @@ gm_draft <- function(id,
 #' @export
 #' @examples
 #' \dontrun{
-#' my_drafts = drafts()
+#' my_drafts = gm_drafts()
 #'
-#' first_10_drafts = drafts(10)
+#' first_10_drafts = gm_drafts(10)
 #' }
 gm_drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
   stopifnot(is_string(user_id))

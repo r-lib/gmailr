@@ -102,7 +102,7 @@ modify_thread(...)
 
 draft(...)
 
-drafts(...)
+gm_drafts(...)
 
 create_draft(...)
 
