@@ -47,7 +47,7 @@ html_msg <- mime() %>%
 
 You can add attachments to your message in two ways.
 
-1. If the data is in a file, use `attach_file()`.  The mime type is
+1. If the data is in a file, use `gm_attach_file()`.  The mime type is
    automatically guessed by `mime::guess_type`, or you can specify it yourself
    with the `type` parameter.
 ```{r sending_messages_attachments_2}
@@ -55,7 +55,7 @@ write.csv(file = "iris.csv", iris)
 
 msg <- html_msg %>%
   gm_subject("Here are some flowers") %>%
-  attach_file("iris.csv")
+  gm_attach_file("iris.csv")
 ```
 
 2. If the data are already loaded into R, you can use `gm_attach_part()` to attach the binary data to your file.
@@ -101,7 +101,7 @@ email <- gm_mime() %>%
   gm_html_body(
     '<h1>A plot of <b>MotorTrend</b> data <i>(1974)</i></h1>
     <br><img src="cid:foobar">') %>%
-  attach_file("mtcars.png", id = "foobar")
+  gm_attach_file("mtcars.png", id = "foobar")
 ```
 
 ```{r, include = FALSE}

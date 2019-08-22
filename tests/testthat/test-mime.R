@@ -60,7 +60,7 @@ test_that("MIME - More Complex", {
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
-                           attach_file( TEST_PNG                      )
+                           gm_attach_file( TEST_PNG                      )
 
           rv2_chr <- as.character(rv2)
 
@@ -74,7 +74,7 @@ test_that("MIME - More Complex", {
                            to         ( "james.f.hester@gmail.com"    ) %>%
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
-                           attach_file( TEST_INI, content_type = "text/plain")
+                           gm_attach_file( TEST_INI, content_type = "text/plain")
 
           rv3_chr <- as.character(rv3)
 
@@ -89,7 +89,7 @@ test_that("MIME - More Complex", {
                            subject    ( "Hello To:!"                  ) %>%
                            text_body  ( "I am an email"               ) %>%
                            html_body  ( "I am an html email<br>"               ) %>%
-                           attach_file( TEST_INI, content_type = "application/octet-stream")
+                           gm_attach_file( TEST_INI, content_type = "application/octet-stream")
 
           rv4_chr <- as.character(rv4)
 

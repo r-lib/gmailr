@@ -130,7 +130,7 @@ gm_html_body(...)
 
 gm_attach_part(...)
 
-attach_file(...)
+gm_attach_file(...)
 }
 \description{
 These functions are deprecated and will be removed in a future release of
