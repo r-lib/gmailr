@@ -110,15 +110,15 @@ gm_send_draft(...)
 
 gm_labels(...)
 
-label(...)
+gm_label(...)
 
-update_label(...)
+gm_update_label(...)
 
-update_label_patch(...)
+gm_update_label_patch(...)
 
-delete_label(...)
+gm_delete_label(...)
 
-create_label(...)
+gm_create_label(...)
 
 history(...)
 
