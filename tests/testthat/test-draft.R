@@ -10,7 +10,7 @@ test_that("create_draft, drafts, draft and send_draft", {
 
   expect_equal(id(all_ds)[[1]], id(d1))
 
-  d2 <- draft(id(d1))
+  d2 <- gm_draft(id(d1))
   expect_equal(id(d2), id(d1))
 
   expect_equal(gm_to(d2), my_email)

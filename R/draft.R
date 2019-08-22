@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' my_draft = draft('12345')
+#' my_draft = gm_draft('12345')
 #' }
 gm_draft <- function(id,
                   user_id = "me",

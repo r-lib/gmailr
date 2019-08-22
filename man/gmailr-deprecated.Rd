@@ -100,7 +100,7 @@ delete_thread(...)
 
 modify_thread(...)
 
-draft(...)
+gm_draft(...)
 
 gm_drafts(...)
 
