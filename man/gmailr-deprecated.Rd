@@ -54,7 +54,7 @@ gm_to(x, ...)
 
 gm_from(x, ...)
 
-cc(x, ...)
+gm_cc(x, ...)
 
 bcc(x, ...)
 
