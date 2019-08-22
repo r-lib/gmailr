@@ -80,8 +80,8 @@ gm_body.gmail_draft <- function(x, ...){ gm_body.gmail_message(x$message, ...) }
 #' @export
 #' @examples
 #' \dontrun{
-#' id(my_message)
-#' id(my_draft)
+#' gm_id(my_message)
+#' gm_id(my_draft)
 #' }
 gm_id <- function(x, ...) UseMethod("gm_id")
 
@@ -202,7 +202,7 @@ print.gmail_message <- function(x, ...){
   from <- gm_from(x)
   date <- date(x)
   subject <- gm_subject(x)
-  id <- id(x)
+  id <- gm_id(x)
   body <- gm_body(x, collapse = TRUE)
   attached_files <- unlist(lapply(x$payload$parts, function(part) {
     if (!is.null(part$filename) && part$filename != "") {
@@ -224,36 +224,36 @@ print.gmail_message <- function(x, ...){
 
 #' @export
 print.gmail_thread <- function(x, ...){
-  id <- id(x)
+  id <- gm_id(x)
   cat(strwrap(p(crayon::bold("Thread Id: "), id, "\n")), "\n")
 }
 
 #' @export
 print.gmail_draft <- function(x, ...){
-  id <- id(x)
+  id <- gm_id(x)
   cat(strwrap(p(crayon::bold("Draft Id: "), id, "\n")), "\n")
   print(x$message, ...)
 }
 
 #' @export
 print.gmail_messages <- function(x, ...){
-  message_ids <- id(x, "message_id")
-  thread_ids <- id(x, "thread_id")
+  message_ids <- gm_id(x, "message_id")
+  thread_ids <- gm_id(x, "thread_id")
   print(format(data.frame(message_id=message_ids, thread_id=thread_ids)), ...)
 }
 
 #' @export
 print.gmail_threads <- function(x, ...){
-  thread_ids <- id(x)
+  thread_ids <- gm_id(x)
   snippets <- unlist(lapply(x, function(page) { vapply(page$threads, "[[", character(1), "snippet") }))
   print(format(data.frame(thread_id=thread_ids, snippet=snippets)), ...)
 }
 
 #' @export
 print.gmail_drafts <- function(x, ...){
-  draft_ids <- id(x, "draft_id")
-  message_ids <- id(x, "message_id")
-  thread_ids <- id(x, "thread_id")
+  draft_ids <- gm_id(x, "draft_id")
+  message_ids <- gm_id(x, "message_id")
+  thread_ids <- gm_id(x, "thread_id")
   print(format(data.frame(draft_ids, message_id=message_ids, thread_id=thread_ids)), ...)
 }
 

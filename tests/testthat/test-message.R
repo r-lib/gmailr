@@ -4,12 +4,12 @@ test_that("messages and message work", {
   msgs <- gm_messages()
   expect_is(msgs, "gmail_messages")
 
-  ids <- id(msgs)
+  ids <- gm_id(msgs)
   expect_true(length(ids) > 0)
 
   msg <- gm_message(ids[[1]])
 
-  expect_equal(id(msg), ids[[1]])
+  expect_equal(gm_id(msg), ids[[1]])
 
   expect_true(nzchar(gm_to(msg)))
   expect_true(nzchar(gm_from(msg)))
@@ -24,12 +24,12 @@ test_that("messages and message work", {
   msgs <- gm_messages()
   expect_is(msgs, "gmail_messages")
 
-  ids <- id(msgs)
+  ids <- gm_id(msgs)
   expect_true(length(ids) > 0)
 
   msg <- gm_message(ids[[1]])
 
-  expect_equal(id(msg), ids[[1]])
+  expect_equal(gm_id(msg), ids[[1]])
 
   expect_true(nzchar(gm_to(msg)))
   expect_true(nzchar(gm_from(msg)))
@@ -41,7 +41,7 @@ test_that("messages and message work", {
 test_that("import_message works", {
   skip_if_no_token()
 
-  new_id <- id(import_message(
+  new_id <- gm_id(import_message(
     gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
@@ -53,7 +53,7 @@ test_that("import_message works", {
   # directly after importing it
   # msg <- gm_message(new_id)
 
-  #expect_equal(id(msg), new_id)
+  #expect_equal(gm_id(msg), new_id)
   #expect_equal(gm_to(msg), "any@one.com")
   #expect_equal(gm_from(msg), "you@me.com")
   #expect_equal(gm_subject(msg), "hello")
@@ -63,13 +63,13 @@ test_that("import_message works", {
 test_that("insert_message, modify_message, trash_message and untrash_message work", {
   skip_if_no_token()
 
-  new_id <- id(insert_message(
+  new_id <- gm_id(insert_message(
     gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
   msg <- gm_message(new_id)
 
-  expect_equal(id(msg), new_id)
+  expect_equal(gm_id(msg), new_id)
   expect_equal(gm_to(msg), "any@one.com")
   expect_equal(gm_from(msg), "you@me.com")
   expect_equal(gm_subject(msg), "hello")
@@ -99,7 +99,7 @@ test_that("send_message works", {
   skip_if_no_token()
 
   msg <- gm_mime(From=Sys.getenv("GMAILR_EMAIL"), To=Sys.getenv("GMAILR_EMAIL"), Subject="hello myself", body = "how are you doing? I am doing well!")
-  sent_id <- id(send_message(msg))
+  sent_id <- gm_id(send_message(msg))
   msg1 <- gm_message(sent_id)
 
   expect_true("SENT" %in% msg1$labelIds)

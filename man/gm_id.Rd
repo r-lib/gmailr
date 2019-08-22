@@ -22,7 +22,7 @@ Get the id of a gmailr object
 }
 \examples{
 \dontrun{
-id(my_message)
-id(my_draft)
+gm_id(my_message)
+gm_id(my_draft)
 }
 }

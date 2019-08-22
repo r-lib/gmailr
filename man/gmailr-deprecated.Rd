@@ -48,7 +48,7 @@
 gmailr
 #' \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}}
 \usage{
-id(x, ...)
+gm_id(x, ...)
 
 gm_to(x, ...)
 

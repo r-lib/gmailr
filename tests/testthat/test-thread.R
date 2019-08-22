@@ -4,10 +4,10 @@ test_that("threads and thread work", {
   thrds <- gm_threads()
   expect_is(thrds, "gmail_threads")
 
-  ids <- id(thrds)
+  ids <- gm_id(thrds)
   expect_true(length(ids) > 0)
 
   thr <- gm_thread(ids[[1]])
 
-  expect_equal(id(thr), ids[[1]])
+  expect_equal(gm_id(thr), ids[[1]])
 })

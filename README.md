@@ -68,7 +68,7 @@ my_threads <- gm_threads(num_results = 10)
 
 # retrieve the latest thread by retrieving the first ID
 
-latest_thread <- gm_thread(id(my_threads)[[1]])
+latest_thread <- gm_thread(gm_id(my_threads)[[1]])
 
 # The messages in the thread will now be in a list
 latest_thread$messages
