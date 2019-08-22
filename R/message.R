@@ -325,7 +325,7 @@ gm_insert_message <- function(
 #' @export
 #' @examples
 #' \dontrun{
-#' import_message(gm_mime(From="you@@me.com", To="any@@one.com",
+#' gm_import_message(gm_mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
 gm_import_message <- function(mail,

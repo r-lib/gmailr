@@ -84,7 +84,7 @@ save_attachments(...)
 
 gm_insert_message(...)
 
-import_message(...)
+gm_import_message(...)
 
 gm_send_message(...)
 

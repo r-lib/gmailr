@@ -41,7 +41,7 @@ test_that("messages and message work", {
 test_that("import_message works", {
   skip_if_no_token()
 
-  new_id <- gm_id(import_message(
+  new_id <- gm_id(gm_import_message(
     gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
