@@ -265,7 +265,7 @@ print.gmail_profile <- function(x, ...) {
   cat(
     sprintf(paste0(
       "Logged in as:\n",
-      "  * emailAddress: %s\n",
+      "  * email: %s\n",
       "  * num_messages: %i\n",
       "  * num_threads: %i"
     ), x[["emailAddress"]], x[["messagesTotal"]], x[["threadsTotal"]]
