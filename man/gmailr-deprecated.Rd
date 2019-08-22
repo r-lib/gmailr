@@ -64,7 +64,7 @@ gm_subject(x, ...)
 
 gm_body(x, ...)
 
-message(...)
+gm_message(...)
 
 gm_messages(...)
 

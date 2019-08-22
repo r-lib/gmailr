@@ -253,7 +253,7 @@ gm_oauth_app <- function() {
 gm_profile <- function(user_id = "me", verbose = TRUE) {
   if (isFALSE(.auth$auth_active)) {
     if (verbose) {
-      message("Not logged in as any specific Google user.")
+      gm_message("Not logged in as any specific Google user.")
     }
     return(invisible())
   }

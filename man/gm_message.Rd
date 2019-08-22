@@ -19,7 +19,7 @@ Function to retrieve a given message by id
 }
 \examples{
 \dontrun{
-my_message = message(12345)
+my_message = gm_message(12345)
 }
 }
 \references{

@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' my_message = message(12345)
+#' my_message = gm_message(12345)
 #' }
 gm_message <- function(id,
                     user_id = "me",

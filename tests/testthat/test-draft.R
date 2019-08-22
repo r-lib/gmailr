@@ -18,7 +18,7 @@ test_that("create_draft, drafts, draft and send_draft", {
   expect_equal(gm_body(d2), "how are you doing?\r\n")
 
   m1 <- send_draft(d2)
-  msg1 <- message(id(m1))
+  msg1 <- gm_message(id(m1))
 
   expect_true("SENT" %in% msg1$labelIds)
 })
