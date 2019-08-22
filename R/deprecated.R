@@ -5,6 +5,8 @@
 #' @keywords internal
 #' @importFrom lifecycle deprecate_soft
 
+# nocov start
+
 #' @rdname gmailr-deprecated
 #' @export
 id <- function(x, ...) {
@@ -307,3 +309,4 @@ attach_file <- function(...) {
   gm_attach_file(...)
 }
 
+# nocov end

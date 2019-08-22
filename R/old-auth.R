@@ -1,3 +1,5 @@
+# nocov start
+
 get_token <- function() {
   if(!exists("token", the)){
     gmail_auth()
@@ -72,3 +74,5 @@ use_secret_file <- function(filename) {
   the$secret <- info$installed$client_secret
   the$id <- info$installed$client_id
 }
+
+# nocov end
