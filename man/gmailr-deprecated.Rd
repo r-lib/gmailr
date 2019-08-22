@@ -122,7 +122,7 @@ create_label(...)
 
 history(...)
 
-mime(...)
+gm_mime(...)
 
 gm_text_body(...)
 

@@ -1,7 +1,7 @@
 #' Create a mime formatted message object
 #'
 #' These functions create a MIME message. They can be created atomically using
-#' `mime()` or iteratively using the various accessors.
+#' `gm_mime()` or iteratively using the various accessors.
 #' @param body Message body.
 #' @param attr attributes to pass to the message
 #' @param parts mime parts to pass to the message
@@ -9,14 +9,14 @@
 #' @export
 #' @examples
 #' # using the field functions
-#' msg = mime() %>%
+#' msg = gm_mime() %>%
 #'  gm_from("james.f.hester@@gmail.com") %>%
 #'  gm_to("asdf@asdf.com") %>%
 #'  gm_text_body("Test Message")
 #'
-#' # alternatively you can set the fields using mime(), however you have
+#' # alternatively you can set the fields using gm_mime(), however you have
 #' #  to use properly formatted MIME names
-#' msg = mime(From="james.f.hester@@gmail.com",
+#' msg = gm_mime(From="james.f.hester@@gmail.com",
 #'                    To="asdf@asdf.com") %>%
 #'         gm_html_body("<b>Test<\b> Message")
 gm_mime <- function(..., attr = NULL, body = NULL, parts = list()) {
@@ -76,7 +76,7 @@ gm_subject.mime <- function(x, val, ...){
 #' @export
 gm_text_body <- function(mime, body, content_type = "text/plain", charset = "utf-8", encoding = "quoted-printable", format = "flowed", ...){
   if(missing(body)){ return(mime$parts[[TEXT_PART]]) }
-  mime$parts[[TEXT_PART]] <- mime(attr = list(
+  mime$parts[[TEXT_PART]] <- gm_mime(attr = list(
               content_type = content_type,
               charset      = charset,
               encoding     = encoding,
@@ -91,7 +91,7 @@ TEXT_PART <- 1L
 #' @export
 gm_html_body <- function(mime, body, ...){
   if(missing(body)){ return(mime$parts[[HTML_PART]]) }
-  mime$parts[[HTML_PART]] <- mime(attr = list(
+  mime$parts[[HTML_PART]] <- gm_mime(attr = list(
                          content_type = "text/html",
                          charset      = "utf-8",
                          encoding     = "base64",
@@ -110,7 +110,7 @@ HTML_PART <- 2L
 gm_attach_part <- function(mime, part, id = NULL, ...){
   if(missing(part)){ return(mime$parts[[3L:length(mime$parts)]]) }
   part_num <- if(length(mime$parts) < 3L) 3L else length(mime$parts) + 1L
-  part <- mime(attr = c(encoding = "base64", list(...)), body = part)
+  part <- gm_mime(attr = c(encoding = "base64", list(...)), body = part)
   if (!is.null(id)) {
     part$header[["Content-Id"]] <- sprintf("<%s>", id)
   }

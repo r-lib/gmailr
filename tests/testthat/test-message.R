@@ -42,7 +42,7 @@ test_that("import_message works", {
   skip_if_no_token()
 
   new_id <- id(import_message(
-    mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
+    gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
   on.exit(delete_message(new_id))
@@ -64,7 +64,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
   skip_if_no_token()
 
   new_id <- id(insert_message(
-    mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
+    gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
     label_ids = NULL
   ))
   msg <- message(new_id)
@@ -98,7 +98,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
 test_that("send_message works", {
   skip_if_no_token()
 
-  msg <- mime(From=Sys.getenv("GMAILR_EMAIL"), To=Sys.getenv("GMAILR_EMAIL"), Subject="hello myself", body = "how are you doing? I am doing well!")
+  msg <- gm_mime(From=Sys.getenv("GMAILR_EMAIL"), To=Sys.getenv("GMAILR_EMAIL"), Subject="hello myself", body = "how are you doing? I am doing well!")
   sent_id <- id(send_message(msg))
   msg1 <- message(sent_id)
 

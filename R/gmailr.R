@@ -19,9 +19,9 @@ NULL
 #' @param lhs,rhs A visualisation and a function to apply to it
 #' @examples
 #' # Instead of
-#' gm_to(mime(), 'someone@@somewhere.com')
+#' gm_to(gm_mime(), 'someone@@somewhere.com')
 #' # you can write
-#' mime() %>% gm_to('someone@@somewhere.com')
+#' gm_mime() %>% gm_to('someone@@somewhere.com')
 NULL
 
 #' Get the body text of a message or draft

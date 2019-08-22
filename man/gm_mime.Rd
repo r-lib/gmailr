@@ -58,18 +58,18 @@ gm_attach_file(mime, filename, type = NULL, id = NULL, ...)
 }
 \description{
 These functions create a MIME message. They can be created atomically using
-\code{mime()} or iteratively using the various accessors.
+\code{gm_mime()} or iteratively using the various accessors.
 }
 \examples{
 # using the field functions
-msg = mime() \%>\%
+msg = gm_mime() \%>\%
  gm_from("james.f.hester@gmail.com") \%>\%
  gm_to("asdf@asdf.com") \%>\%
  gm_text_body("Test Message")
 
-# alternatively you can set the fields using mime(), however you have
+# alternatively you can set the fields using gm_mime(), however you have
 #  to use properly formatted MIME names
-msg = mime(From="james.f.hester@gmail.com",
+msg = gm_mime(From="james.f.hester@gmail.com",
                    To="asdf@asdf.com") \%>\%
         gm_html_body("<b>Test<\\b> Message")
 }

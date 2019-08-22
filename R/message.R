@@ -290,7 +290,7 @@ gm_attachments.gmail_draft <- function(x, ...) {
 #' @export
 #' @examples
 #' \dontrun{
-#' insert_message(mime(From="you@@me.com", To="any@@one.com",
+#' insert_message(gm_mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
 gm_insert_message <- function(
@@ -325,7 +325,7 @@ gm_insert_message <- function(
 #' @export
 #' @examples
 #' \dontrun{
-#' import_message(mime(From="you@@me.com", To="any@@one.com",
+#' import_message(gm_mime(From="you@@me.com", To="any@@one.com",
 #'                           Subject="hello", "how are you doing?"))
 #' }
 gm_import_message <- function(mail,
@@ -360,7 +360,7 @@ gm_import_message <- function(mail,
 #' @export
 #' @examples
 #' \dontrun{
-#' send_message(mime(from="you@@me.com", to="any@@one.com",
+#' send_message(gm_mime(from="you@@me.com", to="any@@one.com",
 #'                           subject="hello", "how are you doing?"))
 #' }
 gm_send_message <- function(

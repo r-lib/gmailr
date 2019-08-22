@@ -18,7 +18,7 @@ library(gmailr)
 First we will construct a simple text only message
 
 ```{r sending_messages_simple}
-text_msg <- mime() %>%
+text_msg <- gm_mime() %>%
   gm_to("james.f.hester@gmail.com") %>%
   gm_from("me@somewhere.com") %>%
   gm_text_body("Gmailr is a very handy package!")
@@ -37,7 +37,7 @@ only message along with the html message, but with modern email clients this is
 not strictly necessary.
 
 ```{r sending_messages_html}
-html_msg <- mime() %>%
+html_msg <- gm_mime() %>%
   gm_to("james.f.hester@gmail.com") %>%
   gm_from("me@somewhere.com") %>%
   gm_html_body("<b>Gmailr</b> is a <i>very</i> handy package!")

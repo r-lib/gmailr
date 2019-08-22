@@ -25,7 +25,7 @@ Insert a message into the gmail mailbox from a mime message
 }
 \examples{
 \dontrun{
-insert_message(mime(From="you@me.com", To="any@one.com",
+insert_message(gm_mime(From="you@me.com", To="any@one.com",
                           Subject="hello", "how are you doing?"))
 }
 }
