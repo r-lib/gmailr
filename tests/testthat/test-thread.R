@@ -1,7 +1,7 @@
 test_that("threads and thread work", {
   skip_if_no_token()
 
-  thrds <- threads()
+  thrds <- gm_threads()
   expect_is(thrds, "gmail_threads")
 
   ids <- id(thrds)

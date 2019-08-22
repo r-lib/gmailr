@@ -25,9 +25,9 @@ Get a list of threads possibly matching a given query string.
 }
 \examples{
 \dontrun{
-my_threads = threads()
+my_threads = gm_threads()
 
-first_10_threads = threads(10)
+first_10_threads = gm_threads(10)
 }
 }
 \references{

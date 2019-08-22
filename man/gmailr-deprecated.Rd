@@ -88,7 +88,7 @@ import_message(...)
 
 send_message(...)
 
-threads(...)
+gm_threads(...)
 
 thread(...)
 

@@ -92,7 +92,7 @@ gm_save_attachments(my_msg)
   - history: `my_history = history(start_num)`
   - labels: `my_labels = labels()`
   - messages: `my_messages = messages("search query")`
-  - threads: `my_threads = threads("search query")`
+  - threads: `my_threads = gm_threads("search query")`
 - Create and send emails and drafts: see [sending_messages vignette](https://github.com/r-lib/gmailr/blob/master/vignettes/sending_messages.Rmd)
 - manage email labels programmatically: `modify_thread(thread_id, add_labels=c("label_1"), remove_labels=c("label_2"))`
 - put things in the gmail trash
