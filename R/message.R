@@ -161,8 +161,8 @@ gm_modify_message <- function(id,
 #' @examples
 #' \dontrun{
 #' my_attachment = attachment('a32e324b', '12345')
-#' save attachment to a file
-#' save_attachment(my_attachment, 'photo.jpg')
+#' # save attachment to a file
+#' gm_save_attachment(my_attachment, 'photo.jpg')
 #' }
 gm_attachment <- function(id,
                        message_id,

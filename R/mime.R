@@ -71,34 +71,61 @@ gm_subject.mime <- function(x, val, ...){
 }
 
 #' @param mime message.
+#' @param content_type The content type to use for the body.
+#' @param charset The character set to use for the body.
+#' @param encoding The transfer encoding to use for the body.
+#' @param format The mime format to use for the body.
 #' @param ... additional parameters to put in the attr field
 #' @rdname gm_mime
 #' @export
-gm_text_body <- function(mime, body, content_type = "text/plain", charset = "utf-8", encoding = "quoted-printable", format = "flowed", ...){
-  if(missing(body)){ return(mime$parts[[TEXT_PART]]) }
-  mime$parts[[TEXT_PART]] <- gm_mime(attr = list(
-              content_type = content_type,
-              charset      = charset,
-              encoding     = encoding,
-              format       = format,
-              ...),
-              body = body)
+gm_text_body <- function(mime,
+                         body,
+                         content_type = "text/plain",
+                         charset = "utf-8",
+                         encoding = "quoted-printable",
+                         format = "flowed",
+                         ...) {
+  if (missing(body)) {
+    return(mime$parts[[TEXT_PART]])
+  }
+  mime$parts[[TEXT_PART]] <- gm_mime(
+    attr = list(
+      content_type = content_type,
+      charset = charset,
+      encoding = encoding,
+      format = format,
+      ...
+    ),
+    body = body
+  )
   mime
 }
+
 TEXT_PART <- 1L
 
 #' @rdname gm_mime
 #' @export
-gm_html_body <- function(mime, body, ...){
-  if(missing(body)){ return(mime$parts[[HTML_PART]]) }
-  mime$parts[[HTML_PART]] <- gm_mime(attr = list(
+gm_html_body <- function(mime,
+                         body,
                          content_type = "text/html",
-                         charset      = "utf-8",
-                         encoding     = "base64",
-                         ...),
-                         body = body)
+                         charset = "utf-8",
+                         encoding = "base64",
+                         ...) {
+  if (missing(body)) {
+    return(mime$parts[[HTML_PART]])
+  }
+  mime$parts[[HTML_PART]] <- gm_mime(
+    attr = list(
+      content_type = content_type,
+      charset = charset,
+      encoding = encoding,
+      ...
+    ),
+    body = body
+  )
   mime
 }
+
 HTML_PART <- 2L
 
 #' @param part Message part to attach

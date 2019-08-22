@@ -25,9 +25,12 @@ gm_mime(..., attr = NULL, body = NULL, parts = list())
 
 \method{gm_subject}{mime}(x, val, ...)
 
-gm_text_body(mime, body, ...)
+gm_text_body(mime, body, content_type = "text/plain",
+  charset = "utf-8", encoding = "quoted-printable",
+  format = "flowed", ...)
 
-gm_html_body(mime, body, ...)
+gm_html_body(mime, body, content_type = "text/html", charset = "utf-8",
+  encoding = "base64", ...)
 
 gm_attach_part(mime, part, id = NULL, ...)
 
@@ -47,6 +50,14 @@ gm_attach_file(mime, filename, type = NULL, id = NULL, ...)
 \item{val}{the value to set, can be a vector, in which case the values will be joined by ", ".}
 
 \item{mime}{message.}
+
+\item{content_type}{The content type to use for the body.}
+
+\item{charset}{The character set to use for the body.}
+
+\item{encoding}{The transfer encoding to use for the body.}
+
+\item{format}{The mime format to use for the body.}
 
 \item{part}{Message part to attach}
 

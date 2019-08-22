@@ -48,33 +48,33 @@
 gmailr
 #' \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}}
 \usage{
-gm_id(x, ...)
+id(x, ...)
 
-gm_to(x, ...)
+to(x, ...)
 
-gm_from(x, ...)
+from(x, ...)
 
-gm_cc(x, ...)
+cc(x, ...)
 
-gm_bcc(x, ...)
+bcc(x, ...)
 
-gm_date(x, ...)
+date(x, ...)
 
-gm_subject(x, ...)
+subject(x, ...)
 
-gm_body(x, ...)
+body(x, ...)
 
-gm_message(...)
+message(...)
 
-gm_messages(...)
+messages(...)
 
-gm_trash_message(...)
+trash_message(...)
 
-gm_untrash_message(...)
+untrash_message(...)
 
-gm_delete_message(...)
+delete_message(...)
 
-gm_modify_message(...)
+modify_message(...)
 
 attachment(...)
 
@@ -82,15 +82,15 @@ save_attachment(...)
 
 save_attachments(...)
 
-gm_insert_message(...)
+insert_message(...)
 
-gm_import_message(...)
+import_message(...)
 
-gm_send_message(...)
+send_message(...)
 
-gm_threads(...)
+threads(...)
 
-gm_thread(...)
+thread(...)
 
 trash_thread(...)
 
@@ -100,37 +100,37 @@ delete_thread(...)
 
 modify_thread(...)
 
-gm_draft(...)
+draft(...)
 
-gm_drafts(...)
+drafts(...)
 
-gm_create_draft(...)
+create_draft(...)
 
-gm_send_draft(...)
+send_draft(...)
 
-gm_labels(...)
+labels(...)
 
-gm_label(...)
+label(...)
 
-gm_update_label(...)
+update_label(...)
 
-gm_update_label_patch(...)
+update_label_patch(...)
 
-gm_delete_label(...)
+delete_label(...)
 
-gm_create_label(...)
+create_label(...)
 
 history(...)
 
-gm_mime(...)
+mime(...)
 
-gm_text_body(...)
+text_body(...)
 
-gm_html_body(...)
+html_body(...)
 
-gm_attach_part(...)
+attach_part(...)
 
-gm_attach_file(...)
+attach_file(...)
 }
 \description{
 These functions are deprecated and will be removed in a future release of
