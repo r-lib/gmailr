@@ -40,7 +40,7 @@ not strictly necessary.
 html_msg <- mime() %>%
   gm_to("james.f.hester@gmail.com") %>%
   gm_from("me@somewhere.com") %>%
-  html_body("<b>Gmailr</b> is a <i>very</i> handy package!")
+  gm_html_body("<b>Gmailr</b> is a <i>very</i> handy package!")
 ```
 
 ### Attachments

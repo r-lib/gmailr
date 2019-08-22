@@ -126,7 +126,7 @@ mime(...)
 
 gm_text_body(...)
 
-html_body(...)
+gm_html_body(...)
 
 attach_part(...)
 

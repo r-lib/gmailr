@@ -71,6 +71,6 @@ msg = mime() \%>\%
 #  to use properly formatted MIME names
 msg = mime(From="james.f.hester@gmail.com",
                    To="asdf@asdf.com") \%>\%
-        html_body("<b>Test<\\b> Message")
+        gm_html_body("<b>Test<\\b> Message")
 }
 \concept{mime}
