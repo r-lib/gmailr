@@ -20,3 +20,4 @@ TODO.md
 ^azure-pipelines\.yml$
 ^\.secrets$
 ^tests/testthat/\.secrets$
+^revdep$
