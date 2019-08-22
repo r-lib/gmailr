@@ -124,7 +124,7 @@ This inserts the message directly into your mailbox, bypassing gmail's default
 scanning and classification algorithms.
 
 ```{r sending_messages_insert_message, eval=FALSE}
-insert_message(file_attachment)
+gm_insert_message(file_attachment)
 ```
 
 ### Import
@@ -133,7 +133,7 @@ This imports the email as though it was a normal message, with the same
 scanning and classification as normal email.
 
 ```{r sending_messages_file_attachment, eval=FALSE}
-insert_message(file_attachment)
+gm_insert_message(file_attachment)
 ```
 
 ## Sending
