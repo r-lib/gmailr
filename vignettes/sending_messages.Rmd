@@ -150,10 +150,10 @@ send_draft(gm_id(my_drafts, "draft_id")[1])
 ```
 ### Message
 
-You can also send an email message directly from a `mime` object using `send_message()`.
+You can also send an email message directly from a `mime` object using `gm_send_message()`.
 
 ```{r sending_messages_send_message, eval=FALSE}
-send_message(file_attachment)
+gm_send_message(file_attachment)
 ```
 
 ```{r sending_messages_clenup, include=FALSE}

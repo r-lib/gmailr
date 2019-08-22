@@ -21,7 +21,7 @@ Send a message from a mime message
 }
 \examples{
 \dontrun{
-send_message(gm_mime(from="you@me.com", to="any@one.com",
+gm_send_message(gm_mime(from="you@me.com", to="any@one.com",
                           subject="hello", "how are you doing?"))
 }
 }
