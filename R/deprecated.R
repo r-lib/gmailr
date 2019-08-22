@@ -309,4 +309,25 @@ attach_file <- function(...) {
   gm_attach_file(...)
 }
 
+// helper to convert deprecated functions to new names.
+gm_convert_file <- function(file) {
+  gm_funs <- get_deprecated_funs()
+
+  lines <- readLines(file)
+
+  for (i in seq_len(NROW(gm_funs))) {
+    find <- paste0("(?<![[:alnum:]_:])", gm_funs$old[[i]], "[(]")
+    replace <- gm_funs$new[[i]]
+    lines <- gsub(find, replace, lines, perl = TRUE)
+  }
+  writeLines(lines, file)
+}
+
+get_deprecated_funs <- function() {
+  file <- system.file(package = "gmailr", "R", "deprecated.R")
+  lines <- readLines(file)
+  res <- rematch2::re_match(lines, 'deprecate_.*gmailr::(?<old>[^(]+).*(?<new>gm_[^(]+)')
+  na.omit(res)[c("old", "new")]
+}
+
 # nocov end

@@ -1,19 +1,30 @@
-# gmailr (development)
+# gmailr 1.0.0
 
-* `gm_body()`, `gm_to()`, `gm_from()`, `gm_cc()`, `gm_bcc()` and `gm_subject()`
-  now automatically mark their output as UTF-8 (#47, #86)
+## Breaking changes
+
+* All functions are now prefixed with `gm_*()` to avoid name conflicts with
+  other packages (including the base package), the previous names have been deprecated
+  and will be removed in future releases. Use 
+  `gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))`
+  to convert all R files in the current directory to the new names. (#95)
+
+* New `gm_auth_configure()` and `gm_auth()` functions added conforming to the
+  conventions in the [gargle](https://cran.r-project.org/package=gargle) package.
+  `gmail_auth()` and `use_secret_token()` are now deprecated and will be removed
+  in a future release.
+
+* The google application bundled in previous gmailr releases has been removed,
+  users will now need to create their own applications in order to use gmailr. See
+  the [Setup](https://github.com/r-lib/gmailr/blob/master/README.md#setup) section
+  in the readme for details. This was nessesary to comply with stricter enforement
+  of the API terms of service.
+
+## New features
 
 * New `gm_attachements()` returns a data.frame of attachment information from a
   message or draft (#10, #24).
 
-* `print.gmail_message()` now prints out the filenames of attachments (if any).
-
 * New `gm_delete_draft()` added to delete a draft email without sending it to the trash.
-
-* Quoted-printable now works with smart quotes (#77)
-
-* Unicode text can now be used in email headers, including the Subject and
-  address fields, like To and Cc (#76, #78)
 
 * New `gm_profile()` function to return the gmail profile of the currently
   logged in user (#114)
@@ -21,14 +32,21 @@
 * New `gm_scopes()` function to list the available scopes, and gmailr now
   requests only the full scope by default (#90)
 
-* All functions are now prefixed with `gm_*()` to avoid name conflicts with
-  other packages, the previous names have been deprecated (#95)
+* More detailed examples added to the README and the vignette, including adding
+  and referencing attachments in HTML email.
 
-* The authentication has been completely redone to utilize the
-  [gargle](https://cran.r-project.org/package=gargle) package.
+## Minor improvements and fixes
+
+* `gm_body()`, `gm_to()`, `gm_from()`, `gm_cc()`, `gm_bcc()` and `gm_subject()`
+  now automatically mark their output as UTF-8 (#47, #86)
+
+* Quoted-printable now works with smart quotes (#77)
+
+* Unicode text can now be used in email headers, including the Subject and
+  address fields, like To and Cc (#76, #78)
 
 * `print.gmail_message()` now only prints the parts of the message that are
-  defined (#88)
+  defined (#88) and now prints out the filenames of attachments (if any).
 
 # gmailr 0.7.1
 
