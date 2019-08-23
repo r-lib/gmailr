@@ -32,7 +32,7 @@
 
 <meta property="og:title" content="Pipe statements — %&gt;%" />
 
-<meta property="og:description" content="Like dplyr and ggvis gmailr also uses the pipe function, %&amp;gt;% to turn
+<meta property="og:description" content="Like dplyr and ggvis gmailr also uses the pipe function, \%&amp;gt;\% to turn
 function composition into a series of imperative statements." />
 <meta name="twitter:card" content="summary" />
 
@@ -64,7 +64,7 @@ function composition into a series of imperative statements." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">gmailr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -75,6 +75,9 @@ function composition into a series of imperative statements." />
     <span class="fa fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="../articles/gmailr.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -122,7 +125,7 @@ function composition into a series of imperative statements." />
 
     <div class="ref-description">
     
-    <p>Like dplyr and ggvis gmailr also uses the pipe function, <code>%&gt;%</code> to turn
+    <p>Like dplyr and ggvis gmailr also uses the pipe function, <code>\%&gt;\%</code> to turn
 function composition into a series of imperative statements.</p>
     
     </div>
@@ -141,7 +144,7 @@ function composition into a series of imperative statements.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Instead of</span>
-<span class='fu'><a href='accessors.html'>to</a></span>(<span class='fu'><a href='mime.html'>mime</a></span>(), <span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
+<span class='fu'><a href='accessors.html'>gm_to</a></span>(<span class='fu'><a href='gm_mime.html'>gm_mime</a></span>(), <span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
 #&gt; list()
 #&gt; 
 #&gt; $header
@@ -149,7 +152,7 @@ function composition into a series of imperative statements.</p>
 #&gt; [1] "1.0"
 #&gt; 
 #&gt; $header$Date
-#&gt; [1] "Thu, 23 May 2019 15:33:22 GMT"
+#&gt; [1] "Fri, 23 Aug 2019 14:09:45 GMT"
 #&gt; 
 #&gt; $header$To
 #&gt; [1] "someone@somewhere.com"
@@ -163,7 +166,7 @@ function composition into a series of imperative statements.</p>
 #&gt; 
 #&gt; attr(,"class")
 #&gt; [1] "mime"</div><div class='input'><span class='co'># you can write</span>
-<span class='fu'><a href='mime.html'>mime</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='accessors.html'>to</a></span>(<span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
+<span class='fu'><a href='gm_mime.html'>gm_mime</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'><a href='accessors.html'>gm_to</a></span>(<span class='st'>'someone@somewhere.com'</span>)</div><div class='output co'>#&gt; $parts
 #&gt; list()
 #&gt; 
 #&gt; $header
@@ -171,7 +174,7 @@ function composition into a series of imperative statements.</p>
 #&gt; [1] "1.0"
 #&gt; 
 #&gt; $header$Date
-#&gt; [1] "Thu, 23 May 2019 15:33:22 GMT"
+#&gt; [1] "Fri, 23 Aug 2019 14:09:45 GMT"
 #&gt; 
 #&gt; $header$To
 #&gt; [1] "someone@somewhere.com"
@@ -199,7 +202,7 @@ function composition into a series of imperative statements.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Jim Hester.</p>
+  <p>Developed by <a href='http://jimhester.com'>Jim Hester</a>.</p>
 </div>
 
 <div class="pkgdown">
