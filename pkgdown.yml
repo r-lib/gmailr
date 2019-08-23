@@ -5,6 +5,6 @@ articles:
   gmailr: gmailr.html
   sending_messages: sending_messages.html
 urls:
-  reference: http://vroom.r-lib.org/reference
-  article: http://vroom.r-lib.org/articles
+  reference: http://gmailr.r-lib.org/reference
+  article: http://gmailr.r-lib.org/articles
 
