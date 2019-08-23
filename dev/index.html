@@ -45,6 +45,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/gmailr.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -200,7 +203,7 @@
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
-<p>In order to use gmailr you will need to create a google project for it. The easiest way to do this is via the <a href="https://developers.google.com/gmail/api/quickstart/python">Python Quickstart</a>. Light to moderate usage will fall within the free tier of projects, so use of the API for most people should be free.</p>
+<p>In order to use gmailr you will need to create a google project for it. The easiest way to do this is via the <a href="https://developers.google.com/gmail/api/quickstart/python">Python Quickstart</a>.</p>
 <ul>
 <li>Click the <code>Enable the Gmail API</code> button.</li>
 <li>In the resulting dialog click the <code>DOWNLOAD CLIENT CONFIGURATION</code> on your computer.</li>
@@ -213,6 +216,7 @@
 <li>Call <code><a href="reference/gm_auth.html">gm_auth()</a></code> to start the OAuth flow to verify to google that you would like your gmailr project to have access to your email. You will get a scary warning about an untrusted application, this is because the application is the one you just created, click advanced and <code>Go to gmailr</code> to proceed to do the oauth flow.</li>
 <li>If you want to authenticate with fewer scopes than the default use the <code>scopes</code> parameter to <code><a href="reference/gm_auth.html">gm_auth()</a></code>. You can see a full list of available scopes from <code><a href="reference/gm_auth.html">gm_scopes()</a></code>.</li>
 </ul>
+<p>Only very heavy usage of the Gmail API requires payment, so use of the API for most people should be free.</p>
 </div>
 <div id="using-gmailr-in-deployed-applications" class="section level2">
 <h2 class="hasAnchor">

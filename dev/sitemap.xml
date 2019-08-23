@@ -151,6 +151,9 @@
     <loc>http://vroom.r-lib.org/reference/use_secret_file.html</loc>
   </url>
   <url>
+    <loc>http://vroom.r-lib.org/articles/gmailr.html</loc>
+  </url>
+  <url>
     <loc>http://vroom.r-lib.org/articles/sending_messages.html</loc>
   </url>
 </urlset>
