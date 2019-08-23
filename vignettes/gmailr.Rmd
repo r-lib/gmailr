@@ -1,0 +1,116 @@
+---
+title: "gmailr"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gmailr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message = FALSE}
+library(gmailr)
+```
+
+## Quickstart ##
+
+This is a short document on getting up to speed with gmailr quickly.
+
+## External Setup ##
+
+In order to use gmailr you will need to create a google project for it. The
+easiest way to do this is via the [Python
+Quickstart](https://developers.google.com/gmail/api/quickstart/python).
+
+* Click the `Enable the Gmail API` button.
+* In the resulting dialog click the `DOWNLOAD CLIENT CONFIGURATION` on your computer.
+* Tell gmailr where the JSON lives, by doing one of the two things
+  1. Call `gm_auth_configure(path = "path/to/downloaded/json")
+  2. Set the `GMAILR_APP` environment variable to the location of the JSON
+     file, it is convienent to do this in your `.Renviron` file with
+     `usethis::edit_r_environ()`. Then calling `gm_auth_configure()` with no arguments.
+* Call `gm_auth()` to start the OAuth flow to verify to google that you would
+  like your gmailr project to have access to your email. You will get a scary
+  warning about an untrusted application, this is because the application is
+  the one you just created, click advanced and `Go to gmailr` to proceed to do
+  the oauth flow.
+* If you want to authenticate with fewer scopes than the default use the
+  `scopes` parameter to `gm_auth()`. You can see a full list of available
+  scopes from `gm_scopes()`.
+  
+Only very heavy usage of the Gmail API requires payment, so use of the API for most
+people should be free.
+
+If you use `usethis::edit_r_environ()` to set both `GMAILR_EMAIL` and
+`GMAILR_APP`, then once you have an oauth token you can simply run
+`gm_auth_configure()` with no arguments at the top of the script to setup your
+application.
+
+## Writing new emails ##
+
+Create a new email with `gm_mime()` and the helper functions. When testing it
+is recommended to use `gm_create_draft()` to verify your email is formatted as you
+expect before automating it (if desired) with `gm_send_message()`.
+
+```r
+test_email <-
+  gm_mime() %>%
+  gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") %>%
+  gm_from("PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE") %>%
+  gm_subject("this is just a gmailr test") %>%
+  gm_text_body("Can you hear me now?")
+
+# Verify it looks correct
+gm_create_draft(test_email)
+
+# If all is good with your draft, then you can send it
+gm_send_message(test_email)
+```
+
+You can add a file attachment to your message with `gm_attach_file()`.
+
+```r
+write.csv("mtcars.csv", mtcars)
+test_email <- gm_attach_file("mtcars.csv")
+
+# Verify it looks correct
+gm_create_draft(test_email)
+
+# If so, send it
+gm_send_message(test_email)
+```
+
+## Reading emails ##
+
+gmail shows you threads of messages in the web UI, you can retrieve all threads
+with `gm_threads()`, and retrieve a specific thread with `gm_thread()`
+
+```r
+# view the latest thread
+my_threads <- gm_threads(num_results = 10)
+
+# retrieve the latest thread by retrieving the first ID
+
+latest_thread <- gm_thread(gm_id(my_threads)[[1]])
+
+# The messages in the thread will now be in a list
+latest_thread$messages
+
+# Retrieve parts of a specific message with the accessors
+my_msg <- latest_thread$messages[[1]]
+
+gm_to(my_msg)
+gm_from(my_msg)
+gm_date(my_msg)
+gm_subject(my_msg)
+gm_body(my_msg)
+
+# If a message has attachments, download them all locally with `gm_save_attachments()`.
+gm_save_attachments(my_msg)
+```

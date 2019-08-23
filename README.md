@@ -109,9 +109,7 @@ gm_save_attachments(my_msg)
 
 In order to use gmailr you will need to create a google project for it. The
 easiest way to do this is via the [Python
-Quickstart](https://developers.google.com/gmail/api/quickstart/python). Light
-to moderate usage will fall within the free tier of projects, so use of the API
-for most people should be free.
+Quickstart](https://developers.google.com/gmail/api/quickstart/python).
 
 * Click the `Enable the Gmail API` button.
 * In the resulting dialog click the `DOWNLOAD CLIENT CONFIGURATION` on your computer.
@@ -128,6 +126,9 @@ for most people should be free.
 * If you want to authenticate with fewer scopes than the default use the
   `scopes` parameter to `gm_auth()`. You can see a full list of available
   scopes from `gm_scopes()`.
+  
+Only very heavy usage of the Gmail API requires payment, so use of the API for most
+people should be free.
 
 ## Using gmailr in deployed applications ##
 
