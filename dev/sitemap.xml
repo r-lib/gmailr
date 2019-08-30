@@ -1,159 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://vroom.r-lib.org/index.html</loc>
+    <loc>http://gmailr.r-lib.org/index.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/accessors.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/accessors.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/as.character.mime.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/as.character.mime.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/clear_token.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/clear_token.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_attachment.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_attachment.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_attachments.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_attachments.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_auth.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_auth.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_auth_configure.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_auth_configure.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_body.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_body.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_create_draft.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_create_draft.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_create_label.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_create_label.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_deauth.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_deauth.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_delete_draft.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_delete_draft.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_delete_label.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_delete_label.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_delete_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_delete_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_delete_thread.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_delete_thread.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_draft.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_draft.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_drafts.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_drafts.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_has_token.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_has_token.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_history.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_history.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_id.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_id.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_import_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_import_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_insert_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_insert_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_label.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_label.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_labels.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_labels.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_last_response.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_last_response.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_messages.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_messages.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_mime.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_mime.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_modify_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_modify_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_modify_thread.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_modify_thread.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_profile.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_profile.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_save_attachment.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_save_attachment.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_save_attachments.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_save_attachments.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_send_draft.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_send_draft.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_send_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_send_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_thread.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_thread.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_threads.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_threads.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_token.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_token.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_trash_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_trash_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_trash_thread.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_trash_thread.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_untrash_message.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_untrash_message.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_untrash_thread.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_untrash_thread.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gm_update_label.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gm_update_label.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gmail_auth.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gmail_auth.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gmailr-deprecated.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gmailr-deprecated.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/gmailr.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/gmailr.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/pipe.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/quoted_printable_encode.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/quoted_printable_encode.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/reference/use_secret_file.html</loc>
+    <loc>http://gmailr.r-lib.org/reference/use_secret_file.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/articles/gmailr.html</loc>
+    <loc>http://gmailr.r-lib.org/articles/gmailr.html</loc>
   </url>
   <url>
-    <loc>http://vroom.r-lib.org/articles/sending_messages.html</loc>
+    <loc>http://gmailr.r-lib.org/articles/sending_messages.html</loc>
   </url>
 </urlset>
