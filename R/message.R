@@ -239,6 +239,8 @@ gm_save_attachments <- function(x,
       !is.null(part$filename) && part$filename != "",
       x$payload$parts)
   }
+  # remove `:` from file name
+  attachments_parts[[1]]$filename <-   gsub(":","_",attachments_parts[[1]]$filename)
   invisible(vapply(attachments_parts, function(part) {
                      att <- attachment(part$body$attachmentId, x$id, user_id)
                      save_attachment(att, file.path(path, part$filename))
