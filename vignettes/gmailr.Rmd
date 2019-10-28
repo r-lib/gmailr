@@ -31,7 +31,7 @@ Quickstart](https://developers.google.com/gmail/api/quickstart/python).
 * Click the `Enable the Gmail API` button.
 * In the resulting dialog click the `DOWNLOAD CLIENT CONFIGURATION` on your computer.
 * Tell gmailr where the JSON lives, by doing one of the two things
-  1. Call `gm_auth_configure(path = "path/to/downloaded/json")
+  1. Call `gm_auth_configure(path = "path/to/downloaded/json")`
   2. Set the `GMAILR_APP` environment variable to the location of the JSON
      file, it is convienent to do this in your `.Renviron` file with
      `usethis::edit_r_environ()`. Then calling `gm_auth_configure()` with no arguments.
