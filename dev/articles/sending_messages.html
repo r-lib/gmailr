@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sending Messages With Gmailr • gmailr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Sending Messages With Gmailr">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -70,7 +71,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/r-lib/gmailr">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -83,6 +84,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -107,16 +109,16 @@
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_to</a></span>(<span class="st">"james.f.hester@gmail.com"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_text_body</a></span>(<span class="st">"Gmailr is a very handy package!"</span>)</a></code></pre></div>
-<p>You can convert the message to a properly formatted MIME message using <code><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character()</a></code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/strwrap">strwrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(text_msg))</a></code></pre></div>
-<pre><code>## [1] "MIME-Version: 1.0\r Date: Fri, 30 Aug 2019 18:16:29 GMT\r To:"      
+<p>You can convert the message to a properly formatted MIME message using <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/strwrap.html">strwrap</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(text_msg))</a></code></pre></div>
+<pre><code>## [1] "MIME-Version: 1.0\r Date: Mon, 28 Oct 2019 13:49:07 GMT\r To:"      
 ## [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"  
-## [3] "multipart/mixed; boundary=fecc7452cea096b4317c5290500f0704\r \r"    
-## [4] "--fecc7452cea096b4317c5290500f0704\r MIME-Version: 1.0\r Date: Fri,"
-## [5] "30 Aug 2019 18:16:29 GMT\r Content-Type: text/plain; charset=utf-8;"
+## [3] "multipart/mixed; boundary=ab9974c289d19e2f3bc56de9c1759f64\r \r"    
+## [4] "--ab9974c289d19e2f3bc56de9c1759f64\r MIME-Version: 1.0\r Date: Mon,"
+## [5] "28 Oct 2019 13:49:07 GMT\r Content-Type: text/plain; charset=utf-8;"
 ## [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r \r"   
 ## [7] "Gmailr is a very handy package!\r \r"                               
-## [8] "--fecc7452cea096b4317c5290500f0704--\r"</code></pre>
+## [8] "--ab9974c289d19e2f3bc56de9c1759f64--\r"</code></pre>
 </div>
 <div id="html" class="section level3">
 <h3 class="hasAnchor">
@@ -132,9 +134,9 @@
 <a href="#attachments" class="anchor"></a>Attachments</h3>
 <p>You can add attachments to your message in two ways.</p>
 <ol style="list-style-type: decimal">
-<li>If the data is in a file, use <code><a href="../reference/gm_mime.html">gm_attach_file()</a></code>. The mime type is automatically guessed by <code><a href="https://www.rdocumentation.org/packages/mime/topics/guess_type">mime::guess_type</a></code>, or you can specify it yourself with the <code>type</code> parameter.</li>
+<li>If the data is in a file, use <code><a href="../reference/gm_mime.html">gm_attach_file()</a></code>. The mime type is automatically guessed by <code><a href="https://rdrr.io/pkg/mime/man/guess_type.html">mime::guess_type</a></code>, or you can specify it yourself with the <code>type</code> parameter.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(<span class="dt">file =</span> <span class="st">"iris.csv"</span>, iris)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="dt">file =</span> <span class="st">"iris.csv"</span>, iris)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">msg &lt;-<span class="st"> </span>html_msg <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_subject</a></span>(<span class="st">"Here are some flowers"</span>) <span class="op">%&gt;%</span></a>
@@ -143,31 +145,31 @@
 <li>If the data are already loaded into R, you can use <code><a href="../reference/gm_mime.html">gm_attach_part()</a></code> to attach the binary data to your file.</li>
 </ol>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">msg &lt;-<span class="st"> </span>html_msg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_attach_part</a></span>(<span class="dt">part =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rawConversion">charToRaw</a></span>(<span class="st">"attach me!"</span>), <span class="dt">name =</span> <span class="st">"please"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_attach_part</a></span>(<span class="dt">part =</span> <span class="kw"><a href="https://rdrr.io/r/base/rawConversion.html">charToRaw</a></span>(<span class="st">"attach me!"</span>), <span class="dt">name =</span> <span class="st">"please"</span>)</a></code></pre></div>
 </div>
 <div id="including-images" class="section level3">
 <h3 class="hasAnchor">
 <a href="#including-images" class="anchor"></a>Including images</h3>
 <p>You can also add use attached images in HTML by setting the Content ID feature of mime emails. This can be done by referencing the image via a <code>&lt;img src=cid:xyz&gt;</code> tag using the <code>id</code> argument of <code>send_file()</code>. The tag value can by any unique identifier. E.g. here is an example of including a ggplot2 image</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># First create a plot to send, and save it to mtcars.png</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">mtcars<span class="op">$</span>gear &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(mtcars<span class="op">$</span>gear)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">mtcars<span class="op">$</span>gear &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(mtcars<span class="op">$</span>gear)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/png">png</a></span>(<span class="st">"mtcars.png"</span>, <span class="dt">width =</span> <span class="dv">400</span>, <span class="dt">height =</span> <span class="dv">400</span>, <span class="dt">pointsize =</span> <span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/with">with</a></span>(mtcars,</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(hp,</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="st">"mtcars.png"</span>, <span class="dt">width =</span> <span class="dv">400</span>, <span class="dt">height =</span> <span class="dv">400</span>, <span class="dt">pointsize =</span> <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(mtcars,</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(hp,</a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">    mpg,</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">    <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(gear),</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">    <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(gear),</a>
 <a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="dt">pch =</span> <span class="dv">19</span>,</a>
 <a class="sourceLine" id="cb7-10" data-line-number="10">    <span class="dt">xlab =</span> <span class="st">"Horsepower"</span>,</a>
 <a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="dt">ylab =</span> <span class="st">"Miles / gallon"</span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12">  )</a>
 <a class="sourceLine" id="cb7-13" data-line-number="13">)</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/legend">legend</a></span>(<span class="st">"topright"</span>, <span class="dt">title =</span> <span class="st">"# gears"</span>,</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span>(<span class="st">"topright"</span>, <span class="dt">title =</span> <span class="st">"# gears"</span>,</a>
 <a class="sourceLine" id="cb7-15" data-line-number="15">  <span class="dt">pch =</span> <span class="dv">19</span>,</a>
-<a class="sourceLine" id="cb7-16" data-line-number="16">  <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_along</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/levels">levels</a></span>(mtcars<span class="op">$</span>gear)),</a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">  <span class="dt">legend =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/levels">levels</a></span>(mtcars<span class="op">$</span>gear)</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">  <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(mtcars<span class="op">$</span>gear)),</a>
+<a class="sourceLine" id="cb7-17" data-line-number="17">  <span class="dt">legend =</span> <span class="kw"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(mtcars<span class="op">$</span>gear)</a>
 <a class="sourceLine" id="cb7-18" data-line-number="18">)</a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()</a></code></pre></div>
 <pre><code>## png 
 ##   2</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Next create an HTML email that references the plot as 'foobar'</span></a>
@@ -237,6 +239,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -252,17 +255,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by <a href="http://jimhester.com">Jim Hester</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
