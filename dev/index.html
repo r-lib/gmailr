@@ -213,7 +213,8 @@
 <li>In the resulting dialog click the <code>DOWNLOAD CLIENT CONFIGURATION</code> on your computer.</li>
 <li>Tell gmailr where the JSON lives, by doing one of the two things
 <ol>
-<li>Call `gm_auth_configure(path = “path/to/downloaded/json”)</li>
+<li>Call <code><a href="reference/gm_auth_configure.html">gm_auth_configure(path = "path/to/downloaded/json")</a></code>
+</li>
 <li>Set the <code>GMAILR_APP</code> environment variable to the location of the JSON file, it is convienent to do this in your <code>.Renviron</code> file with <code>usethis::edit_r_environ()</code>. Then calling <code><a href="reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments.</li>
 </ol>
 </li>
