@@ -10,7 +10,7 @@ lhs \%>\% rhs
 \item{lhs, rhs}{A visualisation and a function to apply to it}
 }
 \description{
-Like dplyr and ggvis gmailr also uses the pipe function, \code{\\\%>\\\%} to turn
+Like dplyr and ggvis gmailr also uses the pipe function, \verb{\\\%>\\\%} to turn
 function composition into a series of imperative statements.
 }
 \examples{

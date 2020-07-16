@@ -4,8 +4,14 @@
 \alias{gm_messages}
 \title{Get a list of messages}
 \usage{
-gm_messages(search = NULL, num_results = NULL, label_ids = NULL,
-  include_spam_trash = NULL, page_token = NULL, user_id = "me")
+gm_messages(
+  search = NULL,
+  num_results = NULL,
+  label_ids = NULL,
+  include_spam_trash = NULL,
+  page_token = NULL,
+  user_id = "me"
+)
 }
 \arguments{
 \item{search}{query to use, same format as gmail search box.}
@@ -33,16 +39,17 @@ my_messages = gm_messages("R", 10, "label_1", TRUE)
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
 }
 \seealso{
-Other message: \code{\link{gm_attachment}},
-  \code{\link{gm_delete_message}},
-  \code{\link{gm_import_message}},
-  \code{\link{gm_insert_message}},
-  \code{\link{gm_message}},
-  \code{\link{gm_modify_message}},
-  \code{\link{gm_save_attachments}},
-  \code{\link{gm_save_attachment}},
-  \code{\link{gm_send_message}},
-  \code{\link{gm_trash_message}},
-  \code{\link{gm_untrash_message}}
+Other message: 
+\code{\link{gm_attachment}()},
+\code{\link{gm_delete_message}()},
+\code{\link{gm_import_message}()},
+\code{\link{gm_insert_message}()},
+\code{\link{gm_message}()},
+\code{\link{gm_modify_message}()},
+\code{\link{gm_save_attachments}()},
+\code{\link{gm_save_attachment}()},
+\code{\link{gm_send_message}()},
+\code{\link{gm_trash_message}()},
+\code{\link{gm_untrash_message}()}
 }
 \concept{message}

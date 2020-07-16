@@ -23,15 +23,17 @@ gm_trash_message('12345')
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages/trash}
 }
 \seealso{
-Other message: \code{\link{gm_attachment}},
-  \code{\link{gm_delete_message}},
-  \code{\link{gm_import_message}},
-  \code{\link{gm_insert_message}},
-  \code{\link{gm_messages}}, \code{\link{gm_message}},
-  \code{\link{gm_modify_message}},
-  \code{\link{gm_save_attachments}},
-  \code{\link{gm_save_attachment}},
-  \code{\link{gm_send_message}},
-  \code{\link{gm_untrash_message}}
+Other message: 
+\code{\link{gm_attachment}()},
+\code{\link{gm_delete_message}()},
+\code{\link{gm_import_message}()},
+\code{\link{gm_insert_message}()},
+\code{\link{gm_messages}()},
+\code{\link{gm_message}()},
+\code{\link{gm_modify_message}()},
+\code{\link{gm_save_attachments}()},
+\code{\link{gm_save_attachment}()},
+\code{\link{gm_send_message}()},
+\code{\link{gm_untrash_message}()}
 }
 \concept{message}

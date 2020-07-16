@@ -4,8 +4,14 @@
 \alias{gm_threads}
 \title{Get a list of threads}
 \usage{
-gm_threads(search = NULL, num_results = NULL, page_token = NULL,
-  label_ids = NULL, include_spam_trash = NULL, user_id = "me")
+gm_threads(
+  search = NULL,
+  num_results = NULL,
+  page_token = NULL,
+  label_ids = NULL,
+  include_spam_trash = NULL,
+  user_id = "me"
+)
 }
 \arguments{
 \item{search}{query to use, same format as gmail search box.}
@@ -34,9 +40,11 @@ first_10_threads = gm_threads(10)
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
 }
 \seealso{
-Other thread: \code{\link{gm_delete_thread}},
-  \code{\link{gm_modify_thread}}, \code{\link{gm_thread}},
-  \code{\link{gm_trash_thread}},
-  \code{\link{gm_untrash_thread}}
+Other thread: 
+\code{\link{gm_delete_thread}()},
+\code{\link{gm_modify_thread}()},
+\code{\link{gm_thread}()},
+\code{\link{gm_trash_thread}()},
+\code{\link{gm_untrash_thread}()}
 }
 \concept{thread}

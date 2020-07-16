@@ -3,7 +3,6 @@
 \docType{package}
 \name{gmailr}
 \alias{gmailr}
-\alias{gmailr-package}
 \title{\pkg{gmailr} makes gmail access easy.}
 \description{
 \code{gmailr} provides an interface to the gmail api \url{https://developers.google.com/gmail/api/}

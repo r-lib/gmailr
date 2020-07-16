@@ -5,9 +5,14 @@
 \alias{gm_oauth_app}
 \title{Edit auth configuration}
 \usage{
-gm_auth_configure(key = "", secret = "",
-  path = Sys.getenv("GMAILR_APP"), appname = "gmailr", ...,
-  app = httr::oauth_app(appname, key, secret, ...))
+gm_auth_configure(
+  key = "",
+  secret = "",
+  path = Sys.getenv("GMAILR_APP"),
+  appname = "gmailr",
+  ...,
+  app = httr::oauth_app(appname, key, secret, ...)
+)
 
 gm_oauth_app()
 }
@@ -30,7 +35,7 @@ used to make it easier to identify different applications.}
 \value{
 \itemize{
 \item \code{gm_auth_configure()}: An object of R6 class
-\link[gargle:AuthState]{gargle::AuthState}, invisibly.
+\link[gargle:AuthState-class]{gargle::AuthState}, invisibly.
 \item \code{gm_oauth_app()}: the current user-configured
 \code{\link[httr:oauth_app]{httr::oauth_app()}}.
 }
@@ -82,7 +87,8 @@ gm_auth_configure(
 }
 }
 \seealso{
-Other auth functions: \code{\link{gm_deauth}},
-  \code{\link{gm_scopes}}
+Other auth functions: 
+\code{\link{gm_deauth}()},
+\code{\link{gm_scopes}()}
 }
 \concept{auth functions}

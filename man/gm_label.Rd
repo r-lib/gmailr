@@ -18,8 +18,10 @@ Get a specific label by id and user_id.
 \url{https://developers.google.com/gmail/api/v1/reference/users/labels/get}
 }
 \seealso{
-Other label: \code{\link{gm_create_label}},
-  \code{\link{gm_delete_label}}, \code{\link{gm_labels}},
-  \code{\link{gm_update_label}}
+Other label: 
+\code{\link{gm_create_label}()},
+\code{\link{gm_delete_label}()},
+\code{\link{gm_labels}()},
+\code{\link{gm_update_label}()}
 }
 \concept{label}

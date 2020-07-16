@@ -25,12 +25,24 @@ gm_mime(..., attr = NULL, body = NULL, parts = list())
 
 \method{gm_subject}{mime}(x, val, ...)
 
-gm_text_body(mime, body, content_type = "text/plain",
-  charset = "utf-8", encoding = "quoted-printable",
-  format = "flowed", ...)
+gm_text_body(
+  mime,
+  body,
+  content_type = "text/plain",
+  charset = "utf-8",
+  encoding = "quoted-printable",
+  format = "flowed",
+  ...
+)
 
-gm_html_body(mime, body, content_type = "text/html", charset = "utf-8",
-  encoding = "base64", ...)
+gm_html_body(
+  mime,
+  body,
+  content_type = "text/html",
+  charset = "utf-8",
+  encoding = "base64",
+  ...
+)
 
 gm_attach_part(mime, part, id = NULL, ...)
 
@@ -82,6 +94,6 @@ msg = gm_mime() \%>\%
 #  to use properly formatted MIME names
 msg = gm_mime(From="james.f.hester@gmail.com",
                    To="asdf@asdf.com") \%>\%
-        gm_html_body("<b>Test<\\b> Message")
+        gm_html_body("<b>Test<\b> Message")
 }
 \concept{mime}

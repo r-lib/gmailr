@@ -4,8 +4,12 @@
 \alias{gm_modify_thread}
 \title{Modify the labels on a thread}
 \usage{
-gm_modify_thread(id, add_labels = character(0),
-  remove_labels = character(0), user_id = "me")
+gm_modify_thread(
+  id,
+  add_labels = character(0),
+  remove_labels = character(0),
+  user_id = "me"
+)
 }
 \arguments{
 \item{id}{thread id to access}
@@ -31,9 +35,11 @@ modify_thread(12345, add_labels='label_2', remove_labels='label_1')
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/modify}
 }
 \seealso{
-Other thread: \code{\link{gm_delete_thread}},
-  \code{\link{gm_threads}}, \code{\link{gm_thread}},
-  \code{\link{gm_trash_thread}},
-  \code{\link{gm_untrash_thread}}
+Other thread: 
+\code{\link{gm_delete_thread}()},
+\code{\link{gm_threads}()},
+\code{\link{gm_thread}()},
+\code{\link{gm_trash_thread}()},
+\code{\link{gm_untrash_thread}()}
 }
 \concept{thread}

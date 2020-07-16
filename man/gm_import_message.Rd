@@ -4,9 +4,13 @@
 \alias{gm_import_message}
 \title{Import a message into the gmail mailbox from a mime message}
 \usage{
-gm_import_message(mail, label_ids, type = c("multipart", "media",
-  "resumable"), internal_date_source = c("dateHeader", "recievedTime"),
-  user_id = "me")
+gm_import_message(
+  mail,
+  label_ids,
+  type = c("multipart", "media", "resumable"),
+  internal_date_source = c("dateHeader", "recievedTime"),
+  user_id = "me"
+)
 }
 \arguments{
 \item{mail}{mime mail message created by mime}
@@ -33,15 +37,17 @@ gm_import_message(gm_mime(From="you@me.com", To="any@one.com",
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages/import}
 }
 \seealso{
-Other message: \code{\link{gm_attachment}},
-  \code{\link{gm_delete_message}},
-  \code{\link{gm_insert_message}},
-  \code{\link{gm_messages}}, \code{\link{gm_message}},
-  \code{\link{gm_modify_message}},
-  \code{\link{gm_save_attachments}},
-  \code{\link{gm_save_attachment}},
-  \code{\link{gm_send_message}},
-  \code{\link{gm_trash_message}},
-  \code{\link{gm_untrash_message}}
+Other message: 
+\code{\link{gm_attachment}()},
+\code{\link{gm_delete_message}()},
+\code{\link{gm_insert_message}()},
+\code{\link{gm_messages}()},
+\code{\link{gm_message}()},
+\code{\link{gm_modify_message}()},
+\code{\link{gm_save_attachments}()},
+\code{\link{gm_save_attachment}()},
+\code{\link{gm_send_message}()},
+\code{\link{gm_trash_message}()},
+\code{\link{gm_untrash_message}()}
 }
 \concept{message}

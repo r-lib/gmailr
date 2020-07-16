@@ -7,8 +7,7 @@
 \usage{
 gm_id(x, ...)
 
-\method{gm_id}{gmail_messages}(x, what = c("message_id", "thread_id"),
-  ...)
+\method{gm_id}{gmail_messages}(x, what = c("message_id", "thread_id"), ...)
 }
 \arguments{
 \item{x}{the object from which to retrieve the id}

@@ -3,13 +3,18 @@
 \name{gm_scopes}
 \alias{gm_scopes}
 \alias{gm_auth}
-\title{Authorize bigrquery}
+\title{Authorize gmailr}
 \usage{
 gm_scopes()
 
-gm_auth(email = gm_default_email(), path = NULL, scopes = "full",
+gm_auth(
+  email = gm_default_email(),
+  path = NULL,
+  scopes = "full",
   cache = gargle::gargle_oauth_cache(),
-  use_oob = gargle::gargle_oob_default(), token = NULL)
+  use_oob = gargle::gargle_oob_default(),
+  token = NULL
+)
 }
 \arguments{
 \item{email}{Optional. Allows user to target a specific Google identity. If
@@ -21,7 +26,7 @@ always determined from the token itself, never from this argument. Use \code{NA}
 or \code{FALSE} to match nothing and force the OAuth dance in the browser. Use
 \code{TRUE} to allow email auto-discovery, if exactly one matching token is
 found in the cache. Defaults to the option named "gargle_oauth_email",
-retrieved by \code{\link[gargle:gargle_oauth_email]{gargle::gargle_oauth_email()}}.}
+retrieved by \code{\link[gargle:gargle_options]{gargle::gargle_oauth_email()}}.}
 
 \item{path}{JSON identifying the service account, in one of the forms
 supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
@@ -35,11 +40,11 @@ permissions for each scope. and \code{gm_scopes()} to return a vector of the
 available scopes.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
-"gargle_oauth_cache", retrieved via \code{\link[gargle:gargle_oauth_cache]{gargle::gargle_oauth_cache()}}.}
+"gargle_oauth_cache", retrieved via \code{\link[gargle:gargle_options]{gargle::gargle_oauth_cache()}}.}
 
 \item{use_oob}{Whether to prefer "out of band" authentication. Defaults to
 the option named "gargle_oob_default", retrieved via
-\code{\link[gargle:gargle_oob_default]{gargle::gargle_oob_default()}}.}
+\code{\link[gargle:gargle_options]{gargle::gargle_oob_default()}}.}
 
 \item{token}{A token with class \link[httr:Token-class]{Token2.0} or an object of
 httr's class \code{request}, i.e. a token that has been prepared with
@@ -53,10 +58,16 @@ wrapper around \code{\link[gargle:token_fetch]{gargle::token_fetch()}}.
 By default, you are directed to a web browser, asked to sign in to your
 Google account, and to grant gmailr permission to operate on your
 behalf with Google Gmail. By default, these user credentials are cached in a
-folder below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
+folder below your home directory, \verb{~/.R/gargle/gargle-oauth}, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
+
+If you are interacting with R from a web-based platform, like RStudio
+Server or Cloud, you need to use a variant of this flow, known as
+out-of-band auth ("oob"). If this does not happen automatically, you
+can request it yourself with \code{use_oob = TRUE} or, more persistently, by
+setting an option via \code{options(gargle_oob_default = TRUE)}.
 }
 \details{
 Most users, most of the time, do not need to call \code{gm_auth()}
@@ -78,6 +89,7 @@ authentication.
 For details on the many ways to find a token, see
 \code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
 \code{\link[=gm_auth_configure]{gm_auth_configure()}} to bring your own OAuth app or API key.
+Read more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{
 \dontrun{
@@ -102,7 +114,8 @@ gm_auth(path = "foofy-83ee9e7c9c48.json")
 }
 }
 \seealso{
-Other auth functions: \code{\link{gm_auth_configure}},
-  \code{\link{gm_deauth}}
+Other auth functions: 
+\code{\link{gm_auth_configure}()},
+\code{\link{gm_deauth}()}
 }
 \concept{auth functions}

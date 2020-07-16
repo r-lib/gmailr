@@ -25,7 +25,9 @@ my_draft = gm_draft('12345')
 \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/get}
 }
 \seealso{
-Other draft: \code{\link{gm_delete_draft}},
-  \code{\link{gm_drafts}}, \code{\link{gm_send_draft}}
+Other draft: 
+\code{\link{gm_delete_draft}()},
+\code{\link{gm_drafts}()},
+\code{\link{gm_send_draft}()}
 }
 \concept{draft}

@@ -27,7 +27,9 @@ first_10_drafts = gm_drafts(10)
 \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
 }
 \seealso{
-Other draft: \code{\link{gm_delete_draft}},
-  \code{\link{gm_draft}}, \code{\link{gm_send_draft}}
+Other draft: 
+\code{\link{gm_delete_draft}()},
+\code{\link{gm_draft}()},
+\code{\link{gm_send_draft}()}
 }
 \concept{draft}

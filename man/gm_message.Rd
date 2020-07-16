@@ -4,8 +4,11 @@
 \alias{gm_message}
 \title{Get a single message}
 \usage{
-gm_message(id, user_id = "me", format = c("full", "metadata",
-  "minimal", "raw"))
+gm_message(
+  id,
+  user_id = "me",
+  format = c("full", "metadata", "minimal", "raw")
+)
 }
 \arguments{
 \item{id}{message id to access}
@@ -26,16 +29,17 @@ my_message = gm_message(12345)
 \url{https://developers.google.com/gmail/api/v1/reference/users/messages}
 }
 \seealso{
-Other message: \code{\link{gm_attachment}},
-  \code{\link{gm_delete_message}},
-  \code{\link{gm_import_message}},
-  \code{\link{gm_insert_message}},
-  \code{\link{gm_messages}},
-  \code{\link{gm_modify_message}},
-  \code{\link{gm_save_attachments}},
-  \code{\link{gm_save_attachment}},
-  \code{\link{gm_send_message}},
-  \code{\link{gm_trash_message}},
-  \code{\link{gm_untrash_message}}
+Other message: 
+\code{\link{gm_attachment}()},
+\code{\link{gm_delete_message}()},
+\code{\link{gm_import_message}()},
+\code{\link{gm_insert_message}()},
+\code{\link{gm_messages}()},
+\code{\link{gm_modify_message}()},
+\code{\link{gm_save_attachments}()},
+\code{\link{gm_save_attachment}()},
+\code{\link{gm_send_message}()},
+\code{\link{gm_trash_message}()},
+\code{\link{gm_untrash_message}()}
 }
 \concept{message}

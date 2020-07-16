@@ -23,9 +23,11 @@ delete_thread(12345)
 \url{https://developers.google.com/gmail/api/v1/reference/users/threads/delete}
 }
 \seealso{
-Other thread: \code{\link{gm_modify_thread}},
-  \code{\link{gm_threads}}, \code{\link{gm_thread}},
-  \code{\link{gm_trash_thread}},
-  \code{\link{gm_untrash_thread}}
+Other thread: 
+\code{\link{gm_modify_thread}()},
+\code{\link{gm_threads}()},
+\code{\link{gm_thread}()},
+\code{\link{gm_trash_thread}()},
+\code{\link{gm_untrash_thread}()}
 }
 \concept{thread}

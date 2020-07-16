@@ -25,7 +25,9 @@ gm_send_draft(draft)
 \url{https://developers.google.com/gmail/api/v1/reference/users/drafts/send}
 }
 \seealso{
-Other draft: \code{\link{gm_delete_draft}},
-  \code{\link{gm_drafts}}, \code{\link{gm_draft}}
+Other draft: 
+\code{\link{gm_delete_draft}()},
+\code{\link{gm_drafts}()},
+\code{\link{gm_draft}()}
 }
 \concept{draft}

@@ -4,8 +4,12 @@
 \alias{gmail_auth}
 \title{Setup oauth authentication for your gmail}
 \usage{
-gmail_auth(scope = c("read_only", "modify", "compose", "full"),
-  id = the$id, secret = the$secret, secret_file = NULL)
+gmail_auth(
+  scope = c("read_only", "modify", "compose", "full"),
+  id = the$id,
+  secret = the$secret,
+  secret_file = NULL
+)
 }
 \arguments{
 \item{scope}{the authentication scope to use}

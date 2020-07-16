@@ -4,9 +4,12 @@
 \alias{gm_create_label}
 \title{Create a new label}
 \usage{
-gm_create_label(name, label_list_visibility = c("show", "hide",
-  "show_unread"), message_list_visibility = c("show", "hide"),
-  user_id = "me")
+gm_create_label(
+  name,
+  label_list_visibility = c("show", "hide", "show_unread"),
+  message_list_visibility = c("show", "hide"),
+  user_id = "me"
+)
 }
 \arguments{
 \item{name}{name to give to the new label}
@@ -24,8 +27,10 @@ Function to create a label.
 \url{https://developers.google.com/gmail/api/v1/reference/users/labels/create}
 }
 \seealso{
-Other label: \code{\link{gm_delete_label}},
-  \code{\link{gm_labels}}, \code{\link{gm_label}},
-  \code{\link{gm_update_label}}
+Other label: 
+\code{\link{gm_delete_label}()},
+\code{\link{gm_labels}()},
+\code{\link{gm_label}()},
+\code{\link{gm_update_label}()}
 }
 \concept{label}
