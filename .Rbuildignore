@@ -22,3 +22,4 @@ TODO.md
 ^tests/testthat/\.secrets$
 ^revdep$
 ^script[.]R$
+^codecov\.yml$

@@ -1,9 +1,7 @@
 # gmailr #
 <!-- badges: start -->
-[![Azure pipelines build status](https://img.shields.io/azure-devops/build/r-lib/gmailr/5)](https://dev.azure.com/r-lib/gmailr/_build/latest?definitionId=5&branchName=master)
-[![Azure pipelines test status](https://img.shields.io/azure-devops/tests/r-lib/gmailr/5?color=brightgreen&compact_message)](https://dev.azure.com/r-lib/gmailr/_build/latest?definitionId=5&branchName=master)
-[![Azure pipelines coverage status](https://img.shields.io/azure-devops/coverage/r-lib/gmailr/5)](https://dev.azure.com/r-lib/gmailr/_build/latest?definitionId=5&branchName=master)
-[![Build Status](https://travis-ci.org/r-lib/gmailr.svg?branch=master)](https://travis-ci.org/r-lib/gmailr)
+[![R build status](https://github.com/r-lib/gmailr/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/gmailr/actions)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/gmailr/branch/master/graph/badge.svg)](https://codecov.io/gh/r-lib/gmailr?branch=master)
 <!-- badges: end -->
 
 Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.

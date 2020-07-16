@@ -26,8 +26,7 @@ Suggests:
     methods,
     sodium,
     rmarkdown,
-    testthat,
-    xml2
+    testthat
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
