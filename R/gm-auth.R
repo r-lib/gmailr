@@ -31,7 +31,7 @@ gm_scopes <- function() {
   )
 }
 
-#' Authorize bigrquery
+#' Authorize gmailr
 #'
 #' @eval gargle:::PREFIX_auth_description(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_details(gargle_lookup_table)
