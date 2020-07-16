@@ -2,7 +2,7 @@ if (gargle:::secret_can_decrypt("gmailr")) {
   # we want to use the oauth token directly, this avoids the need to reproduce the token filename
   token <- unserialize(gzcon(rawConnection(gargle:::secret_read("gmailr", "rpkgtester@gmail.com"))))
   dir.create(token$cache_path, showWarnings = FALSE)
-  gm_auth_configure()
+  .auth$set_app(token$app)
   gm_auth(token = token)
 }
 
