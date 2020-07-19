@@ -45,8 +45,8 @@ gm_send_message(test_email)
 You can add a file attachment to your message with `gm_attach_file()`.
 
 ```r
-write.csv("mtcars.csv", mtcars)
-test_email <- gm_attach_file("mtcars.csv")
+write.csv(mtcars,"mtcars.csv")
+test_email <- test_email %>% gm_attach_file("mtcars.csv")
 
 # Verify it looks correct
 gm_create_draft(test_email)
