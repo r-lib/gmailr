@@ -11,7 +11,6 @@ BugReports: https://github.com/r-lib/gmailr/issues
 Depends:
     R (>= 3.0.0)
 Imports:
-    base,
     base64enc,
     crayon,
     gargle,
