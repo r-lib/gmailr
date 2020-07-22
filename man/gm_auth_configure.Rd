@@ -35,7 +35,7 @@ used to make it easier to identify different applications.}
 \value{
 \itemize{
 \item \code{gm_auth_configure()}: An object of R6 class
-\link[gargle:AuthState-class]{gargle::AuthState}, invisibly.
+\link[gargle:AuthState]{gargle::AuthState}, invisibly.
 \item \code{gm_oauth_app()}: the current user-configured
 \code{\link[httr:oauth_app]{httr::oauth_app()}}.
 }

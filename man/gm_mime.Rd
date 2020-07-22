@@ -9,6 +9,7 @@
 \alias{gm_subject.mime}
 \alias{gm_text_body}
 \alias{gm_html_body}
+\alias{gm_markdown_body}
 \alias{gm_attach_part}
 \alias{gm_attach_file}
 \title{Create a mime formatted message object}
@@ -36,6 +37,15 @@ gm_text_body(
 )
 
 gm_html_body(
+  mime,
+  body,
+  content_type = "text/html",
+  charset = "utf-8",
+  encoding = "base64",
+  ...
+)
+
+gm_markdown_body(
   mime,
   body,
   content_type = "text/html",

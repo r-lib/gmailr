@@ -7,7 +7,7 @@
 gm_token()
 }
 \value{
-A \code{request} object (an S3 class provided by \link[httr:httr-package]{httr}).
+A \code{request} object (an S3 class provided by \link[httr:httr]{httr}).
 }
 \description{
 For internal use or for those programming around the Gmail API.

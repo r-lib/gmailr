@@ -11,6 +11,7 @@ BugReports: https://github.com/r-lib/gmailr/issues
 Depends:
     R (>= 3.0.0)
 Imports:
+    base,
     base64enc,
     crayon,
     gargle,
@@ -18,17 +19,18 @@ Imports:
     jsonlite,
     lifecycle,
     magrittr,
-    mime,
-    rematch2
-Suggests:
-    covr,
-    knitr,
+    markdown,
     methods,
-    sodium,
+    mime,
+    rematch2,
+    stats
+Suggests:
+    graphics,
+    knitr,
     rmarkdown,
     testthat
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
