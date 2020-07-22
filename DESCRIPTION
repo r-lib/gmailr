@@ -24,6 +24,7 @@ Imports:
     rematch2,
     stats
 Suggests:
+    covr,
     graphics,
     knitr,
     rmarkdown,
