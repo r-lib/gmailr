@@ -1,6 +1,6 @@
 Package: gmailr
 Title: Access the 'Gmail' 'RESTful' API
-Version: 1.0.0.9000
+Version: 1.0.0.9001
 Author: Jim Hester
 Maintainer: Jim Hester <james.f.hester@gmail.com>
 Description: An interface to the 'Gmail' 'RESTful' API.  Allows
