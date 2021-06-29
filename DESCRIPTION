@@ -6,7 +6,7 @@ Maintainer: Jim Hester <james.f.hester@gmail.com>
 Description: An interface to the 'Gmail' 'RESTful' API.  Allows
     access to your 'Gmail' messages, threads, drafts and labels.
 License: MIT + file LICENSE
-URL: https://github.com/r-lib/gmailr
+URL: https://gmailr.r-lib.org, https://github.com/r-lib/gmailr
 BugReports: https://github.com/r-lib/gmailr/issues
 Depends:
     R (>= 3.0.0)
