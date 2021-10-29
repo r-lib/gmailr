@@ -17,7 +17,7 @@
 
 * The google application bundled in previous gmailr releases has been removed,
   users will now need to create their own applications in order to use gmailr. See
-  the [Setup](https://github.com/r-lib/gmailr/blob/master/README.md#setup) section
+  the [Setup](https://github.com/r-lib/gmailr/blob/main/README.md#setup) section
   in the readme for details. This was nessesary to comply with stricter enforement
   of the API terms of service.
 
