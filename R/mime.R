@@ -126,6 +126,25 @@ gm_html_body <- function(mime,
   mime
 }
 
+#' @rdname gm_mime
+#' @importFrom markdown markdownToHTML
+#' @export
+gm_markdown_body <- function(mime,
+                         body,
+                         content_type = "text/html",
+                         charset = "utf-8",
+                         encoding = "base64",
+                         ...) {
+
+  gm_html_body(
+    body = markdownToHTML(text = body, fragment.only = TRUE),
+    content_type = content_type,
+    charset = charset,
+    encoding = encoding,
+    ...
+  )
+}
+
 HTML_PART <- 2L
 
 #' @param part Message part to attach

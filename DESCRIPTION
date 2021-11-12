@@ -18,17 +18,19 @@ Imports:
     jsonlite,
     lifecycle,
     magrittr,
+    markdown,
+    methods,
     mime,
-    rematch2
+    rematch2,
+    stats
 Suggests:
     covr,
+    graphics,
     knitr,
-    methods,
-    sodium,
     rmarkdown,
     testthat
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
