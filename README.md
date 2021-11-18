@@ -1,6 +1,6 @@
 # gmailr #
 <!-- badges: start -->
-[![R build status](https://github.com/r-lib/gmailr/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/gmailr/actions)
+[![R-CMD-check](https://github.com/r-lib/gmailr/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/gmailr/actions)
 [![Codecov test coverage](https://codecov.io/gh/r-lib/gmailr/branch/main/graph/badge.svg)](https://codecov.io/gh/r-lib/gmailr?branch=main)
 <!-- badges: end -->
 
