@@ -27,7 +27,7 @@ save_attachments(my_message, 'a32e324b')
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.messages.attachments/get}
 }
 \seealso{
 Other message: 

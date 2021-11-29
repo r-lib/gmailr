@@ -24,7 +24,7 @@ first_10_drafts = gm_drafts(10)
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/drafts/list}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list}
 }
 \seealso{
 Other draft: 

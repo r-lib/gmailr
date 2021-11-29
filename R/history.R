@@ -6,7 +6,7 @@
 #' @param label_id filter history only for this label
 #' @param page_token retrieve a specific page of results
 #' @inheritParams gm_thread
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/history/list>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.history/list>
 #' @export
 #' @examples
 #' \dontrun{

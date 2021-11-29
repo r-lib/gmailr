@@ -30,7 +30,7 @@ gm_send_message(gm_mime(from="you@me.com", to="any@one.com",
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/messages/send}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send}
 }
 \seealso{
 Other message: 

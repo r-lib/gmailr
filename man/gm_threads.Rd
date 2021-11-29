@@ -37,7 +37,7 @@ first_10_threads = gm_threads(10)
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/threads/list}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list}
 }
 \seealso{
 Other thread: 

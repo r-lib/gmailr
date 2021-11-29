@@ -21,5 +21,5 @@ gm_create_draft(gm_mime(From="you@me.com", To="any@one.com",
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/drafts/create}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create}
 }

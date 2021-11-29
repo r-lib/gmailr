@@ -26,7 +26,7 @@ my_message = gm_message(12345)
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/messages}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.messages}
 }
 \seealso{
 Other message: 

@@ -30,6 +30,6 @@ prof[["historyId"]]
 \seealso{
 Wraps the \code{getProfile} endpoint:
 \itemize{
-\item \url{https://developers.google.com/gmail/api/v1/reference/users/getProfile}
+\item \url{https://developers.google.com/gmail/api/reference/rest/v1/users/getProfile}
 }
 }

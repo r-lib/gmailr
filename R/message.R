@@ -5,7 +5,7 @@
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the message returned
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages>
 #' @family message
 #' @export
 #' @examples
@@ -34,7 +34,7 @@ gm_message <- function(id,
 #' @param label_ids restrict search to given labels
 #' @param include_spam_trash boolean whether to include the spam and trash folders in the search
 #' @inheritParams gm_thread
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/list>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list>
 #' @family message
 #' @examples
 #' \dontrun{
@@ -62,7 +62,7 @@ gm_messages <- function(search = NULL,
 #'
 #' Function to trash a given message by id.  This can be undone by [gm_untrash_message()].
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/trash>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/trash>
 #' @export
 #' @family message
 #' @examples
@@ -81,7 +81,7 @@ gm_trash_message <- function(id, user_id = "me") {
 #'
 #' Function to trash a given message by id.  This can be undone by [gm_untrash_message()].
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/trash>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/trash>
 #' @family message
 #' @export
 #' @examples
@@ -100,7 +100,7 @@ gm_untrash_message <- function(id, user_id = "me") {
 #'
 #' Function to delete a given message by id.  This cannot be undone!
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/delete>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/delete>
 #' @family message
 #' @export
 #' @examples
@@ -122,7 +122,7 @@ gm_delete_message <- function(id, user_id = "me") {
 #' @param add_labels label IDs to add to the specified message
 #' @param remove_labels label IDs to remove from the specified message
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/modify>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify>
 #' @family message
 #' @export
 #' @examples
@@ -155,7 +155,7 @@ gm_modify_message <- function(id,
 #' @param id id of the attachment
 #' @param message_id id of the parent message
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages.attachments/get>
 #' @family message
 #' @export
 #' @examples
@@ -210,7 +210,7 @@ gm_save_attachment <- function(x, filename){
 #' @param attachment_id id of the attachment to save, if none specified saves all attachments
 #' @param path where to save the attachments
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/attachments/get>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages.attachments/get>
 #' @family message
 #' @export
 #' @examples
@@ -285,7 +285,7 @@ gm_attachments.gmail_draft <- function(x, ...) {
 #' @param internal_date_source whether to date the object based on the date of
 #'        the message or when it was received by gmail.
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/insert>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/insert>
 #' @family message
 #' @export
 #' @examples
@@ -320,7 +320,7 @@ gm_insert_message <- function(
 #' Import a message into the gmail mailbox from a mime message
 #'
 #' @inheritParams gm_insert_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/import>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import>
 #' @family message
 #' @export
 #' @examples
@@ -355,7 +355,7 @@ gm_import_message <- function(mail,
 #'
 #' @param thread_id the id of the thread to send from.
 #' @inheritParams gm_insert_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/messages/send>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages/send>
 #' @family message
 #' @export
 #' @examples

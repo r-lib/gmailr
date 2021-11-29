@@ -18,7 +18,7 @@ my_labels = gm_labels()
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/labels/list}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.labels/list}
 }
 \seealso{
 Other label: 

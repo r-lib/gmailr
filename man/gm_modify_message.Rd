@@ -28,7 +28,7 @@ gm_modify_message(12345, add_labels='label_2', remove_labels='label_1')
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/messages/modify}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.messages/modify}
 }
 \seealso{
 Other message: 

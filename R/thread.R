@@ -2,7 +2,7 @@
 #'
 #' Get a list of threads possibly matching a given query string.
 #' @inheritParams gm_messages
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/threads/list>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.threads/list>
 #' @family thread
 #' @export
 #' @examples
@@ -20,7 +20,7 @@ gm_threads <- function(search = NULL, num_results = NULL, page_token = NULL, lab
 #' Function to retrieve a given thread by id
 #' @param id thread id to access
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/threads>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.threads>
 #' @family thread
 #' @export
 #' @examples
@@ -41,7 +41,7 @@ gm_thread <- function(id, user_id = "me") {
 #'
 #' Function to trash a given thread by id.  This can be undone by [gm_untrash_thread()].
 #' @inheritParams gm_thread
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/threads/trash>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash>
 #' @family thread
 #' @export
 #' @examples
@@ -58,7 +58,7 @@ gm_trash_thread <- function(id, user_id = "me") {
 #'
 #' Function to untrash a given thread by id.  This can reverse the results of a previous [trash_thread()].
 #' @inheritParams gm_thread
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/threads/untrash>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.threads/untrash>
 #' @family thread
 #' @export
 #' @examples
@@ -75,7 +75,7 @@ gm_untrash_thread <- function(id, user_id = "me") {
 #'
 #' Function to delete a given thread by id.  This cannot be undone!
 #' @inheritParams gm_thread
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/threads/delete>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.threads/delete>
 #' @family thread
 #' @export
 #' @examples
@@ -94,7 +94,7 @@ gm_delete_thread <- function(id, user_id = "me") {
 #' @param add_labels labels to add to the specified thread
 #' @param remove_labels labels to remove from the specified thread
 #' @inheritParams gm_thread
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/threads/modify>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.threads/modify>
 #' @family thread
 #' @export
 #' @examples

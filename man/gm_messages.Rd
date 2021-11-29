@@ -36,7 +36,7 @@ my_messages = gm_messages("R", 10, "label_1", TRUE)
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/messages/list}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.messages/list}
 }
 \seealso{
 Other message: 

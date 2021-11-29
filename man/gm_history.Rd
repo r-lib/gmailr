@@ -32,5 +32,5 @@ my_history = history("10")
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/history/list}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.history/list}
 }

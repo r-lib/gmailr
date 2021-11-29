@@ -20,7 +20,7 @@ my_thread = gm_thread(12345)
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/threads}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.threads}
 }
 \seealso{
 Other thread: 

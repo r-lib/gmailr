@@ -34,7 +34,7 @@ gm_import_message(gm_mime(From="you@me.com", To="any@one.com",
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/messages/import}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.messages/import}
 }
 \seealso{
 Other message: 

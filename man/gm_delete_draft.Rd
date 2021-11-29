@@ -20,7 +20,7 @@ delete_draft('12345')
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/drafts/delete}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/delete}
 }
 \seealso{
 Other draft: 

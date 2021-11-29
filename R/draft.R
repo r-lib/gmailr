@@ -5,7 +5,7 @@
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the draft returned
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/get>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/get>
 #' @family draft
 #' @export
 #' @examples
@@ -30,7 +30,7 @@ gm_draft <- function(id,
 #' @param num_results the number of results to return.
 #' @param page_token retrieve a specific page of results
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/list>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/list>
 #' @family draft
 #' @export
 #' @examples
@@ -48,7 +48,7 @@ gm_drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #'
 #' @param mail mime mail message created by mime
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/create>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/create>
 #' @export
 #' @examples
 #' \dontrun{
@@ -75,7 +75,7 @@ gm_create_draft <- function(mail,
 #' Send a draft to the recipients in the To, CC, and Bcc headers.
 #' @param draft the draft to send
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/send>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/send>
 #' @family draft
 #' @export
 #' @examples
@@ -96,7 +96,7 @@ gm_send_draft <- function(draft,
 #'
 #' Function to delete a given draft by id.  This cannot be undone!
 #' @inheritParams gm_message
-#' @references <https://developers.google.com/gmail/api/v1/reference/users/drafts/delete>
+#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/delete>
 #' @family draft
 #' @export
 #' @examples

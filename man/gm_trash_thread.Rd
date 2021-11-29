@@ -20,7 +20,7 @@ trash_thread(12345)
 }
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/threads/trash}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash}
 }
 \seealso{
 Other thread: 

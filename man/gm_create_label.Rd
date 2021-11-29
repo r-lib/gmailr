@@ -24,7 +24,7 @@ gm_create_label(
 Function to create a label.
 }
 \references{
-\url{https://developers.google.com/gmail/api/v1/reference/users/labels/create}
+\url{https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create}
 }
 \seealso{
 Other label: 

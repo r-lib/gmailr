@@ -1,10 +1,10 @@
 # gmailr #
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/r-lib/gmailr/workflows/R-CMD-check/badge.svg)](https://github.com/r-lib/gmailr/actions)
-[![Codecov test coverage](https://codecov.io/gh/r-lib/gmailr/branch/main/graph/badge.svg)](https://codecov.io/gh/r-lib/gmailr?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/gmailr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/gmailr?branch=main)
 <!-- badges: end -->
 
-Exposing the [Gmail API](https://developers.google.com/gmail/api/overview) from R.
+Exposing the [Gmail API](https://developers.google.com/gmail/api) from R.
 
 ## Installation ##
 
