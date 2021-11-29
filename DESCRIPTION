@@ -1,10 +1,13 @@
 Package: gmailr
 Title: Access the 'Gmail' 'RESTful' API
 Version: 1.0.0.9001
-Author: Jim Hester
-Maintainer: Jim Hester <james.f.hester@gmail.com>
-Description: An interface to the 'Gmail' 'RESTful' API.  Allows
-    access to your 'Gmail' messages, threads, drafts and labels.
+Authors@R: c(
+    person("Jim", "Hester", role = "aut"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("aut", "cre")),
+    person("RStudio", role = c("cph", "fnd"))
+  )
+Description: An interface to the 'Gmail' 'RESTful' API.  Allows access to
+    your 'Gmail' messages, threads, drafts and labels.
 License: MIT + file LICENSE
 URL: https://gmailr.r-lib.org, https://github.com/r-lib/gmailr
 BugReports: https://github.com/r-lib/gmailr/issues
@@ -24,11 +27,11 @@ Suggests:
     covr,
     knitr,
     methods,
-    sodium,
     rmarkdown,
+    sodium,
     testthat
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
-RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2

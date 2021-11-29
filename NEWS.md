@@ -1,5 +1,7 @@
 # gmailr (development version)
 
+* Jenny Bryan is now the maintainer
+
 # gmailr 1.0.0
 
 ## Breaking changes
