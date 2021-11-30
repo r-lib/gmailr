@@ -24,3 +24,4 @@ TODO.md
 ^script[.]R$
 ^codecov\.yml$
 ^MAINTENANCE\.md$
+^CRAN-RELEASE$
