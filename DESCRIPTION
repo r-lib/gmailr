@@ -1,6 +1,6 @@
 Package: gmailr
 Title: Access the 'Gmail' 'RESTful' API
-Version: 1.0.1
+Version: 1.0.1.9000
 Authors@R: c(
     person("Jim", "Hester", role = "aut"),
     person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("aut", "cre")),
