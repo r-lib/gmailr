@@ -1,29 +1,3 @@
-#' \pkg{gmailr} makes gmail access easy.
-#'
-#' `gmailr` provides an interface to the gmail api <https://developers.google.com/gmail/api/>
-#' @docType package
-#' @name gmailr
-#' @import httr
-#' @import base64enc
-NULL
-
-#' Pipe statements
-#'
-#' Like dplyr and ggvis gmailr also uses the pipe function, `\%>\%` to turn
-#' function composition into a series of imperative statements.
-#'
-#' @importFrom magrittr %>%
-#' @name %>%
-#' @rdname pipe
-#' @export
-#' @param lhs,rhs A visualisation and a function to apply to it
-#' @examples
-#' # Instead of
-#' gm_to(gm_mime(), 'someone@@somewhere.com')
-#' # you can write
-#' gm_mime() %>% gm_to('someone@@somewhere.com')
-NULL
-
 #' Get the body text of a message or draft
 #' @param x the object from which to retrieve the body
 #' @param ... other parameters passed to methods

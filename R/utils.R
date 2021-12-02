@@ -124,14 +124,6 @@ substitute_regex <- function(data, pattern, fun, ...) {
 # value, otherwise this function makes little sense
 "%|||%" <- function(x, y){ if(is.null(x)){ x } else { y } }
 
-#' @name %>%
-#' @rdname pipe
-#' @keywords internal
-#' @export
-#' @importFrom magrittr %>%
-#' @usage lhs \%>\% rhs
-NULL
-
 encode_base64 <- function(x, line_length = 76L, newline = "\r\n") {
   if (length(x) == 0) {
     return(x)
