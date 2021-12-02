@@ -1,5 +1,7 @@
 # gmailr (development version)
 
+* `gm_auth_configure()` accepts an OAuth client (or "app"), via the `app` argument, as promised in the docs (#144).
+
 # gmailr 1.0.1
 
 * Jenny Bryan is now the maintainer
