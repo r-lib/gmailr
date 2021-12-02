@@ -1,8 +1,12 @@
-url: http://gmailr.r-lib.org
+url: https://gmailr.r-lib.org
 
-authors:
-  "Jim Hester":
-    href: http://jimhester.com
+template:
+  package: tidytemplate
+  bootstrap: 5
+
+  includes:
+    in_header: |
+      <script defer data-domain="gmailr.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
 development:
   mode: auto
@@ -72,7 +76,6 @@ reference:
   - gm_last_response
   - quoted_printable_encode
   - gm_last_response
-  -
 
 navbar:
   type: default
