@@ -4,270 +4,258 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="gmailr">
 <title>Sending Messages With Gmailr • gmailr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Sending Messages With Gmailr">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="../deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet">
+<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Sending Messages With Gmailr">
+<meta property="og:description" content="gmailr">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><script defer data-domain="gmailr.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 </head>
 <body>
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">gmailr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">1.0.0.9000</span>
-      </span>
-    </div>
+    <a href="#container" class="visually-hidden-focusable">Skip to content</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">Home</a>
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-none"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">gmailr</a>
+
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-2">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../index.html">Home</a>
 </li>
-<li>
-  <a href="../articles/gmailr.html">Overview</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/gmailr.html">Overview</a>
 </li>
-<li>
-  <a href="../articles/sending_messages.html">Sending Messages</a>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/sending_messages.html">Sending Messages</a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    News
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li class="dropdown-header">Release notes</li>
-    <li>
-      <a href="https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/">Version 1.0.0</a>
-    </li>
-    <li class="divider">
-    <li>
-      <a href="../news/index.html">Change log</a>
-    </li>
-  </ul>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-news">
+    <h6 class="dropdown-header" data-toc-skip>Release notes</h6>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/">Version 1.0.0</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../news/index.html">Change log</a>
+  </div>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/r-lib/gmailr">
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/r-lib/gmailr/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1>Sending Messages With Gmailr</h1>
+</nav><div class="container template-article" id="container">
+<script src="sending_messages_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>Sending Messages With Gmailr</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/gmailr/blob/master/vignettes/sending_messages.Rmd"><code>vignettes/sending_messages.Rmd</code></a></small>
-      <div class="hidden name"><code>sending_messages.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/gmailr/blob/HEAD/vignettes/sending_messages.Rmd" class="external-link"><code>vignettes/sending_messages.Rmd</code></a></small>
+      <div class="d-none name"><code>sending_messages.Rmd</code></div>
     </div>
 
     
     
-<div id="constructing-a-mime-message" class="section level2">
-<h2 class="hasAnchor">
-<a href="#constructing-a-mime-message" class="anchor"></a>Constructing a MIME message</h2>
-<div id="text" class="section level3">
-<h3 class="hasAnchor">
-<a href="#text" class="anchor"></a>Text</h3>
+<div class="section level2">
+<h2 id="constructing-a-mime-message">Constructing a MIME message<a class="anchor" aria-label="anchor" href="#constructing-a-mime-message"></a>
+</h2>
+<div class="section level3">
+<h3 id="text">Text<a class="anchor" aria-label="anchor" href="#text"></a>
+</h3>
 <p>First we will construct a simple text only message</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">text_msg &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gm_mime.html">gm_mime</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_to</a></span>(<span class="st">"james.f.hester@gmail.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_text_body</a></span>(<span class="st">"Gmailr is a very handy package!"</span>)</a></code></pre></div>
-<p>You can convert the message to a properly formatted MIME message using <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/strwrap.html">strwrap</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(text_msg))</a></code></pre></div>
-<pre><code>## [1] "MIME-Version: 1.0\r Date: Mon, 03 Feb 2020 16:39:29 GMT\r To:"             
-## [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"         
-## [3] "multipart/mixed; boundary=b4c4352f5b3214d66f23655c81626f53\r \r"           
-## [4] "--b4c4352f5b3214d66f23655c81626f53\r MIME-Version: 1.0\r Date: Mon, 03"    
-## [5] "Feb 2020 16:39:29 GMT\r Content-Type: text/plain; charset=utf-8;"          
-## [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r \r Gmailr is"
-## [7] "a very handy package!\r \r --b4c4352f5b3214d66f23655c81626f53--\r"</code></pre>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">text_msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"james.f.hester@gmail.com"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"me@somewhere.com"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/gm_mime.html">gm_text_body</a></span><span class="op">(</span><span class="st">"Gmailr is a very handy package!"</span><span class="op">)</span></code></pre></div>
+<p>You can convert the message to a properly formatted MIME message using <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">text_msg</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] "MIME-Version: 1.0\r Date: Thu, 02 Dec 2021 21:42:25 GMT\r To:"      </span>
+<span class="co">## [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"  </span>
+<span class="co">## [3] "multipart/mixed; boundary=e129b10ce589883ddfb371eca0e30241\r \r"    </span>
+<span class="co">## [4] "--e129b10ce589883ddfb371eca0e30241\r MIME-Version: 1.0\r Date: Thu,"</span>
+<span class="co">## [5] "02 Dec 2021 21:42:25 GMT\r Content-Type: text/plain; charset=utf-8;"</span>
+<span class="co">## [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r \r"   </span>
+<span class="co">## [7] "Gmailr is a very handy package!\r \r"                               </span>
+<span class="co">## [8] "--e129b10ce589883ddfb371eca0e30241--\r"</span></code></pre>
 </div>
-<div id="html" class="section level3">
-<h3 class="hasAnchor">
-<a href="#html" class="anchor"></a>HTML</h3>
+<div class="section level3">
+<h3 id="html">HTML<a class="anchor" aria-label="anchor" href="#html"></a>
+</h3>
 <p>You can also construct html messages. It is customary to provide a text only message along with the html message, but with modern email clients this is not strictly necessary.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">html_msg &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gm_mime.html">gm_mime</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_to</a></span>(<span class="st">"james.f.hester@gmail.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_from</a></span>(<span class="st">"me@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_html_body</a></span>(<span class="st">"&lt;b&gt;Gmailr&lt;/b&gt; is a &lt;i&gt;very&lt;/i&gt; handy package!"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">html_msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"james.f.hester@gmail.com"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"me@somewhere.com"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/gm_mime.html">gm_html_body</a></span><span class="op">(</span><span class="st">"&lt;b&gt;Gmailr&lt;/b&gt; is a &lt;i&gt;very&lt;/i&gt; handy package!"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="attachments" class="section level3">
-<h3 class="hasAnchor">
-<a href="#attachments" class="anchor"></a>Attachments</h3>
+<div class="section level3">
+<h3 id="attachments">Attachments<a class="anchor" aria-label="anchor" href="#attachments"></a>
+</h3>
 <p>You can add attachments to your message in two ways.</p>
 <ol style="list-style-type: decimal">
-<li>If the data is in a file, use <code><a href="../reference/gm_mime.html">gm_attach_file()</a></code>. The mime type is automatically guessed by <code><a href="https://rdrr.io/pkg/mime/man/guess_type.html">mime::guess_type</a></code>, or you can specify it yourself with the <code>type</code> parameter.</li>
+<li>If the data is in a file, use <code><a href="../reference/gm_mime.html">gm_attach_file()</a></code>. The mime type is automatically guessed by <code><a href="https://rdrr.io/pkg/mime/man/guess_type.html" class="external-link">mime::guess_type</a></code>, or you can specify it yourself with the <code>type</code> parameter.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="dt">file =</span> <span class="st">"iris.csv"</span>, iris)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">msg &lt;-<span class="st"> </span>html_msg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_subject</a></span>(<span class="st">"Here are some flowers"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_attach_file</a></span>(<span class="st">"iris.csv"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"iris.csv"</span>, <span class="va">iris</span><span class="op">)</span>
+
+<span class="va">msg</span> <span class="op">&lt;-</span> <span class="va">html_msg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"Here are some flowers"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"iris.csv"</span><span class="op">)</span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>If the data are already loaded into R, you can use <code><a href="../reference/gm_mime.html">gm_attach_part()</a></code> to attach the binary data to your file.</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">msg &lt;-<span class="st"> </span>html_msg <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_attach_part</a></span>(<span class="dt">part =</span> <span class="kw"><a href="https://rdrr.io/r/base/rawConversion.html">charToRaw</a></span>(<span class="st">"attach me!"</span>), <span class="dt">name =</span> <span class="st">"please"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">msg</span> <span class="op">&lt;-</span> <span class="va">html_msg</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/gm_mime.html">gm_attach_part</a></span><span class="op">(</span>part <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rawConversion.html" class="external-link">charToRaw</a></span><span class="op">(</span><span class="st">"attach me!"</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"please"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="including-images" class="section level3">
-<h3 class="hasAnchor">
-<a href="#including-images" class="anchor"></a>Including images</h3>
+<div class="section level3">
+<h3 id="including-images">Including images<a class="anchor" aria-label="anchor" href="#including-images"></a>
+</h3>
 <p>You can also add use attached images in HTML by setting the Content ID feature of mime emails. This can be done by referencing the image via a <code>&lt;img src=cid:xyz&gt;</code> tag using the <code>id</code> argument of <code>send_file()</code>. The tag value can by any unique identifier. E.g. here is an example of including a ggplot2 image</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># First create a plot to send, and save it to mtcars.png</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">mtcars<span class="op">$</span>gear &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(mtcars<span class="op">$</span>gear)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/grDevices/png.html">png</a></span>(<span class="st">"mtcars.png"</span>, <span class="dt">width =</span> <span class="dv">400</span>, <span class="dt">height =</span> <span class="dv">400</span>, <span class="dt">pointsize =</span> <span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/with.html">with</a></span>(mtcars,</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="kw"><a href="https://rdrr.io/r/graphics/plot.html">plot</a></span>(hp,</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">    mpg,</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">    <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(gear),</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="dt">pch =</span> <span class="dv">19</span>,</a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">    <span class="dt">xlab =</span> <span class="st">"Horsepower"</span>,</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="dt">ylab =</span> <span class="st">"Miles / gallon"</span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">  )</a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">)</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span>(<span class="st">"topright"</span>, <span class="dt">title =</span> <span class="st">"# gears"</span>,</a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">  <span class="dt">pch =</span> <span class="dv">19</span>,</a>
-<a class="sourceLine" id="cb7-16" data-line-number="16">  <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(mtcars<span class="op">$</span>gear)),</a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">  <span class="dt">legend =</span> <span class="kw"><a href="https://rdrr.io/r/base/levels.html">levels</a></span>(mtcars<span class="op">$</span>gear)</a>
-<a class="sourceLine" id="cb7-18" data-line-number="18">)</a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw"><a href="https://rdrr.io/r/grDevices/dev.html">dev.off</a></span>()</a></code></pre></div>
-<pre><code>## png 
-##   2</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Next create an HTML email that references the plot as 'foobar'</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">email &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gm_mime.html">gm_mime</a></span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_to</a></span>(<span class="st">'someaddress@somewhere.com'</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_from</a></span>(<span class="st">"someaddress@somewhere.com"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/accessors.html">gm_subject</a></span>(<span class="st">"Cars report"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_html_body</a></span>(</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">    <span class="st">'&lt;h1&gt;A plot of &lt;b&gt;MotorTrend&lt;/b&gt; data &lt;i&gt;(1974)&lt;/i&gt;&lt;/h1&gt;</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="st">    &lt;br&gt;&lt;img src="cid:foobar"&gt;'</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/gm_mime.html">gm_attach_file</a></span>(<span class="st">"mtcars.png"</span>, <span class="dt">id =</span> <span class="st">"foobar"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># First create a plot to send, and save it to mtcars.png</span>
+<span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="st">"mtcars.png"</span>, width <span class="op">=</span> <span class="fl">400</span>, height <span class="op">=</span> <span class="fl">400</span>, pointsize <span class="op">=</span> <span class="fl">12</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">mtcars</span>,
+  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hp</span>,
+    <span class="va">mpg</span>,
+    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span>,
+    pch <span class="op">=</span> <span class="fl">19</span>,
+    xlab <span class="op">=</span> <span class="st">"Horsepower"</span>,
+    ylab <span class="op">=</span> <span class="st">"Miles / gallon"</span>
+  <span class="op">)</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, title <span class="op">=</span> <span class="st">"# gears"</span>,
+  pch <span class="op">=</span> <span class="fl">19</span>,
+  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span><span class="op">)</span>,
+  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span>
+<span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/grDevices/dev.html" class="external-link">dev.off</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## agg_png </span>
+<span class="co">##       2</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Next create an HTML email that references the plot as 'foobar'</span>
+<span class="va">email</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">'someaddress@somewhere.com'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"someaddress@somewhere.com"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"Cars report"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/gm_mime.html">gm_html_body</a></span><span class="op">(</span>
+    <span class="st">'&lt;h1&gt;A plot of &lt;b&gt;MotorTrend&lt;/b&gt; data &lt;i&gt;(1974)&lt;/i&gt;&lt;/h1&gt;
+    &lt;br&gt;&lt;img src="cid:foobar"&gt;'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.png"</span>, id <span class="op">=</span> <span class="st">"foobar"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="uploading" class="section level2">
-<h2 class="hasAnchor">
-<a href="#uploading" class="anchor"></a>Uploading</h2>
-<div id="create-draft" class="section level3">
-<h3 class="hasAnchor">
-<a href="#create-draft" class="anchor"></a>Create Draft</h3>
+<div class="section level2">
+<h2 id="uploading">Uploading<a class="anchor" aria-label="anchor" href="#uploading"></a>
+</h2>
+<div class="section level3">
+<h3 id="create-draft">Create Draft<a class="anchor" aria-label="anchor" href="#create-draft"></a>
+</h3>
 <p>You can upload any mime message into your gmail drafts using <code><a href="../reference/gm_create_draft.html">gm_create_draft()</a></code>. Be sure to give yourself at least <code>compose</code> permissions first.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../reference/gm_create_draft.html">gm_create_draft</a></span>(file_attachment)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">file_attachment</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="insert" class="section level3">
-<h3 class="hasAnchor">
-<a href="#insert" class="anchor"></a>Insert</h3>
+<div class="section level3">
+<h3 id="insert">Insert<a class="anchor" aria-label="anchor" href="#insert"></a>
+</h3>
 <p>This inserts the message directly into your mailbox, bypassing gmail’s default scanning and classification algorithms.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../reference/gm_insert_message.html">gm_insert_message</a></span>(file_attachment)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/gm_insert_message.html">gm_insert_message</a></span><span class="op">(</span><span class="va">file_attachment</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="import" class="section level3">
-<h3 class="hasAnchor">
-<a href="#import" class="anchor"></a>Import</h3>
+<div class="section level3">
+<h3 id="import">Import<a class="anchor" aria-label="anchor" href="#import"></a>
+</h3>
 <p>This imports the email as though it was a normal message, with the same scanning and classification as normal email.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../reference/gm_insert_message.html">gm_insert_message</a></span>(file_attachment)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/gm_insert_message.html">gm_insert_message</a></span><span class="op">(</span><span class="va">file_attachment</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="sending" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sending" class="anchor"></a>Sending</h2>
-<div id="draft" class="section level3">
-<h3 class="hasAnchor">
-<a href="#draft" class="anchor"></a>Draft</h3>
+<div class="section level2">
+<h2 id="sending">Sending<a class="anchor" aria-label="anchor" href="#sending"></a>
+</h2>
+<div class="section level3">
+<h3 id="draft">Draft<a class="anchor" aria-label="anchor" href="#draft"></a>
+</h3>
 <p><code><a href="../reference/gm_send_draft.html">gm_send_draft()</a></code> sends an email using the <code>draft_id</code> of an existing draft (possibly created with <code><a href="../reference/gm_create_draft.html">gm_create_draft()</a></code>).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">my_drafts &lt;-<span class="st"> </span><span class="kw"><a href="../reference/gm_drafts.html">gm_drafts</a></span>()</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="../reference/gm_send_draft.html">gm_send_draft</a></span>(<span class="kw"><a href="../reference/gm_id.html">gm_id</a></span>(my_drafts, <span class="st">"draft_id"</span>)[<span class="dv">1</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my_drafts</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_drafts.html">gm_drafts</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="fu"><a href="../reference/gm_send_draft.html">gm_send_draft</a></span><span class="op">(</span><span class="fu"><a href="../reference/gm_id.html">gm_id</a></span><span class="op">(</span><span class="va">my_drafts</span>, <span class="st">"draft_id"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="message" class="section level3">
-<h3 class="hasAnchor">
-<a href="#message" class="anchor"></a>Message</h3>
+<div class="section level3">
+<h3 id="message">Message<a class="anchor" aria-label="anchor" href="#message"></a>
+</h3>
 <p>You can also send an email message directly from a <code>mime</code> object using <code><a href="../reference/gm_send_message.html">gm_send_message()</a></code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../reference/gm_send_message.html">gm_send_message</a></span>(file_attachment)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">file_attachment</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
-<div id="troubleshooting" class="section level2">
-<h2 class="hasAnchor">
-<a href="#troubleshooting" class="anchor"></a>Troubleshooting</h2>
-<div id="gmail-api-error-400-mail-service-not-enabled" class="section level3">
-<h3 class="hasAnchor">
-<a href="#gmail-api-error-400-mail-service-not-enabled" class="anchor"></a>Gmail API error 400: Mail service not enabled</h3>
+<div class="section level2">
+<h2 id="troubleshooting">Troubleshooting<a class="anchor" aria-label="anchor" href="#troubleshooting"></a>
+</h2>
+<div class="section level3">
+<h3 id="gmail-api-error-400-mail-service-not-enabled">Gmail API error 400: Mail service not enabled<a class="anchor" aria-label="anchor" href="#gmail-api-error-400-mail-service-not-enabled"></a>
+</h3>
 <p>It is possible to have a high-functioning Google account that does not have Gmail enabled. For example, your account might be fully operational with respect to Google Drive and yet have no mail capabilities. Such an account cannot be used with the Gmail API and therefore with <code>gmailr</code>. However, you will still be able to complete the <code>gmailr</code> authorization process via <code><a href="../reference/gmail_auth.html">gmail_auth()</a></code>. The problem will only reveal itself upon the first attempt to use the API and it will look something like this:</p>
 <pre><code> Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  : 
   Gmail API error: 400
   Mail service not enabled </code></pre>
-<p>You can confirm the account’s lack of mail capability by visiting <a href="https://mail.google.com/mail/" class="uri">https://mail.google.com/mail/</a> while logged in. If you don’t already have Gmail, this link gives you the option of adding mail to your existing account or creating a new, mail-capable account.</p>
+<p>You can confirm the account’s lack of mail capability by visiting <a href="https://mail.google.com/mail/" class="external-link uri">https://mail.google.com/mail/</a> while logged in. If you don’t already have Gmail, this link gives you the option of adding mail to your existing account or creating a new, mail-capable account.</p>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#constructing-a-mime-message">Constructing a MIME message</a></li>
-      <li><a href="#uploading">Uploading</a></li>
-      <li><a href="#sending">Sending</a></li>
-      <li><a href="#troubleshooting">Troubleshooting</a></li>
-      </ul>
-</div>
-      </div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by <a href="http://jimhester.com">Jim Hester</a>.</p>
+   </div>
+  <footer><div class="container">
+  <div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.</p>
 </div>
 
-      </footer>
-</div>
-
-  
-
-
-  </body>
+  </div></footer>
+</body>
 </html>
