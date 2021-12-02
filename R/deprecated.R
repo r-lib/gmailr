@@ -3,7 +3,6 @@
 #' #' \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
 #' @name gmailr-deprecated
 #' @keywords internal
-#' @importFrom lifecycle deprecate_soft
 
 # nocov start
 
