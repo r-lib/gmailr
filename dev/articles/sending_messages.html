@@ -25,7 +25,7 @@
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
     
 
-    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-none"><div class="container">
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-none"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">gmailr</a>
 
@@ -39,24 +39,24 @@
     <div id="navbar" class="collapse navbar-collapse ms-2">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="../index.html">Home</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/gmailr.html">Overview</a>
-</li>
-<li class="active nav-item">
-  <a class="nav-link" href="../articles/sending_messages.html">Sending Messages</a>
+  <a class="nav-link" href="../articles/gmailr.html">Get started</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="active nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/sending_messages.html">Sending Messages With Gmailr</a>
+  </div>
+</li>
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-news">
-    <h6 class="dropdown-header" data-toc-skip>Release notes</h6>
-    <a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/">Version 1.0.0</a>
+    <h6 class="dropdown-header" data-toc-skip>Releases</h6>
+    <a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/">gmailr 1.0.0</a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../news/index.html">Change log</a>
+    <a class="dropdown-item" href="../news/index.html">Changelog</a>
   </div>
 </li>
       </ul>
@@ -103,14 +103,14 @@
 <p>You can convert the message to a properly formatted MIME message using <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">text_msg</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] "MIME-Version: 1.0\r Date: Thu, 02 Dec 2021 21:42:25 GMT\r To:"      </span>
+<pre><code><span class="co">## [1] "MIME-Version: 1.0\r Date: Thu, 02 Dec 2021 22:34:02 GMT\r To:"      </span>
 <span class="co">## [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"  </span>
-<span class="co">## [3] "multipart/mixed; boundary=e129b10ce589883ddfb371eca0e30241\r \r"    </span>
-<span class="co">## [4] "--e129b10ce589883ddfb371eca0e30241\r MIME-Version: 1.0\r Date: Thu,"</span>
-<span class="co">## [5] "02 Dec 2021 21:42:25 GMT\r Content-Type: text/plain; charset=utf-8;"</span>
+<span class="co">## [3] "multipart/mixed; boundary=4516ae7b163e170ce9fae7baa359527e\r \r"    </span>
+<span class="co">## [4] "--4516ae7b163e170ce9fae7baa359527e\r MIME-Version: 1.0\r Date: Thu,"</span>
+<span class="co">## [5] "02 Dec 2021 22:34:02 GMT\r Content-Type: text/plain; charset=utf-8;"</span>
 <span class="co">## [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r \r"   </span>
 <span class="co">## [7] "Gmailr is a very handy package!\r \r"                               </span>
-<span class="co">## [8] "--e129b10ce589883ddfb371eca0e30241--\r"</span></code></pre>
+<span class="co">## [8] "--4516ae7b163e170ce9fae7baa359527e--\r"</span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="html">HTML<a class="anchor" aria-label="anchor" href="#html"></a>
