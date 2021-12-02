@@ -11,6 +11,11 @@ template:
 development:
   mode: auto
 
+news:
+ releases:
+ - text: "gmailr 1.0.0"
+   href: https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/
+
 reference:
 - title: Authentication
   desc: >
@@ -76,23 +81,3 @@ reference:
   - gm_last_response
   - quoted_printable_encode
   - gm_last_response
-
-navbar:
-  type: default
-  left:
-  - text: Home
-    href: index.html
-  - text: Overview
-    href: articles/gmailr.html
-  - text: Sending Messages
-    href: articles/sending_messages.html
-  - text: Reference
-    href: reference/index.html
-  - text: News
-    menu:
-    - text: "Release notes"
-    - text: "Version 1.0.0"
-      href: https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/
-    - text: "------------------"
-    - text: "Change log"
-      href: news/index.html
