@@ -169,7 +169,7 @@ gm_has_token <- function() {
 #' @export
 #' @examples
 #' \dontrun{
-#' # see the current user-configured OAuth app (probaby `NULL`)
+#' # see the current user-configured OAuth app (errors if not configured)
 #' gm_oauth_app()
 #'
 #' if (require(httr)) {
@@ -204,11 +204,16 @@ gm_auth_configure <- function(key = "",
                               appname = "gmailr",
                               ...,
                               app = httr::oauth_app(appname, key, secret, ...)) {
+  have_key_and_secret <- nzchar(key) && nzchar(secret)
+  have_path <- nzchar(path)
 
-  if (!((nzchar(key) && nzchar(secret)) || nzchar(path))) {
-    stop("Must supply either `key` and `secret` or `path`", call. = FALSE)
+  if (!(have_key_and_secret || have_path)) {
+    have_app <- nzchar(app$key) && nzchar(app$secret)
+    if (!have_app) {
+      stop("Must supply either `key` and `secret` or `path`", call. = FALSE)
+    }
   }
-  if (nzchar(path)) {
+  if (have_path) {
     stopifnot(is_string(path))
     app <- gargle::oauth_app_from_json(path)
   }

@@ -56,7 +56,7 @@ are used.
 }
 \examples{
 \dontrun{
-# see the current user-configured OAuth app (probaby `NULL`)
+# see the current user-configured OAuth app (errors if not configured)
 gm_oauth_app()
 
 if (require(httr)) {
