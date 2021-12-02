@@ -1,10 +1,11 @@
-pandoc: '2.2'
-pkgdown: 1.3.0
-pkgdown_sha: ~
+pandoc: 2.14.0.3
+pkgdown: 2.0.0.9000
+pkgdown_sha: 3e17275dfe27b1176d9cb596f679c23808d7b3d7
 articles:
   gmailr: gmailr.html
   sending_messages: sending_messages.html
+last_built: 2021-12-02T23:01Z
 urls:
-  reference: http://gmailr.r-lib.org/reference
-  article: http://gmailr.r-lib.org/articles
+  reference: https://gmailr.r-lib.org/reference
+  article: https://gmailr.r-lib.org/articles
 
