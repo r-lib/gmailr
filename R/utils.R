@@ -160,6 +160,6 @@ vcapply <- function(...) vapply(..., FUN.VALUE = character(1))
 vlapply <- function(...) vapply(..., FUN.VALUE = logical(1))
 vnapply <- function(...) vapply(..., FUN.VALUE = numeric(1))
 
-iSFALSE <- function(x) {
+isFALSE <- function(x) {
   is.logical(x) && length(x) == 1L && !is.na(x) && !x
 }
