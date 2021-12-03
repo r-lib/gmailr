@@ -210,7 +210,7 @@ gm_auth_configure <- function(key = "",
   if (!(have_key_and_secret || have_path)) {
     have_app <- nzchar(app$key) && nzchar(app$secret)
     if (!have_app) {
-      stop("Must supply either `key` and `secret` or `path`", call. = FALSE)
+      stop("Must supply `key` and `secret`, `path`, or `app`", call. = FALSE)
     }
   }
   if (have_path) {
