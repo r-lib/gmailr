@@ -76,8 +76,7 @@
     
   </div>
 </nav><div class="container template-article" id="container">
-
-<div class="row">
+<script src="gmailr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <main id="main"><div class="page-header">
       <img src="" class="logo" alt=""><h1>gmailr</h1>
             
@@ -106,14 +105,14 @@
 <ol style="list-style-type: decimal">
 <li>Call <code>gm_auth_configure(path = "path/to/downloaded/json")</code>
 </li>
-<li>Set the <code>GMAILR_APP</code> environment variable to the location of the JSON file, it is convienent to do this in your <code>.Renviron</code> file with <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code>. Then calling <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments.</li>
+<li>Set the <code>GMAILR_APP</code> environment variable to the location of the JSON file, it is convienent to do this in your <code>.Renviron</code> file with <code>usethis::edit_r_environ()</code>. Then calling <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments.</li>
 </ol>
 </li>
 <li>Call <code><a href="../reference/gm_auth.html">gm_auth()</a></code> to start the OAuth flow to verify to google that you would like your gmailr project to have access to your email. You will get a scary warning about an untrusted application, this is because the application is the one you just created, click advanced and <code>Go to gmailr</code> to proceed to do the oauth flow.</li>
 <li>If you want to authenticate with fewer scopes than the default use the <code>scopes</code> parameter to <code><a href="../reference/gm_auth.html">gm_auth()</a></code>. You can see a full list of available scopes from <code><a href="../reference/gm_auth.html">gm_scopes()</a></code>.</li>
 </ul>
 <p>Only very heavy usage of the Gmail API requires payment, so use of the API for most people should be free.</p>
-<p>If you use <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code> to set both <code>GMAILR_EMAIL</code> and <code>GMAILR_APP</code>, then once you have an oauth token you can simply run <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments at the top of the script to setup your application.</p>
+<p>If you use <code>usethis::edit_r_environ()</code> to set both <code>GMAILR_EMAIL</code> and <code>GMAILR_APP</code>, then once you have an oauth token you can simply run <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments at the top of the script to setup your application.</p>
 </div>
 <div class="section level2">
 <h2 id="writing-new-emails">Writing new emails<a class="anchor" aria-label="anchor" href="#writing-new-emails"></a>
@@ -185,7 +184,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.0.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
   </div></footer>
