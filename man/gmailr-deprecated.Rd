@@ -132,6 +132,7 @@ attach_file(...)
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 These functions are deprecated and will be removed in a future release of
 gmailr.
 }

@@ -2,7 +2,7 @@
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-
+#'
 #' These functions are deprecated and will be removed in a future release of
 #' gmailr.
 #' @name gmailr-deprecated
