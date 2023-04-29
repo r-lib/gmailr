@@ -11,6 +11,7 @@ gm_auth_configure(
   path = Sys.getenv("GMAILR_APP"),
   appname = "gmailr",
   ...,
+  client,
   app = httr::oauth_app(appname, key, secret, ...)
 )
 
@@ -30,12 +31,12 @@ used to make it easier to identify different applications.}
 
 \item{...}{Additional arguments passed to \code{\link[httr:oauth_app]{httr::oauth_app()}}}
 
-\item{app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Replaced by the \code{client}
-argument.}
-
 \item{client}{A Google OAuth client, presumably constructed via
 \code{\link[gargle:gargle_oauth_client_from_json]{gargle::gargle_oauth_client_from_json()}}. Note, however, that it is
 preferred to specify the client with JSON, using the \code{path} argument.}
+
+\item{app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Replaced by the \code{client}
+argument.}
 }
 \value{
 \itemize{

@@ -203,6 +203,10 @@ gm_auth_configure <- function(key = "",
                               path = Sys.getenv("GMAILR_APP"),
                               appname = "gmailr",
                               ...,
+                              # TODO: this is a temporary fix to unblock other
+                              # changes and allow re-document(); function needs
+                              # more work and thought
+                              client,
                               app = httr::oauth_app(appname, key, secret, ...)) {
   have_key_and_secret <- nzchar(key) && nzchar(secret)
   have_path <- nzchar(path)
