@@ -4,7 +4,6 @@
 #' @param id message id to access
 #' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the message returned
-#' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.messages>
 #' @family message
 #' @export

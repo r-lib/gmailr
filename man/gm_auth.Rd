@@ -28,7 +28,7 @@ or \code{FALSE} to match nothing and force the OAuth dance in the browser. Use
 found in the cache. Specify just the domain with a glob pattern, e.g.
 \code{"*@example.com"}, to create code that "just works" for both
 \code{alice@example.com} and \code{bob@example.com}. Defaults to the option named
-"gargle_oauth_email", retrieved by \code{\link[gargle:gargle_options]{gargle_oauth_email()}}.}
+"gargle_oauth_email", retrieved by \code{\link[gargle:gargle_oauth_email]{gargle_oauth_email()}}.}
 
 \item{path}{JSON identifying the service account, in one of the forms
 supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
@@ -42,11 +42,10 @@ permissions for each scope. and \code{gm_scopes()} to return a vector of the
 available scopes.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
-"gargle_oauth_cache", retrieved via \code{\link[gargle:gargle_options]{gargle_oauth_cache()}}.}
+\code{"gargle_oauth_cache"}, retrieved via \code{\link[gargle:gargle_oauth_cache]{gargle_oauth_cache()}}.}
 
-\item{use_oob}{Whether to prefer "out of band" authentication. Defaults to
-the option named "gargle_oob_default", retrieved via
-\code{\link[gargle:gargle_options]{gargle_oob_default()}}.}
+\item{use_oob}{Whether to prefer out-of-band authentication. Defaults to the
+value returned by \code{\link[gargle:gargle_oob_default]{gargle_oob_default()}}.}
 
 \item{token}{A token with class \link[httr:Token-class]{Token2.0} or an object of
 httr's class \code{request}, i.e. a token that has been prepared with
@@ -66,7 +65,7 @@ level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
 
 If you are interacting with R within a browser (applies to RStudio Server,
-RStudio Workbench, and RStudio Cloud), you need a variant of this flow,
+Posit Workbench, and Posit Cloud), you need a variant of this flow,
 known as out-of-band auth ("oob"). If this does not happen
 automatically, you can request it yourself with \code{use_oob = TRUE} or,
 more persistently, by setting an option via
@@ -96,7 +95,7 @@ authentication.
 
 For details on the many ways to find a token, see
 \code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
-\code{\link[=gm_auth_configure]{gm_auth_configure()}} to bring your own OAuth app or API key.
+\code{\link[=gm_auth_configure]{gm_auth_configure()}} to bring your own OAuth client or API key.
 Read more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{

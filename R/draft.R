@@ -2,7 +2,6 @@
 #'
 #' Function to retrieve a given draft by <-
 #' @param id draft id to access
-#' @param user_id gmail user_id to access, special value of 'me' indicates the authenticated user.
 #' @param format format of the draft returned
 #' @inheritParams gm_message
 #' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.drafts/get>

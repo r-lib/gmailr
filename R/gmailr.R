@@ -70,7 +70,6 @@ gm_id.gmail_draft <- gm_id.gmail_message
 
 #' @rdname gm_id
 #' @export
-#' @inheritParams gm_id
 #' @param what the type of id to return
 gm_id.gmail_messages <- function(x, what=c("message_id", "thread_id"), ...){
   what <- switch(match.arg(what),
