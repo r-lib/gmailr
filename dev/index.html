@@ -9,12 +9,12 @@
     your Gmail messages, threads, drafts and labels.">
 <title>Access the Gmail RESTful API • gmailr</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
-<link href="deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access the Gmail RESTful API">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access the Gmail RESTful API">
 <meta property="og:description" content="An interface to the Gmail RESTful API.  Allows access to
     your Gmail messages, threads, drafts and labels.">
 <meta name="robots" content="noindex">
@@ -38,7 +38,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
   <a class="nav-link" href="articles/gmailr.html">Get started</a>
@@ -91,66 +91,66 @@
 </h2>
 <p>Get the released version from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"gmailr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"gmailr"</span><span class="op">)</span></span></code></pre></div>
 <p>Or the development version from github with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-lib/gmailr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"r-lib/gmailr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="writing-new-emails">Writing new emails<a class="anchor" aria-label="anchor" href="#writing-new-emails"></a>
 </h2>
 <p>Create a new email with <code><a href="reference/gm_mime.html">gm_mime()</a></code> and the helper functions. When testing it is recommended to use <code><a href="reference/gm_create_draft.html">gm_create_draft()</a></code> to verify your email is formatted as you expect before automating it (if desired) with <code><a href="reference/gm_send_message.html">gm_send_message()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">test_email</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"this is just a gmailr test"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="reference/gm_mime.html">gm_text_body</a></span><span class="op">(</span><span class="st">"Can you hear me now?"</span><span class="op">)</span>
-
-<span class="co"># Verify it looks correct</span>
-<span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span>
-
-<span class="co"># If all is good with your draft, then you can send it</span>
-<span class="fu"><a href="reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">test_email</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"this is just a gmailr test"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/gm_mime.html">gm_text_body</a></span><span class="op">(</span><span class="st">"Can you hear me now?"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Verify it looks correct</span></span>
+<span><span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># If all is good with your draft, then you can send it</span></span>
+<span><span class="fu"><a href="reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span></code></pre></div>
 <p>You can add a file attachment to your message with <code><a href="reference/gm_mime.html">gm_attach_file()</a></code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>,<span class="st">"mtcars.csv"</span><span class="op">)</span>
-<span class="va">test_email</span> <span class="op">&lt;-</span> <span class="va">test_email</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.csv"</span><span class="op">)</span>
-
-<span class="co"># Verify it looks correct</span>
-<span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span>
-
-<span class="co"># If so, send it</span>
-<span class="fu"><a href="reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>,<span class="st">"mtcars.csv"</span><span class="op">)</span></span>
+<span><span class="va">test_email</span> <span class="op">&lt;-</span> <span class="va">test_email</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.csv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Verify it looks correct</span></span>
+<span><span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># If so, send it</span></span>
+<span><span class="fu"><a href="reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="reading-emails">Reading emails<a class="anchor" aria-label="anchor" href="#reading-emails"></a>
 </h2>
 <p>gmail shows you threads of messages in the web UI, you can retrieve all threads with <code><a href="reference/gm_threads.html">gm_threads()</a></code>, and retrieve a specific thread with <code><a href="reference/gm_thread.html">gm_thread()</a></code></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># view the latest thread</span>
-<span class="va">my_threads</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_threads.html">gm_threads</a></span><span class="op">(</span>num_results <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-
-<span class="co"># retrieve the latest thread by retrieving the first ID</span>
-
-<span class="va">latest_thread</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_thread.html">gm_thread</a></span><span class="op">(</span><span class="fu"><a href="reference/gm_id.html">gm_id</a></span><span class="op">(</span><span class="va">my_threads</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
-
-<span class="co"># The messages in the thread will now be in a list</span>
-<span class="va">latest_thread</span><span class="op">$</span><span class="va">messages</span>
-
-<span class="co"># Retrieve parts of a specific message with the accessors</span>
-<span class="va">my_msg</span> <span class="op">&lt;-</span> <span class="va">latest_thread</span><span class="op">$</span><span class="va">messages</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>
-
-<span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span>
-<span class="fu"><a href="reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span>
-<span class="fu"><a href="reference/accessors.html">gm_date</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span>
-<span class="fu"><a href="reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span>
-<span class="fu"><a href="reference/gm_body.html">gm_body</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span>
-
-<span class="co"># If a message has attachments, download them all locally with `gm_save_attachments()`.</span>
-<span class="fu"><a href="reference/gm_save_attachments.html">gm_save_attachments</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># view the latest thread</span></span>
+<span><span class="va">my_threads</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_threads.html">gm_threads</a></span><span class="op">(</span>num_results <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># retrieve the latest thread by retrieving the first ID</span></span>
+<span></span>
+<span><span class="va">latest_thread</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_thread.html">gm_thread</a></span><span class="op">(</span><span class="fu"><a href="reference/gm_id.html">gm_id</a></span><span class="op">(</span><span class="va">my_threads</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The messages in the thread will now be in a list</span></span>
+<span><span class="va">latest_thread</span><span class="op">$</span><span class="va">messages</span></span>
+<span></span>
+<span><span class="co"># Retrieve parts of a specific message with the accessors</span></span>
+<span><span class="va">my_msg</span> <span class="op">&lt;-</span> <span class="va">latest_thread</span><span class="op">$</span><span class="va">messages</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/accessors.html">gm_date</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/gm_body.html">gm_body</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># If a message has attachments, download them all locally with `gm_save_attachments()`.</span></span>
+<span><span class="fu"><a href="reference/gm_save_attachments.html">gm_save_attachments</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="features">Features<a class="anchor" aria-label="anchor" href="#features"></a>
@@ -233,22 +233,22 @@
 <h3 id="run-locally">Run locally<a class="anchor" aria-label="anchor" href="#run-locally"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Configure your app</span>
-<span class="fu"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"credentials.json"</span><span class="op">)</span>
-
-<span class="co"># Authenticate with the new cache, store tokens in .secret</span>
-<span class="fu"><a href="reference/gm_auth.html">gm_auth</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="st">".secret"</span><span class="op">)</span>
-<span class="co"># Go through the oauth flow</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Configure your app</span></span>
+<span><span class="fu"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"credentials.json"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Authenticate with the new cache, store tokens in .secret</span></span>
+<span><span class="fu"><a href="reference/gm_auth.html">gm_auth</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="st">".secret"</span><span class="op">)</span></span>
+<span><span class="co"># Go through the oauth flow</span></span></code></pre></div>
 <p>Then copy <code>credentials.json</code> <em>and</em> the <code>.secret</code> directory to your remote location.</p>
 </div>
 <div class="section level3">
 <h3 id="run-remotely">Run remotely<a class="anchor" aria-label="anchor" href="#run-remotely"></a>
 </h3>
-<pre><code><span class="co"># Configure your app</span>
-<span class="fu"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"credentials.json"</span><span class="op">)</span>
-
-<span class="co"># Authenticate with the tokens in the copied cache</span>
-<span class="fu"><a href="reference/gm_auth.html">gm_auth</a></span><span class="op">(</span>email <span class="op">=</span> <span class="cn">TRUE</span>, cache <span class="op">=</span> <span class="st">".secret"</span><span class="op">)</span></code></pre>
+<pre><code><span><span class="co"># Configure your app</span></span>
+<span><span class="fu"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"credentials.json"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Authenticate with the tokens in the copied cache</span></span>
+<span><span class="fu"><a href="reference/gm_auth.html">gm_auth</a></span><span class="op">(</span>email <span class="op">=</span> <span class="cn">TRUE</span>, cache <span class="op">=</span> <span class="st">".secret"</span><span class="op">)</span></span></code></pre>
 <p>There are additional details on dealing with <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-an-oauth-token-directly" class="external-link">non-interactive auth</a> in the gargle documentation.</p>
 </div>
 </div>
@@ -308,7 +308,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/r-lib/gmailr/actions" class="external-link"><img src="https://github.com/r-lib/gmailr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://app.codecov.io/gh/r-lib/gmailr?branch=main" class="external-link"><img src="https://codecov.io/gh/r-lib/gmailr/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
@@ -326,7 +326,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
   </div></footer>

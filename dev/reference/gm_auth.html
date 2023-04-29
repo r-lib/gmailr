@@ -13,7 +13,7 @@ RStudio Workbench, and RStudio Cloud), you need a variant of this flow,
 known as out-of-band auth ("oob"). If this does not happen
 automatically, you can request it yourself with use_oob = TRUE or,
 more persistently, by setting an option via
-options(gargle_oob_default = TRUE).'><title>Authorize gmailr — gm_scopes • gmailr</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet"><link href="../deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Authorize gmailr — gm_scopes"><meta property="og:description" content='Authorize gmailr to view and manage your Gmail projects. This function is a
+options(gargle_oob_default = TRUE).'><title>Authorize gmailr — gm_scopes • gmailr</title><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Authorize gmailr — gm_scopes"><meta property="og:description" content='Authorize gmailr to view and manage your Gmail projects. This function is a
 wrapper around gargle::token_fetch().
 By default, you are directed to a web browser, asked to sign in to your
 Google account, and to grant gmailr permission to operate on your
@@ -45,7 +45,7 @@ options(gargle_oob_default = TRUE).'><meta name="robots" content="noindex"><!-- 
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
   <a class="nav-link" href="../articles/gmailr.html">Get started</a>
 </li>
@@ -108,16 +108,16 @@ more persistently, by setting an option via
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gm_scopes</span><span class="op">(</span><span class="op">)</span>
-
-<span class="fu">gm_auth</span><span class="op">(</span>
-  email <span class="op">=</span> <span class="fu">gm_default_email</span><span class="op">(</span><span class="op">)</span>,
-  path <span class="op">=</span> <span class="cn">NULL</span>,
-  scopes <span class="op">=</span> <span class="st">"full"</span>,
-  cache <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_cache</a></span><span class="op">(</span><span class="op">)</span>,
-  use_oob <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oob_default</a></span><span class="op">(</span><span class="op">)</span>,
-  token <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gm_scopes</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">gm_auth</span><span class="op">(</span></span>
+<span>  email <span class="op">=</span> <span class="fu">gm_default_email</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scopes <span class="op">=</span> <span class="st">"full"</span>,</span>
+<span>  cache <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_cache</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  use_oob <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oob_default</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -135,10 +135,14 @@ found in the cache. Specify just the domain with a glob pattern, e.g.
 <code>"*@example.com"</code>, to create code that "just works" for both
 <code>alice@example.com</code> and <code>bob@example.com</code>. Defaults to the option named
 "gargle_oauth_email", retrieved by <code><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_email()</a></code>.</p></dd>
+
+
 <dt>path</dt>
 <dd><p>JSON identifying the service account, in one of the forms
 supported for the <code>txt</code> argument of <code><a href="https://rdrr.io/pkg/jsonlite/man/fromJSON.html" class="external-link">jsonlite::fromJSON()</a></code> (typically, a
 file path or JSON string).</p></dd>
+
+
 <dt>scopes</dt>
 <dd><p>One or more gmail API scope to use, one of 'labels', 'send',
 'readonly', 'compose', 'insert', 'modify', 'metadata', 'settings_basic',
@@ -146,18 +150,25 @@ file path or JSON string).</p></dd>
 <a href="https://developers.google.com/gmail/api/auth/scopes" class="external-link">https://developers.google.com/gmail/api/auth/scopes</a> for details on the
 permissions for each scope. and <code>gm_scopes()</code> to return a vector of the
 available scopes.</p></dd>
+
+
 <dt>cache</dt>
 <dd><p>Specifies the OAuth token cache. Defaults to the option named
 "gargle_oauth_cache", retrieved via <code><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_cache()</a></code>.</p></dd>
+
+
 <dt>use_oob</dt>
 <dd><p>Whether to prefer "out of band" authentication. Defaults to
 the option named "gargle_oob_default", retrieved via
 <code><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oob_default()</a></code>.</p></dd>
+
+
 <dt>token</dt>
 <dd><p>A token with class <a href="https://httr.r-lib.org/reference/Token-class.html" class="external-link">Token2.0</a> or an object of
 httr's class <code>request</code>, i.e. a token that has been prepared with
 <code><a href="https://httr.r-lib.org/reference/config.html" class="external-link">httr::config()</a></code> and has a <a href="https://httr.r-lib.org/reference/Token-class.html" class="external-link">Token2.0</a> in the
 <code>auth_token</code> component.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -192,26 +203,26 @@ Read more about gargle options, see <a href="https://gargle.r-lib.org/reference/
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## load/refresh existing credentials, if available</span></span>
-<span class="r-in"><span class="co">## otherwise, go to browser for authentication and authorization</span></span>
-<span class="r-in"><span class="fu">gm_auth</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## force use of a token associated with a specific email</span></span>
-<span class="r-in"><span class="fu">gm_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="st">"jim@example.com"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## force a menu where you can choose from existing tokens or</span></span>
-<span class="r-in"><span class="co">## choose to get a new one</span></span>
-<span class="r-in"><span class="fu">gm_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## use a 'read only' scope, so it's impossible to change data</span></span>
-<span class="r-in"><span class="fu">gm_auth</span><span class="op">(</span></span>
-<span class="r-in">  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/gmail.readonly"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## use a service account token</span></span>
-<span class="r-in"><span class="fu">gm_auth</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"foofy-83ee9e7c9c48.json"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## load/refresh existing credentials, if available</span></span></span>
+<span class="r-in"><span><span class="co">## otherwise, go to browser for authentication and authorization</span></span></span>
+<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## force use of a token associated with a specific email</span></span></span>
+<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="st">"jim@example.com"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## force a menu where you can choose from existing tokens or</span></span></span>
+<span class="r-in"><span><span class="co">## choose to get a new one</span></span></span>
+<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## use a 'read only' scope, so it's impossible to change data</span></span></span>
+<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/gmail.readonly"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## use a service account token</span></span></span>
+<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"foofy-83ee9e7c9c48.json"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -225,7 +236,7 @@ Read more about gargle options, see <a href="https://gargle.r-lib.org/reference/
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
   </div></footer></body></html>
