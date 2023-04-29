@@ -44,9 +44,7 @@
 \alias{html_body}
 \alias{attach_part}
 \alias{attach_file}
-\title{These functions are deprecated and will be removed in a future release of
-gmailr
-#' \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}}
+\title{Deprecated functions}
 \usage{
 id(x, ...)
 
@@ -133,8 +131,9 @@ attach_part(...)
 attach_file(...)
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
 These functions are deprecated and will be removed in a future release of
-gmailr
-#' \Sexpr[results=rd, stage=render]{lifecycle::badge("deprecated")}
+gmailr.
 }
 \keyword{internal}
