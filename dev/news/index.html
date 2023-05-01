@@ -62,7 +62,10 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="gmailr-development-version">gmailr (development version)<a class="anchor" aria-label="anchor" href="#gmailr-development-version"></a></h2>
 <ul><li>
-<code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> accepts an OAuth client (or “app”), via the <code>app</code> argument, as promised in the docs (<a href="https://github.com/r-lib/gmailr/issues/144" class="external-link">#144</a>).</li>
+<p>The deprecation process for legacy functions that lack the <code>gm_</code> prefix has been advanced to the next stage, getting closer to actual removal. More users will see deprecation warnings in more contexts.</p>
+<p>The unexported helper <code>gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))</code> can be used to convert all R files in the current directory to the new names. (<a href="https://github.com/r-lib/gmailr/issues/95" class="external-link">#95</a>)</p>
+</li>
+<li><p><code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> accepts an OAuth client (or “app”), via the <code>app</code> argument, as promised in the docs (<a href="https://github.com/r-lib/gmailr/issues/144" class="external-link">#144</a>).</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.1" id="gmailr-101">gmailr 1.0.1<a class="anchor" aria-label="anchor" href="#gmailr-101"></a></h2><p class="text-muted">CRAN release: 2021-11-30</p>
