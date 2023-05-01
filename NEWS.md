@@ -1,6 +1,15 @@
 # gmailr (development version)
 
-* `gm_auth_configure()` accepts an OAuth client (or "app"), via the `app` argument, as promised in the docs (#144).
+* The deprecation process for legacy functions that lack the `gm_` prefix has
+  been advanced to the next stage, getting closer to actual removal. More users
+  will see deprecation warnings in more contexts.
+
+  The unexported helper `gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))`
+  can be used to convert all R files in the current directory to the new names.
+  (#95)
+
+* `gm_auth_configure()` accepts an OAuth client (or "app"), via the `app`
+  argument, as promised in the docs (#144).
 
 # gmailr 1.0.1
 
