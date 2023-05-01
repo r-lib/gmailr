@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jennifer Bryan \email{jenny@rstudio.com}
+\strong{Maintainer}: Jennifer Bryan \email{jenny@posit.co}
 
 Authors:
 \itemize{
@@ -27,7 +27,7 @@ Authors:
 
 Other contributors:
 \itemize{
-  \item RStudio [copyright holder, funder]
+  \item Posit Software, PBC [copyright holder, funder]
 }
 
 }
