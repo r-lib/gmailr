@@ -25,3 +25,4 @@ TODO.md
 ^codecov\.yml$
 ^MAINTENANCE\.md$
 ^CRAN-RELEASE$
+^LICENSE\.md$
