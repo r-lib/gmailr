@@ -22,7 +22,8 @@ Imports:
     lifecycle,
     magrittr,
     mime,
-    rematch2
+    rematch2,
+    rlang (>= 1.1.0)
 Suggests:
     covr,
     knitr,
