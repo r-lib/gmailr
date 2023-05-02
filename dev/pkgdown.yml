@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   gmailr: gmailr.html
   sending_messages: sending_messages.html
-last_built: 2023-05-02T22:21Z
+last_built: 2023-05-02T22:29Z
 urls:
   reference: https://gmailr.r-lib.org/reference
   article: https://gmailr.r-lib.org/articles
