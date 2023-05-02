@@ -15,15 +15,18 @@ Depends:
     R (>= 3.6)
 Imports:
     base64enc,
+    cli,
     crayon,
     gargle,
+    glue,
     httr,
     jsonlite,
     lifecycle,
     magrittr,
     mime,
     rematch2,
-    rlang (>= 1.1.0)
+    rlang (>= 1.1.0),
+    withr
 Suggests:
     covr,
     knitr,
