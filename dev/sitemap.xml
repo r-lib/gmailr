@@ -37,9 +37,6 @@
     <loc>https://gmailr.r-lib.org/dev/reference/as.character.mime.html</loc>
   </url>
   <url>
-    <loc>https://gmailr.r-lib.org/dev/reference/clear_token.html</loc>
-  </url>
-  <url>
     <loc>https://gmailr.r-lib.org/dev/reference/gm_attachment.html</loc>
   </url>
   <url>
@@ -163,7 +160,7 @@
     <loc>https://gmailr.r-lib.org/dev/reference/gm_update_label.html</loc>
   </url>
   <url>
-    <loc>https://gmailr.r-lib.org/dev/reference/gmail_auth.html</loc>
+    <loc>https://gmailr.r-lib.org/dev/reference/gmailr-deprecated-auth.html</loc>
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/dev/reference/gmailr-deprecated.html</loc>
@@ -179,8 +176,5 @@
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/dev/reference/quoted_printable_encode.html</loc>
-  </url>
-  <url>
-    <loc>https://gmailr.r-lib.org/dev/reference/use_secret_file.html</loc>
   </url>
 </urlset>
