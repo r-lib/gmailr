@@ -1,7 +1,7 @@
 # gmailr (development version)
 
 * `gm_scopes()` can now take a character vector of scopes, each of which can be
-  an literal scope or a short alias, which resolves to a full scope associated
+  a literal scope or a short alias, which resolves to a full scope associated
   with the Gmail API. When called without arguments, it still returns
   a named vector of Gmail API-specific scopes.
 
