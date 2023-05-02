@@ -1,5 +1,10 @@
 # gmailr (development version)
 
+* `gm_scopes()` can now take a character vector of scopes, each of which can be
+  an literal scope or a short alias, which resolves to a full scope associated
+  with the Gmail API. When called without arguments, it still returns
+  a named vector of Gmail API-specific scopes.
+
 * The deprecation process for legacy functions that lack the `gm_` prefix has
   been advanced to the next stage, getting closer to actual removal. More users
   will see deprecation warnings in more contexts.

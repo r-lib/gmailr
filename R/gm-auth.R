@@ -14,22 +14,6 @@ gargle_lookup_table <- list(
   PREFIX      = "gm"
 )
 
-#' @rdname gm_auth
-#' @export
-gm_scopes <- function() {
-  c(labels = "https://www.googleapis.com/auth/gmail.labels",
-    send = "https://www.googleapis.com/auth/gmail.send",
-    readonly = "https://www.googleapis.com/auth/gmail.readonly",
-    compose = "https://www.googleapis.com/auth/gmail.compose",
-    insert = "https://www.googleapis.com/auth/gmail.insert",
-    modify = "https://www.googleapis.com/auth/gmail.modify",
-    metadata = "https://www.googleapis.com/auth/gmail.metadata",
-    settings_basic = "https://www.googleapis.com/auth/gmail.settings.basic",
-    settings_sharing = "https://www.googleapis.com/auth/gmail.settings.sharing",
-    full = "https://mail.google.com/"
-  )
-}
-
 #' Authorize gmailr
 #'
 #' @eval gargle:::PREFIX_auth_description(gargle_lookup_table)
@@ -37,12 +21,22 @@ gm_scopes <- function() {
 #' @eval gargle:::PREFIX_auth_params()
 #'
 #' @family auth functions
-#' @param scopes One or more gmail API scope to use, one of 'labels', 'send',
-#'   'readonly', 'compose', 'insert', 'modify', 'metadata', 'settings_basic',
-#'   'settings_sharing' or 'full' (default: 'full'). See
-#'   <https://developers.google.com/gmail/api/auth/scopes> for details on the
-#'   permissions for each scope. and `gm_scopes()` to return a vector of the
-#'   available scopes.
+#' @param scopes One or more API scopes. Each scope can be specified in full or,
+#'   for Gmail API-specific scopes, in an abbreviated form that is recognized by
+#'   [gm_scopes()]:
+#'   * "full" = "https://mail.google.com/" (the default)
+#'   * "compose" = "https://www.googleapis.com/auth/gmail.compose"
+#'   * "readonly" = "https://www.googleapis.com/auth/gmail.readonly"
+#'   * "labels" = "https://www.googleapis.com/auth/gmail.labels"
+#'   * "send" = "https://www.googleapis.com/auth/gmail.send"
+#'   * "insert" = "https://www.googleapis.com/auth/gmail.insert"
+#'   * "modify" = "https://www.googleapis.com/auth/gmail.modify"
+#'   * "metadata" = "https://www.googleapis.com/auth/gmail.metadata"
+#'   * "settings_basic" = "https://www.googleapis.com/auth/gmail.settings.basic"
+#'   * "settings_sharing" = "https://www.googleapis.com/auth/gmail.settings.sharing"
+#'
+#' See <https://developers.google.com/gmail/api/auth/scopes> for details on the
+#' permissions for each scope.
 #' @export
 #'
 #' @examples
@@ -73,7 +67,7 @@ gm_auth <- function(email = gm_default_email(),
                     use_oob = gargle::gargle_oob_default(),
                     token = NULL) {
 
-  scopes <- gm_scopes()[match.arg(scopes, names(gm_scopes()), several.ok = TRUE)]
+  scopes <- gm_scopes(scopes)
 
   app <- gm_oauth_app()
 
@@ -282,3 +276,48 @@ print.gmail_profile <- function(x, ...) {
   )
   invisible(x)
 }
+
+#' Produce scopes specific to the Gmail API
+#'
+#' When called with no arguments, `gm_scopes()` returns a named character vector
+#' of scopes associated with the Gmail API. If `gm_scopes(scopes =)` is given,
+#' an abbreviated entry such as `"readonly"` is expanded to a full scope
+#' (`"https://www.googleapis.com/auth/gmail.readonly"` in this case).
+#' Unrecognized scopes are passed through unchanged.
+#'
+#' @inheritParams gm_auth
+#'
+#' @seealso <https://developers.google.com/gmail/api/auth/scopes> for details on
+#'   the permissions for each scope.
+#' @returns A character vector of scopes.
+#' @family auth functions
+#' @export
+#' @examples
+#' gm_scopes("full")
+#' gm_scopes("readonly")
+#' gm_scopes()
+gm_scopes <- function(scopes = NULL) {
+  if (is.null(scopes)) {
+    return(gmail_scopes)
+  }
+  resolve_scopes(user_scopes = scopes, package_scopes = gmail_scopes)
+}
+
+# TODO: put some version of this in gargle
+resolve_scopes <- function(user_scopes, package_scopes) {
+  m <- match(user_scopes, names(package_scopes))
+  ifelse(is.na(m), user_scopes, package_scopes[m])
+}
+
+gmail_scopes <- c(
+  full             = "https://mail.google.com/",
+  compose          = "https://www.googleapis.com/auth/gmail.compose",
+  readonly         = "https://www.googleapis.com/auth/gmail.readonly",
+  labels           = "https://www.googleapis.com/auth/gmail.labels",
+  send             = "https://www.googleapis.com/auth/gmail.send",
+  insert           = "https://www.googleapis.com/auth/gmail.insert",
+  modify           = "https://www.googleapis.com/auth/gmail.modify",
+  metadata         = "https://www.googleapis.com/auth/gmail.metadata",
+  settings_basic   = "https://www.googleapis.com/auth/gmail.settings.basic",
+  settings_sharing = "https://www.googleapis.com/auth/gmail.settings.sharing"
+)
