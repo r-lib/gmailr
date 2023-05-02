@@ -130,6 +130,9 @@
     <loc>https://gmailr.r-lib.org/dev/reference/gm_save_attachments.html</loc>
   </url>
   <url>
+    <loc>https://gmailr.r-lib.org/dev/reference/gm_scopes.html</loc>
+  </url>
+  <url>
     <loc>https://gmailr.r-lib.org/dev/reference/gm_send_draft.html</loc>
   </url>
   <url>

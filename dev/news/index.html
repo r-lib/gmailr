@@ -61,7 +61,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="gmailr-development-version">gmailr (development version)<a class="anchor" aria-label="anchor" href="#gmailr-development-version"></a></h2>
-<ul><li>
+<ul><li><p><code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> can now take a character vector of scopes, each of which can be an actual scope or a short alias, e.g., <code>"gmail.readonly"</code>, which identifies a scope associated with the Gmail API. When called without arguments, <code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> still returns a named vector of Gmail API-specific scopes, where the names are the associated short aliases.</p></li>
+<li>
 <p>The deprecation process for legacy functions that lack the <code>gm_</code> prefix has been advanced to the next stage, getting closer to actual removal. More users will see deprecation warnings in more contexts.</p>
 <p>The unexported helper <code>gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))</code> can be used to convert all R files in the current directory to the new names. (<a href="https://github.com/r-lib/gmailr/issues/95" class="external-link">#95</a>)</p>
 </li>
@@ -84,7 +85,7 @@
 <ul><li><p>New <code>gm_attachements()</code> returns a data.frame of attachment information from a message or draft (<a href="https://github.com/r-lib/gmailr/issues/10" class="external-link">#10</a>, <a href="https://github.com/r-lib/gmailr/issues/24" class="external-link">#24</a>).</p></li>
 <li><p>New <code><a href="../reference/gm_delete_draft.html">gm_delete_draft()</a></code> added to delete a draft email without sending it to the trash.</p></li>
 <li><p>New <code><a href="../reference/gm_profile.html">gm_profile()</a></code> function to return the gmail profile of the currently logged in user (<a href="https://github.com/r-lib/gmailr/issues/114" class="external-link">#114</a>)</p></li>
-<li><p>New <code><a href="../reference/gm_auth.html">gm_scopes()</a></code> function to list the available scopes, and gmailr now requests only the full scope by default (<a href="https://github.com/r-lib/gmailr/issues/90" class="external-link">#90</a>)</p></li>
+<li><p>New <code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> function to list the available scopes, and gmailr now requests only the full scope by default (<a href="https://github.com/r-lib/gmailr/issues/90" class="external-link">#90</a>)</p></li>
 <li><p>More detailed examples added to the README and the vignette, including adding and referencing attachments in HTML email.</p></li>
 </ul></div>
 <div class="section level3">
