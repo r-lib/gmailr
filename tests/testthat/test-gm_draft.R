@@ -3,7 +3,7 @@ test_that("create_draft, drafts, draft and send_draft", {
 
   my_email <- Sys.getenv("GMAILR_EMAIL")
 
-  mail <- gm_mime(To = my_email, Subject="hello", body = "how are you doing?")
+  mail <- gm_mime(To = my_email, Subject = "hello", body = "how are you doing?")
 
   d1 <- gm_create_draft(mail)
   all_ds <- gm_drafts()

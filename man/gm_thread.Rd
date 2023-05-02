@@ -16,7 +16,7 @@ Function to retrieve a given thread by id
 }
 \examples{
 \dontrun{
-my_thread = gm_thread(12345)
+my_thread <- gm_thread(12345)
 }
 }
 \references{

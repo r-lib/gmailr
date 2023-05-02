@@ -21,10 +21,10 @@ use the label ID as arguments to this function, not the label name.
 }
 \examples{
 \dontrun{
-gm_modify_message(12345, add_labels='label_1')
-gm_modify_message(12345, remove_labels='label_1')
-#add and remove at the same time
-gm_modify_message(12345, add_labels='label_2', remove_labels='label_1')
+gm_modify_message(12345, add_labels = "label_1")
+gm_modify_message(12345, remove_labels = "label_1")
+# add and remove at the same time
+gm_modify_message(12345, add_labels = "label_2", remove_labels = "label_1")
 }
 }
 \references{

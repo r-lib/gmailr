@@ -1,8 +1,9 @@
-label_value_map <- c("hide" = "labelHide",
-                    "show" = "labelShow",
-                    "show_unread" = "labelSHowIfUnread",
-                    NULL
-                    )
+label_value_map <- c(
+  "hide" = "labelHide",
+  "show" = "labelShow",
+  "show_unread" = "labelSHowIfUnread",
+  NULL
+)
 
 name_map <- c(
   "user_id" = "userId",
@@ -39,10 +40,16 @@ rename <- function(...) {
   vals
 }
 
-not_null <- function(x){ Filter(Negate(is.null), x) }
+not_null <- function(x) {
+  Filter(Negate(is.null), x)
+}
 
-gmail_path <- function(user, ...) { paste("https://www.googleapis.com/gmail/v1/users", user, paste0(unlist(list(...)), collapse = "/"), sep = "/") }
-gmail_upload_path <- function(user, ...) { paste("https://www.googleapis.com/upload/gmail/v1/users", user, paste0(list(...), collapse = "/"), sep = "/") }
+gmail_path <- function(user, ...) {
+  paste("https://www.googleapis.com/gmail/v1/users", user, paste0(unlist(list(...)), collapse = "/"), sep = "/")
+}
+gmail_upload_path <- function(user, ...) {
+  paste("https://www.googleapis.com/upload/gmail/v1/users", user, paste0(list(...), collapse = "/"), sep = "/")
+}
 mark_utf8 <- function(x) {
   if (length(x)) {
     Encoding(x) <- "UTF-8"
@@ -53,43 +60,50 @@ mark_utf8 <- function(x) {
 base64url_decode_to_char <- function(x) {
   mark_utf8(rawToChar(base64decode(gsub("_", "/", gsub("-", "+", x)))))
 }
-base64url_decode <- function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
-base64url_encode <- function(x) { gsub("/", "_", gsub("\\+", "-", base64encode(charToRaw(as.character(x))))) }
-
-show_dots <- function(...){
-  args <- dots(...)
-
-  base::message(sprintf(paste0(args, "=%s", collapse=" "), ...))
+base64url_decode <- function(x) {
+  base64decode(gsub("_", "/", gsub("-", "+", x)))
+}
+base64url_encode <- function(x) {
+  gsub("/", "_", gsub("\\+", "-", base64encode(charToRaw(as.character(x)))))
 }
 
-dots <- function (...) { eval(substitute(alist(...))) }
+show_dots <- function(...) {
+  args <- dots(...)
 
-page_and_trim <- function(type, user_id, num_results, ...){
+  base::message(sprintf(paste0(args, "=%s", collapse = " "), ...))
+}
 
+dots <- function(...) {
+  eval(substitute(alist(...)))
+}
+
+page_and_trim <- function(type, user_id, num_results, ...) {
   num_results <- num_results %||% 100
-  itr <- function(...){
+  itr <- function(...) {
     req <- GET(gmail_path(user_id, type),
-             query = not_null(rename(...)), gm_token())
+      query = not_null(rename(...)), gm_token()
+    )
     stop_for_status(req)
     content(req, "parsed")
   }
-  counts <- function(res) { vapply(lapply(res, `[[`, type), length, integer(1)) }
+  counts <- function(res) {
+    vapply(lapply(res, `[[`, type), length, integer(1))
+  }
   trim <- function(res, amount) {
-    if(is.null(amount)){
+    if (is.null(amount)) {
       return(res)
     }
     num <- counts(res)
     count <- 0
     itr <- 0
-    while(count < amount && itr <= length(num)){
+    while (count < amount && itr <= length(num)) {
       itr <- itr + 1
       count <- count + num[itr]
     }
     remain <- amount - count
-    if(itr > length(res)){
+    if (itr > length(res)) {
       res
-    }
-    else {
+    } else {
       res[[itr]][[type]] <- res[[itr]][[type]][1:(num[itr] + remain)]
       res[1:itr]
     }
@@ -97,56 +111,84 @@ page_and_trim <- function(type, user_id, num_results, ...){
   res <- itr(...)
   all_results <- list(res)
   page_token <- res[["nextPageToken"]]
-  while(sum(counts(all_results)) < num_results && !is.null(page_token)){
+  while (sum(counts(all_results)) < num_results && !is.null(page_token)) {
     res <- itr(..., page_token = page_token)
     page_token <- res[["nextPageToken"]]
 
     all_results[[length(all_results) + 1]] <- res
   }
-  structure(trim(all_results, num_results), class=paste0("gmail_", type))
+  structure(trim(all_results, num_results), class = paste0("gmail_", type))
 }
 
-ord <- function(x) { strtoi(charToRaw(x), 16L) }
+ord <- function(x) {
+  strtoi(charToRaw(x), 16L)
+}
 
-chr <- function(x) { rawToChar(as.raw(x)) }
+chr <- function(x) {
+  rawToChar(as.raw(x))
+}
 
 substitute_regex <- function(data, pattern, fun, ...) {
   match <- gregexpr(pattern, ..., data)
-  regmatches(data, match) <- lapply(regmatches(data, match),
-                                   function(x) { if(length(x) > 0) { vapply(x, function(xx) paste0(fun(xx), collapse=""), character(1)) } else { x } })
+  regmatches(data, match) <- lapply(
+    regmatches(data, match),
+    function(x) {
+      if (length(x) > 0) {
+        vapply(x, function(xx) paste0(fun(xx), collapse = ""), character(1))
+      } else {
+        x
+      }
+    }
+  )
   data
 }
 
 # return RHS if LHS is null, else LHS
-"%||%" <- function(x, y){ if(is.null(x)){ y } else { x } }
+"%||%" <- function(x, y) {
+  if (is.null(x)) {
+    y
+  } else {
+    x
+  }
+}
 
 # return LHS if LHS is null, else RHS, usually RHS should also include The LHS
 # value, otherwise this function makes little sense
-"%|||%" <- function(x, y){ if(is.null(x)){ x } else { y } }
+"%|||%" <- function(x, y) {
+  if (is.null(x)) {
+    x
+  } else {
+    y
+  }
+}
 
 encode_base64 <- function(x, line_length = 76L, newline = "\r\n") {
   if (length(x) == 0) {
     return(x)
   }
 
-  if(is.raw(x)) {
+  if (is.raw(x)) {
     base64encode(x, 76L, newline)
   } else {
     base64encode(charToRaw(x), 76L, "\r\n")
   }
 }
 
-exists_list <- function(data, x){
-  if(is.character(x)){
+exists_list <- function(data, x) {
+  if (is.character(x)) {
     return(exists(x, data))
   }
   return(length(data) >= x && !is.null(data[[x]]))
 }
 
-"%==%" <- function(x, y) { identical(x, y) }
-"%!=%" <- function(x, y) { !identical(x, y) }
+"%==%" <- function(x, y) {
+  identical(x, y)
+}
+"%!=%" <- function(x, y) {
+  !identical(x, y)
+}
 
-p <- function(...) paste(sep="", collapse="", ...)
+p <- function(...) paste(sep = "", collapse = "", ...)
 
 vcapply <- function(...) vapply(..., FUN.VALUE = character(1))
 vlapply <- function(...) vapply(..., FUN.VALUE = logical(1))

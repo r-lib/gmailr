@@ -16,8 +16,10 @@ Send a draft to the recipients in the To, CC, and Bcc headers.
 }
 \examples{
 \dontrun{
-draft <- gm_create_draft(gm_mime(From="you@me.com", To="any@one.com",
-                      Subject="hello", "how are you doing?"))
+draft <- gm_create_draft(gm_mime(
+  From = "you@me.com", To = "any@one.com",
+  Subject = "hello", "how are you doing?"
+))
 gm_send_draft(draft)
 }
 }

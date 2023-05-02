@@ -66,7 +66,6 @@ gm_auth <- function(email = gm_default_email(),
                     cache = gargle::gargle_oauth_cache(),
                     use_oob = gargle::gargle_oob_default(),
                     token = NULL) {
-
   scopes <- gm_scopes(scopes)
 
   app <- gm_oauth_app()
@@ -167,7 +166,6 @@ gm_has_token <- function() {
 #' gm_oauth_app()
 #'
 #' if (require(httr)) {
-#'
 #'   # store current state, so we can restore
 #'   original_app <- gm_oauth_app()
 #'
@@ -270,8 +268,7 @@ print.gmail_profile <- function(x, ...) {
       "  * email: %s\n",
       "  * num_messages: %i\n",
       "  * num_threads: %i"
-    ), x[["emailAddress"]], x[["messagesTotal"]], x[["threadsTotal"]]
-    ),
+    ), x[["emailAddress"]], x[["messagesTotal"]], x[["threadsTotal"]]),
     sep = "\n"
   )
   invisible(x)

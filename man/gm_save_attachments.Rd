@@ -23,7 +23,7 @@ Function to retrieve and save all of the attachments to a message by id of the m
 # save all attachments
 save_attachments(my_message)
 # save a specific attachment
-save_attachments(my_message, 'a32e324b')
+save_attachments(my_message, "a32e324b")
 }
 }
 \references{

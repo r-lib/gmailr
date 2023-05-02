@@ -29,8 +29,10 @@ Import a message into the gmail mailbox from a mime message
 }
 \examples{
 \dontrun{
-gm_import_message(gm_mime(From="you@me.com", To="any@one.com",
-                          Subject="hello", "how are you doing?"))
+gm_import_message(gm_mime(
+  From = "you@me.com", To = "any@one.com",
+  Subject = "hello", "how are you doing?"
+))
 }
 }
 \references{

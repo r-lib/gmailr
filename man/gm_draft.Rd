@@ -18,7 +18,7 @@ Function to retrieve a given draft by <-
 }
 \examples{
 \dontrun{
-my_draft = gm_draft('12345')
+my_draft <- gm_draft("12345")
 }
 }
 \references{

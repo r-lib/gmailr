@@ -9,14 +9,14 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' my_draft = gm_draft('12345')
+#' my_draft <- gm_draft("12345")
 #' }
 gm_draft <- function(id,
-                  user_id = "me",
-                  format = c("full", "minimal", "raw")) {
+                     user_id = "me",
+                     format = c("full", "minimal", "raw")) {
   stopifnot(is_string(id), is_string(user_id))
   format <- match.arg(format)
-  res <- gmailr_GET(c("drafts", id), user_id, query = list(format=format), class = "gmail_draft")
+  res <- gmailr_GET(c("drafts", id), user_id, query = list(format = format), class = "gmail_draft")
 
   class(res$message) <- c("gmail_message", "list")
 
@@ -34,9 +34,9 @@ gm_draft <- function(id,
 #' @export
 #' @examples
 #' \dontrun{
-#' my_drafts = gm_drafts()
+#' my_drafts <- gm_drafts()
 #'
-#' first_10_drafts = gm_drafts(10)
+#' first_10_drafts <- gm_drafts(10)
 #' }
 gm_drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
   stopifnot(is_string(user_id))
@@ -51,18 +51,22 @@ gm_drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' gm_create_draft(gm_mime(From="you@@me.com", To="any@@one.com",
-#'                           Subject="hello", "how are you doing?"))
+#' gm_create_draft(gm_mime(
+#'   From = "you@@me.com", To = "any@@one.com",
+#'   Subject = "hello", "how are you doing?"
+#' ))
 #' }
 gm_create_draft <- function(mail,
-                         user_id = "me") {
+                            user_id = "me") {
   mail <- as.character(mail)
   stopifnot(is_string(user_id))
-  res <- gmailr_POST("drafts", user_id, class = "gmail_draft",
-              query = list(uploadType="media"),
-              body = mail,
-              add_headers("Content-Type" = "message/rfc822"),
-              upload=TRUE)
+  res <- gmailr_POST("drafts", user_id,
+    class = "gmail_draft",
+    query = list(uploadType = "media"),
+    body = mail,
+    add_headers("Content-Type" = "message/rfc822"),
+    upload = TRUE
+  )
 
   # This is labeled as a message but is really a thread
   class(res$message) <- c("gmail_thread", "list")
@@ -79,16 +83,20 @@ gm_create_draft <- function(mail,
 #' @export
 #' @examples
 #' \dontrun{
-#' draft <- gm_create_draft(gm_mime(From="you@@me.com", To="any@@one.com",
-#'                       Subject="hello", "how are you doing?"))
+#' draft <- gm_create_draft(gm_mime(
+#'   From = "you@@me.com", To = "any@@one.com",
+#'   Subject = "hello", "how are you doing?"
+#' ))
 #' gm_send_draft(draft)
 #' }
 gm_send_draft <- function(draft,
-                       user_id = "me") {
+                          user_id = "me") {
   stopifnot(has_class(draft, "gmail_draft"), is_string(user_id))
-  gmailr_POST(c("drafts", "send"), user_id, class = "gmail_draft",
+  gmailr_POST(c("drafts", "send"), user_id,
+    class = "gmail_draft",
     body = draft,
-    encode = "json")
+    encode = "json"
+  )
 }
 
 #' Permanently delete a single draft
@@ -100,12 +108,13 @@ gm_send_draft <- function(draft,
 #' @export
 #' @examples
 #' \dontrun{
-#' delete_draft('12345')
+#' delete_draft("12345")
 #' }
 gm_delete_draft <- function(id, user_id = "me") {
   stopifnot(
     is_string(id),
-    is_string(user_id))
+    is_string(user_id)
+  )
 
   gmailr_DELETE(c("drafts", id), user_id, class = "gmail_message")
 }

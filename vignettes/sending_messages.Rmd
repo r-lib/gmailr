@@ -77,7 +77,8 @@ by any unique identifier. E.g. here is an example of including a ggplot2 image
 mtcars$gear <- as.factor(mtcars$gear)
 
 png("mtcars.png", width = 400, height = 400, pointsize = 12)
-with(mtcars,
+with(
+  mtcars,
   plot(hp,
     mpg,
     col = as.factor(gear),
@@ -86,7 +87,8 @@ with(mtcars,
     ylab = "Miles / gallon"
   )
 )
-legend("topright", title = "# gears",
+legend("topright",
+  title = "# gears",
   pch = 19,
   col = seq_along(levels(mtcars$gear)),
   legend = levels(mtcars$gear)
@@ -95,12 +97,13 @@ dev.off()
 
 # Next create an HTML email that references the plot as 'foobar'
 email <- gm_mime() %>%
-  gm_to('someaddress@somewhere.com') %>%
+  gm_to("someaddress@somewhere.com") %>%
   gm_from("someaddress@somewhere.com") %>%
   gm_subject("Cars report") %>%
   gm_html_body(
     '<h1>A plot of <b>MotorTrend</b> data <i>(1974)</i></h1>
-    <br><img src="cid:foobar">') %>%
+    <br><img src="cid:foobar">'
+  ) %>%
   gm_attach_file("mtcars.png", id = "foobar")
 ```
 

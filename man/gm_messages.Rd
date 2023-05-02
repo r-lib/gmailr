@@ -31,8 +31,8 @@ Get a list of messages possibly matching a given query string.
 }
 \examples{
 \dontrun{
-#Search for R, return 10 results using label 1 including spam and trash folders
-my_messages = gm_messages("R", 10, "label_1", TRUE)
+# Search for R, return 10 results using label 1 including spam and trash folders
+my_messages <- gm_messages("R", 10, "label_1", TRUE)
 }
 }
 \references{

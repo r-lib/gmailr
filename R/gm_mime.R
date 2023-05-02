@@ -9,63 +9,78 @@
 #' @export
 #' @examples
 #' # using the field functions
-#' msg = gm_mime() %>%
-#'  gm_from("james.f.hester@@gmail.com") %>%
-#'  gm_to("asdf@asdf.com") %>%
-#'  gm_text_body("Test Message")
+#' msg <- gm_mime() %>%
+#'   gm_from("james.f.hester@gmail.com") %>%
+#'   gm_to("asdf@asdf.com") %>%
+#'   gm_text_body("Test Message")
 #'
 #' # alternatively you can set the fields using gm_mime(), however you have
 #' #  to use properly formatted MIME names
-#' msg = gm_mime(From="james.f.hester@@gmail.com",
-#'                    To="asdf@asdf.com") %>%
-#'         gm_html_body("<b>Test<\b> Message")
+#' msg <- gm_mime(
+#'   From = "james.f.hester@gmail.com",
+#'   To = "asdf@asdf.com"
+#' ) %>%
+#'   gm_html_body("<b>Test<\b> Message")
 gm_mime <- function(..., attr = NULL, body = NULL, parts = list()) {
-  structure(list(parts = parts,
-                 header = with_defaults(
-                   c("MIME-Version" = "1.0"),
-                     Date = http_date(Sys.time()),
-                   ...),
-                 body = body, attr = attr), class="mime")
+  structure(list(
+    parts = parts,
+    header = with_defaults(
+      c("MIME-Version" = "1.0"),
+      Date = http_date(Sys.time()),
+      ...
+    ),
+    body = body, attr = attr
+  ), class = "mime")
 }
 
 #' @param x the object whose fields you are setting
 #' @param val the value to set, can be a vector, in which case the values will be joined by ", ".
 #' @rdname gm_mime
 #' @export
-gm_to.mime <- function(x, val, ...){
-  if(missing(val)){ return(x$header$To) }
+gm_to.mime <- function(x, val, ...) {
+  if (missing(val)) {
+    return(x$header$To)
+  }
   x$header$To <- val
   x
 }
 
 #' @rdname gm_mime
 #' @export
-gm_from.mime <- function(x, val, ...){
-  if(missing(val)){ return(x$header$From) }
+gm_from.mime <- function(x, val, ...) {
+  if (missing(val)) {
+    return(x$header$From)
+  }
   x$header$From <- val
   x
 }
 
 #' @rdname gm_mime
 #' @export
-gm_cc.mime <- function(x, val, ...){
-  if(missing(val)){ return(x$header$Cc) }
+gm_cc.mime <- function(x, val, ...) {
+  if (missing(val)) {
+    return(x$header$Cc)
+  }
   x$header$Cc <- val
   x
 }
 
 #' @rdname gm_mime
 #' @export
-gm_bcc.mime <- function(x, val, ...){
-  if(missing(val)){ return(x$header$Bcc) }
+gm_bcc.mime <- function(x, val, ...) {
+  if (missing(val)) {
+    return(x$header$Bcc)
+  }
   x$header$Bcc <- val
   x
 }
 
 #' @rdname gm_mime
 #' @export
-gm_subject.mime <- function(x, val, ...){
-  if(missing(val)){ return(x$header$Subject) }
+gm_subject.mime <- function(x, val, ...) {
+  if (missing(val)) {
+    return(x$header$Subject)
+  }
   x$header$Subject <- val
   x
 }
@@ -134,9 +149,11 @@ HTML_PART <- 2L
 #' @param id The content ID of the attachment
 #' @rdname gm_mime
 #' @export
-gm_attach_part <- function(mime, part, id = NULL, ...){
-  if(missing(part)){ return(mime$parts[[3L:length(mime$parts)]]) }
-  part_num <- if(length(mime$parts) < 3L) 3L else length(mime$parts) + 1L
+gm_attach_part <- function(mime, part, id = NULL, ...) {
+  if (missing(part)) {
+    return(mime$parts[[3L:length(mime$parts)]])
+  }
+  part_num <- if (length(mime$parts) < 3L) 3L else length(mime$parts) + 1L
   part <- gm_mime(attr = c(encoding = "base64", list(...)), body = part)
   if (!is.null(id)) {
     part$header[["Content-Id"]] <- sprintf("<%s>", id)
@@ -147,8 +164,10 @@ gm_attach_part <- function(mime, part, id = NULL, ...){
 
 #' @rdname gm_mime
 #' @export
-gm_attach_file <- function(mime, filename, type = NULL, id = NULL, ...){
-  if(missing(filename)){ return(mime$parts[[3L:length(mime$parts)]]) }
+gm_attach_file <- function(mime, filename, type = NULL, id = NULL, ...) {
+  if (missing(filename)) {
+    return(mime$parts[[3L:length(mime$parts)]])
+  }
 
   if (is.null(type)) {
     type <- mime::guess_type(filename, empty = NULL)
@@ -162,13 +181,14 @@ gm_attach_file <- function(mime, filename, type = NULL, id = NULL, ...){
   base_name <- basename(filename)
 
   gm_attach_part(mime, body,
-         content_type = type,
-         name = base_name,
-         filename = base_name,
-         disposition = "attachment",
-         #modification_date = http_date(info$mtime),
-         id = id,
-         ...)
+    content_type = type,
+    name = base_name,
+    filename = base_name,
+    disposition = "attachment",
+    # modification_date = http_date(info$mtime),
+    id = id,
+    ...
+  )
 }
 
 header_encode <- function(x) {
@@ -202,19 +222,17 @@ header_encode <- function(x) {
 #' @param newline value to use as newline character
 #' @param ... further arguments ignored
 #' @export
-as.character.mime <- function(x, newline="\r\n", ...) {
-
+as.character.mime <- function(x, newline = "\r\n", ...) {
   # encode headers
   x$header <- lapply(x$header, header_encode)
 
   # if we have both the text part and html part, we have to embed them in a multipart/alternative message
-  if(x$attr$content_type %!=% "multipart/alternative" && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)){
+  if (x$attr$content_type %!=% "multipart/alternative" && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)) {
     x$attr$content_type <- "multipart/alternative"
   }
 
   # if a multipart message
-  if(length(x$parts) > 0L){
-
+  if (length(x$parts) > 0L) {
     x$attr$content_type <- x$attr$content_type %||% "multipart/mixed"
 
     # random hex boundary if multipart, otherwise nothing
@@ -226,9 +244,8 @@ as.character.mime <- function(x, newline="\r\n", ...) {
     # end is --boundary-- if mulitpart, otherwise nothing
     end <- paste0(newline, "--", boundary, "--", newline)
 
-    body_text <- paste0(collapse=sep, Filter(function(x) length(x) > 0L, c(lapply(x$parts, as.character), x$body)))
-  }
-  else {
+    body_text <- paste0(collapse = sep, Filter(function(x) length(x) > 0L, c(lapply(x$parts, as.character), x$body)))
+  } else {
     boundary <- NULL
     sep <- newline
     end <- newline
@@ -253,12 +270,13 @@ as.character.mime <- function(x, newline="\r\n", ...) {
 }
 
 parse_content_type <- function(header) {
-  paste0(header$content_type %||% "text/plain",
-         header$charset %|||% paste0("; charset=", header$charset),
-         header$format %|||% paste0("; format=", header$format),
-         header$name %|||% paste0("; name=", header$name),
-         header$boundary %|||% paste0("; boundary=", header$boundary)
-         )
+  paste0(
+    header$content_type %||% "text/plain",
+    header$charset %|||% paste0("; charset=", header$charset),
+    header$format %|||% paste0("; format=", header$format),
+    header$name %|||% paste0("; name=", header$name),
+    header$boundary %|||% paste0("; boundary=", header$boundary)
+  )
 }
 
 generate_content_disposition <- function(header) {
@@ -266,26 +284,29 @@ generate_content_disposition <- function(header) {
     return(NULL)
   }
 
-  paste0(header$disposition,
-         header$filename %|||% paste0("; filename=", header$filename)
-         #header$modification_date %|||% paste0("; modification-date=", header$modification_date)
+  paste0(
+    header$disposition,
+    header$filename %|||% paste0("; filename=", header$filename)
+    # header$modification_date %|||% paste0("; modification-date=", header$modification_date)
   )
 }
 
 random_hex <- function(width = 4) {
-  paste(sprintf("%x", sample(16, size = width, replace = TRUE) - 1L), collapse="")
+  paste(sprintf("%x", sample(16, size = width, replace = TRUE) - 1L), collapse = "")
 }
 
 format_headers <- function(headers, newline) {
-  empty <- vapply(headers, function(x) { is.null(x) || length(x) %==% 0L }, logical(1L))
+  empty <- vapply(headers, function(x) {
+    is.null(x) || length(x) %==% 0L
+  }, logical(1L))
   keep_headers <- headers[!empty]
-  if(length(keep_headers) %==% 0L){
+  if (length(keep_headers) %==% 0L) {
     return(NULL)
   }
   paste0(paste(sep = ": ", collapse = newline, names(keep_headers), keep_headers), newline)
 }
 
-with_defaults <- function(defaults, ...){
+with_defaults <- function(defaults, ...) {
   args <- list(...)
   missing <- setdiff(names(defaults), names(args))
   c(defaults[missing], args)

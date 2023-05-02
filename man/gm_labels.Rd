@@ -14,7 +14,7 @@ Get a list of all labels for a user.
 }
 \examples{
 \dontrun{
-my_labels = gm_labels()
+my_labels <- gm_labels()
 }
 }
 \references{

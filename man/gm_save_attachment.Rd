@@ -18,9 +18,9 @@ which is a higher level interface more suitable for most uses.
 }
 \examples{
 \dontrun{
-my_attachment = attachment('a32e324b', '12345')
+my_attachment <- attachment("a32e324b", "12345")
 # save attachment to a file
-save_attachment(my_attachment, 'photo.jpg')
+save_attachment(my_attachment, "photo.jpg")
 }
 }
 \seealso{

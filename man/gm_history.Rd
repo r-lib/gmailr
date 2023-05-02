@@ -28,7 +28,7 @@ Retrieves the history results in chronological order
 }
 \examples{
 \dontrun{
-my_history = history("10")
+my_history <- history("10")
 }
 }
 \references{

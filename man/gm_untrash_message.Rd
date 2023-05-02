@@ -16,7 +16,7 @@ Function to trash a given message by id.  This can be undone by \code{\link[=gm_
 }
 \examples{
 \dontrun{
-gm_untrash_message('12345')
+gm_untrash_message("12345")
 }
 }
 \references{

@@ -16,7 +16,7 @@ Function to delete a given draft by id.  This cannot be undone!
 }
 \examples{
 \dontrun{
-delete_draft('12345')
+delete_draft("12345")
 }
 }
 \references{

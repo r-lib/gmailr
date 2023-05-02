@@ -18,9 +18,9 @@ Get a list of drafts possibly matching a given query string.
 }
 \examples{
 \dontrun{
-my_drafts = gm_drafts()
+my_drafts <- gm_drafts()
 
-first_10_drafts = gm_drafts(10)
+first_10_drafts <- gm_drafts(10)
 }
 }
 \references{

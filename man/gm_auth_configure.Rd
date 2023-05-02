@@ -66,7 +66,6 @@ are used.
 gm_oauth_app()
 
 if (require(httr)) {
-
   # store current state, so we can restore
   original_app <- gm_oauth_app()
 

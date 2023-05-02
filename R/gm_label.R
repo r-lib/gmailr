@@ -7,9 +7,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' my_labels = gm_labels()
+#' my_labels <- gm_labels()
 #' }
-gm_labels <- function(user_id = "me"){
+gm_labels <- function(user_id = "me") {
   gmailr_GET("labels", user_id)
 }
 
@@ -69,15 +69,18 @@ gm_delete_label <- function(id, user_id = "me") {
 #' @family label
 #' @export
 gm_create_label <- function(name,
-                         label_list_visibility=c("show", "hide", "show_unread"),
-                         message_list_visibility=c("show", "hide"),
-                         user_id = "me") {
+                            label_list_visibility = c("show", "hide", "show_unread"),
+                            message_list_visibility = c("show", "hide"),
+                            user_id = "me") {
   label_list_visibility <- label_value_map[match.arg(label_list_visibility)]
   message_list_visibility <- match.arg(message_list_visibility)
 
   gmailr_POST("labels", user_id,
-              body = c(rename(name,
-                              label_list_visibility,
-                              message_list_visibility)),
-              encode = "json")
+    body = c(rename(
+      name,
+      label_list_visibility,
+      message_list_visibility
+    )),
+    encode = "json"
+  )
 }

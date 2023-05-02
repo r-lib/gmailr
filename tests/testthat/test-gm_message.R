@@ -42,7 +42,7 @@ test_that("import_message works", {
   skip_if_no_token()
 
   new_id <- gm_id(gm_import_message(
-    gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
+    gm_mime(From = "you@me.com", To = "any@one.com", Subject = "hello", body = "how are you doing?"),
     label_ids = NULL
   ))
   on.exit(gm_delete_message(new_id))
@@ -53,18 +53,18 @@ test_that("import_message works", {
   # directly after importing it
   # msg <- gm_message(new_id)
 
-  #expect_equal(gm_id(msg), new_id)
-  #expect_equal(gm_to(msg), "any@one.com")
-  #expect_equal(gm_from(msg), "you@me.com")
-  #expect_equal(gm_subject(msg), "hello")
-  #expect_equal(gm_body(msg), "how are you doing?\r\n")
+  # expect_equal(gm_id(msg), new_id)
+  # expect_equal(gm_to(msg), "any@one.com")
+  # expect_equal(gm_from(msg), "you@me.com")
+  # expect_equal(gm_subject(msg), "hello")
+  # expect_equal(gm_body(msg), "how are you doing?\r\n")
 })
 
 test_that("insert_message, modify_message, trash_message and untrash_message work", {
   skip_if_no_token()
 
   new_id <- gm_id(gm_insert_message(
-    gm_mime(From="you@me.com", To="any@one.com", Subject="hello", body = "how are you doing?"),
+    gm_mime(From = "you@me.com", To = "any@one.com", Subject = "hello", body = "how are you doing?"),
     label_ids = NULL
   ))
   msg <- gm_message(new_id)
@@ -98,7 +98,7 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
 test_that("send_message works", {
   skip_if_no_token()
 
-  msg <- gm_mime(From=Sys.getenv("GMAILR_EMAIL"), To=Sys.getenv("GMAILR_EMAIL"), Subject="hello myself", body = "how are you doing? I am doing well!")
+  msg <- gm_mime(From = Sys.getenv("GMAILR_EMAIL"), To = Sys.getenv("GMAILR_EMAIL"), Subject = "hello myself", body = "how are you doing? I am doing well!")
   sent_id <- gm_id(gm_send_message(msg))
   msg1 <- gm_message(sent_id)
 
