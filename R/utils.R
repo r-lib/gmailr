@@ -143,15 +143,6 @@ substitute_regex <- function(data, pattern, fun, ...) {
   data
 }
 
-# return RHS if LHS is null, else LHS
-"%||%" <- function(x, y) {
-  if (is.null(x)) {
-    y
-  } else {
-    x
-  }
-}
-
 # return LHS if LHS is null, else RHS, usually RHS should also include The LHS
 # value, otherwise this function makes little sense
 "%|||%" <- function(x, y) {
