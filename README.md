@@ -1,4 +1,4 @@
-# gmailr #
+# gmailr
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/r-lib/gmailr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/gmailr?branch=main)
@@ -6,22 +6,22 @@
 
 Exposing the [Gmail API](https://developers.google.com/gmail/api) from R.
 
-## Installation ##
+## Installation
 
-Get the released version from CRAN:
+Install the released version of gmailr from CRAN:
 
-```R
+```{r, eval = FALSE}
 install.packages("gmailr")
 ```
 
-Or the development version from github with:
+Or install the development version from GitHub with:
 
-```R
-# install.packages("devtools")
-devtools::install_github("r-lib/gmailr")
+```{r, eval = FALSE}
+# install.packages("pak")
+pak::pak("r-lib/gmailr")
 ```
 
-## Writing new emails ##
+## Writing new emails
 
 Create a new email with `gm_mime()` and the helper functions. When testing it
 is recommended to use `gm_create_draft()` to verify your email is formatted as you
@@ -55,7 +55,7 @@ gm_create_draft(test_email)
 gm_send_message(test_email)
 ```
 
-## Reading emails ##
+## Reading emails
 
 gmail shows you threads of messages in the web UI, you can retrieve all threads
 with `gm_threads()`, and retrieve a specific thread with `gm_thread()`
@@ -84,7 +84,7 @@ gm_body(my_msg)
 gm_save_attachments(my_msg)
 ```
 
-## Features ##
+## Features
 - retrieve data from your email
   - drafts: `my_drafts = gm_drafts()`
   - history: `my_history = history(start_num)`
@@ -103,7 +103,7 @@ gm_save_attachments(my_msg)
   - messages: `gm_delete_message(message_id)`
   - threads: `delete_thread(thread_id)`
 
-## Setup ##
+## Setup
 
 In order to use gmailr you will need to create a google project for it. The
 easiest way to do this is via the [Python
@@ -128,7 +128,7 @@ Quickstart](https://developers.google.com/gmail/api/quickstart/python).
 Only very heavy usage of the Gmail API requires payment, so use of the API for most
 people should be free.
 
-## Using gmailr in deployed applications ##
+## Using gmailr in deployed applications
 
 If you are using gmailr in a deployed application you will need to copy two pieces to your deployed location.
 
@@ -163,9 +163,9 @@ There are additional details on dealing with [non-interactive
 auth](https://gargle.r-lib.org/articles/non-interactive-auth.html#provide-an-oauth-token-directly)
 in the gargle documentation.
 
-## Policies ##
+## Policies
 
 [Privacy policy](https://www.tidyverse.org/google_privacy_policy)
 
-# Community Examples #
+# Community Examples
 - [Send Email with R](https://github.com/jennybc/send-email-with-r) - Jenny Bryan (@jennybc)
