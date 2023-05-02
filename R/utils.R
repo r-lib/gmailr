@@ -56,7 +56,7 @@ base64url_decode_to_char <- function(x) {
 base64url_decode <- function(x) { base64decode(gsub("_", "/", gsub("-", "+", x))) }
 base64url_encode <- function(x) { gsub("/", "_", gsub("\\+", "-", base64encode(charToRaw(as.character(x))))) }
 
-debug <- function(...){
+show_dots <- function(...){
   args <- dots(...)
 
   base::message(sprintf(paste0(args, "=%s", collapse=" "), ...))
