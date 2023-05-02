@@ -25,15 +25,15 @@ gargle_lookup_table <- list(
 #'   for Gmail API-specific scopes, in an abbreviated form that is recognized by
 #'   [gm_scopes()]:
 #'   * "full" = "https://mail.google.com/" (the default)
-#'   * "compose" = "https://www.googleapis.com/auth/gmail.compose"
-#'   * "readonly" = "https://www.googleapis.com/auth/gmail.readonly"
-#'   * "labels" = "https://www.googleapis.com/auth/gmail.labels"
-#'   * "send" = "https://www.googleapis.com/auth/gmail.send"
-#'   * "insert" = "https://www.googleapis.com/auth/gmail.insert"
-#'   * "modify" = "https://www.googleapis.com/auth/gmail.modify"
-#'   * "metadata" = "https://www.googleapis.com/auth/gmail.metadata"
-#'   * "settings_basic" = "https://www.googleapis.com/auth/gmail.settings.basic"
-#'   * "settings_sharing" = "https://www.googleapis.com/auth/gmail.settings.sharing"
+#'   * "gmail.compose" = "https://www.googleapis.com/auth/gmail.compose"
+#'   * "gmail.readonly" = "https://www.googleapis.com/auth/gmail.readonly"
+#'   * "gmail.labels" = "https://www.googleapis.com/auth/gmail.labels"
+#'   * "gmail.send" = "https://www.googleapis.com/auth/gmail.send"
+#'   * "gmail.insert" = "https://www.googleapis.com/auth/gmail.insert"
+#'   * "gmail.modify" = "https://www.googleapis.com/auth/gmail.modify"
+#'   * "gmail.metadata" = "https://www.googleapis.com/auth/gmail.metadata"
+#'   * "gmail.settings_basic" = "https://www.googleapis.com/auth/gmail.settings.basic"
+#'   * "gmail.settings_sharing" = "https://www.googleapis.com/auth/gmail.settings.sharing"
 #'
 #' See <https://developers.google.com/gmail/api/auth/scopes> for details on the
 #' permissions for each scope.
@@ -281,7 +281,7 @@ print.gmail_profile <- function(x, ...) {
 #'
 #' When called with no arguments, `gm_scopes()` returns a named character vector
 #' of scopes associated with the Gmail API. If `gm_scopes(scopes =)` is given,
-#' an abbreviated entry such as `"readonly"` is expanded to a full scope
+#' an abbreviated entry such as `"gmail.readonly"` is expanded to a full scope
 #' (`"https://www.googleapis.com/auth/gmail.readonly"` in this case).
 #' Unrecognized scopes are passed through unchanged.
 #'
@@ -294,14 +294,35 @@ print.gmail_profile <- function(x, ...) {
 #' @export
 #' @examples
 #' gm_scopes("full")
-#' gm_scopes("readonly")
+#' gm_scopes("gmail.readonly")
 #' gm_scopes()
 gm_scopes <- function(scopes = NULL) {
   if (is.null(scopes)) {
     return(gmail_scopes)
   }
+
+  # In hindsight, I think it is better for the short form to be slightly less
+  # short. Once you start to think about the full set of APIs and supporting
+  # this in gargle, it seems that "gmail.compose" is better than "compose".
+  # gmailr will continue to accept the original, very short forms for backwards
+  # compatibility, but we catch, warn, and modify them here.
+  scopes <- fixup_gmail_scopes(scopes)
+
   resolve_scopes(user_scopes = scopes, package_scopes = gmail_scopes)
 }
+
+gmail_scopes <- c(
+  full                   = "https://mail.google.com/",
+  gmail.compose          = "https://www.googleapis.com/auth/gmail.compose",
+  gmail.readonly         = "https://www.googleapis.com/auth/gmail.readonly",
+  gmail.labels           = "https://www.googleapis.com/auth/gmail.labels",
+  gmail.send             = "https://www.googleapis.com/auth/gmail.send",
+  gmail.insert           = "https://www.googleapis.com/auth/gmail.insert",
+  gmail.modify           = "https://www.googleapis.com/auth/gmail.modify",
+  gmail.metadata         = "https://www.googleapis.com/auth/gmail.metadata",
+  gmail.settings_basic   = "https://www.googleapis.com/auth/gmail.settings.basic",
+  gmail.settings_sharing = "https://www.googleapis.com/auth/gmail.settings.sharing"
+)
 
 # TODO: put some version of this in gargle
 resolve_scopes <- function(user_scopes, package_scopes) {
@@ -309,15 +330,34 @@ resolve_scopes <- function(user_scopes, package_scopes) {
   ifelse(is.na(m), user_scopes, package_scopes[m])
 }
 
-gmail_scopes <- c(
-  full             = "https://mail.google.com/",
-  compose          = "https://www.googleapis.com/auth/gmail.compose",
-  readonly         = "https://www.googleapis.com/auth/gmail.readonly",
-  labels           = "https://www.googleapis.com/auth/gmail.labels",
-  send             = "https://www.googleapis.com/auth/gmail.send",
-  insert           = "https://www.googleapis.com/auth/gmail.insert",
-  modify           = "https://www.googleapis.com/auth/gmail.modify",
-  metadata         = "https://www.googleapis.com/auth/gmail.metadata",
-  settings_basic   = "https://www.googleapis.com/auth/gmail.settings.basic",
-  settings_sharing = "https://www.googleapis.com/auth/gmail.settings.sharing"
-)
+# 'readonly' --> 'gmail.readonly'
+# 'whatever' --> 'whatever'
+fixup_gmail_scopes <- function(scopes) {
+  haystack <- grep(
+    "^https://www.googleapis.com/auth/gmail.",
+    gmail_scopes,
+    value = TRUE
+  )
+  haystack <- basename(haystack)
+  haystack <- set_names(haystack, \(x) sub("^gmail[.]", "", x))
+
+  m <- match(scopes, names(haystack))
+
+  if (any(!is.na(m))) {
+    needs_work <- haystack[m]
+    needs_work <- needs_work[!is.na(needs_work)]
+    what <- glue('
+      The use of extremely short scopes \\
+      ({glue::glue_collapse(glue::double_quote(names(needs_work)), sep = ", ")})')
+    with <- glue('
+      the slightly longer form \\
+      ({glue::glue_collapse(glue::double_quote(needs_work), sep = ", ")})')
+    lifecycle::deprecate_warn(
+      when = "2.0.0",
+      what = I(what),
+      with = I(with)
+    )
+  }
+
+  ifelse(is.na(m), scopes, haystack[m])
+}

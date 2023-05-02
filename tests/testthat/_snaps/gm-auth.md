@@ -5,22 +5,32 @@
     Output
                                                           full 
                                     "https://mail.google.com/" 
-                                                       compose 
+                                                 gmail.compose 
                "https://www.googleapis.com/auth/gmail.compose" 
-                                                      readonly 
+                                                gmail.readonly 
               "https://www.googleapis.com/auth/gmail.readonly" 
-                                                        labels 
+                                                  gmail.labels 
                 "https://www.googleapis.com/auth/gmail.labels" 
-                                                          send 
+                                                    gmail.send 
                   "https://www.googleapis.com/auth/gmail.send" 
-                                                        insert 
+                                                  gmail.insert 
                 "https://www.googleapis.com/auth/gmail.insert" 
-                                                        modify 
+                                                  gmail.modify 
                 "https://www.googleapis.com/auth/gmail.modify" 
-                                                      metadata 
+                                                gmail.metadata 
               "https://www.googleapis.com/auth/gmail.metadata" 
-                                                settings_basic 
+                                          gmail.settings_basic 
         "https://www.googleapis.com/auth/gmail.settings.basic" 
-                                              settings_sharing 
+                                        gmail.settings_sharing 
       "https://www.googleapis.com/auth/gmail.settings.sharing" 
+
+# gm_scopes() substitutes full scope for legacy super-short form
+
+    The use of extremely short scopes ("readonly") was deprecated in gmailr 2.0.0.
+    i Please use the slightly longer form ("gmail.readonly") instead.
+
+---
+
+    The use of extremely short scopes ("readonly", "compose") was deprecated in gmailr 2.0.0.
+    i Please use the slightly longer form ("gmail.readonly", "gmail.compose") instead.
 

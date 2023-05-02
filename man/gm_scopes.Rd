@@ -12,15 +12,15 @@ for Gmail API-specific scopes, in an abbreviated form that is recognized by
 \code{\link[=gm_scopes]{gm_scopes()}}:
 \itemize{
 \item "full" = "https://mail.google.com/" (the default)
-\item "compose" = "https://www.googleapis.com/auth/gmail.compose"
-\item "readonly" = "https://www.googleapis.com/auth/gmail.readonly"
-\item "labels" = "https://www.googleapis.com/auth/gmail.labels"
-\item "send" = "https://www.googleapis.com/auth/gmail.send"
-\item "insert" = "https://www.googleapis.com/auth/gmail.insert"
-\item "modify" = "https://www.googleapis.com/auth/gmail.modify"
-\item "metadata" = "https://www.googleapis.com/auth/gmail.metadata"
-\item "settings_basic" = "https://www.googleapis.com/auth/gmail.settings.basic"
-\item "settings_sharing" = "https://www.googleapis.com/auth/gmail.settings.sharing"
+\item "gmail.compose" = "https://www.googleapis.com/auth/gmail.compose"
+\item "gmail.readonly" = "https://www.googleapis.com/auth/gmail.readonly"
+\item "gmail.labels" = "https://www.googleapis.com/auth/gmail.labels"
+\item "gmail.send" = "https://www.googleapis.com/auth/gmail.send"
+\item "gmail.insert" = "https://www.googleapis.com/auth/gmail.insert"
+\item "gmail.modify" = "https://www.googleapis.com/auth/gmail.modify"
+\item "gmail.metadata" = "https://www.googleapis.com/auth/gmail.metadata"
+\item "gmail.settings_basic" = "https://www.googleapis.com/auth/gmail.settings.basic"
+\item "gmail.settings_sharing" = "https://www.googleapis.com/auth/gmail.settings.sharing"
 }
 
 See \url{https://developers.google.com/gmail/api/auth/scopes} for details on the
@@ -32,13 +32,13 @@ A character vector of scopes.
 \description{
 When called with no arguments, \code{gm_scopes()} returns a named character vector
 of scopes associated with the Gmail API. If \code{gm_scopes(scopes =)} is given,
-an abbreviated entry such as \code{"readonly"} is expanded to a full scope
+an abbreviated entry such as \code{"gmail.readonly"} is expanded to a full scope
 (\code{"https://www.googleapis.com/auth/gmail.readonly"} in this case).
 Unrecognized scopes are passed through unchanged.
 }
 \examples{
 gm_scopes("full")
-gm_scopes("readonly")
+gm_scopes("gmail.readonly")
 gm_scopes()
 }
 \seealso{

@@ -36,15 +36,15 @@ for Gmail API-specific scopes, in an abbreviated form that is recognized by
 \code{\link[=gm_scopes]{gm_scopes()}}:
 \itemize{
 \item "full" = "https://mail.google.com/" (the default)
-\item "compose" = "https://www.googleapis.com/auth/gmail.compose"
-\item "readonly" = "https://www.googleapis.com/auth/gmail.readonly"
-\item "labels" = "https://www.googleapis.com/auth/gmail.labels"
-\item "send" = "https://www.googleapis.com/auth/gmail.send"
-\item "insert" = "https://www.googleapis.com/auth/gmail.insert"
-\item "modify" = "https://www.googleapis.com/auth/gmail.modify"
-\item "metadata" = "https://www.googleapis.com/auth/gmail.metadata"
-\item "settings_basic" = "https://www.googleapis.com/auth/gmail.settings.basic"
-\item "settings_sharing" = "https://www.googleapis.com/auth/gmail.settings.sharing"
+\item "gmail.compose" = "https://www.googleapis.com/auth/gmail.compose"
+\item "gmail.readonly" = "https://www.googleapis.com/auth/gmail.readonly"
+\item "gmail.labels" = "https://www.googleapis.com/auth/gmail.labels"
+\item "gmail.send" = "https://www.googleapis.com/auth/gmail.send"
+\item "gmail.insert" = "https://www.googleapis.com/auth/gmail.insert"
+\item "gmail.modify" = "https://www.googleapis.com/auth/gmail.modify"
+\item "gmail.metadata" = "https://www.googleapis.com/auth/gmail.metadata"
+\item "gmail.settings_basic" = "https://www.googleapis.com/auth/gmail.settings.basic"
+\item "gmail.settings_sharing" = "https://www.googleapis.com/auth/gmail.settings.sharing"
 }
 
 See \url{https://developers.google.com/gmail/api/auth/scopes} for details on the
