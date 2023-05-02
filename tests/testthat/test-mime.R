@@ -1,5 +1,3 @@
-context("MIME - Basic")
-
 test_that("MIME - Basic functions", {
   # Create a new Email::Stuffer object
   msg <- gm_mime()
@@ -40,7 +38,6 @@ test_that("header_encode encodes non-ascii values as base64", {
   expect_equal(res, "=?utf-8?B?ImbDtsO2IGLDoXIi?= <baz@qux.com>, \"foo bar\" <foo.bar@baz.com>, qux@baz.com, =?utf-8?B?InHDu3ggIg==?= <qux@foo.com>")
 })
 
-context("MIME - More Complex")
 test_that("MIME - More Complex", {
   # create test files
   library(graphics)
@@ -113,8 +110,6 @@ test_that("MIME - More Complex", {
   }
 })
 
-context("MIME - Alternative")
-
 test_that("MIME - Alternative emails contain correct parts", {
   email <- gm_mime() %>%
     gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
@@ -137,15 +132,13 @@ test_that("MIME - Alternative emails contain correct parts", {
 })
 
 
-context("Quoted Printable")
-
-test_that(
-  "plain ascii should not be encoded",
+test_that("plain ascii should not be encoded", {
   expect_match(
     "quoted_printable",
     quoted_printable_encode("quoted_printable")
   )
-)
+})
+
 test_that("trailing space should be encoded", {
   expect_equal(
     "=20=20",

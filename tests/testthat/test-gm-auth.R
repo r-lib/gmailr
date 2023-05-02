@@ -10,7 +10,6 @@ test_that("gm_auth_configure() can accept the app via `app`", {
 })
 
 test_that("gm_scopes() reveals gmail scopes", {
-  local_edition(3)
   expect_snapshot(gm_scopes())
 })
 
@@ -30,9 +29,8 @@ test_that("gm_scopes() substitutes actual scope for short form", {
 })
 
 test_that("gm_scopes() substitutes actual scope for legacy super-short form", {
-  local_edition(3)
-  local_reproducible_output()
   withr::local_options(lifecycle_verbosity = "warning")
+
   expect_snapshot_warning(
     out <- gm_scopes("readonly")
   )
