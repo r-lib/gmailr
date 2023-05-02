@@ -339,7 +339,7 @@ fixup_gmail_scopes <- function(scopes) {
     value = TRUE
   )
   haystack <- basename(haystack)
-  haystack <- set_names(haystack, \(x) sub("^gmail[.]", "", x))
+  haystack <- set_names(haystack, function(x) sub("^gmail[.]", "", x))
 
   m <- match(scopes, names(haystack))
 
