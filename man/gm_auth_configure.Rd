@@ -94,6 +94,7 @@ gm_auth_configure(
 }
 \seealso{
 Other auth functions: 
+\code{\link{gm_auth}()},
 \code{\link{gm_deauth}()},
 \code{\link{gm_scopes}()}
 }

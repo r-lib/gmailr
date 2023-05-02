@@ -8,3 +8,57 @@ test_that("gm_auth_configure() can accept the app via `app`", {
 
   expect_error_free(gm_auth_configure(app = google_app))
 })
+
+test_that("gm_scopes() reveals gmail scopes", {
+  local_edition(3)
+  expect_snapshot(gm_scopes())
+})
+
+test_that("gm_scopes() substitutes actual scope for short form", {
+  expect_equal(
+    gm_scopes(c(
+      "full",
+      "gmail.readonly",
+      "gmail.settings_basic"
+    )),
+    c(
+      "https://mail.google.com/",
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/gmail.settings.basic"
+    )
+  )
+})
+
+test_that("gm_scopes() substitutes actual scope for legacy super-short form", {
+  local_edition(3)
+  local_reproducible_output()
+  withr::local_options(lifecycle_verbosity = "warning")
+  expect_snapshot_warning(
+    out <- gm_scopes("readonly")
+  )
+  expect_equal(out, gm_scopes("gmail.readonly"))
+
+  # multiple legacy scopes, plus another one
+  expect_snapshot_warning(
+    out <- gm_scopes(c("readonly", "openid", "compose"))
+  )
+  expect_equal(
+    out,
+    gm_scopes(c("gmail.readonly", "openid", "gmail.compose"))
+  )
+})
+
+test_that("gm_scopes() passes unrecognized scopes through", {
+  expect_equal(
+    gm_scopes(c(
+      "email",
+      "gmail.compose",
+      "https://www.googleapis.com/auth/cloud-platform"
+    )),
+    c(
+      "email",
+      "https://www.googleapis.com/auth/gmail.compose",
+      "https://www.googleapis.com/auth/cloud-platform"
+    )
+  )
+})
