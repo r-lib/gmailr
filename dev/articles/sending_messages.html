@@ -108,13 +108,13 @@
 using <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">text_msg</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "MIME-Version: 1.0\r Date: Tue, 02 May 2023 21:53:16 GMT\r To:"       </span></span>
+<pre><code><span><span class="co">## [1] "MIME-Version: 1.0\r Date: Tue, 02 May 2023 21:59:27 GMT\r To:"       </span></span>
 <span><span class="co">## [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"   </span></span>
-<span><span class="co">## [3] "multipart/mixed; boundary=31bad3fb1dd4e9c21b174d9bcf789a26\r"        </span></span>
-<span><span class="co">## [4] "--31bad3fb1dd4e9c21b174d9bcf789a26\r MIME-Version: 1.0\r Date: Tue," </span></span>
-<span><span class="co">## [5] "02 May 2023 21:53:16 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
+<span><span class="co">## [3] "multipart/mixed; boundary=7689a2a2cd915b54d08458b2dc2d16f1\r"        </span></span>
+<span><span class="co">## [4] "--7689a2a2cd915b54d08458b2dc2d16f1\r MIME-Version: 1.0\r Date: Tue," </span></span>
+<span><span class="co">## [5] "02 May 2023 21:59:27 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
 <span><span class="co">## [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r Gmailr"</span></span>
-<span><span class="co">## [7] "is a very handy package!\r --31bad3fb1dd4e9c21b174d9bcf789a26--\r"</span></span></code></pre>
+<span><span class="co">## [7] "is a very handy package!\r --7689a2a2cd915b54d08458b2dc2d16f1--\r"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="html">HTML<a class="anchor" aria-label="anchor" href="#html"></a>
@@ -165,7 +165,8 @@ identifier. E.g. here is an example of including a ggplot2 image</p>
 <span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a></span><span class="op">(</span><span class="st">"mtcars.png"</span>, width <span class="op">=</span> <span class="fl">400</span>, height <span class="op">=</span> <span class="fl">400</span>, pointsize <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">mtcars</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span></span>
+<span>  <span class="va">mtcars</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hp</span>,</span>
 <span>    <span class="va">mpg</span>,</span>
 <span>    col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">gear</span><span class="op">)</span>,</span>
@@ -174,7 +175,8 @@ identifier. E.g. here is an example of including a ggplot2 image</p>
 <span>    ylab <span class="op">=</span> <span class="st">"Miles / gallon"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, title <span class="op">=</span> <span class="st">"# gears"</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html" class="external-link">legend</a></span><span class="op">(</span><span class="st">"topright"</span>,</span>
+<span>  title <span class="op">=</span> <span class="st">"# gears"</span>,</span>
 <span>  pch <span class="op">=</span> <span class="fl">19</span>,</span>
 <span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/levels.html" class="external-link">levels</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span><span class="op">)</span></span>
@@ -185,12 +187,13 @@ identifier. E.g. here is an example of including a ggplot2 image</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Next create an HTML email that references the plot as 'foobar'</span></span>
 <span><span class="va">email</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="../reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">'someaddress@somewhere.com'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"someaddress@somewhere.com"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"someaddress@somewhere.com"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"Cars report"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/gm_mime.html">gm_html_body</a></span><span class="op">(</span></span>
 <span>    <span class="st">'&lt;h1&gt;A plot of &lt;b&gt;MotorTrend&lt;/b&gt; data &lt;i&gt;(1974)&lt;/i&gt;&lt;/h1&gt;</span></span>
-<span><span class="st">    &lt;br&gt;&lt;img src="cid:foobar"&gt;'</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span><span class="st">    &lt;br&gt;&lt;img src="cid:foobar"&gt;'</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.png"</span>, id <span class="op">=</span> <span class="st">"foobar"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
