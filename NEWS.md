@@ -11,8 +11,11 @@
   will see deprecation warnings in more contexts.
 
   The unexported helper `gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))`
-  can be used to convert all R files in the current directory to the new names.
-  (#95)
+  can be used to convert all R files in the current directory to the new names
+  (#95).
+  
+* Legacy auth functions `clear_token()`, `gmail_auth()`, and `use_secret_file()`
+  now throw an error.
 
 * `gm_auth_configure()` accepts an OAuth client (or "app"), via the `app`
   argument, as promised in the docs (#144).
