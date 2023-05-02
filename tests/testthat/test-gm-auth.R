@@ -14,19 +14,22 @@ test_that("gm_scopes() reveals gmail scopes", {
   expect_snapshot(gm_scopes())
 })
 
-test_that("gm_scopes() substitutes full scope for short form", {
-  # "full" is special
-  expect_equal(gm_scopes("full"), "https://mail.google.com/")
+test_that("gm_scopes() substitutes actual scope for short form", {
   expect_equal(
-    gm_scopes(c("gmail.readonly", "gmail.settings_basic")),
+    gm_scopes(c(
+      "full",
+      "gmail.readonly",
+      "gmail.settings_basic"
+    )),
     c(
+      "https://mail.google.com/",
       "https://www.googleapis.com/auth/gmail.readonly",
       "https://www.googleapis.com/auth/gmail.settings.basic"
     )
   )
 })
 
-test_that("gm_scopes() substitutes full scope for legacy super-short form", {
+test_that("gm_scopes() substitutes actual scope for legacy super-short form", {
   local_edition(3)
   local_reproducible_output()
   withr::local_options(lifecycle_verbosity = "warning")
@@ -49,13 +52,11 @@ test_that("gm_scopes() passes unrecognized scopes through", {
   expect_equal(
     gm_scopes(c(
       "email",
-      "readonly",
       "gmail.compose",
       "https://www.googleapis.com/auth/cloud-platform"
     )),
     c(
       "email",
-      "https://www.googleapis.com/auth/gmail.readonly",
       "https://www.googleapis.com/auth/gmail.compose",
       "https://www.googleapis.com/auth/cloud-platform"
     )
