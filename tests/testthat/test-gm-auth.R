@@ -50,11 +50,13 @@ test_that("gm_scopes() passes unrecognized scopes through", {
     gm_scopes(c(
       "email",
       "readonly",
+      "gmail.compose",
       "https://www.googleapis.com/auth/cloud-platform"
     )),
     c(
       "email",
       "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/gmail.compose",
       "https://www.googleapis.com/auth/cloud-platform"
     )
   )
