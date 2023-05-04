@@ -16,9 +16,9 @@ gmailr is not usable in a de-authorized state. Therefore, calling
 subsequent requests are made with an API key in lieu of a token.
 }
 \examples{
-\dontrun{
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 gm_deauth()
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other auth functions: 

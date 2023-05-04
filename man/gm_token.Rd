@@ -20,8 +20,12 @@ If auth has been deactivated via \code{\link[=gm_deauth]{gm_deauth()}}, \code{gm
 returns \code{NULL}.
 }
 \examples{
-\dontrun{
+\dontshow{if (gm_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 gm_token()
+\dontshow{\}) # examplesIf}
 }
+\seealso{
+Other low-level API functions: 
+\code{\link{gm_has_token}()}
 }
 \concept{low-level API functions}

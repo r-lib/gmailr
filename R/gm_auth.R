@@ -97,10 +97,8 @@ gm_auth <- function(email = gm_default_email(),
 #'
 #' @family auth functions
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf rlang::is_interactive()
 #' gm_deauth()
-#' }
 gm_deauth <- function() {
   .auth$clear_cred()
   invisible()
@@ -113,10 +111,8 @@ gm_deauth <- function() {
 #'
 #' @family low-level API functions
 #' @export
-#' @examples
-#' \dontrun{
+#' @examplesIf gm_has_token()
 #' gm_token()
-#' }
 gm_token <- function() {
   if (!gm_has_token()) {
     gm_auth()
@@ -126,10 +122,10 @@ gm_token <- function() {
 
 #' Is there a token on hand?
 #'
-#' Reports whether gmailr has stored a token, ready for use in downstream
-#' requests.
+#' @eval gargle:::PREFIX_has_token_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_has_token_return()
 #'
-#' @return Logical.
+#' @family low-level API functions
 #' @export
 #'
 #' @examples
