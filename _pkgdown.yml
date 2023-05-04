@@ -27,6 +27,7 @@ reference:
   - gm_profile
   - gm_token
   - gm_has_token
+  - gmailr-configuration
 - title: Messages
   desc: >
     These functions create, modify, query and delete email messages.

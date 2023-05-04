@@ -143,6 +143,6 @@ Other auth functions:
 \code{\link{gm_auth_configure}()},
 \code{\link{gm_deauth}()},
 \code{\link{gm_scopes}()},
-\code{\link{gmailr_configuration}}
+\code{\link{gmailr-configuration}}
 }
 \concept{auth functions}

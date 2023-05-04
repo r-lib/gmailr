@@ -19,10 +19,10 @@ NULL
 #' relevant, which is mostly accomplished through [options and associated
 #' accessor functions][gargle::gargle_options].
 #'
-#' @name gmailr_configuration
+#' @name gmailr-configuration
 NULL
 
-#' @rdname gmailr_configuration
+#' @rdname gmailr-configuration
 #' @export
 #' @section `gm_default_email()`:
 
