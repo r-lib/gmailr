@@ -88,14 +88,6 @@ gm_auth <- function(email = gm_default_email(),
   invisible()
 }
 
-gm_default_email <- function() {
-  user <- Sys.getenv("GMAILR_EMAIL")
-  if (nzchar(user)) {
-    return(user)
-  }
-  NULL
-}
-
 #' Clear current token
 #'
 #' @eval gargle:::PREFIX_deauth_description_no_api_key(gargle_lookup_table)
