@@ -20,7 +20,6 @@ gargle_lookup_table <- list(
 #' @eval gargle:::PREFIX_auth_details(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_params()
 #'
-#' @family auth functions
 #' @param scopes One or more API scopes. Each scope can be specified in full or,
 #'   for Gmail API-specific scopes, in an abbreviated form that is recognized by
 #'   [gm_scopes()]:
@@ -37,29 +36,24 @@ gargle_lookup_table <- list(
 #'
 #' See <https://developers.google.com/gmail/api/auth/scopes> for details on the
 #' permissions for each scope.
+#'
+#' @family auth functions
 #' @export
 #'
-#' @examples
-#' \dontrun{
-#' ## load/refresh existing credentials, if available
-#' ## otherwise, go to browser for authentication and authorization
+#' @examplesIf rlang::is_interactive()
+#' # load/refresh existing credentials, if available
+#' # otherwise, go to browser for authentication and authorization
 #' gm_auth()
 #'
-#' ## force use of a token associated with a specific email
+#' # indicate the specific identity you want to auth as
 #' gm_auth(email = "jim@example.com")
 #'
-#' ## force a menu where you can choose from existing tokens or
-#' ## choose to get a new one
+#' # force a new browser dance, i.e. don't even try to use existing user
+#' # credentials
 #' gm_auth(email = NA)
 #'
-#' ## use a 'read only' scope, so it's impossible to change data
-#' gm_auth(
-#'   scopes = "https://www.googleapis.com/auth/gmail.readonly"
-#' )
-#'
-#' ## use a service account token
-#' gm_auth(path = "foofy-83ee9e7c9c48.json")
-#' }
+#' # use a 'read only' scope, so it's impossible to, e.g., send or delete email
+#' gm_auth(scopes = "gmail.readonly")
 gm_auth <- function(email = gm_default_email(),
                     path = NULL,
                     scopes = "full",
