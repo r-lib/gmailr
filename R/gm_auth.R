@@ -60,6 +60,7 @@ gm_auth <- function(email = gm_default_email(),
                     cache = gargle::gargle_oauth_cache(),
                     use_oob = gargle::gargle_oob_default(),
                     token = NULL) {
+  gargle::check_is_service_account(path, hint = "gm_auth_configure")
   scopes <- gm_scopes(scopes)
 
   app <- gm_oauth_app()
