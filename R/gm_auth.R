@@ -76,12 +76,14 @@ gm_auth <- function(email = gm_default_email(),
     token = token
   )
   if (!inherits(cred, "Token2.0")) {
-    stop(
-      "Can't get Google credentials.\n",
-      "Are you running gmailr in a non-interactive session? Consider:\n",
-      "  * Call `gm_auth()` directly with all necessary specifics.\n",
-      call. = FALSE
-    )
+    cli::cli_abort(c(
+      "Can't get Google credentials.",
+      "i" = "Are you running {.pkg gmailr} in a non-interactive \\
+             session? Consider:",
+      "*" = "Call {.fun gm_auth} directly with all necessary specifics.",
+      "i" = "See gargle's \"Non-interactive auth\" vignette for more details:",
+      "i" = "{.url https://gargle.r-lib.org/articles/non-interactive-auth.html}"
+    ))
   }
   .auth$set_cred(cred)
   .auth$set_auth_active(TRUE)
