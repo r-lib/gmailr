@@ -2,41 +2,31 @@
 % Please edit documentation in R/gm_auth.R
 \name{gm_auth_configure}
 \alias{gm_auth_configure}
-\alias{gm_oauth_app}
+\alias{gm_oauth_client}
 \title{Edit auth configuration}
 \usage{
 gm_auth_configure(
-  key = "",
-  secret = "",
-  path = Sys.getenv("GMAILR_APP"),
-  appname = "gmailr",
-  ...,
   client,
-  app = httr::oauth_app(appname, key, secret, ...)
+  path = Sys.getenv("GMAILR_APP"),
+  key = deprecated(),
+  secret = deprecated(),
+  appname = deprecated(),
+  app = deprecated()
 )
 
-gm_oauth_app()
+gm_oauth_client()
 }
 \arguments{
-\item{key}{consumer key, also sometimes called the client ID}
-
-\item{secret}{consumer secret, also sometimes called the client secret.}
+\item{client}{A Google OAuth client, presumably constructed via
+\code{\link[gargle:gargle_oauth_client_from_json]{gargle::gargle_oauth_client_from_json()}}. Note, however, that it is
+preferred to specify the client with JSON, using the \code{path} argument.}
 
 \item{path}{JSON downloaded from \href{https://console.cloud.google.com}{Google Cloud Console}, containing a client id and
 secret, in one of the forms supported for the \code{txt} argument of
 \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
 
-\item{appname}{name of the application.  This is not used for OAuth, but is
-used to make it easier to identify different applications.}
-
-\item{...}{Additional arguments passed to \code{\link[httr:oauth_app]{httr::oauth_app()}}}
-
-\item{client}{A Google OAuth client, presumably constructed via
-\code{\link[gargle:gargle_oauth_client_from_json]{gargle::gargle_oauth_client_from_json()}}. Note, however, that it is
-preferred to specify the client with JSON, using the \code{path} argument.}
-
-\item{app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Replaced by the \code{client}
-argument.}
+\item{key, secret, appname, app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use the
+\code{path} (strongly recommended) or \code{client} argument instead.}
 }
 \value{
 \itemize{
@@ -55,41 +45,27 @@ lets the user specify their own:
 
 See the \code{vignette("get-api-credentials", package = "gargle")}
 for more.
-If the user does not configure these settings, internal defaults
-are used.
 
 \code{gm_oauth_client()} retrieves the currently configured OAuth client.
 }
 \examples{
-\dontrun{
-# see the current user-configured OAuth app (errors if not configured)
-gm_oauth_app()
+# see and store the current user-configured OAuth client
+(original_client <- gm_oauth_client())
 
-if (require(httr)) {
-  # store current state, so we can restore
-  original_app <- gm_oauth_app()
-
-  # bring your own app via client id (aka key) and secret
-  google_app <- httr::oauth_app(
-    "my-awesome-google-api-wrapping-package",
-    key = "123456789.apps.googleusercontent.com",
-    secret = "abcdefghijklmnopqrstuvwxyz"
-  )
-  gm_auth_configure(app = google_app)
-
-  # confirm current app
-  gm_oauth_app()
-
-  # restore original state
-  gm_auth_configure(app = original_app)
-  gm_oauth_app()
-}
-
-# bring your own app via JSON downloaded from Google Developers Console
-gm_auth_configure(
-  path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+# the preferred way to configure your own client is via a JSON file
+# downloaded from Google Developers Console
+# this example JSON is indicative, but fake
+path_to_json <- system.file(
+  "extdata", "client_secret_installed.googleusercontent.com.json",
+  package = "gargle"
 )
-}
+gm_auth_configure(path = path_to_json)
+
+# confirm that a (fake) OAuth client is now configured
+gm_oauth_client()
+
+# restore original auth config
+gm_auth_configure(client = original_client)
 }
 \seealso{
 Other auth functions: 

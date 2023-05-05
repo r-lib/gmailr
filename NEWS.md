@@ -1,5 +1,28 @@
 # gmailr (development version)
 
+## Syncing up with gargle
+
+Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is syncing up that:
+
+* `gm_oauth_client()` is a new function to replace the now-deprecated
+  `gm_oauth_app()`. This is somewhat about a vocabulary change ("client" instead
+  of "app"), but it's really connected to a more meaningful shift in gargle,
+  which has a new appreciation for different OAuth client types (e.g.,
+  "installed" vs. "web").
+* `gm_oauth_client()` (and the function it's replacing, `gm_oauth_app()`) no
+  longer error if there is no configured OAuth client.
+* `gm_auth_configure()` has an updated signature:
+  - The first argument is now named `client`, which is morally equivalent to the
+    previous `app`, i.e. this is essentially a name change.
+  - The `key`, `secret`, `appname`, and `app` arguments are deprecated.
+    Our strong recommendation is to use the `path` argument, e.g.:
+  
+    ``` r
+    gm_auth_configure(path = "path/to/my-oauth-client.json")
+    ```
+
+## Other changes
+
 * `gm_scopes()` can now take a character vector of scopes, each of which can be
   an actual scope or a short alias, e.g., `"gmail.readonly"`, which identifies a
   scope associated with the Gmail API. When called without arguments,
@@ -16,9 +39,6 @@
   
 * Legacy auth functions `clear_token()`, `gmail_auth()`, and `use_secret_file()`
   now throw an error.
-
-* `gm_auth_configure()` accepts an OAuth client (or "app"), via the `app`
-  argument, as promised in the docs (#144).
 
 # gmailr 1.0.1
 

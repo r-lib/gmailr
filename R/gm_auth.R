@@ -63,11 +63,20 @@ gm_auth <- function(email = gm_default_email(),
   gargle::check_is_service_account(path, hint = "gm_auth_configure")
   scopes <- gm_scopes(scopes)
 
-  app <- gm_oauth_app()
+  # preserving previous behavior, in which gm_auth() errors if no OAuth client
+  # is pre-configured
+  # this has downsides (see https://github.com/r-lib/gmailr/issues/160), but
+  # tackling the service account problem is a separate piece of work
+  client <- gm_oauth_client()
+  if (is.null(client)) {
+    cli::cli_abort(
+      "Must create an OAuth client and register it with {.fun gm_auth_configure}."
+    )
+  }
 
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = app,
+    app = client,
     email = email,
     path = path,
     package = "gmailr",
@@ -134,85 +143,89 @@ gm_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
+# gm_auth_configure() started out with a signature that is quite different from
+# other packages, because gmailr adopted gargle later in its life. Therefore I
+# had to document the arguments "by hand". That situation will improve with
+# time, i.e. once I can truly remove deprecated arguments.
+
 #' Edit auth configuration
 #'
-#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table, .has_api_key = FALSE)
-#' @eval gargle:::PREFIX_auth_configure_params(.has_api_key = FALSE)
-#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key = FALSE)
+#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table,
+#'   .has_api_key = FALSE, .fallbacks = FALSE)
 #'
-#' @inheritParams httr::oauth_app
-#' @param secret consumer secret, also sometimes called the client secret.
-#' @param ... Additional arguments passed to \code{\link[httr:oauth_app]{httr::oauth_app()}}
+#' @param client A Google OAuth client, presumably constructed via
+#'   [gargle::gargle_oauth_client_from_json()]. Note, however, that it is
+#'   preferred to specify the client with JSON, using the `path` argument.
+#' @inheritParams gargle::gargle_oauth_client_from_json
+#' @param key,secret,appname,app `r lifecycle::badge('deprecated')` Use the
+#'   `path` (strongly recommended) or `client` argument instead.
+#'
+#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key
+#'   = FALSE)
+#'
 #' @family auth functions
 #' @export
+
 #' @examples
-#' \dontrun{
-#' # see the current user-configured OAuth app (errors if not configured)
-#' gm_oauth_app()
+#' # see and store the current user-configured OAuth client
+#' (original_client <- gm_oauth_client())
 #'
-#' if (require(httr)) {
-#'   # store current state, so we can restore
-#'   original_app <- gm_oauth_app()
-#'
-#'   # bring your own app via client id (aka key) and secret
-#'   google_app <- httr::oauth_app(
-#'     "my-awesome-google-api-wrapping-package",
-#'     key = "123456789.apps.googleusercontent.com",
-#'     secret = "abcdefghijklmnopqrstuvwxyz"
-#'   )
-#'   gm_auth_configure(app = google_app)
-#'
-#'   # confirm current app
-#'   gm_oauth_app()
-#'
-#'   # restore original state
-#'   gm_auth_configure(app = original_app)
-#'   gm_oauth_app()
-#' }
-#'
-#' # bring your own app via JSON downloaded from Google Developers Console
-#' gm_auth_configure(
-#'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
+#' # the preferred way to configure your own client is via a JSON file
+#' # downloaded from Google Developers Console
+#' # this example JSON is indicative, but fake
+#' path_to_json <- system.file(
+#'   "extdata", "client_secret_installed.googleusercontent.com.json",
+#'   package = "gargle"
 #' )
-#' }
-gm_auth_configure <- function(key = "",
-                              secret = "",
+#' gm_auth_configure(path = path_to_json)
+#'
+#' # confirm that a (fake) OAuth client is now configured
+#' gm_oauth_client()
+#'
+#' # restore original auth config
+#' gm_auth_configure(client = original_client)
+gm_auth_configure <- function(client,
                               path = Sys.getenv("GMAILR_APP"),
-                              appname = "gmailr",
-                              ...,
-                              # TODO: this is a temporary fix to unblock other
-                              # changes and allow re-document(); function needs
-                              # more work and thought
-                              client,
-                              app = httr::oauth_app(appname, key, secret, ...)) {
-  have_key_and_secret <- nzchar(key) && nzchar(secret)
-  have_path <- nzchar(path)
-
-  if (!(have_key_and_secret || have_path)) {
-    have_app <- nzchar(app$key) && nzchar(app$secret)
-    if (!have_app) {
-      stop("Must supply `key` and `secret`, `path`, or `app`", call. = FALSE)
-    }
-  }
-  if (have_path) {
-    stopifnot(is_string(path))
-    app <- gargle::oauth_app_from_json(path)
+                              key = deprecated(),
+                              secret = deprecated(),
+                              appname = deprecated(),
+                              app = deprecated()) {
+  if (lifecycle::is_present(app) ||
+      lifecycle::is_present(key) ||
+      lifecycle::is_present(secret) ||
+      lifecycle::is_present(appname)) {
+    what <- glue("
+      The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()`")
+    with <- glue("
+      the `path` (strongly recommended) or `client` argument")
+    lifecycle::deprecate_stop(
+      when = "2.0.0",
+      what = I(what),
+      with = I(with)
+    )
   }
 
-  stopifnot(is.null(app) || inherits(app, "oauth_app"))
+  if (!missing(client) && !missing(path)) {
+    cli::cli_abort(
+      "Must supply exactly one of {.arg client} and {.arg path}, not both."
+    )
+  }
 
-  .auth$set_app(app)
+  if (missing(client)) {
+    check_string(path)
+    client <- gargle::gargle_oauth_client_from_json(path)
+  }
+  stopifnot(is.null(client) || inherits(client, "gargle_oauth_client"))
 
+  .auth$set_app(client)
   invisible(.auth)
 }
 
 #' @export
 #' @rdname gm_auth_configure
-gm_oauth_app <- function() {
-  if (!is.null(.auth$app)) {
-    return(.auth$app)
-  }
-  stop("Must create an app and register it with `gm_auth_configure()`", call. = FALSE)
+gm_oauth_client <- function() {
+  .auth$app
+
 }
 
 #' Get info on current gmail profile
@@ -342,4 +355,22 @@ fixup_gmail_scopes <- function(scopes) {
   }
 
   ifelse(is.na(m), scopes, haystack[m])
+}
+
+# deprecated functions ----
+
+#' Get currently configured OAuth app (deprecated)
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' In light of the new [gargle::gargle_oauth_client()] constructor and class of
+#' the same name, `gm_oauth_app()` is being replaced by [gm_oauth_client()].
+#' @keywords internal
+#' @export
+gm_oauth_app <- function() {
+  lifecycle::deprecate_warn(
+    "2.0.0", "gm_oauth_app()", "gm_oauth_client()"
+  )
+  gm_oauth_client()
 }
