@@ -87,7 +87,7 @@ test_that("MIME - More Complex", {
 
   skip_if_no_token()
   for (email in c(msg1_chr, msg2_chr, msg3_chr)) {
-    expect_error_free({
+    expect_no_error({
       draft <- gm_create_draft(email)
       gm_delete_draft(gm_id(draft))
     })
