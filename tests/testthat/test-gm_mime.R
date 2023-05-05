@@ -39,28 +39,13 @@ test_that("header_encode encodes non-ascii values as base64", {
 })
 
 test_that("MIME - More Complex", {
-  # create test files
-  library(graphics)
-  TEST_PNG <- "volcano.png"
-  png(file = TEST_PNG, width = 200, height = 200)
-  filled.contour(volcano, color.palette = terrain.colors, asp = 1)
-  dev.off()
-
-  TEST_INI <- "test.ini"
-  cat(file = TEST_INI, "testing")
-
-  on.exit({
-    unlink(TEST_PNG)
-    unlink(TEST_INI)
-  })
-
   msg <- gm_mime()
   msg <- gm_from(msg, "Jim Hester<james.f.hester@gmail.com>")
   msg <- gm_to(msg, "james.f.hester@gmail.com")
   msg <- gm_subject(msg, "Hello To:!")
   msg <- gm_text_body(msg, "I am an email")
 
-  msg1 <- gm_attach_file(msg, TEST_PNG)
+  msg1 <- gm_attach_file(msg, test_path("fixtures", "volcano.png"))
 
   msg1_chr <- as.character(msg1)
 
@@ -70,7 +55,11 @@ test_that("MIME - More Complex", {
   expect_match(msg1_chr, "I am an email", label = "Email contains text_body")
   expect_match(msg1_chr, "volcano", label = "Email contains file name")
 
-  msg2 <- gm_attach_file(msg, TEST_INI, content_type = "text/plain")
+  msg2 <- gm_attach_file(
+    msg,
+    test_path("fixtures", "test.ini"),
+    content_type = "text/plain"
+  )
 
   msg2_chr <- as.character(msg2)
 
@@ -81,7 +70,11 @@ test_that("MIME - More Complex", {
   expect_match(msg2_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
 
   msg3 <- gm_html_body(msg, "I am an html email<br>")
-  msg3 <- gm_attach_file(msg3, TEST_INI, content_type = "application/octet-stream")
+  msg3 <- gm_attach_file(
+    msg3,
+    test_path("fixtures", "test.ini"),
+    content_type = "application/octet-stream"
+  )
 
   msg3_chr <- as.character(msg3)
 
