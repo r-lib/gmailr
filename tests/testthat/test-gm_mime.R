@@ -39,7 +39,6 @@ test_that("header_encode encodes non-ascii values as base64", {
 })
 
 test_that("MIME - More Complex", {
-  skip_if_not_installed("base", "4.1") # the pipe really helps here
   # create test files
   library(graphics)
   TEST_PNG <- "volcano.png"
@@ -55,55 +54,46 @@ test_that("MIME - More Complex", {
     unlink(TEST_INI)
   })
 
-  rv2 <- gm_mime() |>
-    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
-    gm_to("james.f.hester@gmail.com") |>
-    gm_subject("Hello To:!") |>
-    gm_text_body("I am an email") |>
-    gm_attach_file(TEST_PNG)
+  msg <- gm_mime()
+  msg <- gm_from(msg, "Jim Hester<james.f.hester@gmail.com>")
+  msg <- gm_to(msg, "james.f.hester@gmail.com")
+  msg <- gm_subject(msg, "Hello To:!")
+  msg <- gm_text_body(msg, "I am an email")
 
-  rv2_chr <- as.character(rv2)
+  msg1 <- gm_attach_file(msg, TEST_PNG)
 
-  expect_match(rv2_chr, "Jim Hester", label = "Email contains from name")
-  expect_match(rv2_chr, "gmail", label = "Email contains to string")
-  expect_match(rv2_chr, "Hello", label = "Email contains subject string")
-  expect_match(rv2_chr, "I am an email", label = "Email contains text_body")
-  expect_match(rv2_chr, "volcano", label = "Email contains file name")
+  msg1_chr <- as.character(msg1)
 
-  rv3 <- gm_mime() |>
-    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
-    gm_to("james.f.hester@gmail.com") |>
-    gm_subject("Hello To:!") |>
-    gm_text_body("I am an email") |>
-    gm_attach_file(TEST_INI, content_type = "text/plain")
+  expect_match(msg1_chr, "Jim Hester", label = "Email contains from name")
+  expect_match(msg1_chr, "gmail", label = "Email contains to string")
+  expect_match(msg1_chr, "Hello", label = "Email contains subject string")
+  expect_match(msg1_chr, "I am an email", label = "Email contains text_body")
+  expect_match(msg1_chr, "volcano", label = "Email contains file name")
 
-  rv3_chr <- as.character(rv3)
+  msg2 <- gm_attach_file(msg, TEST_INI, content_type = "text/plain")
 
-  expect_match(rv3_chr, "Jim Hester", label = "Email contains from name")
-  expect_match(rv3_chr, "gmail", label = "Email contains to string")
-  expect_match(rv3_chr, "Hello", label = "Email contains subject string")
-  expect_match(rv3_chr, "I am an email", label = "Email contains text_body")
-  expect_match(rv3_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
+  msg2_chr <- as.character(msg2)
 
-  rv4 <- gm_mime() |>
-    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
-    gm_to("james.f.hester@gmail.com") |>
-    gm_subject("Hello To:!") |>
-    gm_text_body("I am an email") |>
-    gm_html_body("I am an html email<br>") |>
-    gm_attach_file(TEST_INI, content_type = "application/octet-stream")
+  expect_match(msg2_chr, "Jim Hester", label = "Email contains from name")
+  expect_match(msg2_chr, "gmail", label = "Email contains to string")
+  expect_match(msg2_chr, "Hello", label = "Email contains subject string")
+  expect_match(msg2_chr, "I am an email", label = "Email contains text_body")
+  expect_match(msg2_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
 
-  rv4_chr <- as.character(rv4)
+  msg3 <- gm_html_body(msg, "I am an html email<br>")
+  msg3 <- gm_attach_file(msg3, TEST_INI, content_type = "application/octet-stream")
 
-  expect_match(rv4_chr, "Jim Hester", label = "Email contains from name")
-  expect_match(rv4_chr, "gmail", label = "Email contains to string")
-  expect_match(rv4_chr, "Hello", label = "Email contains subject string")
-  expect_match(rv4_chr, "I am an email", label = "Email contains text_body")
-  expect_match(rv4_chr, base64url_encode("I am an html email<br>"), label = "Email contains html_body")
-  expect_match(rv4_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
+  msg3_chr <- as.character(msg3)
+
+  expect_match(msg3_chr, "Jim Hester", label = "Email contains from name")
+  expect_match(msg3_chr, "gmail", label = "Email contains to string")
+  expect_match(msg3_chr, "Hello", label = "Email contains subject string")
+  expect_match(msg3_chr, "I am an email", label = "Email contains text_body")
+  expect_match(msg3_chr, base64url_encode("I am an html email<br>"), label = "Email contains html_body")
+  expect_match(msg3_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
 
   skip_if_no_token()
-  for (email in c(rv2_chr, rv3_chr, rv4_chr)) {
+  for (email in c(msg1_chr, msg2_chr, msg3_chr)) {
     expect_error_free({
       draft <- gm_create_draft(email)
       gm_delete_draft(gm_id(draft))
@@ -112,16 +102,14 @@ test_that("MIME - More Complex", {
 })
 
 test_that("MIME - Alternative emails contain correct parts", {
-  skip_if_not_installed("base", "4.1") # the pipe really helps here
+  msg <- gm_mime()
+  msg <- gm_from(msg, "Jim Hester<james.f.hester@gmail.com>")
+  msg <- gm_to(msg, "james.f.hester@gmail.com")
+  msg <- gm_subject(msg, "Hello To:!")
+  msg <- gm_text_body(msg, "I am an email")
+  msg <- gm_html_body(msg, "<b>I am a html email</b>")
 
-  email <- gm_mime() |>
-    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
-    gm_to("james.f.hester@gmail.com") |>
-    gm_subject("Hello To:!") |>
-    gm_text_body("I am an email") |>
-    gm_html_body("<b>I am a html email</b>")
-
-  email_chr <- as.character(email)
+  email_chr <- as.character(msg)
 
   expect_match(email_chr, "Jim Hester", label = "Email contains from name")
   expect_match(email_chr, "james.f.hester", label = "Email contains to string")
