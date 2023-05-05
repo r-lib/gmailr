@@ -29,10 +29,10 @@ expect before automating it (if desired) with `gm_send_message()`.
 
 ```r
 test_email <-
-  gm_mime() %>%
-  gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") %>%
-  gm_from("PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE") %>%
-  gm_subject("this is just a gmailr test") %>%
+  gm_mime() |>
+  gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") |>
+  gm_from("PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE") |>
+  gm_subject("this is just a gmailr test") |>
   gm_text_body("Can you hear me now?")
 
 # Verify it looks correct
@@ -46,7 +46,7 @@ You can add a file attachment to your message with `gm_attach_file()`.
 
 ```r
 write.csv(mtcars,"mtcars.csv")
-test_email <- test_email %>% gm_attach_file("mtcars.csv")
+test_email <- test_email |> gm_attach_file("mtcars.csv")
 
 # Verify it looks correct
 gm_create_draft(test_email)

@@ -5,19 +5,19 @@ test_that("MIME - Basic functions", {
 
   expect_true(length(msg$header) > 0, label = "Even the default object has headers")
 
-  rv <- msg %>% gm_to("adam@ali.as")
+  rv <- gm_to(msg, "adam@ali.as")
   expect_equal(header_encode(rv$header$To), "adam@ali.as", label = "to sets To Header")
 
-  rv <- msg %>% gm_from("bob@ali.as")
+  rv <- gm_from(msg, "bob@ali.as")
   expect_equal(header_encode(rv$header$From), "bob@ali.as", label = "from sets From Header")
 
-  rv <- msg %>% gm_to(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
+  rv <- gm_to(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(header_encode(rv$header$To), "adam@ali.as, another@ali.as, bob@ali.as", label = "to (multiple) sets To header")
 
-  rv <- msg %>% gm_cc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
+  rv <- gm_cc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(header_encode(rv$header$Cc), "adam@ali.as, another@ali.as, bob@ali.as", label = "cc (multiple) sets To header")
 
-  rv <- msg %>% gm_bcc(c("adam@ali.as", "another@ali.as", "bob@ali.as"))
+  rv <- gm_bcc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(header_encode(rv$header$Bcc), "adam@ali.as, another@ali.as, bob@ali.as", label = "bcc (multiple) sets To header")
 })
 
@@ -39,6 +39,7 @@ test_that("header_encode encodes non-ascii values as base64", {
 })
 
 test_that("MIME - More Complex", {
+  skip_if_not_installed("base", "4.1") # the pipe really helps here
   # create test files
   library(graphics)
   TEST_PNG <- "volcano.png"
@@ -54,11 +55,11 @@ test_that("MIME - More Complex", {
     unlink(TEST_INI)
   })
 
-  rv2 <- gm_mime() %>%
-    gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
-    gm_to("james.f.hester@gmail.com") %>%
-    gm_subject("Hello To:!") %>%
-    gm_text_body("I am an email") %>%
+  rv2 <- gm_mime() |>
+    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
+    gm_to("james.f.hester@gmail.com") |>
+    gm_subject("Hello To:!") |>
+    gm_text_body("I am an email") |>
     gm_attach_file(TEST_PNG)
 
   rv2_chr <- as.character(rv2)
@@ -69,11 +70,11 @@ test_that("MIME - More Complex", {
   expect_match(rv2_chr, "I am an email", label = "Email contains text_body")
   expect_match(rv2_chr, "volcano", label = "Email contains file name")
 
-  rv3 <- gm_mime() %>%
-    gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
-    gm_to("james.f.hester@gmail.com") %>%
-    gm_subject("Hello To:!") %>%
-    gm_text_body("I am an email") %>%
+  rv3 <- gm_mime() |>
+    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
+    gm_to("james.f.hester@gmail.com") |>
+    gm_subject("Hello To:!") |>
+    gm_text_body("I am an email") |>
     gm_attach_file(TEST_INI, content_type = "text/plain")
 
   rv3_chr <- as.character(rv3)
@@ -84,12 +85,12 @@ test_that("MIME - More Complex", {
   expect_match(rv3_chr, "I am an email", label = "Email contains text_body")
   expect_match(rv3_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
 
-  rv4 <- gm_mime() %>%
-    gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
-    gm_to("james.f.hester@gmail.com") %>%
-    gm_subject("Hello To:!") %>%
-    gm_text_body("I am an email") %>%
-    gm_html_body("I am an html email<br>") %>%
+  rv4 <- gm_mime() |>
+    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
+    gm_to("james.f.hester@gmail.com") |>
+    gm_subject("Hello To:!") |>
+    gm_text_body("I am an email") |>
+    gm_html_body("I am an html email<br>") |>
     gm_attach_file(TEST_INI, content_type = "application/octet-stream")
 
   rv4_chr <- as.character(rv4)
@@ -111,11 +112,13 @@ test_that("MIME - More Complex", {
 })
 
 test_that("MIME - Alternative emails contain correct parts", {
-  email <- gm_mime() %>%
-    gm_from("Jim Hester<james.f.hester@gmail.com>") %>%
-    gm_to("james.f.hester@gmail.com") %>%
-    gm_subject("Hello To:!") %>%
-    gm_text_body("I am an email") %>%
+  skip_if_not_installed("base", "4.1") # the pipe really helps here
+
+  email <- gm_mime() |>
+    gm_from("Jim Hester<james.f.hester@gmail.com>") |>
+    gm_to("james.f.hester@gmail.com") |>
+    gm_subject("Hello To:!") |>
+    gm_text_body("I am an email") |>
     gm_html_body("<b>I am a html email</b>")
 
   email_chr <- as.character(email)

@@ -39,6 +39,19 @@ Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is synci
   
 * Legacy auth functions `clear_token()`, `gmail_auth()`, and `use_secret_file()`
   now throw an error.
+  
+* gmailr no longer `Imports` magrittr and no longer re-exports the magrittr pipe
+  (`%>%`). gmailr is a very pipe-friendly package, so this was originally done
+  for user convenience (#42).
+  
+  Since most users (those using R >= 4.1) now have access to the base pipe
+  (`|>`), that is now what is shown in gmailr's documentation. Those using R <
+  4.1 can still use gmailr with `magrittr::%>%`, but they will need to do
+  `library(magrittr)` for themselves.
+  
+  Any gmailr examples that use the base pipe will no longer work on R < 4.1. On
+  affected R versions, the examples are automatically converted to a regular
+  section with a note that they might not work.
 
 # gmailr 1.0.1
 

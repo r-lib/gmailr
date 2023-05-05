@@ -2,9 +2,6 @@
 .Rproj.user
 .Rhistory
 .RData
-setup.R
-script.R
 docs/
-tools/
 .secrets
 inst/doc

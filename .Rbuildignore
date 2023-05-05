@@ -16,7 +16,6 @@ TODO.md
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^tools$
 ^azure-pipelines\.yml$
 \.secrets$
 ^tests/testthat/\.secrets$

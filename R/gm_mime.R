@@ -9,9 +9,9 @@
 #' @export
 #' @examples
 #' # using the field functions
-#' msg <- gm_mime() %>%
-#'   gm_from("james.f.hester@gmail.com") %>%
-#'   gm_to("asdf@asdf.com") %>%
+#' msg <- gm_mime() |>
+#'   gm_from("james.f.hester@gmail.com") |>
+#'   gm_to("asdf@asdf.com") |>
 #'   gm_text_body("Test Message")
 #'
 #' # alternatively you can set the fields using gm_mime(), however you have
@@ -19,7 +19,7 @@
 #' msg <- gm_mime(
 #'   From = "james.f.hester@gmail.com",
 #'   To = "asdf@asdf.com"
-#' ) %>%
+#' ) |>
 #'   gm_html_body("<b>Test<\b> Message")
 gm_mime <- function(..., attr = NULL, body = NULL, parts = list()) {
   structure(list(
