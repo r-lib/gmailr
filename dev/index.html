@@ -100,10 +100,10 @@
 <p>Create a new email with <code><a href="reference/gm_mime.html">gm_mime()</a></code> and the helper functions. When testing it is recommended to use <code><a href="reference/gm_create_draft.html">gm_create_draft()</a></code> to verify your email is formatted as you expect before automating it (if desired) with <code><a href="reference/gm_send_message.html">gm_send_message()</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_email</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"this is just a gmailr test"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"this is just a gmailr test"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/gm_mime.html">gm_text_body</a></span><span class="op">(</span><span class="st">"Can you hear me now?"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Verify it looks correct</span></span>
@@ -114,7 +114,7 @@
 <p>You can add a file attachment to your message with <code><a href="reference/gm_mime.html">gm_attach_file()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>,<span class="st">"mtcars.csv"</span><span class="op">)</span></span>
-<span><span class="va">test_email</span> <span class="op">&lt;-</span> <span class="va">test_email</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.csv"</span><span class="op">)</span></span>
+<span><span class="va">test_email</span> <span class="op">&lt;-</span> <span class="va">test_email</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Verify it looks correct</span></span>
 <span><span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span>

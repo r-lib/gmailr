@@ -87,6 +87,11 @@
 <p>The unexported helper <code>gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))</code> can be used to convert all R files in the current directory to the new names (<a href="https://github.com/r-lib/gmailr/issues/95" class="external-link">#95</a>).</p>
 </li>
 <li><p>Legacy auth functions <code><a href="../reference/gmailr-deprecated-auth.html">clear_token()</a></code>, <code><a href="../reference/gmailr-deprecated-auth.html">gmail_auth()</a></code>, and <code><a href="../reference/gmailr-deprecated-auth.html">use_secret_file()</a></code> now throw an error.</p></li>
+<li>
+<p>gmailr no longer <code>Imports</code> magrittr and no longer re-exports the magrittr pipe (<code>%&gt;%</code>). gmailr is a very pipe-friendly package, so this was originally done for user convenience (<a href="https://github.com/r-lib/gmailr/issues/42" class="external-link">#42</a>).</p>
+<p>Since most users (those using R &gt;= 4.1) now have access to the base pipe (<code>|&gt;</code>), that is now what is shown in gmailr’s documentation. Those using R &lt; 4.1 can still use gmailr with <code>magrittr::%&gt;%</code>, but they will need to do <code><a href="https://magrittr.tidyverse.org" class="external-link">library(magrittr)</a></code> for themselves.</p>
+<p>Any gmailr examples that use the base pipe will no longer work on R &lt; 4.1. On affected R versions, the examples are automatically converted to a regular section with a note that they might not work.</p>
+</li>
 </ul></div>
 </div>
     <div class="section level2">
