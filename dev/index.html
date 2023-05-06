@@ -90,15 +90,18 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>Install the released version of gmailr from CRAN:</p>
-<p><code>{r, eval = FALSE} install.packages("gmailr")</code></p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"gmailr"</span><span class="op">)</span></span></code></pre></div>
 <p>Or install the development version from GitHub with:</p>
-<p><code>{r, eval = FALSE} # install.packages("pak") pak::pak("r-lib/gmailr")</code></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"r-lib/gmailr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="writing-new-emails">Writing new emails<a class="anchor" aria-label="anchor" href="#writing-new-emails"></a>
 </h2>
-<p>Create a new email with <code><a href="reference/gm_mime.html">gm_mime()</a></code> and the helper functions. When testing it is recommended to use <code><a href="reference/gm_create_draft.html">gm_create_draft()</a></code> to verify your email is formatted as you expect before automating it (if desired) with <code><a href="reference/gm_send_message.html">gm_send_message()</a></code>.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<p>Create a new email with <code><a href="reference/gm_mime.html">gm_mime()</a></code> and the helper functions (<code><a href="reference/accessors.html">gm_from()</a></code>, <code><a href="reference/accessors.html">gm_to()</a></code>, etc.). When developing the message, you might want to use <code><a href="reference/gm_create_draft.html">gm_create_draft()</a></code> to verify your email is formatted as you expect. Then you can send the draft with <code><a href="reference/gm_send_draft.html">gm_send_draft()</a></code> or send the original MIME message with <code><a href="reference/gm_send_message.html">gm_send_message()</a></code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_email</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -106,27 +109,30 @@
 <span>  <span class="fu"><a href="reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="st">"this is just a gmailr test"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/gm_mime.html">gm_text_body</a></span><span class="op">(</span><span class="st">"Can you hear me now?"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Verify it looks correct</span></span>
-<span><span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span>
+<span><span class="co"># Verify it looks correct, i.e. look at your Gmail drafts in the browser</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># If all is good with your draft, then you can send it</span></span>
+<span><span class="co"># If all is good with your draft, then you can send the existing draft</span></span>
+<span><span class="fu"><a href="reference/gm_send_draft.html">gm_send_draft</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># or the existing MIME message</span></span>
 <span><span class="fu"><a href="reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span></code></pre></div>
 <p>You can add a file attachment to your message with <code><a href="reference/gm_mime.html">gm_attach_file()</a></code>.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>,<span class="st">"mtcars.csv"</span><span class="op">)</span></span>
 <span><span class="va">test_email</span> <span class="op">&lt;-</span> <span class="va">test_email</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Verify it looks correct</span></span>
-<span><span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># If so, send it</span></span>
-<span><span class="fu"><a href="reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/gm_send_draft.html">gm_send_draft</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="reading-emails">Reading emails<a class="anchor" aria-label="anchor" href="#reading-emails"></a>
 </h2>
 <p>gmail shows you threads of messages in the web UI, you can retrieve all threads with <code><a href="reference/gm_threads.html">gm_threads()</a></code>, and retrieve a specific thread with <code><a href="reference/gm_thread.html">gm_thread()</a></code></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># view the latest thread</span></span>
 <span><span class="va">my_threads</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_threads.html">gm_threads</a></span><span class="op">(</span>num_results <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
@@ -229,7 +235,7 @@
 <div class="section level3">
 <h3 id="run-locally">Run locally<a class="anchor" aria-label="anchor" href="#run-locally"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Configure your app</span></span>
 <span><span class="fu"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"credentials.json"</span><span class="op">)</span></span>
 <span></span>
