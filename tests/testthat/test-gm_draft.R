@@ -1,7 +1,7 @@
 test_that("create_draft, drafts, draft and send_draft", {
   skip_if_no_token()
 
-  my_email <- Sys.getenv("GMAILR_EMAIL")
+  my_email <- gm_default_email()
 
   mail <- gm_mime(To = my_email, Subject = "hello", body = "how are you doing?")
 

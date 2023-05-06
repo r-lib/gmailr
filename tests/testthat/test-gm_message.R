@@ -98,7 +98,12 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
 test_that("send_message works", {
   skip_if_no_token()
 
-  msg <- gm_mime(From = Sys.getenv("GMAILR_EMAIL"), To = Sys.getenv("GMAILR_EMAIL"), Subject = "hello myself", body = "how are you doing? I am doing well!")
+  msg <- gm_mime(
+    From = gm_default_email(),
+    To   = gm_default_email(),
+    Subject = "hello myself",
+    body = "how are you doing? I am doing well!"
+  )
   sent_id <- gm_id(gm_send_message(msg))
   msg1 <- gm_message(sent_id)
 
