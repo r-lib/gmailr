@@ -10,22 +10,22 @@ Exposing the [Gmail API](https://developers.google.com/gmail/api) from R.
 
 Install the released version of gmailr from CRAN:
 
-```{r, eval = FALSE}
+```r
 install.packages("gmailr")
 ```
 
 Or install the development version from GitHub with:
 
-```{r, eval = FALSE}
+```r
 # install.packages("pak")
 pak::pak("r-lib/gmailr")
 ```
 
 ## Writing new emails
 
-Create a new email with `gm_mime()` and the helper functions. When testing it
-is recommended to use `gm_create_draft()` to verify your email is formatted as you
-expect before automating it (if desired) with `gm_send_message()`.
+Create a new email with `gm_mime()` and the helper functions (`gm_from()`, `gm_to()`, etc.).
+When developing the message, you might want to use `gm_create_draft()` to verify your email is formatted as you expect.
+Then you can send the draft with `gm_send_draft()` or send the original MIME message with `gm_send_message()`.
 
 ```r
 test_email <-
@@ -35,10 +35,13 @@ test_email <-
   gm_subject("this is just a gmailr test") |>
   gm_text_body("Can you hear me now?")
 
-# Verify it looks correct
-gm_create_draft(test_email)
+# Verify it looks correct, i.e. look at your Gmail drafts in the browser
+d <- gm_create_draft(test_email)
 
-# If all is good with your draft, then you can send it
+# If all is good with your draft, then you can send the existing draft
+gm_send_draft(d)
+
+# or the existing MIME message
 gm_send_message(test_email)
 ```
 
@@ -49,10 +52,10 @@ write.csv(mtcars,"mtcars.csv")
 test_email <- test_email |> gm_attach_file("mtcars.csv")
 
 # Verify it looks correct
-gm_create_draft(test_email)
+d <- gm_create_draft(test_email)
 
 # If so, send it
-gm_send_message(test_email)
+gm_send_draft(d)
 ```
 
 ## Reading emails
