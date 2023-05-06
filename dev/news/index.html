@@ -92,6 +92,7 @@
 <p>Since most users (those using R &gt;= 4.1) now have access to the base pipe (<code>|&gt;</code>), that is now what is shown in gmailr’s documentation. Those using R &lt; 4.1 can still use gmailr with <code>magrittr::%&gt;%</code>, but they will need to do <code><a href="https://magrittr.tidyverse.org" class="external-link">library(magrittr)</a></code> for themselves.</p>
 <p>Any gmailr examples that use the base pipe will no longer work on R &lt; 4.1. On affected R versions, the examples are automatically converted to a regular section with a note that they might not work.</p>
 </li>
+<li><p><code><a href="../reference/gmailr-configuration.html">gm_default_oauth_client()</a></code> is a new helper that searches for the JSON file representing an OAuth client in a sequence of locations. The (file)path of least resistance is to place this file in the directory returned by <code>rappdirs::user_data_dir("gmailr")</code>. Another alternative is to record its filepath in the <code>GMAILR_OAUTH_CLIENT</code> environment variable. For backwards compatibility, the <code>GMAILR_APP</code> environment variable is still consulted, but generates a warning (<a href="https://github.com/r-lib/gmailr/issues/166" class="external-link">#166</a>).</p></li>
 </ul></div>
 </div>
     <div class="section level2">
