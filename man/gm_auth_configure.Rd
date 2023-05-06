@@ -6,8 +6,8 @@
 \title{Edit auth configuration}
 \usage{
 gm_auth_configure(
-  client,
-  path = Sys.getenv("GMAILR_APP"),
+  client = NULL,
+  path = gm_default_oauth_client(),
   key = deprecated(),
   secret = deprecated(),
   appname = deprecated(),
@@ -49,6 +49,11 @@ for more.
 \code{gm_oauth_client()} retrieves the currently configured OAuth client.
 }
 \examples{
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# if your OAuth client can be auto-discovered (see ?gm_default_oauth_client),
+# you don't need to provide anything!
+gm_auth_configure()
+\dontshow{\}) # examplesIf}
 # see and store the current user-configured OAuth client
 (original_client <- gm_oauth_client())
 
@@ -68,6 +73,9 @@ gm_oauth_client()
 gm_auth_configure(client = original_client)
 }
 \seealso{
+\code{\link[=gm_default_oauth_client]{gm_default_oauth_client()}} to learn how you can make your OAuth
+client easy for gmailr to discover.
+
 Other auth functions: 
 \code{\link{gm_auth}()},
 \code{\link{gm_deauth}()},

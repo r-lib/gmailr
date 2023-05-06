@@ -163,8 +163,15 @@ gm_has_token <- function() {
 #' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key
 #'   = FALSE)
 #'
+#' @seealso [gm_default_oauth_client()] to learn how you can make your OAuth
+#'   client easy for gmailr to discover.
 #' @family auth functions
 #' @export
+
+#' @examplesIf rlang::is_interactive()
+#' # if your OAuth client can be auto-discovered (see ?gm_default_oauth_client),
+#' # you don't need to provide anything!
+#' gm_auth_configure()
 
 #' @examples
 #' # see and store the current user-configured OAuth client
@@ -184,8 +191,8 @@ gm_has_token <- function() {
 #'
 #' # restore original auth config
 #' gm_auth_configure(client = original_client)
-gm_auth_configure <- function(client,
-                              path = Sys.getenv("GMAILR_APP"),
+gm_auth_configure <- function(client = NULL,
+                              path = gm_default_oauth_client(),
                               key = deprecated(),
                               secret = deprecated(),
                               appname = deprecated(),
@@ -212,6 +219,11 @@ gm_auth_configure <- function(client,
   }
 
   if (missing(client)) {
+    if (is.null(path)) {
+      cli::cli_abort(
+        "Must supply either {.arg client} or {.arg path}."
+      )
+    }
     check_string(path)
     client <- gargle::gargle_oauth_client_from_json(path)
   }
@@ -225,7 +237,6 @@ gm_auth_configure <- function(client,
 #' @rdname gm_auth_configure
 gm_oauth_client <- function() {
   .auth$app
-
 }
 
 #' Get info on current gmail profile

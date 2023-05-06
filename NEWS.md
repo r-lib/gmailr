@@ -52,6 +52,14 @@ Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is synci
   Any gmailr examples that use the base pipe will no longer work on R < 4.1. On
   affected R versions, the examples are automatically converted to a regular
   section with a note that they might not work.
+  
+* `gm_default_oauth_client()` is a new helper that searches for the JSON file
+  representing an OAuth client in a sequence of locations. The (file)path of
+  least resistance is to place this file in the directory returned by
+  `rappdirs::user_data_dir("gmailr")`. Another alternative is to record its
+  filepath in the `GMAILR_OAUTH_CLIENT` environment variable. For backwards
+  compatibility, the `GMAILR_APP` environment variable is still consulted, but
+  generates a warning (#166).
 
 # gmailr 1.0.1
 

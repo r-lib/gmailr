@@ -23,6 +23,7 @@ Imports:
     jsonlite,
     lifecycle,
     mime,
+    rappdirs,
     rematch2,
     rlang (>= 1.1.0),
     withr
@@ -40,5 +41,5 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Config/testthat/edition: 3
-Remotes:  
+Remotes: 
     r-lib/gargle

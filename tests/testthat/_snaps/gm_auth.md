@@ -24,6 +24,14 @@
       Error in `gm_auth_configure()`:
       ! Must supply exactly one of `client` and `path`, not both.
 
+---
+
+    Code
+      gm_auth_configure()
+    Condition
+      Error in `gm_auth_configure()`:
+      ! Must supply either `client` or `path`.
+
 # gm_scopes() reveals gmail scopes
 
     Code

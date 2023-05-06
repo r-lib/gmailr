@@ -18,6 +18,8 @@ test_that("gm_oauth_app() is deprecated", {
 })
 
 test_that("gm_auth_configure() works", {
+  # unset GMAILR_APP
+  withr::local_envvar(GMAILR_APP = NA)
   old_client <- gm_oauth_client()
   withr::defer(gm_auth_configure(client = old_client))
 
@@ -37,8 +39,11 @@ test_that("gm_auth_configure() works", {
   )
   expect_s3_class(gm_oauth_client(), "gargle_oauth_client")
 
-  gm_auth_configure(client = NULL)
-  expect_null(gm_oauth_client())
+  local_mocked_bindings(gm_default_oauth_client = function() NULL)
+  expect_snapshot(
+    error = TRUE,
+    gm_auth_configure()
+  )
 })
 
 test_that("gm_scopes() reveals gmail scopes", {
