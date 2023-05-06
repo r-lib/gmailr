@@ -32,7 +32,7 @@ test_that("gm_default_oauth_client() latches on to 1 matching .json file", {
   withr::local_envvar(R_USER_DATA_DIR = tmp)
 
   user_data_dir <- rappdirs::user_data_dir("gmailr")
-  dir.create(user_data_dir)
+  dir.create(user_data_dir, recursive = TRUE)
   file.copy(
     system.file(
       "extdata", "client_secret_installed.googleusercontent.com.json",
@@ -58,7 +58,7 @@ test_that("gm_default_oauth_client() errors for >1 matching .json files", {
   withr::local_envvar(R_USER_DATA_DIR = tmp)
 
   user_data_dir <- rappdirs::user_data_dir("gmailr")
-  dir.create(user_data_dir)
+  dir.create(user_data_dir, recursive = TRUE)
   file.copy(
     system.file(
       "extdata", "client_secret_installed.googleusercontent.com.json",
