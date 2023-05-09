@@ -57,15 +57,25 @@ gm_default_email <- function() {
 
 #' * `GMAILR_OAUTH_CLIENT` environment variable: If defined, it is assumed to be
 #'   the path to the target JSON file.
-#' * A solitary `.json` file found in the directory returned by
-#'   `rappdirs::user_data_dir("gmailr")`, whose filename matches the regular
-#'   expression `"client_secret.+[.]json$"`.
+#' * A `.json` file found in the directory returned by
+#'   `rappdirs::user_data_dir("gmailr")`, whose filename uniquely matches the
+#'   regular expression `"client_secret.+[.]json$"`.
 #' * `GMAILR_APP` environment variable: This is supported for backwards
 #'   compatibility, but it is preferable to store the JSON below
 #'   `rappdirs::user_data_dir("gmailr")` or to store the path in the
 #'   `GMAILR_OAUTH_CLIENT` environment variable.
 
+#'
+#' Here's an inspirational snippet to move the JSON file you downloaded into the
+#' right place for auto-discovery by `gm_auth_configure()`:
+#' ``` r
+#' path_old <- "~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"
+#' d <- fs::dir_create(rappdirs::user_data_dir("gmailr"), recurse = TRUE)
+#' fs::file_move(path_old, d)
+#' ```
+
 #' @examples
+#'
 #' gm_default_oauth_client()
 #'
 #' withr::with_envvar(
