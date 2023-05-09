@@ -205,7 +205,7 @@ gm_auth_configure <- function(client = NULL,
       The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()`")
     with <- glue("
       the `path` (strongly recommended) or `client` argument")
-    lifecycle::deprecate_stop(
+    deprecate_stop(
       when = "2.0.0",
       what = I(what),
       with = I(with)
@@ -358,7 +358,7 @@ fixup_gmail_scopes <- function(scopes) {
     with <- glue('
       the slightly longer form \\
       ({glue::glue_collapse(glue::double_quote(needs_work), sep = ", ")})')
-    lifecycle::deprecate_warn(
+    deprecate_warn(
       when = "2.0.0",
       what = I(what),
       with = I(with)
@@ -380,7 +380,7 @@ fixup_gmail_scopes <- function(scopes) {
 #' @keywords internal
 #' @export
 gm_oauth_app <- function() {
-  lifecycle::deprecate_warn(
+  deprecate_warn(
     "2.0.0", "gm_oauth_app()", "gm_oauth_client()"
   )
   gm_oauth_client()

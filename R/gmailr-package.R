@@ -7,6 +7,7 @@
 #' @import rlang
 #' @importFrom glue glue
 #' @importFrom lifecycle deprecate_soft
+#' @importFrom lifecycle deprecate_stop
 #' @importFrom lifecycle deprecate_warn
 #' @importFrom lifecycle deprecated
 ## usethis namespace: end
@@ -112,7 +113,7 @@ gm_default_oauth_client <- function() {
 
   path <- Sys.getenv("GMAILR_APP")
   if (nzchar(path)) {
-    lifecycle::deprecate_warn(
+    deprecate_warn(
       when = "2.0.0",
       what = I("The `GMAILR_APP` environment variable"),
       with = I("`GMAILR_OAUTH_CLIENT` or the default storage location"),
