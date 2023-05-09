@@ -30,10 +30,11 @@ Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is synci
   the names are the associated short aliases.
 
 * The deprecation process for legacy functions that lack the `gm_` prefix has
-  been advanced to the next stage, getting closer to actual removal. More users
-  will see deprecation warnings in more contexts.
+  been advanced. The functions are still present, but throw an error directing
+  the user to switch to the prefixed version.
 
-  The unexported helper `gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))`
+  The unexported helper
+  `gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))`
   can be used to convert all R files in the current directory to the new names
   (#95).
   

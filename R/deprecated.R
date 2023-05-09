@@ -1,10 +1,14 @@
 #' Deprecated functions
 #'
-#' @description
-#' `r lifecycle::badge("deprecated")`
+#' @description `r lifecycle::badge("deprecated")`
 #'
-#' These functions are deprecated and will be removed in a future release of
-#' gmailr.
+
+#' All of these functions have been renamed, by adding a `gm_` prefix. This is
+#' to eliminate name conflicts with other packages (including the base package).
+#' Starting with gmailr 1.0.0 (released 2019-08-23), the deprecated functions
+#' generated a warning. As of gmailr 2.0.0, they generate an error and they will
+#' be completely removed in a future release.
+#'
 #' @name gmailr-deprecated
 #' @keywords internal
 
