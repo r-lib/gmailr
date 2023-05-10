@@ -21,6 +21,23 @@ Or install the development version from GitHub with:
 pak::pak("r-lib/gmailr")
 ```
 
+## Setup
+
+In order to use gmailr, you will need to create your own OAuth client.
+This is documented in the article LINK GOES HERE.
+
+After successful setup, a typical gmailr-using script should start like this:
+
+```r
+library(gmailr)
+gm_auth_configure()
+
+# your gmailr code ...
+```
+
+The `gm_auth_configure()` function will discover and configure the OAuth client.
+Alternatively, it can also accept an explicit path to the client JSON.
+
 ## Writing new emails
 
 Create a new email with `gm_mime()` and the helper functions (`gm_from()`, `gm_to()`, etc.).
@@ -106,37 +123,13 @@ gm_save_attachments(my_msg)
   - messages: `gm_delete_message(message_id)`
   - threads: `delete_thread(thread_id)`
 
-## Setup
-
-In order to use gmailr you will need to create a google project for it. The
-easiest way to do this is via the [Python
-Quickstart](https://developers.google.com/gmail/api/quickstart/python).
-
-* Click the `Enable the Gmail API` button.
-* In the resulting dialog click the `DOWNLOAD CLIENT CONFIGURATION` on your computer.
-* Tell gmailr where the JSON lives, by doing one of the two things
-  1. Call `gm_auth_configure(path = "path/to/downloaded/json")`
-  2. Set the `GMAILR_APP` environment variable to the location of the JSON
-     file, it is convienent to do this in your `.Renviron` file with
-     `usethis::edit_r_environ()`. Then calling `gm_auth_configure()` with no arguments.
-* Call `gm_auth()` to start the OAuth flow to verify to google that you would
-  like your gmailr project to have access to your email. You will get a scary
-  warning about an untrusted application, this is because the application is
-  the one you just created, click advanced and `Go to gmailr` to proceed to do
-  the oauth flow.
-* If you want to authenticate with fewer scopes than the default use the
-  `scopes` parameter to `gm_auth()`. You can see a full list of available
-  scopes from `gm_scopes()`.
-  
-Only very heavy usage of the Gmail API requires payment, so use of the API for most
-people should be free.
-
 ## Using gmailr in deployed applications
 
 If you are using gmailr in a deployed application you will need to copy two pieces to your deployed location.
 
-1. The application JSON file, that you setup in the local setup.
-2. The oauth token cache, by default this is `~/.R/gargle/gargle-oauth`
+1. The JSON for your OAuth client.
+2. The OAuth token cache, by default this is the return value of
+   `rappdirs::user_cache_dir("gargle")`.
 
 The easiest thing to do to ensure you are copying only the gmailr oauth token
 is to set this explicitly locally, e.g. do the following.

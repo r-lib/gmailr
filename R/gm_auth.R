@@ -150,6 +150,9 @@ gm_has_token <- function() {
 
 #' Edit auth configuration
 #'
+#' @description
+#' See the ARTICLE for how to get your OAuth client.
+#'
 #' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table,
 #'   .has_api_key = FALSE, .fallbacks = FALSE)
 #'

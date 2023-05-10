@@ -25,3 +25,4 @@ TODO.md
 ^MAINTENANCE\.md$
 ^CRAN-RELEASE$
 ^LICENSE\.md$
+^vignettes/articles$
