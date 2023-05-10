@@ -27,21 +27,34 @@ There may be differences between the screenshots here and what you see.
 
 ## Overview
 
-This is a multi-step process and it's easy to get lost in the weeds, so here is an overiew of the main steps:
+This is a multi-step process and it's easy to get lost in the weeds, so here is an overview.
+I include some detail here, so that someone who's done this before might be able to work from just this checklist:
 
-* Sign in to Google Cloud console
-* Create a Google Cloud project
-* Enable the Gmail API for the project
+* Sign in to Google Cloud console <https://console.cloud.google.com/>.
+* Create a Google Cloud project. And/or select the target project.
+* Enable the Gmail API for the project.
 * Configure the OAuth consent screen for the project (or, using Google's
-  vocabulary, for your "app")
-* Create an OAuth client and download a JSON representation of it
-* Tell gmailr about your OAuth client
+  vocabulary, for your "app"):
+  - Specify the user type, i.e. external vs. internal. An individual Google
+    user, operating outside of Google Workspace, must choose external. Inside an
+    organization, it is possible to choose internal.
+  - Select the allowed scopes. Below I recommend a few nonsensitive default
+    scopes, plus the Gmail-related scopes.
+  - List the allowed users. This applies to a project with external user type
+    and "testing" app status (as opposed to "in production").
+* Create an OAuth client and download a JSON representation of it.
+  - Here you must choose between the "Desktop app" or "Web" client type. We
+    cover how to make this decision below.
+* Tell gmailr about your OAuth client.
+  - Put the downloaded JSON in the place where gmailr can discover it or provide
+    the filepath via an environment variable or provide it directly in
+    `gm_auth_configure(path =)`.
 
 ## Sign in to Google Cloud console
 
 *I focus on the user who has never used Google Cloud before and who is authenticating as an individual (versus as a user within an organization).
 The rationale is that these are the users who will benefit the most from this detailed documentation.
-I may eventually create documentation focused on a different type of user, but, in the meantime, hopefully other users can also gain something from this article.*
+I may eventually create documentation focused on a different type of user, but, in the meantime, hopefully other types of users can also gain something from this article.*
 
 Go to the [Google Cloud console](https://cloud.google.com/cloud-console) and sign in:
 
@@ -71,7 +84,7 @@ knitr::include_graphics("img/google-cloud-welcome-new-user.png")
 
 At this point, you might see an offer to start a free trial of Google Cloud Platform, but that is not necessary in order to create an OAuth client.
 You might be interested in the free trial if you want to experiment with Google Cloud services that normally cost money, such as BigQuery or Maps.
-You can activate the free trial, now, later or never; it has nothing to do with your ability to create an OAuth client that works with gmailr.
+You can activate the free trial, now, later, or never; it has nothing to do with your ability to create an OAuth client that works with gmailr.
 
 ## Create a Google Cloud project
 
@@ -90,6 +103,7 @@ knitr::include_graphics("img/select-a-project-new-user-1.png")
 
 Since you are a new user, presumably you don't have any existing projects.
 Click "NEW PROJECT" in the upper right corner.
+It is fine to see "No organization" here; that's expected if the Google account you're using exists outside of Google Workspace.
 
 ```{r}
 #| echo: false
@@ -177,9 +191,10 @@ knitr::include_graphics("img/apis-and-services-1.png")
 knitr::include_graphics("img/apis-and-services-2.png")
 ```
 
-Click on "APIs & Services".
-If the next screen reveals that the Gmail API is already enabled, you can move on.
-However, here's how this screen might look for a new project that has no APIs enabled:
+Click on "APIs & Services" and then on "Enabled APIs & services".
+Don't be surprised if some APIs are already enabled, even in a new project; this happens by default.
+If this page reveals that the Gmail API is already enabled, you can move on (that won't be true in a new project, but could be true for an existing project).
+Here's how this screen might look for a new project:
 
 ```{r}
 #| echo: false
@@ -551,7 +566,8 @@ knitr::include_graphics("img/one-existing-credential.png")
 
 You should see your successfully created OAuth client ID, with the name you gave it.
 
-If you ever need to access to this JSON again, come back to the "Credentials" screen and there is a download button for all existing OAuth client IDs.
+If you ever need to access to this JSON again, come back to the "Credentials" screen.
+Each existing OAuth client ID has a download button.
 
 ```{r}
 #| echo: false
