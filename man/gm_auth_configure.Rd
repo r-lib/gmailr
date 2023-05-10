@@ -36,6 +36,8 @@ secret, in one of the forms supported for the \code{txt} argument of
 }
 }
 \description{
+See the ARTICLE for how to get your OAuth client.
+
 These functions give more control over and visibility into the auth
 configuration than \code{\link[=gm_auth]{gm_auth()}} does. \code{gm_auth_configure()}
 lets the user specify their own:
