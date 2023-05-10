@@ -2,9 +2,10 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  oauth-client: oauth-client.html
   gmailr: gmailr.html
   sending_messages: sending_messages.html
-last_built: 2023-05-09T15:06Z
+last_built: 2023-05-10T16:35Z
 urls:
   reference: https://gmailr.r-lib.org/reference
   article: https://gmailr.r-lib.org/articles

@@ -49,6 +49,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/oauth-client.html">Set up an OAuth client</a>
     <a class="dropdown-item" href="articles/sending_messages.html">Sending Messages With Gmailr</a>
   </div>
 </li>
@@ -98,10 +99,22 @@
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"r-lib/gmailr"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
+<p>In order to use gmailr, you will need to create your own OAuth client. This is documented in the article LINK GOES HERE.</p>
+<p>After successful setup, a typical gmailr-using script should start like this:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gmailr.r-lib.org">gmailr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># your gmailr code ...</span></span></code></pre></div>
+<p>The <code><a href="reference/gm_auth_configure.html">gm_auth_configure()</a></code> function will discover and configure the OAuth client. Alternatively, it can also accept an explicit path to the client JSON.</p>
+</div>
+<div class="section level2">
 <h2 id="writing-new-emails">Writing new emails<a class="anchor" aria-label="anchor" href="#writing-new-emails"></a>
 </h2>
 <p>Create a new email with <code><a href="reference/gm_mime.html">gm_mime()</a></code> and the helper functions (<code><a href="reference/accessors.html">gm_from()</a></code>, <code><a href="reference/accessors.html">gm_to()</a></code>, etc.). When developing the message, you might want to use <code><a href="reference/gm_create_draft.html">gm_create_draft()</a></code> to verify your email is formatted as you expect. Then you can send the draft with <code><a href="reference/gm_send_draft.html">gm_send_draft()</a></code> or send the original MIME message with <code><a href="reference/gm_send_message.html">gm_send_message()</a></code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_email</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -118,7 +131,7 @@
 <span><span class="co"># or the existing MIME message</span></span>
 <span><span class="fu"><a href="reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span></code></pre></div>
 <p>You can add a file attachment to your message with <code><a href="reference/gm_mime.html">gm_attach_file()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>,<span class="st">"mtcars.csv"</span><span class="op">)</span></span>
 <span><span class="va">test_email</span> <span class="op">&lt;-</span> <span class="va">test_email</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="st">"mtcars.csv"</span><span class="op">)</span></span>
 <span></span>
@@ -132,7 +145,7 @@
 <h2 id="reading-emails">Reading emails<a class="anchor" aria-label="anchor" href="#reading-emails"></a>
 </h2>
 <p>gmail shows you threads of messages in the web UI, you can retrieve all threads with <code><a href="reference/gm_threads.html">gm_threads()</a></code>, and retrieve a specific thread with <code><a href="reference/gm_thread.html">gm_thread()</a></code></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># view the latest thread</span></span>
 <span><span class="va">my_threads</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gm_threads.html">gm_threads</a></span><span class="op">(</span>num_results <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span></span>
@@ -204,38 +217,18 @@
 </ul>
 </div>
 <div class="section level2">
-<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
-</h2>
-<p>In order to use gmailr you will need to create a google project for it. The easiest way to do this is via the <a href="https://developers.google.com/gmail/api/quickstart/python" class="external-link">Python Quickstart</a>.</p>
-<ul>
-<li>Click the <code>Enable the Gmail API</code> button.</li>
-<li>In the resulting dialog click the <code>DOWNLOAD CLIENT CONFIGURATION</code> on your computer.</li>
-<li>Tell gmailr where the JSON lives, by doing one of the two things
-<ol style="list-style-type: decimal">
-<li>Call <code>gm_auth_configure(path = "path/to/downloaded/json")</code>
-</li>
-<li>Set the <code>GMAILR_APP</code> environment variable to the location of the JSON file, it is convienent to do this in your <code>.Renviron</code> file with <code>usethis::edit_r_environ()</code>. Then calling <code><a href="reference/gm_auth_configure.html">gm_auth_configure()</a></code> with no arguments.</li>
-</ol>
-</li>
-<li>Call <code><a href="reference/gm_auth.html">gm_auth()</a></code> to start the OAuth flow to verify to google that you would like your gmailr project to have access to your email. You will get a scary warning about an untrusted application, this is because the application is the one you just created, click advanced and <code>Go to gmailr</code> to proceed to do the oauth flow.</li>
-<li>If you want to authenticate with fewer scopes than the default use the <code>scopes</code> parameter to <code><a href="reference/gm_auth.html">gm_auth()</a></code>. You can see a full list of available scopes from <code><a href="reference/gm_scopes.html">gm_scopes()</a></code>.</li>
-</ul>
-<p>Only very heavy usage of the Gmail API requires payment, so use of the API for most people should be free.</p>
-</div>
-<div class="section level2">
 <h2 id="using-gmailr-in-deployed-applications">Using gmailr in deployed applications<a class="anchor" aria-label="anchor" href="#using-gmailr-in-deployed-applications"></a>
 </h2>
 <p>If you are using gmailr in a deployed application you will need to copy two pieces to your deployed location.</p>
 <ol style="list-style-type: decimal">
-<li>The application JSON file, that you setup in the local setup.</li>
-<li>The oauth token cache, by default this is <code>~/.R/gargle/gargle-oauth</code>
-</li>
+<li>The JSON for your OAuth client.</li>
+<li>The OAuth token cache, by default this is the return value of <code>rappdirs::user_cache_dir("gargle")</code>.</li>
 </ol>
 <p>The easiest thing to do to ensure you are copying only the gmailr oauth token is to set this explicitly locally, e.g. do the following.</p>
 <div class="section level3">
 <h3 id="run-locally">Run locally<a class="anchor" aria-label="anchor" href="#run-locally"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Configure your app</span></span>
 <span><span class="fu"><a href="reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"credentials.json"</span><span class="op">)</span></span>
 <span></span>
