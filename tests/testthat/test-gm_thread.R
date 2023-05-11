@@ -2,7 +2,7 @@ test_that("threads and thread work", {
   skip_if_no_token()
 
   thrds <- gm_threads()
-  expect_is(thrds, "gmail_threads")
+  expect_s3_class(thrds, "gmail_threads")
 
   ids <- gm_id(thrds)
   expect_true(length(ids) > 0)

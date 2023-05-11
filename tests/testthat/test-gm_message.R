@@ -2,7 +2,7 @@ test_that("messages and message work", {
   skip_if_no_token()
 
   msgs <- gm_messages()
-  expect_is(msgs, "gmail_messages")
+  expect_s3_class(msgs, "gmail_messages")
 
   ids <- gm_id(msgs)
   expect_true(length(ids) > 0)
@@ -22,7 +22,7 @@ test_that("messages and message work", {
   skip_if_no_token()
 
   msgs <- gm_messages()
-  expect_is(msgs, "gmail_messages")
+  expect_s3_class(msgs, "gmail_messages")
 
   ids <- gm_id(msgs)
   expect_true(length(ids) > 0)
@@ -47,7 +47,7 @@ test_that("import_message works", {
   ))
   on.exit(gm_delete_message(new_id))
 
-  expect_is(new_id, "character")
+  expect_type(new_id, "character")
 
   # Doing the scanning takes some time, so we can't retrieve the message
   # directly after importing it

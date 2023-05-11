@@ -26,3 +26,4 @@ TODO.md
 ^CRAN-RELEASE$
 ^LICENSE\.md$
 ^vignettes/articles$
+^internal$
