@@ -24,7 +24,7 @@ pak::pak("r-lib/gmailr")
 ## Setup
 
 In order to use gmailr, you will need to create your own OAuth client.
-This is documented in the article LINK GOES HERE.
+This is documented in the article [Set up an OAuth client](https://gmailr.r-lib.org/dev/articles/oauth-client.html).
 
 After successful setup, a typical gmailr-using script should start like this:
 
