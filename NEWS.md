@@ -24,7 +24,7 @@ Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is synci
     gm_auth_configure()
     ```
     which works because of the new default:
-    `gm_auth_configure(path = gm_default_oauth_client()`.
+    `gm_auth_configure(path = gm_default_oauth_client())`.
 * `gm_default_oauth_client()` is a new helper that searches for the JSON file
   representing an OAuth client in a sequence of locations. The (file)path of
   least resistance is to place this file in the directory returned by
