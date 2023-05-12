@@ -72,17 +72,29 @@
 <li>
 <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> has an updated signature:
 <ul><li><p>The first argument is now named <code>client</code>, which is morally equivalent to the previous <code>app</code>, i.e. this is essentially a name change.</p></li>
+<li><p>The <code>key</code>, <code>secret</code>, <code>appname</code>, and <code>app</code> arguments are deprecated.</p></li>
 <li>
-<p>The <code>key</code>, <code>secret</code>, <code>appname</code>, and <code>app</code> arguments are deprecated. Our strong recommendation is to use the <code>path</code> argument, e.g.:</p>
+<p>Our strong recommendation is to use the <code>path</code> argument, either explicitly::</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/my-oauth-client.json"</span><span class="op">)</span></span></code></pre></div>
+<p>or implicitly:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="../reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>which works because of the new default: <code>gm_auth_configure(path = gm_default_oauth_client()</code>.</p>
 </li>
 </ul></li>
+<li>
+<code><a href="../reference/gmailr-configuration.html">gm_default_oauth_client()</a></code> is a new helper that searches for the JSON file representing an OAuth client in a sequence of locations. The (file)path of least resistance is to place this file in the directory returned by <code>rappdirs::user_data_dir("gmailr")</code>. Another alternative is to record its filepath in the <code>GMAILR_OAUTH_CLIENT</code> environment variable. For backwards compatibility, the <code>GMAILR_APP</code> environment variable is still consulted, but generates a warning (<a href="https://github.com/r-lib/gmailr/issues/166" class="external-link">#166</a>).</li>
 </ul></div>
 <div class="section level3">
 <h3 id="other-changes-development-version">Other changes<a class="anchor" aria-label="anchor" href="#other-changes-development-version"></a></h3>
-<ul><li><p><code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> can now take a character vector of scopes, each of which can be an actual scope or a short alias, e.g., <code>"gmail.readonly"</code>, which identifies a scope associated with the Gmail API. When called without arguments, <code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> still returns a named vector of Gmail API-specific scopes, where the names are the associated short aliases.</p></li>
+<ul><li>
+<p><code><a href="../reference/gm_auth.html">gm_auth()</a></code> no longer checks for an OAuth client before calling <code><a href="https://gargle.r-lib.org/reference/token_fetch.html" class="external-link">gargle::token_fetch()</a></code>. This allows other auth methods to work, which by and large don’t need an OAuth client, such as <code><a href="https://gargle.r-lib.org/reference/credentials_byo_oauth2.html" class="external-link">gargle::credentials_byo_oauth2()</a></code> (<a href="https://github.com/r-lib/gmailr/issues/160" class="external-link">#160</a>, <a href="https://github.com/r-lib/gmailr/issues/186" class="external-link">#186</a>).</p>
+<p>Since the lack of an OAuth client undoubtedly remains the most common reason for <code><a href="../reference/gm_auth.html">gm_auth()</a></code> to fail, its error message includes some specific content if no OAuth client has been configured.</p>
+</li>
+<li><p><code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> can now take a character vector of scopes, each of which can be an actual scope or a short alias, e.g., <code>"gmail.readonly"</code>, which identifies a scope associated with the Gmail API. When called without arguments, <code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> still returns a named vector of Gmail API-specific scopes, where the names are the associated short aliases.</p></li>
 <li>
 <p>The deprecation process for legacy functions that lack the <code>gm_</code> prefix has been advanced. The functions are still present, but throw an error directing the user to switch to the prefixed version.</p>
 <p>The unexported helper <code>gmailr:::gm_convert_file(list.files(pattern = "[.]R$", recursive = TRUE))</code> can be used to convert all R files in the current directory to the new names (<a href="https://github.com/r-lib/gmailr/issues/95" class="external-link">#95</a>).</p>
@@ -93,7 +105,6 @@
 <p>Since most users (those using R &gt;= 4.1) now have access to the base pipe (<code>|&gt;</code>), that is now what is shown in gmailr’s documentation. Those using R &lt; 4.1 can still use gmailr with <code>magrittr::%&gt;%</code>, but they will need to do <code><a href="https://magrittr.tidyverse.org" class="external-link">library(magrittr)</a></code> for themselves.</p>
 <p>Any gmailr examples that use the base pipe will no longer work on R &lt; 4.1. On affected R versions, the examples are automatically converted to a regular section with a note that they might not work.</p>
 </li>
-<li><p><code><a href="../reference/gmailr-configuration.html">gm_default_oauth_client()</a></code> is a new helper that searches for the JSON file representing an OAuth client in a sequence of locations. The (file)path of least resistance is to place this file in the directory returned by <code>rappdirs::user_data_dir("gmailr")</code>. Another alternative is to record its filepath in the <code>GMAILR_OAUTH_CLIENT</code> environment variable. For backwards compatibility, the <code>GMAILR_APP</code> environment variable is still consulted, but generates a warning (<a href="https://github.com/r-lib/gmailr/issues/166" class="external-link">#166</a>).</p></li>
 </ul></div>
 </div>
     <div class="section level2">
