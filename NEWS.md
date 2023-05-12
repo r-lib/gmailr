@@ -15,13 +15,34 @@ Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is synci
   - The first argument is now named `client`, which is morally equivalent to the
     previous `app`, i.e. this is essentially a name change.
   - The `key`, `secret`, `appname`, and `app` arguments are deprecated.
-    Our strong recommendation is to use the `path` argument, e.g.:
-  
+  - Our strong recommendation is to use the `path` argument, either explicitly::
     ``` r
     gm_auth_configure(path = "path/to/my-oauth-client.json")
     ```
+    or implicitly:
+    ``` r
+    gm_auth_configure()
+    ```
+    which works because of the new default:
+    `gm_auth_configure(path = gm_default_oauth_client()`.
+* `gm_default_oauth_client()` is a new helper that searches for the JSON file
+  representing an OAuth client in a sequence of locations. The (file)path of
+  least resistance is to place this file in the directory returned by
+  `rappdirs::user_data_dir("gmailr")`. Another alternative is to record its
+  filepath in the `GMAILR_OAUTH_CLIENT` environment variable. For backwards
+  compatibility, the `GMAILR_APP` environment variable is still consulted, but
+  generates a warning (#166).
 
 ## Other changes
+
+* `gm_auth()` no longer checks for an OAuth client before calling
+  `gargle::token_fetch()`. This allows other auth methods to work, which by and
+  large don't need an OAuth client, such as `gargle::credentials_byo_oauth2()`
+  (#160, #186).
+  
+  Since the lack of an OAuth client undoubtedly remains the most common reason
+  for `gm_auth()` to fail, its error message includes some specific content if
+  no OAuth client has been configured.
 
 * `gm_scopes()` can now take a character vector of scopes, each of which can be
   an actual scope or a short alias, e.g., `"gmail.readonly"`, which identifies a
@@ -54,13 +75,6 @@ Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is synci
   affected R versions, the examples are automatically converted to a regular
   section with a note that they might not work.
   
-* `gm_default_oauth_client()` is a new helper that searches for the JSON file
-  representing an OAuth client in a sequence of locations. The (file)path of
-  least resistance is to place this file in the directory returned by
-  `rappdirs::user_data_dir("gmailr")`. Another alternative is to record its
-  filepath in the `GMAILR_OAUTH_CLIENT` environment variable. For backwards
-  compatibility, the `GMAILR_APP` environment variable is still consulted, but
-  generates a warning (#166).
 
 # gmailr 1.0.1
 
