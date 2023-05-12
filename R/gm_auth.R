@@ -151,10 +151,12 @@ gm_has_token <- function() {
 #' Edit auth configuration
 #'
 #' @description
-#' See the ARTICLE for how to get your OAuth client.
-#'
-#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table,
-#'   .has_api_key = FALSE, .fallbacks = FALSE)
+
+#' See the article [Set up an OAuth
+#' client](https://gmailr.r-lib.org/dev/articles/oauth-client.html) for
+#' instructions on how to get an OAuth client. Then you can use
+#' `gm_auth_configure()` to register your client for use with gmailr.
+#' `gm_oauth_client()` retrieves the currently configured OAuth client.
 #'
 #' @param client A Google OAuth client, presumably constructed via
 #'   [gargle::gargle_oauth_client_from_json()]. Note, however, that it is

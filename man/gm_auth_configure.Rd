@@ -36,18 +36,9 @@ secret, in one of the forms supported for the \code{txt} argument of
 }
 }
 \description{
-See the ARTICLE for how to get your OAuth client.
-
-These functions give more control over and visibility into the auth
-configuration than \code{\link[=gm_auth]{gm_auth()}} does. \code{gm_auth_configure()}
-lets the user specify their own:
-\itemize{
-\item OAuth client, which is used when obtaining a user token.
-}
-
-See the \code{vignette("get-api-credentials", package = "gargle")}
-for more.
-
+See the article \href{https://gmailr.r-lib.org/dev/articles/oauth-client.html}{Set up an OAuth client} for
+instructions on how to get an OAuth client. Then you can use
+\code{gm_auth_configure()} to register your client for use with gmailr.
 \code{gm_oauth_client()} retrieves the currently configured OAuth client.
 }
 \examples{
