@@ -63,17 +63,7 @@ gm_auth <- function(email = gm_default_email(),
   gargle::check_is_service_account(path, hint = "gm_auth_configure")
   scopes <- gm_scopes(scopes)
 
-  # preserving previous behavior, in which gm_auth() errors if no OAuth client
-  # is pre-configured
-  # this has downsides (see https://github.com/r-lib/gmailr/issues/160), but
-  # tackling the service account problem is a separate piece of work
   client <- gm_oauth_client()
-  if (is.null(client)) {
-    cli::cli_abort(
-      "Must create an OAuth client and register it with {.fun gm_auth_configure}."
-    )
-  }
-
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = client,
@@ -84,20 +74,39 @@ gm_auth <- function(email = gm_default_email(),
     use_oob = use_oob,
     token = token
   )
-  if (!inherits(cred, "Token2.0")) {
-    cli::cli_abort(c(
-      "Can't get Google credentials.",
-      "i" = "Are you running {.pkg gmailr} in a non-interactive \\
-             session? Consider:",
-      "*" = "Call {.fun gm_auth} directly with all necessary specifics.",
-      "i" = "See gargle's \"Non-interactive auth\" vignette for more details:",
-      "i" = "{.url https://gargle.r-lib.org/articles/non-interactive-auth.html}"
-    ))
-  }
-  .auth$set_cred(cred)
-  .auth$set_auth_active(TRUE)
 
-  invisible()
+  if (inherits(cred, "Token2.0")) {
+    .auth$set_cred(cred)
+    .auth$set_auth_active(TRUE)
+    return(invisible())
+  }
+
+  no_client <- is.null(client)
+  no_client_msg <- c(
+    "x" = "No OAuth client has been configured.",
+    "i" = "To auth with the user flow, you must register an OAuth client with \\
+           {.fun gm_auth_configure}.",
+    "i" = "See the article \"Set up an OAuth client\" for how to get a client:",
+    " " = "{.url https://gmailr.r-lib.org/dev/articles/oauth-client.html}"
+  )
+
+  non_interactive_msg <- c(
+    "!" = "{.pkg gmailr} appears to be running in a non-interactive session \\
+             and it can't auto-discover credentials.",
+    " " = "You may need to call {.fun gm_auth} directly with all necessary \\
+             specifics.",
+    "i" = "See gargle's \"Non-interactive auth\" vignette for more details:",
+    "i" = "{.url https://gargle.r-lib.org/articles/non-interactive-auth.html}"
+  )
+
+  cli::cli_abort(c(
+    "Can't get Google credentials.",
+    if (no_client) no_client_msg,
+    if (!is_interactive()) non_interactive_msg,
+    "i" = "For general auth troubleshooting, set \\
+           {.code options(gargle_verbosity = \"debug\")} to see more detailed
+           debugging information."
+  ))
 }
 
 #' Clear current token
