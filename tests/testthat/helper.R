@@ -1,11 +1,12 @@
-if (gargle:::secret_can_decrypt("gmailr")) {
-  token <- unserialize(gzcon(rawConnection(
-    gargle:::secret_read("gmailr", "gmailr-dev-token")
-  )))
-  gm_auth(token = token)
-
-  # TODO: Think about approaches other than this.
-  Sys.setenv(GMAILR_EMAIL = token$email)
+auth_success <- tryCatch(
+  gm_auth_testing(),
+  gmailr_auth_internal_error = function(e) e
+)
+if (!isTRUE(auth_success)) {
+  cli::cli_inform(c(
+    "!" = "Internal auth failed; not logged in with the testing Gmail account.",
+    auth_success$body
+  ))
 }
 
 skip_if_no_token <- function() {

@@ -382,6 +382,37 @@ fixup_gmail_scopes <- function(scopes) {
   ifelse(is.na(m), scopes, haystack[m])
 }
 
+# unexported helpers that are nice for internal use ----
+gm_auth_testing <- function() {
+  can_decrypt <- gargle:::secret_can_decrypt("gmailr")
+  online <- !is.null(curl::nslookup("gmail.googleapis.com", error = FALSE))
+  if (!can_decrypt || !online) {
+    cli::cli_abort(c(
+      "Auth unsuccessful:",
+      if (!can_decrypt) {
+        c("x" = "Can't decrypt the token.")
+      },
+      if (!online) {
+        c("x" = "We don't appear to be online. Or maybe the Gmail API is down?")
+      }
+    ),
+    class = "gmailr_auth_internal_error",
+    can_decrypt = can_decrypt, online = online
+    )
+  }
+
+  token <- unserialize(gzcon(rawConnection(
+    gargle:::secret_read("gmailr", "gmailr-dev-token")
+  )))
+  gm_auth(token = token)
+
+  # TODO: Think about approaches other than this.
+  Sys.setenv(GMAILR_EMAIL = token$email)
+
+  print(gm_profile())
+  invisible(TRUE)
+}
+
 # deprecated functions ----
 
 #' Get currently configured OAuth app (deprecated)
