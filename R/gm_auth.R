@@ -344,7 +344,6 @@ gmail_scopes <- c(
   gmail.settings_sharing = "https://www.googleapis.com/auth/gmail.settings.sharing"
 )
 
-# TODO: put some version of this in gargle
 resolve_scopes <- function(user_scopes, package_scopes) {
   m <- match(user_scopes, names(package_scopes))
   ifelse(is.na(m), user_scopes, package_scopes[m])
