@@ -148,7 +148,12 @@ client easy for gmailr to discover.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># confirm that a (fake) OAuth client is now configured</span></span></span>
 <span class="r-in"><span><span class="fu">gm_oauth_client</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">&lt;gargle_oauth_client&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> name: a_project_d1c5a8066d2cbe48e8d94514dd286163</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> id: abc.apps.googleusercontent.com</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> secret: <span style="color: #555555;">&lt;REDACTED&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> type: installed</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> redirect_uris: http://localhost</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># restore original auth config</span></span></span>
 <span class="r-in"><span><span class="fu">gm_auth_configure</span><span class="op">(</span>client <span class="op">=</span> <span class="va">original_client</span><span class="op">)</span></span></span>
