@@ -55,7 +55,7 @@ gargle_lookup_table <- list(
 #' # use a 'read only' scope, so it's impossible to, e.g., send or delete email
 #' gm_auth(scopes = "gmail.readonly")
 gm_auth <- function(email = gm_default_email(),
-                    path = NULL,
+                    path = NULL, subject = NULL,
                     scopes = "full",
                     cache = gargle::gargle_oauth_cache(),
                     use_oob = gargle::gargle_oob_default(),
@@ -69,6 +69,7 @@ gm_auth <- function(email = gm_default_email(),
     app = client,
     email = email,
     path = path,
+    subject = subject,
     package = "gmailr",
     cache = cache,
     use_oob = use_oob,

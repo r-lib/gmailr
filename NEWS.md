@@ -35,6 +35,12 @@ Versions 1.3.0, 1.4.0, and 1.5.0 of gargle introduced some changes around OAuth 
 
 ## Other changes
 
+* `gm_auth(subject =)` is a new argument that can be used with
+  `gm_auth(path =)`, i.e. when using a service account. The `path` and
+  `subject` arguments are ultimately processed by
+  `gargle::credentials_service_account()` and support the use of a service
+  account to impersonate a regular user.
+
 * `gm_auth()` no longer checks for an OAuth client before calling
   `gargle::token_fetch()`. This allows other auth methods to work, which by and
   large don't need an OAuth client, such as `gargle::credentials_byo_oauth2()`
