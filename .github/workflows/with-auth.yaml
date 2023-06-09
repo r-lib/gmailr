@@ -17,7 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      GMAILR_PASSWORD: ${{ secrets.GMAILR_PASSWORD }}
       R_KEEP_PKG_SOURCE: yes
     steps:
       - uses: actions/checkout@v3
@@ -34,5 +33,8 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
+        env:
+          GMAILR_PASSWORD: ${{ secrets.GMAILR_PASSWORD }}
+          WITH_AUTH: true
         with:
           upload-snapshots: true
