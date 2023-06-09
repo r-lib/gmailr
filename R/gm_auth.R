@@ -66,7 +66,7 @@ gm_auth <- function(email = gm_default_email(),
   client <- gm_oauth_client()
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = client,
+    client = client,
     email = email,
     path = path,
     subject = subject,
@@ -251,7 +251,7 @@ gm_auth_configure <- function(client = NULL,
 #' @export
 #' @rdname gm_auth_configure
 gm_oauth_client <- function() {
-  .auth$app
+  .auth$client
 }
 
 #' Get info on current gmail profile
