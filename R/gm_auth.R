@@ -244,7 +244,7 @@ gm_auth_configure <- function(client = NULL,
   }
   stopifnot(is.null(client) || inherits(client, "gargle_oauth_client"))
 
-  .auth$set_app(client)
+  .auth$set_client(client)
   invisible(.auth)
 }
 
