@@ -1,3 +1,17 @@
+test_that("the 'with-auth' GHA workflow actually has a token", {
+  skip_if_not(
+    Sys.getenv("GITHUB_ACTIONS") == "true",
+    "Not on GitHub Actions"
+  )
+
+  skip_if_not(
+    Sys.getenv("WITH_AUTH") == "true",
+    "Not the 'with-auth' GHA workflow"
+  )
+
+  expect_true(gm_has_token())
+})
+
 # gm_auth() ----
 test_that("gm_auth() errors if OAuth client is passed to `path`", {
   expect_snapshot(

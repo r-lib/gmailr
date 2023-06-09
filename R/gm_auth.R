@@ -419,6 +419,7 @@ gm_auth_testing <- function() {
   try_fetch(
     whoami <- gm_profile(),
     error = function(cnd) {
+      gm_deauth()
       cli::cli_abort(
         c(
           "",
