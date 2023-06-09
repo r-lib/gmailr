@@ -405,8 +405,32 @@ gm_auth_testing <- function() {
     system.file("secret", "gmailr-dev-token", package = "gmailr"),
     key = "GMAILR_KEY"
   ))
+  # credentials_byo_oauth2() tries to refresh the token and, if that fails, it
+  # generates a warning like this:
+  # Unable to refresh token: invalid_grant
+  # Token has been expired or revoked.
 
-  whoami <- gm_profile()
+  # since I'm using an OAuth client in testing mode, a token might only
+  # be valid for 1 week, so this serves a dual purpose:
+  # - test if the token actually works
+  # - if it does, reveal who I am
+  #   otherwise, throw an error of class "gmailr_auth_internal_error", so that
+  #   downstream work proceeds in "no auth" mode
+  try_fetch(
+    whoami <- gm_profile(),
+    error = function(cnd) {
+      cli::cli_abort(
+        c(
+          "",
+          "x" = "Token decrypted but does not appear to be valid:"
+        ),
+        class = "gmailr_auth_internal_error",
+        parent = NA,
+        error = cnd
+      )
+    }
+  )
+
   # TODO: I don't love this, but it's how I found things and I haven't done
   # enough analysis to remove or change it yet.
   Sys.setenv(GMAILR_EMAIL = whoami$emailAddress)
