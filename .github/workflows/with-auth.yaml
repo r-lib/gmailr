@@ -9,6 +9,7 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
 
 name: with-auth
 
@@ -35,6 +36,7 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         env:
           GMAILR_PASSWORD: ${{ secrets.GMAILR_PASSWORD }}
+          GMAILR_KEY: ${{ secrets.GMAILR_KEY }}
           WITH_AUTH: true
         with:
           upload-snapshots: true
