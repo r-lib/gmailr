@@ -2,7 +2,7 @@
 
 ## Syncing up with gargle
 
-Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is syncing up that:
+Versions 1.3.0, 1.4.0, and 1.5.0 of gargle introduced some changes around OAuth and gmailr is syncing up that:
 
 * `gm_oauth_client()` is a new function to replace the now-deprecated
   `gm_oauth_app()`. This is somewhat about a vocabulary change ("client" instead
@@ -74,7 +74,6 @@ Version 1.3.0 of gargle introduced some changes around OAuth and gmailr is synci
   Any gmailr examples that use the base pipe will no longer work on R < 4.1. On
   affected R versions, the examples are automatically converted to a regular
   section with a note that they might not work.
-  
 
 # gmailr 1.0.1
 
