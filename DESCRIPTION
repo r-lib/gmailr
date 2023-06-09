@@ -28,12 +28,10 @@ Imports:
     rlang (>= 1.1.0),
     withr
 Suggests:
-    covr,
     curl,
     knitr,
     methods,
     rmarkdown,
-    sodium,
     testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr

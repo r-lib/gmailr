@@ -384,7 +384,7 @@ fixup_gmail_scopes <- function(scopes) {
 
 # unexported helpers that are nice for internal use ----
 gm_auth_testing <- function() {
-  can_decrypt <- gargle:::secret_can_decrypt("gmailr")
+  can_decrypt <- gargle::secret_has_key("GMAILR_KEY")
   online <- !is.null(curl::nslookup("gmail.googleapis.com", error = FALSE))
   if (!can_decrypt || !online) {
     cli::cli_abort(c(
@@ -401,15 +401,18 @@ gm_auth_testing <- function() {
     )
   }
 
-  token <- unserialize(gzcon(rawConnection(
-    gargle:::secret_read("gmailr", "gmailr-dev-token")
-  )))
-  gm_auth(token = token)
+  gm_auth(token = gargle::secret_read_rds(
+    system.file("secret", "gmailr-dev-token", package = "gmailr"),
+    key = "GMAILR_KEY"
+  ))
 
-  # TODO: Think about approaches other than this.
-  Sys.setenv(GMAILR_EMAIL = token$email)
+  whoami <- gm_profile()
+  # TODO: I don't love this, but it's how I found things and I haven't done
+  # enough analysis to remove or change it yet.
+  Sys.setenv(GMAILR_EMAIL = whoami$emailAddress)
 
-  print(gm_profile())
+  print(whoami)
+
   invisible(TRUE)
 }
 
