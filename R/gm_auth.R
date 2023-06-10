@@ -267,6 +267,8 @@ gm_oauth_client <- function() {
   .auth$client
 }
 
+# Gmail profile ----
+
 #' Get info on current gmail profile
 #'
 #' Reveals information about the profile associated with the current token.
@@ -288,9 +290,9 @@ gm_oauth_client <- function() {
 #' prof[["historyId"]]
 #' }
 gm_profile <- function(user_id = "me", verbose = TRUE) {
-  if (isFALSE(.auth$auth_active)) {
+  if (!gm_has_token()) {
     if (verbose) {
-      gm_message("Not logged in as any specific Google user.")
+      cli::cli_inform("Not logged in as any specific Google user.")
     }
     return(invisible())
   }
