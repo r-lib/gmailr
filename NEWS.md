@@ -25,6 +25,9 @@ Versions 1.3.0, 1.4.0, and 1.5.0 of gargle introduced some changes around OAuth 
     ```
     which works because of the new default:
     `gm_auth_configure(path = gm_default_oauth_client())`.
+
+## Automatic OAuth client discovery
+
 * `gm_default_oauth_client()` is a new helper that searches for the JSON file
   representing an OAuth client in a sequence of locations. The (file)path of
   least resistance is to place this file in the directory returned by
@@ -32,6 +35,10 @@ Versions 1.3.0, 1.4.0, and 1.5.0 of gargle introduced some changes around OAuth 
   filepath in the `GMAILR_OAUTH_CLIENT` environment variable. For backwards
   compatibility, the `GMAILR_APP` environment variable is still consulted, but
   generates a warning (#166).
+* If `gm_auth()` fails to get a token and no OAuth client has been configured,
+  it silently calls `gm_auth_configure()` to make one attempt at automatic
+  client discovery. If an OAuth client is indeed discovered, `gm_auth()` tries
+  one more time to get a token.
 
 ## Other changes
 

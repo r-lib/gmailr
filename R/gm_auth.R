@@ -83,6 +83,19 @@ gm_auth <- function(email = gm_default_email(),
   }
 
   no_client <- is.null(client)
+
+  if (no_client) {
+    try(gm_auth_configure(), silent = TRUE)
+    if (inherits(gm_oauth_client(), "gargle_oauth_client")) {
+      return(
+        gm_auth(
+          email = email, path = path, subject = subject, scopes = scopes,
+          cache = cache, use_oob = use_oob, token = token
+        )
+      )
+    }
+  }
+
   no_client_msg <- c(
     "x" = "No OAuth client has been configured.",
     "i" = "To auth with the user flow, you must register an OAuth client with \\
