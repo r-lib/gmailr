@@ -19,9 +19,11 @@ httr's class \code{request}, i.e. a token that has been prepared with
 (\code{gm_token_read()}).}
 
 \item{key}{Encryption key, as implemented by httr2's \href{https://httr2.r-lib.org/reference/secrets.html}{secret functions}. If absent, a
-built-in \code{key} is used. If supplied, the \code{key} should almost always be the
-name of an environment variable whose value was generated with
-\code{gargle::secret_make_key()} or \code{httr2::secret_make_key()}).}
+built-in \code{key} is used. If supplied, the \code{key} should usually be the name
+of an environment variable whose value was generated with
+\code{gargle::secret_make_key()} (which is a copy of
+\code{httr2::secret_make_key()}). The \code{key} argument of \code{gm_token_read()} must
+match the \code{key} used in \code{gm_token_write()}.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
@@ -78,7 +80,8 @@ relatively secure place, such as on Posit Connect within your organization.
 
 To prepare a stored credential for exposure in a more public setting, such as
 on GitHub or CRAN, you must actually encrypt it, using a \code{key} known only to
-you. You should make this encryption \code{key} available on both the reading and
-writing side via an environment variable.
+you. You must make the encryption \code{key} available via a secure environment
+variable in any setting where you wish to decrypt and use the token, such as
+on GitHub Actions.
 }
 

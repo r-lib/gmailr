@@ -454,17 +454,20 @@ fixup_gmail_scopes <- function(scopes) {
 #'
 #' To prepare a stored credential for exposure in a more public setting, such as
 #' on GitHub or CRAN, you must actually encrypt it, using a `key` known only to
-#' you. You should make this encryption `key` available on both the reading and
-#' writing side via an environment variable.
+#' you. You must make the encryption `key` available via a secure environment
+#' variable in any setting where you wish to decrypt and use the token, such as
+#' on GitHub Actions.
 #'
 #' @inheritParams gm_auth
 #' @param path The path to write to (`gm_token_write()`) or to read from
 #'   (`gm_token_read()`).
 #' @param key Encryption key, as implemented by httr2's [secret
 #'   functions](https://httr2.r-lib.org/reference/secrets.html). If absent, a
-#'   built-in `key` is used. If supplied, the `key` should almost always be the
-#'   name of an environment variable whose value was generated with
-#'   `gargle::secret_make_key()` or `httr2::secret_make_key()`).
+#'   built-in `key` is used. If supplied, the `key` should usually be the name
+#'   of an environment variable whose value was generated with
+#'   `gargle::secret_make_key()` (which is a copy of
+#'   `httr2::secret_make_key()`). The `key` argument of `gm_token_read()` must
+#'   match the `key` used in `gm_token_write()`.
 #'
 #' @export
 gm_token_write <- function(token = gm_token(),
