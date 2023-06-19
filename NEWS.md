@@ -2,7 +2,7 @@
 
 ## Syncing up with gargle
 
-Versions 1.3.0, 1.4.0, and 1.5.0 of gargle introduced some changes around OAuth and gmailr is syncing up that:
+Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth and gmailr is syncing up that:
 
 * `gm_oauth_client()` is a new function to replace the now-deprecated
   `gm_oauth_app()`. This is somewhat about a vocabulary change ("client" instead
@@ -56,6 +56,11 @@ Versions 1.3.0, 1.4.0, and 1.5.0 of gargle introduced some changes around OAuth 
   Since the lack of an OAuth client undoubtedly remains the most common reason
   for `gm_auth()` to fail, its error message includes some specific content if
   no OAuth client has been configured.
+  
+* `gm_token_write()` + `gm_token_read()` is a new matched pair of functions that
+  make it much easier to explicitly store a token obtained in an interactive
+  session then reuse that token elsewhere, such in CI or in a deployed product
+  (#190).
 
 * `gm_scopes()` can now take a character vector of scopes, each of which can be
   an actual scope or a short alias, e.g., `"gmail.readonly"`, which identifies a
