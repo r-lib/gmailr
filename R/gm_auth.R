@@ -460,7 +460,11 @@ fixup_gmail_scopes <- function(scopes) {
 #' @inheritParams gm_auth
 #' @param path The path to write to (`gm_token_write()`) or to read from
 #'   (`gm_token_read()`).
-#' @inheritParams gargle::gargle_secret
+#' @param key Encryption key, as implemented by httr2's [secret
+#'   functions](https://httr2.r-lib.org/reference/secrets.html). If absent, a
+#'   built-in `key` is used. If supplied, the `key` should almost always be the
+#'   name of an environment variable whose value was generated with
+#'   `gargle::secret_make_key()` or `httr2::secret_make_key()`).
 #'
 #' @export
 gm_token_write <- function(token = gm_token(),

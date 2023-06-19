@@ -17,17 +17,19 @@ news:
    href: https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/
 
 reference:
-- title: Authentication
+- title: Authentication and authorization
   desc: >
-    These functions are used to configure and establish authentication to the gmail API. `gm_auth_configure()` and `gm_auth()` are the most important for most users.
+    These functions are used to auth with the gmail API. `gm_auth_configure()` and `gm_auth()` are the most important for most users.
   contents:
-  - matches("auth")
+  - gm_auth
+  - gm_deauth
+  - gm_auth_configure
   - gm_scopes
   - gm_has_token
   - gm_profile
   - gm_token
-  - gm_has_token
   - gmailr-configuration
+  - gm_token_write
 - title: Messages
   desc: >
     These functions create, modify, query and delete email messages.

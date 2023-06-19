@@ -18,10 +18,10 @@ httr's class \code{request}, i.e. a token that has been prepared with
 \item{path}{The path to write to (\code{gm_token_write()}) or to read from
 (\code{gm_token_read()}).}
 
-\item{key}{Encryption key, as implemented by httr2's \href{https://httr2.r-lib.org/reference/secrets.html}{secret functions}. This should
-almost always be the name of an environment variable whose value was
-generated with \code{secret_make_key()} (which is an inlined copy of
-\code{httr2::secret_make_key()}).}
+\item{key}{Encryption key, as implemented by httr2's \href{https://httr2.r-lib.org/reference/secrets.html}{secret functions}. If absent, a
+built-in \code{key} is used. If supplied, the \code{key} should almost always be the
+name of an environment variable whose value was generated with
+\code{gargle::secret_make_key()} or \code{httr2::secret_make_key()}).}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
