@@ -64,7 +64,7 @@
 <h2 class="pkg-version" data-toc-text="development version" id="gmailr-development-version">gmailr (development version)<a class="anchor" aria-label="anchor" href="#gmailr-development-version"></a></h2>
 <div class="section level3">
 <h3 id="syncing-up-with-gargle-development-version">Syncing up with gargle<a class="anchor" aria-label="anchor" href="#syncing-up-with-gargle-development-version"></a></h3>
-<p>Versions 1.3.0, 1.4.0, and 1.5.0 of gargle introduced some changes around OAuth and gmailr is syncing up that:</p>
+<p>Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth and gmailr is syncing up that:</p>
 <ul><li>
 <code><a href="../reference/gm_auth_configure.html">gm_oauth_client()</a></code> is a new function to replace the now-deprecated <code><a href="../reference/gm_oauth_app.html">gm_oauth_app()</a></code>. This is somewhat about a vocabulary change (“client” instead of “app”), but it’s really connected to a more meaningful shift in gargle, which has a new appreciation for different OAuth client types (e.g., “installed” vs. “web”).</li>
 <li>
@@ -99,6 +99,7 @@
 <p><code><a href="../reference/gm_auth.html">gm_auth()</a></code> no longer checks for an OAuth client before calling <code><a href="https://gargle.r-lib.org/reference/token_fetch.html" class="external-link">gargle::token_fetch()</a></code>. This allows other auth methods to work, which by and large don’t need an OAuth client, such as <code><a href="https://gargle.r-lib.org/reference/credentials_byo_oauth2.html" class="external-link">gargle::credentials_byo_oauth2()</a></code> (<a href="https://github.com/r-lib/gmailr/issues/160" class="external-link">#160</a>, <a href="https://github.com/r-lib/gmailr/issues/186" class="external-link">#186</a>).</p>
 <p>Since the lack of an OAuth client undoubtedly remains the most common reason for <code><a href="../reference/gm_auth.html">gm_auth()</a></code> to fail, its error message includes some specific content if no OAuth client has been configured.</p>
 </li>
+<li><p><code><a href="../reference/gm_token_write.html">gm_token_write()</a></code> + <code><a href="../reference/gm_token_write.html">gm_token_read()</a></code> is a new matched pair of functions that make it much easier to explicitly store a token obtained in an interactive session then reuse that token elsewhere, such in CI or in a deployed product (<a href="https://github.com/r-lib/gmailr/issues/190" class="external-link">#190</a>).</p></li>
 <li><p><code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> can now take a character vector of scopes, each of which can be an actual scope or a short alias, e.g., <code>"gmail.readonly"</code>, which identifies a scope associated with the Gmail API. When called without arguments, <code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> still returns a named vector of Gmail API-specific scopes, where the names are the associated short aliases.</p></li>
 <li>
 <p>The deprecation process for legacy functions that lack the <code>gm_</code> prefix has been advanced. The functions are still present, but throw an error directing the user to switch to the prefixed version.</p>
