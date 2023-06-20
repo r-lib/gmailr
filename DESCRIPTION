@@ -17,7 +17,7 @@ Imports:
     base64enc,
     cli,
     crayon,
-    gargle (>= 1.5.0),
+    gargle (>= 1.5.1),
     glue,
     httr,
     jsonlite,
@@ -25,14 +25,14 @@ Imports:
     mime,
     rappdirs,
     rematch2,
-    rlang (>= 1.1.0),
-    withr
+    rlang (>= 1.1.0)
 Suggests:
     curl,
     knitr,
     methods,
     rmarkdown,
-    testthat (>= 3.0.0)
+    testthat (>= 3.1.8),
+    withr
 VignetteBuilder: 
     knitr
 Config/Needs/website: tidyverse/tidytemplate
