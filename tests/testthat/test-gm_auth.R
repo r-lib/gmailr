@@ -138,3 +138,36 @@ test_that("gm_scopes() passes unrecognized scopes through", {
     )
   )
 })
+
+# gm_token_write / gm_token_read() ----
+
+test_that("gm_token_write() / gm_token_read() roundtrip, built-in key", {
+  fauxen_in <- gargle::gargle2.0_token(
+    email = "a@example.org",
+    credentials = list(a = 1)
+  )
+  tmp <- withr::local_tempfile(pattern = "fauxen-")
+
+  gm_token_write(fauxen_in, tmp)
+  fauxen_out <- gm_token_read(tmp)
+
+  expect_error(readRDS(tmp))
+  expect_equal(fauxen_in, fauxen_out)
+})
+
+test_that("gm_token_write() / gm_token_read() roundtrip, explicit key", {
+  fauxen_in <- gargle::gargle2.0_token(
+    email = "b@example.org",
+    credentials = list(b = 1)
+  )
+  tmp <- withr::local_tempfile(pattern = "fauxen-")
+  withr::local_envvar(GMAILR_ABCXYZ_KEY = gargle::secret_make_key())
+
+  gm_token_write(fauxen_in, tmp, key = "GMAILR_ABCXYZ_KEY")
+
+  expect_error(readRDS(tmp))
+  expect_error(gm_token_read(tmp))
+
+  fauxen_out <- gm_token_read(tmp, "GMAILR_ABCXYZ_KEY")
+  expect_equal(fauxen_in, fauxen_out)
+})
