@@ -48,6 +48,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/oauth-client.html">Set up an OAuth client</a>
+    <a class="dropdown-item" href="../articles/deploy-a-token.html">Deploy a token</a>
     <a class="dropdown-item" href="../articles/sending_messages.html">Sending Messages With Gmailr</a>
   </div>
 </li>
@@ -111,13 +112,13 @@
 using <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">text_msg</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Tue, 20 Jun 2023 06:20:49 GMT\r To:"       </span></span>
+<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Sun, 25 Jun 2023 15:40:57 GMT\r To:"       </span></span>
 <span><span class="co">#&gt; [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"   </span></span>
-<span><span class="co">#&gt; [3] "multipart/mixed; boundary=6af425feac62f63944d3d9af61fcfcf2\r"        </span></span>
-<span><span class="co">#&gt; [4] "--6af425feac62f63944d3d9af61fcfcf2\r MIME-Version: 1.0\r Date: Tue," </span></span>
-<span><span class="co">#&gt; [5] "20 Jun 2023 06:20:49 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
+<span><span class="co">#&gt; [3] "multipart/mixed; boundary=4467c159edb937ad94c4b0dc1f21b7bd\r"        </span></span>
+<span><span class="co">#&gt; [4] "--4467c159edb937ad94c4b0dc1f21b7bd\r MIME-Version: 1.0\r Date: Sun," </span></span>
+<span><span class="co">#&gt; [5] "25 Jun 2023 15:40:57 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
 <span><span class="co">#&gt; [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r Gmailr"</span></span>
-<span><span class="co">#&gt; [7] "is a very handy package!\r --6af425feac62f63944d3d9af61fcfcf2--\r"</span></span></code></pre></div>
+<span><span class="co">#&gt; [7] "is a very handy package!\r --4467c159edb937ad94c4b0dc1f21b7bd--\r"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="html">HTML<a class="anchor" aria-label="anchor" href="#html"></a>

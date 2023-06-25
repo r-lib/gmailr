@@ -3,9 +3,10 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   oauth-client: oauth-client.html
+  deploy-a-token: deploy-a-token.html
   gmailr: gmailr.html
   sending_messages: sending_messages.html
-last_built: 2023-06-20T06:20Z
+last_built: 2023-06-25T15:40Z
 urls:
   reference: https://gmailr.r-lib.org/reference
   article: https://gmailr.r-lib.org/articles
