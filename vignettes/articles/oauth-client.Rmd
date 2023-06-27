@@ -371,6 +371,9 @@ knitr::include_graphics("img/edit-app-registration-4.png")
 Now we will add a test user: YOU!
 Click on "+ ADD USERS".
 
+(If you are creating an OAuth client within a Google Workspace and it is only for internal users, you can skip the steps around adding test users.
+That is only relevant to a client that aims to support external users.)
+
 ```{r}
 #| echo: false
 #| label: edit-app-registration-5
