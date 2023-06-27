@@ -151,14 +151,19 @@ To learn more about gargle options, see \link[gargle:gargle_options]{gargle::gar
 gm_auth()
 
 # indicate the specific identity you want to auth as
-gm_auth(email = "jim@example.com")
+gm_auth(email = "jenny@example.com")
 
 # force a new browser dance, i.e. don't even try to use existing user
 # credentials
 gm_auth(email = NA)
 
-# use a 'read only' scope, so it's impossible to, e.g., send or delete email
-gm_auth(scopes = "gmail.readonly")
+# specify the identity, use a 'read only' scope, so it's impossible to
+# send or delete email, and specify a cache folder
+gm_auth(
+  "target.user@example.com",
+  scopes = "gmail.readonly",
+  cache = "some/nice/directory/"
+)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
