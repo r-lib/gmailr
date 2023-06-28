@@ -8,109 +8,186 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+can_decrypt <- gargle::secret_has_key("GMAILR_KEY")
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
 )
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+```{r auth, include = FALSE}
+gmailr:::gm_auth_testing()
 ```
 
 ```{r setup, message = FALSE}
 library(gmailr)
 ```
 
-## Quickstart ##
+## OAuth client
 
-This is a short document on getting up to speed with gmailr quickly.
+In order to use gmailr, you **must** provide your own OAuth client.
+The article [Set up an OAuth client](https://gmailr.r-lib.org/dev/articles/oauth-client.html) explains how to obtain an OAuth client and how to configure it for gmailr's use.
+The help topics for `?gm_auth_configure` and `?gm_default_oauth_client` will also be useful.
 
-## External Setup ##
-
-In order to use gmailr you will need to create a google project for it. The
-easiest way to do this is via the [Python
-Quickstart](https://developers.google.com/gmail/api/quickstart/python).
-
-* Click the `Enable the Gmail API` button.
-* In the resulting dialog click the `DOWNLOAD CLIENT CONFIGURATION` on your computer.
-* Tell gmailr where the JSON lives, by doing one of the two things
-  1. Call `gm_auth_configure(path = "path/to/downloaded/json")`
-  2. Set the `GMAILR_APP` environment variable to the location of the JSON
-     file, it is convienent to do this in your `.Renviron` file with
-     `usethis::edit_r_environ()`. Then calling `gm_auth_configure()` with no arguments.
-* Call `gm_auth()` to start the OAuth flow to verify to google that you would
-  like your gmailr project to have access to your email. You will get a scary
-  warning about an untrusted application, this is because the application is
-  the one you just created, click advanced and `Go to gmailr` to proceed to do
-  the oauth flow.
-* If you want to authenticate with fewer scopes than the default use the
-  `scopes` parameter to `gm_auth()`. You can see a full list of available
-  scopes from `gm_scopes()`.
-  
-Only very heavy usage of the Gmail API requires payment, so use of the API for most
-people should be free.
-
-If you use `usethis::edit_r_environ()` to set both `GMAILR_EMAIL` and
-`GMAILR_APP`, then once you have an oauth token you can simply run
-`gm_auth_configure()` with no arguments at the top of the script to setup your
-application.
-
-## Writing new emails ##
-
-Create a new email with `gm_mime()` and the helper functions. When testing it
-is recommended to use `gm_create_draft()` to verify your email is formatted as you
-expect before automating it (if desired) with `gm_send_message()`.
+Unless you have reason to do otherwise, my recommendation is to place the JSON file for your OAuth client in the default location, so that it is discovered automatically.
+The default location is returned by `rappdirs::user_data_dir("gmailr")`.
+Alternatively, you can also make autodiscovery work by exposing the client's JSON filepath as the `GMAILR_OAUTH_CLIENT` environment variable.
+If your client is configured for auto-discovery, your gmailr code should "just work", without any explicit configuration around the client:
 
 ```r
+library(gmailr)
+
+# your gmailr code ...
+```
+
+Otherwise, your code must always include a call to `gm_auth_configure()`, probably right after you attach gmailr:
+
+```r
+library(gmailr)
+gm_auth_configure("path/to/your/oauth_client.json")
+
+# your gmailr code ...
+```
+
+## Auth
+
+Configuring an OAuth client is step 1 of 2 for getting ready to use gmailr.
+Step 2 is to complete the so-called "OAuth dance".
+
+For most folks and especially in early usage, you can just allow the OAuth dance to be triggered automatically upon first need.
+You are taken to a web browser, where you must select or login as the Google user you want to use (authenticate yourself) and give your OAuth client permission to do Gmail stuff on your behalf (authorize).
+The OAuth dance does not need to be repeated in subsequent sessions, because, by default, your credentials are cached locally and can be refreshed.
+
+If, however, you want to take more control over auth, you can call `gm_auth()` explicitly and proactively.
+The arguments that are most useful in practice are:
+
+* `email`: Use this to specify the target user. This can be useful if you have
+  a cached token and you want code to run without an attempt to get interactive
+  confirmation that it's OK to use it.
+* `scopes`: Following the principle of least privilege, if you have no intention
+  of sending email, it could be wise to deliberately use a token with a
+  "read only" scope.
+* `token`: In a deployed setting, it can be useful to directly provide a stored
+  token to gmailr. This use case is documented in `vignettes("deploy-a-token")`.
+  
+Here's how a script might begin if the OAuth client can't be auto-discovered and the user needs to request non-default behaviour from `gm_auth()`:
+
+```{r eval = FALSE}
+library(gmailr)
+gm_auth_configure("path/to/your/oauth_client.json")
+
+gm_auth(
+  "target.user@example.com",
+  scopes = "gmail.readonly",
+  cache = "some/nice/directory/"
+)
+```
+
+`gm_profile()` is a handy function to confirm that gmailr is using the intended Google identity.
+
+```{r}
+gm_profile()
+```
+
+## Compose and send an email
+
+Create a new email with `gm_mime()` and then build it up from parts, using helper functions like `gm_to()` and `gm_subject()`.
+
+```{r eval = FALSE}
 test_email <-
   gm_mime() |>
   gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") |>
   gm_from("PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE") |>
   gm_subject("this is just a gmailr test") |>
   gm_text_body("Can you hear me now?")
+```
 
-# Verify it looks correct
-gm_create_draft(test_email)
+```{r include = FALSE}
+test_email <-
+  gm_mime() |>
+  gm_to("gargle-testuser@posit.co") |>
+  gm_from("gargle-testuser@posit.co") |>
+  gm_subject("this is just a gmailr test") |>
+  gm_text_body("Can you hear me now?")
+```
 
-# If all is good with your draft, then you can send it
+You can even add a file attachment with `gm_attach_file()`:
+
+```{r}
+tmp <- tempfile("mtcars-", fileext = ".csv")
+write.csv(mtcars, tmp)
+test_email <- gm_attach_file(test_email, tmp)
+```
+
+When developing a message, it's a good idea to first create a draft with  `gm_create_draft()`
+Then you can visit your Gmail drafts in the browser and confirm that the message content and formatting is as you intend.
+
+```{r}
+d <- gm_create_draft(test_email)
+```
+
+If you're happy, you can either send that draft with `gm_send_draft()`:
+
+```{r}
+gm_send_draft(d)
+```
+
+Or you can send the original MIME message with `gm_send_message()`:
+
+```{r eval = FALSE}
 gm_send_message(test_email)
 ```
 
-You can add a file attachment to your message with `gm_attach_file()`.
+## Read email
 
-```r
-write.csv("mtcars.csv", mtcars)
-test_email <- gm_attach_file("mtcars.csv")
+You can retrieve email threads with `gm_threads()`:
 
-# Verify it looks correct
-gm_create_draft(test_email)
-
-# If so, send it
-gm_send_message(test_email)
-```
-
-## Reading emails ##
-
-gmail shows you threads of messages in the web UI, you can retrieve all threads
-with `gm_threads()`, and retrieve a specific thread with `gm_thread()`
-
-```r
-# view the latest thread
+```{r}
 my_threads <- gm_threads(num_results = 10)
+```
 
+You can retrieve a specific thread with `gm_thread()`:
+
+```{r}
 # retrieve the latest thread by retrieving the first ID
-
 latest_thread <- gm_thread(gm_id(my_threads)[[1]])
+```
 
-# The messages in the thread will now be in a list
-latest_thread$messages
+The messages in `latest_thread` are stored as a list.
+You can then isolate a specific message and access its parts.
 
-# Retrieve parts of a specific message with the accessors
+```{r}
 my_msg <- latest_thread$messages[[1]]
 
-gm_to(my_msg)
-gm_from(my_msg)
 gm_date(my_msg)
 gm_subject(my_msg)
 gm_body(my_msg)
-
-# If a message has attachments, download them all locally with `gm_save_attachments()`.
-gm_save_attachments(my_msg)
 ```
+
+If a message has attachments, you can download them all locally with `gm_save_attachments()`:
+
+```{r}
+tmp2 <- tempfile("attachments-")
+dir.create(tmp2)
+gm_save_attachments(my_msg, path = tmp2)
+
+# let's take a peek
+tmp2 |> 
+  list.files(full.names = TRUE, pattern = "[.]csv$") |> 
+  read.csv() |> 
+  head()
+```
+
+```{r include = FALSE}
+unlink(tmp)
+unlink(tmp2, recursive = TRUE)
+```
+
+

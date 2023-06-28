@@ -27,3 +27,4 @@ TODO.md
 ^LICENSE\.md$
 ^vignettes/articles$
 ^internal$
+^README\.Rmd$

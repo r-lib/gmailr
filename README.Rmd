@@ -1,0 +1,136 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+can_decrypt <- gargle::secret_has_key("GMAILR_KEY")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE,
+  fig.path = "man/figures/README-",
+  out.width = "100%",
+  purl = can_decrypt,
+  eval = can_decrypt
+)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+```{r readme-auth, include = FALSE}
+gmailr:::gm_auth_testing()
+```
+
+# gmailr
+<!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/gmailr)](https://CRAN.R-project.org/package=gmailr)
+[![R-CMD-check](https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/r-lib/gmailr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/gmailr?branch=main)
+<!-- badges: end -->
+
+Exposing the [Gmail API](https://developers.google.com/gmail/api) from R.
+
+## Installation
+
+Install the released version of gmailr from CRAN:
+
+```{r eval = FALSE}
+install.packages("gmailr")
+```
+
+Or install the development version from GitHub with:
+
+```{r eval = FALSE}
+# install.packages("pak")
+pak::pak("r-lib/gmailr")
+```
+
+## Attach gmailr
+
+```{r, message = FALSE}
+library(gmailr)
+```
+
+## Setup and auth
+
+In order to use gmailr, you **must** provide your own OAuth client.
+This is documented in the article [Set up an OAuth client](https://gmailr.r-lib.org/dev/articles/oauth-client.html).
+The article goes deeply into how to create an OAuth client and also how to configure it for gmailr's use.
+If you already have an OAuth client or know how to create one, the help topics for `?gm_auth_configure` and `?gm_default_oauth_client` are more concise resources for just the client configuration piece.
+
+Configuring an OAuth client is step 1 of 2 for getting ready to use gmailr.
+Step 2 is to complete the so-called "OAuth dance", which is triggered automatically upon first need.
+You are taken to a web browser, where you must select or login as the Google user you want to use (authenticate yourself) and give your OAuth client permission to do Gmail stuff on your behalf (authorize).
+The OAuth dance does not (necessarily) need to be repeated in subsequent sessions.
+See `?gm_auth` if these defaults aren't appropriate for your use case and you'd like to take more control.
+
+You can call `gm_profile()` to confirm that you are using the intended Google identity.
+
+## Compose and send an email
+
+Create a new email with `gm_mime()` and build it up from parts, using helper functions like `gm_to()` and `gm_subject()`.
+
+```{r eval = FALSE}
+test_email <-
+  gm_mime() |>
+  gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") |>
+  gm_from("PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE") |>
+  gm_subject("this is just a gmailr test") |>
+  gm_text_body("Can you hear me now?")
+```
+
+```{r include = FALSE}
+test_email <-
+  gm_mime() |>
+  gm_to("gargle-testuser@posit.co") |>
+  gm_from("gargle-testuser@posit.co") |>
+  gm_subject("this is just a gmailr test") |>
+  gm_text_body("Can you hear me now?")
+```
+
+When developing the message, you might want to use `gm_create_draft()`, if you'd like to view a draft and verify that it's formatted as you expect.
+Then you can send the draft with `gm_send_draft()` or send the original MIME message with `gm_send_message()`.
+
+```{r}
+# Verify it looks correct, i.e. look at your Gmail drafts in the browser
+d <- gm_create_draft(test_email)
+
+# If all is good with your draft, then you can send the existing draft
+gm_send_draft(d)
+
+# or the existing MIME message
+gm_send_message(test_email)
+```
+
+## Read email
+
+You can retrieve all email threads with `gm_threads()` or retrieve a specific thread with `gm_thread()`.
+You can then isolate a specific message and access its parts.
+
+```{r}
+# view recent threads
+my_threads <- gm_threads(num_results = 10)
+
+# retrieve the latest thread by retrieving the first ID
+latest_thread <- gm_thread(gm_id(my_threads)[[1]])
+
+# messages in the thread will now be in a list
+# retrieve parts of a specific message with the accessors
+my_msg <- latest_thread$messages[[1]]
+
+gm_date(my_msg)
+gm_subject(my_msg)
+gm_body(my_msg)
+```
+
+## Where to learn more
+
+More details are available in the [Get started](https://gmailr.r-lib.org/articles/gmailr.html) article and in gmailr's [other articles](https://gmailr.r-lib.org/articles/index.html).
+
+## Policies
+
+[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
