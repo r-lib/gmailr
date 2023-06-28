@@ -94,6 +94,8 @@
 
     
     
+<p>This article explains how to create your own OAuth client and how to
+configure it for use with gmailr.</p>
 <p>This article contains many screenshots, by necessity. However, there
 are many downsides to a screenshot-heavy article and the reader needs to
 be ready to adapt to certain issues:</p>
@@ -131,8 +133,8 @@ Google’s vocabulary, for your “app”):
 <ul>
 <li>Specify the user type, i.e. external vs. internal. An individual
 Google user, operating outside of Google Workspace, must choose
-external. Inside an organization, it is possible to choose
-internal.</li>
+external. Inside an organization, it is possible to choose internal and
+that is a good idea.</li>
 <li>Select the allowed scopes. Below I recommend a few nonsensitive
 default scopes, plus the Gmail-related scopes.</li>
 <li>List the allowed users. This applies to a project with external user
@@ -473,6 +475,58 @@ you specify non-default <code>scopes</code> in your
 <code><a href="../reference/gm_auth.html">gm_auth()</a></code> call. Click “Continue” to obtain a user token
 and, hopefully, live out your gmailr-powered dreams of controlling Gmail
 from R.</p>
+<p>At this point, your GCP project is in “Testing” mode. That has the
+potential downside that refresh tokens only last for 1 week (at the time
+of writing), i.e. the credential can be refreshed automatically for only
+1 week. After that, the refresh token becomes invalid, and you’ll have
+to re-do the OAuth dance. There are two ways to get a token that is more
+persistent:</p>
+<ul>
+<li>Switch the publishing status, in your OAuth consent screen settings,
+from “Testing” to “In production”. That is explained in the next
+section.</li>
+<li>Use a GCP project that is within a Google workspace and configure
+the OAuth consent screen for the “Internal” user type. This is obviously
+only available to folks working within a Google workspace and that
+either describes you or it doesn’t.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="using-a-non-verified-in-production-app">Using a non-verified, “In production” app<a class="anchor" aria-label="anchor" href="#using-a-non-verified-in-production-app"></a>
+</h2>
+<p>This section discusses the experience if your GCP project is
+<em>not</em> inside a Google workspace, but you have decided to change
+its publishing status from “Testing” to “In production”. The reason you
+might do this is to get a token that remains valid for more than 1 week.
+This can be done in the OAuth consent screen configuration. Click the
+“PUBLISH APP” button.</p>
+<p><img src="img/oauth-consent-screen-publishing-status-testing.png" alt='Screenshot of the OAuth consent screen configuration. There is an arrow pointing at the "Continue" button at the bottom of the page.' width="600px"></p>
+<p>You will then see a new pop-up asking you to confirm this choice,
+outlining various implications and requirements.</p>
+<p><img src="img/oauth-consent-screen-push-to-production.png" alt='Screenshot of the OAuth consent screen configuration. There is an arrow pointing at the "Continue" button at the bottom of the page.' width="600px"></p>
+<p>Presumably you have no intention of doing any of these things, since
+this OAuth client is for personal use. Regardless, click “CONFIRM” to
+proceed.</p>
+<p>Now the OAuth consent screen settings reflect the new publishing
+status, which is “In production”. However, you will also see that your
+project “Needs verification”. You will just have to accept this
+situation as something awkward that comes when an individual R user is
+forced to use API configuration that is really designed for application
+developers.</p>
+<p>You should be able to make personal use of the OAuth client now,
+despite the fact that it “Needs verification”. My perception is that
+your project can exist in this state as long as the usage is extremely
+low, in terms of the number of unique users, which presumably will be 1
+or some other very small number.</p>
+<p>When you do the OAuth dance, you will again see some scary screens,
+due to the “Needs verification” flag on the project.</p>
+<p><img src="img/google-hasnt-verified-this-app-advanced.png" alt='Screenshot of the OAuth consent screen configuration. There is an arrow pointing at the "Continue" button at the bottom of the page.' width="600px"></p>
+<p>When you are first informed that “Google hasn’t verified this app”,
+click “Advanced” to proceed. You will get a slightly different scary
+screen, advising you to continue only if you understand the risks and
+trust the developer, i.e. yourself. Click “Go to YOUR-PROJECT-NAME
+(unsafe)” to proceed to the usual consent screens.</p>
+<p><img src="img/google-hasnt-verified-this-app-go-to-unsafe.png" alt='Screenshot of the OAuth consent screen configuration. There is an arrow pointing at the "Continue" button at the bottom of the page.' width="600px"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
