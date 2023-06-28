@@ -514,6 +514,10 @@ Here's how to choose the application type:
   "out-of-bound" (oob) auth flow or a gargle-specific variant known as
   pseudo-oob.
   
+Note that above, we are talking about the computing environment where you will do the OAuth dance, i.e. where you will obtain a new token.
+If you are going to do auth on your local computer, the deploy that token to Posit Connect or Cloud, you need a "Desktop app".
+(This workflow is detailed in `vignette("deploy-a-token")`.)
+  
 Let's say you choose "Desktop app".
 Again, you'll get a chance to give the client a name.
 I encourage you to give it a label that has some meaning and that you can hold in your head for minutes at a time.
@@ -717,9 +721,9 @@ Click the "PUBLISH APP" button.
 #| label: oauth-consent-screen-publishing-status-testing
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the OAuth consent screen configuration.
-#|   There is an arrow pointing at the "Continue" button at the bottom of the
-#|   page.
+#|   Screenshot of the configuration of the OAuth consent screen.
+#|   There is an arrow pointing at the "PUBLISH APP" button in the Publishing
+#|   status section.
 knitr::include_graphics("img/oauth-consent-screen-publishing-status-testing.png")
 ```
 
@@ -730,9 +734,9 @@ You will then see a new pop-up asking you to confirm this choice, outlining vari
 #| label: oauth-consent-screen-push-to-production
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the OAuth consent screen configuration.
-#|   There is an arrow pointing at the "Continue" button at the bottom of the
-#|   page.
+#|   Screenshot of a pop-up explaining the implications of putting an app into
+#|   production mode, with the option to click "CANCEL" or "CONFIRM". There is
+#|   an arrow pointing at "CONFIRM".
 knitr::include_graphics("img/oauth-consent-screen-push-to-production.png")
 ```
 
@@ -742,6 +746,17 @@ Regardless, click "CONFIRM" to proceed.
 Now the OAuth consent screen settings reflect the new publishing status, which is "In production".
 However, you will also see that your project "Needs verification".
 You will just have to accept this situation as something awkward that comes when an individual R user is forced to use API configuration that is really designed for application developers.
+
+```{r}
+#| echo: false
+#| label: oauth-consent-screen-in-production-needs-verification
+#| out.width: 600px
+#| fig-alt: >
+#|   Screenshot of the configuration of the OAuth consent screen.
+#|   There is an oval highlighting the new "In production" publishing status and
+#|   another oval highlighting the "Needs verification" status.
+knitr::include_graphics("img/oauth-consent-screen-in-production-needs-verification.png")
+```
 
 You should be able to make personal use of the OAuth client now, despite the fact that it "Needs verification".
 My perception is that your project can exist in this state as long as the usage is extremely low, in terms of the number of unique users, which presumably will be 1 or some other very small number.
@@ -753,9 +768,8 @@ When you do the OAuth dance, you will again see some scary screens, due to the "
 #| label: google-hasnt-verified-this-app-advanced
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the OAuth consent screen configuration.
-#|   There is an arrow pointing at the "Continue" button at the bottom of the
-#|   page.
+#|   Screenshot of a pop-up titled "Google hasn't verified this app".
+#|   There is an arrow pointing at the "Advanced" button.
 knitr::include_graphics("img/google-hasnt-verified-this-app-advanced.png")
 ```
 
@@ -768,8 +782,8 @@ Click "Go to YOUR-PROJECT-NAME (unsafe)" to proceed to the usual consent screens
 #| label: google-hasnt-verified-this-app-go-to-unsafe
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the OAuth consent screen configuration.
-#|   There is an arrow pointing at the "Continue" button at the bottom of the
-#|   page.
+#|   Screenshot of a pop-up titled "Google hasn't verified this app".
+#|   There is an arrow pointing at the "Go to YOUR-PROJECT-NAME (unsafe)"
+#|   button.
 knitr::include_graphics("img/google-hasnt-verified-this-app-go-to-unsafe.png")
 ```
