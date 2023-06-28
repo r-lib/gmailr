@@ -16,7 +16,7 @@ Function to delete a given thread by id.  This cannot be undone!
 }
 \examples{
 \dontrun{
-delete_thread(12345)
+gm_delete_thread(12345)
 }
 }
 \references{

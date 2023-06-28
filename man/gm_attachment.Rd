@@ -20,7 +20,7 @@ automatically save all the attachments in a given message.
 }
 \examples{
 \dontrun{
-my_attachment <- attachment("a32e324b", "12345")
+my_attachment <- gm_attachment("a32e324b", "12345")
 # save attachment to a file
 gm_save_attachment(my_attachment, "photo.jpg")
 }

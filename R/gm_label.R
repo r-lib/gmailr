@@ -28,12 +28,17 @@ gm_label <- function(id, user_id = "me") {
 
 #' Update a existing label.
 #'
-#' Get a specific label by id and user_id.  `update_label_patch` is identical to `update_label` but the latter uses [HTTP PATCH](https://datatracker.ietf.org/doc/html/rfc5789) to allow partial update.
+#' Get a specific label by id and user_id. `gm_update_label_patch()` is
+#' identical to `gm_update_label()` but the latter uses [HTTP
+#' PATCH](https://datatracker.ietf.org/doc/html/rfc5789) to allow partial
+#' update.
 #' @param id label id to update
 #' @param label the label fields to update
 #' @inheritParams gm_labels
-#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update>
-#' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.labels/patch>
+#' @references
+#' <https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update>
+#' @references
+#' <https://developers.google.com/gmail/api/reference/rest/v1/users.labels/patch>
 #' @family label
 #' @export
 gm_update_label <- function(id, label, user_id = "me") {

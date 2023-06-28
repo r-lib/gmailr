@@ -17,7 +17,9 @@ gm_update_label_patch(id, label, user_id = "me")
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
 \description{
-Get a specific label by id and user_id.  \code{update_label_patch} is identical to \code{update_label} but the latter uses \href{https://datatracker.ietf.org/doc/html/rfc5789}{HTTP PATCH} to allow partial update.
+Get a specific label by id and user_id. \code{gm_update_label_patch()} is
+identical to \code{gm_update_label()} but the latter uses \href{https://datatracker.ietf.org/doc/html/rfc5789}{HTTP PATCH} to allow partial
+update.
 }
 \references{
 \url{https://developers.google.com/gmail/api/reference/rest/v1/users.labels/update}

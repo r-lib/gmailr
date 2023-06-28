@@ -12,11 +12,11 @@ gm_untrash_thread(id, user_id = "me")
 \item{user_id}{gmail user_id to access, special value of 'me' indicates the authenticated user.}
 }
 \description{
-Function to untrash a given thread by id.  This can reverse the results of a previous \code{\link[=trash_thread]{trash_thread()}}.
+Function to untrash a given thread by id.  This can reverse the results of a previous \code{\link[=gm_trash_thread]{gm_trash_thread()}}.
 }
 \examples{
 \dontrun{
-untrash_thread(12345)
+gm_untrash_thread(12345)
 }
 }
 \references{

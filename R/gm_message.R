@@ -169,7 +169,7 @@ gm_modify_message <- function(id,
 #' @export
 #' @examples
 #' \dontrun{
-#' my_attachment <- attachment("a32e324b", "12345")
+#' my_attachment <- gm_attachment("a32e324b", "12345")
 #' # save attachment to a file
 #' gm_save_attachment(my_attachment, "photo.jpg")
 #' }
@@ -199,9 +199,9 @@ gm_attachment <- function(id,
 #' @export
 #' @examples
 #' \dontrun{
-#' my_attachment <- attachment("a32e324b", "12345")
+#' my_attachment <- gm_attachment("a32e324b", "12345")
 #' # save attachment to a file
-#' save_attachment(my_attachment, "photo.jpg")
+#' gm_save_attachment(my_attachment, "photo.jpg")
 #' }
 gm_save_attachment <- function(x, filename) {
   stopifnot(
@@ -227,9 +227,9 @@ gm_save_attachment <- function(x, filename) {
 #' @examples
 #' \dontrun{
 #' # save all attachments
-#' save_attachments(my_message)
+#' gm_save_attachments(my_message)
 #' # save a specific attachment
-#' save_attachments(my_message, "a32e324b")
+#' gm_save_attachments(my_message, "a32e324b")
 #' }
 gm_save_attachments <- function(x,
                                 attachment_id = NULL,
@@ -258,8 +258,8 @@ gm_save_attachments <- function(x,
     )
   }
   invisible(vapply(attachments_parts, function(part) {
-    att <- attachment(part$body$attachmentId, x$id, user_id)
-    save_attachment(att, file.path(path, part$filename))
+    att <- gm_attachment(part$body$attachmentId, x$id, user_id)
+    gm_save_attachment(att, file.path(path, part$filename))
   }, character(1L)))
 }
 

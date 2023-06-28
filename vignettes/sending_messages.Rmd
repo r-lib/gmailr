@@ -180,7 +180,7 @@ Gmail enabled. For example, your account might be fully operational with
 respect to Google Drive and yet have no mail capabilities. Such an account
 cannot be used with the Gmail API and therefore with `gmailr`. However, you
 will still be able to complete the `gmailr` authorization process via
-`gmail_auth()`. The problem will only reveal itself upon the first attempt to
+`gm_auth()`. The problem will only reveal itself upon the first attempt to
 use the API and it will look something like this:
 
 ```

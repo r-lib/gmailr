@@ -16,7 +16,7 @@ Function to trash a given thread by id.  This can be undone by \code{\link[=gm_u
 }
 \examples{
 \dontrun{
-trash_thread(12345)
+gm_trash_thread(12345)
 }
 }
 \references{

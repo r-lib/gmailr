@@ -46,7 +46,7 @@ gm_thread <- function(id, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' trash_thread(12345)
+#' gm_trash_thread(12345)
 #' }
 gm_trash_thread <- function(id, user_id = "me") {
   req <- POST(gmail_path(rename(user_id), "threads", id, "trash"), gm_token())
@@ -56,14 +56,14 @@ gm_trash_thread <- function(id, user_id = "me") {
 
 #' Remove a single thread from the trash.
 #'
-#' Function to untrash a given thread by id.  This can reverse the results of a previous [trash_thread()].
+#' Function to untrash a given thread by id.  This can reverse the results of a previous [gm_trash_thread()].
 #' @inheritParams gm_thread
 #' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.threads/untrash>
 #' @family thread
 #' @export
 #' @examples
 #' \dontrun{
-#' untrash_thread(12345)
+#' gm_untrash_thread(12345)
 #' }
 gm_untrash_thread <- function(id, user_id = "me") {
   req <- POST(gmail_path(rename(user_id), "threads", id, "untrash"), gm_token())
@@ -80,7 +80,7 @@ gm_untrash_thread <- function(id, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' delete_thread(12345)
+#' gm_delete_thread(12345)
 #' }
 gm_delete_thread <- function(id, user_id = "me") {
   req <- DELETE(gmail_path(rename(user_id), "threads", id), gm_token())
@@ -99,10 +99,10 @@ gm_delete_thread <- function(id, user_id = "me") {
 #' @export
 #' @examples
 #' \dontrun{
-#' modify_thread(12345, add_labels = "label_1")
-#' modify_thread(12345, remove_labels = "label_1")
+#' gm_modify_thread(12345, add_labels = "label_1")
+#' gm_modify_thread(12345, remove_labels = "label_1")
 #' # add and remove at the same time
-#' modify_thread(12345, add_labels = "label_2", remove_labels = "label_1")
+#' gm_modify_thread(12345, add_labels = "label_2", remove_labels = "label_1")
 #' }
 gm_modify_thread <- function(id, add_labels = character(0), remove_labels = character(0), user_id = "me") {
   body <- rename(list("add_labels" = add_labels, "remove_labels" = remove_labels))
