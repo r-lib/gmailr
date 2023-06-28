@@ -236,14 +236,19 @@ To learn more about gargle options, see <a href="https://gargle.r-lib.org/refere
 <span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># indicate the specific identity you want to auth as</span></span></span>
-<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="st">"jim@example.com"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="st">"jenny@example.com"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># force a new browser dance, i.e. don't even try to use existing user</span></span></span>
 <span class="r-in"><span><span class="co"># credentials</span></span></span>
 <span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># use a 'read only' scope, so it's impossible to, e.g., send or delete email</span></span></span>
-<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span>scopes <span class="op">=</span> <span class="st">"gmail.readonly"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># specify the identity, use a 'read only' scope, so it's impossible to</span></span></span>
+<span class="r-in"><span><span class="co"># send or delete email, and specify a cache folder</span></span></span>
+<span class="r-in"><span><span class="fu">gm_auth</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"target.user@example.com"</span>,</span></span>
+<span class="r-in"><span>  scopes <span class="op">=</span> <span class="st">"gmail.readonly"</span>,</span></span>
+<span class="r-in"><span>  cache <span class="op">=</span> <span class="st">"some/nice/directory/"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

@@ -112,13 +112,13 @@
 using <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">text_msg</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Tue, 27 Jun 2023 17:45:14 GMT\r To:"       </span></span>
+<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Wed, 28 Jun 2023 15:58:02 GMT\r To:"       </span></span>
 <span><span class="co">#&gt; [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"   </span></span>
-<span><span class="co">#&gt; [3] "multipart/mixed; boundary=259ce4ea60b78d02fbd004256c3965eb\r"        </span></span>
-<span><span class="co">#&gt; [4] "--259ce4ea60b78d02fbd004256c3965eb\r MIME-Version: 1.0\r Date: Tue," </span></span>
-<span><span class="co">#&gt; [5] "27 Jun 2023 17:45:14 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
+<span><span class="co">#&gt; [3] "multipart/mixed; boundary=f38c4a6c4caa4f39784da12da82f4459\r"        </span></span>
+<span><span class="co">#&gt; [4] "--f38c4a6c4caa4f39784da12da82f4459\r MIME-Version: 1.0\r Date: Wed," </span></span>
+<span><span class="co">#&gt; [5] "28 Jun 2023 15:58:02 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
 <span><span class="co">#&gt; [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r Gmailr"</span></span>
-<span><span class="co">#&gt; [7] "is a very handy package!\r --259ce4ea60b78d02fbd004256c3965eb--\r"</span></span></code></pre></div>
+<span><span class="co">#&gt; [7] "is a very handy package!\r --f38c4a6c4caa4f39784da12da82f4459--\r"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="html">HTML<a class="anchor" aria-label="anchor" href="#html"></a>
@@ -265,7 +265,7 @@ operational with respect to Google Drive and yet have no mail
 capabilities. Such an account cannot be used with the Gmail API and
 therefore with <code>gmailr</code>. However, you will still be able to
 complete the <code>gmailr</code> authorization process via
-<code><a href="../reference/gmailr-deprecated-auth.html">gmail_auth()</a></code>. The problem will only reveal itself upon the
+<code><a href="../reference/gm_auth.html">gm_auth()</a></code>. The problem will only reveal itself upon the
 first attempt to use the API and it will look something like this:</p>
 <pre><code> Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  : 
   Gmail API error: 400
