@@ -280,7 +280,7 @@ gm_convert_file <- function(file) {
 
   for (i in seq_len(NROW(gm_funs))) {
     find <- paste0("(?<![[:alnum:]_:])", gm_funs$old[[i]], "[(]")
-    replace <- gm_funs$new[[i]]
+    replace <- paste0(gm_funs$new[[i]], "(")
     lines <- gsub(find, replace, lines, perl = TRUE)
   }
   writeLines(lines, file)
@@ -289,8 +289,11 @@ gm_convert_file <- function(file) {
 get_deprecated_funs <- function() {
   file <- system.file(package = "gmailr", "R", "deprecated.R")
   lines <- readLines(file)
-  res <- rematch2::re_match(lines, "deprecate_.*gmailr::(?<old>[^(]+).*(?<new>gm_[^(]+)")
-  stats::na.omit(res)[c("old", "new")]
+  res <- rematch2::re_match(lines, "deprecate_.*gmailr:::?(?<old>[^(]+).*(?<new>gm_[^(]+)")
+  res <- stats::na.omit(res)[c("old", "new")]
+  # don't retain a spurious match from this function, i.e. the rematch2 line
+  valid_fcn <- grepl("^[a-zA-Z\\.]", res$old)
+  res[valid_fcn, ]
 }
 
 # old auth ----
@@ -307,11 +310,7 @@ get_deprecated_funs <- function() {
 #' @rdname gmailr-deprecated-auth
 #' @export
 clear_token <- function() {
-  deprecate_stop(
-    when = "2.0.0",
-    what = "clear_token()",
-    with = "gm_deauth()"
-  )
+  deprecate_stop("2.0.0", "gmailr::clear_token()", "gm_deauth()")
 }
 
 #' @rdname gmailr-deprecated-auth
@@ -320,21 +319,13 @@ gmail_auth <- function(scope = c("read_only", "modify", "compose", "full"),
                        id = the$id,
                        secret = the$secret,
                        secret_file = NULL) {
-  deprecate_stop(
-    when = "2.0.0",
-    what = "gmail_auth()",
-    with = "gm_auth()"
-  )
+  deprecate_stop("2.0.0", "gmailr::gmail_auth()", "gm_auth()")
 }
 
 #' @rdname gmailr-deprecated-auth
 #' @export
 use_secret_file <- function(filename) {
-  deprecate_stop(
-    when = "2.0.0",
-    what = "use_secret_file()",
-    with = "gm_auth_configure()"
-  )
+  deprecate_stop("2.0.0", "gmailr::use_secret_file()", "gm_auth_configure()")
 }
 
 # nocov end
