@@ -709,7 +709,7 @@ There are two ways to get a token that is more persistent:
   available to folks working within a Google workspace and that either describes
   you or it doesn't.
   
-## Using a non-verified, "In production" app
+## Use a non-verified, "In production" app
 
 This section discusses the experience if your GCP project is *not* inside a Google workspace, but you have decided to change its publishing status from "Testing" to "In production".
 The reason you might do this is to get a token that remains valid for more than 1 week.
