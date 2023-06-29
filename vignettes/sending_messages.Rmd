@@ -144,7 +144,7 @@ This imports the email as though it was a normal message, with the same
 scanning and classification as normal email.
 
 ```{r sending_messages_file_attachment, eval=FALSE}
-gm_insert_message(file_attachment)
+gm_import_message(file_attachment)
 ```
 
 ## Sending
@@ -193,4 +193,3 @@ You can confirm the account's lack of mail capability by visiting
 <https://mail.google.com/mail/> while logged in. If you don't already have
 Gmail, this link gives you the option of adding mail to your existing account
 or creating a new, mail-capable account.
-
