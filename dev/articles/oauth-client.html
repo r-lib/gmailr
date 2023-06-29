@@ -360,26 +360,34 @@ CREDENTIALS”.</p>
 <p><img src="img/oauth-client-type-choices.png" alt='Screenshot of the "Application type" dropdown menu with arrows pointing at two of the choices, "Web application" and "Desktop app".' width="600px"></p>
 <p>Here’s how to choose the application type:</p>
 <ul>
-<li>Desktop app: use this if you’re going to use gmailr on your local
+<li>
+<p>Desktop app: use this if you’re going to use gmailr on your local
 computer. More technically, this is appropriate for any setting where
 the httpuv R package will be able to spin up a local web server (gargle
-does this behind the scenes for you).</li>
-<li>Web application: use this if you’re going to use gmailr in some sort
-of hosted or cloud context. Examples include: RStudio Server, Posit
+does this behind the scenes for you).</p>
+<p>This will also work in a hosted/cloud context, under very specific
+circumstances. The GCP project’s OAuth consent screen must be configured
+for internal users within a Google workspace or for external users in
+“Testing” mode. This is associated with a conventional or legacy
+“out-of-bound (oob) auth flow.</p>
+</li>
+<li><p>Web application: use this if you’re going to use gmailr in some
+sort of hosted or cloud context, such as RStudio Server, Posit
 Workbench, Posit Cloud, or Google Colaboratory. This is the client type
-needed for an “out-of-bound” (oob) auth flow or a gargle-specific
-variant known as pseudo-oob.</li>
+needed for a gargle-specific variant of oob known as
+pseudo-oob.</p></li>
 </ul>
 <p>Note that above, we are talking about the computing environment where
 you will do the OAuth dance, i.e. where you will obtain a new token. If
-you are going to do auth on your local computer, the deploy that token
+you are going to do auth on your local computer, then deploy that token
 to Posit Connect or Cloud, you need a “Desktop app”. (This workflow is
 detailed in <code><a href="../articles/deploy-a-token.html">vignette("deploy-a-token")</a></code>.)</p>
-<p>Let’s say you choose “Desktop app”. Again, you’ll get a chance to
-give the client a name. I encourage you to give it a label that has some
-meaning and that you can hold in your head for minutes at a time. In
-this example, I use the name “desktop-aardvark”. I incorporate “desktop”
-to remind myself which type of client this is and “aardvark” is just a
+<p>Let’s say you choose “Desktop app”. (In a later section, we address
+the “Web application” type.) Again, you’ll get a chance to give the
+client a name. I encourage you to give it a label that has some meaning
+and that you can hold in your head for minutes at a time. In this
+example, I use the name “desktop-aardvark”. I incorporate “desktop” to
+remind myself which type of client this is and “aardvark” is just a
 random animal. If I need to add another client later (maybe of “Web
 application” type), I might call that one “web-baboon”. You get the
 idea.</p>
@@ -497,7 +505,7 @@ either describes you or it doesn’t.</li>
 </ul>
 </div>
 <div class="section level2">
-<h2 id="using-a-non-verified-in-production-app">Using a non-verified, “In production” app<a class="anchor" aria-label="anchor" href="#using-a-non-verified-in-production-app"></a>
+<h2 id="use-a-non-verified-in-production-app">Use a non-verified, “In production” app<a class="anchor" aria-label="anchor" href="#use-a-non-verified-in-production-app"></a>
 </h2>
 <p>This section discusses the experience if your GCP project is
 <em>not</em> inside a Google workspace, but you have decided to change
@@ -533,6 +541,50 @@ screen, advising you to continue only if you understand the risks and
 trust the developer, i.e. yourself. Click “Go to YOUR-PROJECT-NAME
 (unsafe)” to proceed to the usual consent screens.</p>
 <p><img src="img/google-hasnt-verified-this-app-go-to-unsafe.png" alt="Screenshot of a pop-up titled &quot;Google hasn't verified this app&quot;. There is an arrow pointing at the &quot;Go to YOUR-PROJECT-NAME (unsafe)&quot; button." width="600px"></p>
+</div>
+<div class="section level2">
+<h2 id="create-an-oauth-client-of-web-application-type">Create an OAuth client of “Web application” type<a class="anchor" aria-label="anchor" href="#create-an-oauth-client-of-web-application-type"></a>
+</h2>
+<p>This section adds a few details about creating an OAuth client of
+“Web application” type, as opposed to “Desktop app” type. You will do
+this if you’re going to obtain tokens, i.e. go through the OAuth dance,
+when both of these are true:</p>
+<ol style="list-style-type: decimal">
+<li>R is running in a web browser. Examples include RStudio Server,
+Posit Workbench, Posit Cloud, or Google Colaboratory.</li>
+<li>The OAuth consent screen for the GCP project that owns the OAuth
+client may have publishing status “In production” (as opposed to
+“Testing”). This is associated with a gargle-specific variant of the
+“out-of-bound” (oob) auth flow known as pseudo-oob.</li>
+</ol>
+<p>The oob auth flows are described in the gargle article <a href="https://gargle.r-lib.org/articles/auth-from-web.html" class="external-link">Auth when
+using R from the browser</a>.</p>
+<p>Let’s pick up the instruction above at the point where you are
+choosing an “Application type”. This time we choose “Web
+application”.</p>
+<p><img src="img/oauth-client-type-choices.png" alt='Screenshot of the "Application type" dropdown menu with arrows pointing at two of the choices, "Web application" and "Desktop app".' width="600px"></p>
+<p>You’ll get a chance to give the client a name. I encourage you to
+give it a label that has some meaning and that you can hold in your head
+for minutes at a time. In this example, I use the name “web-baboon”. I
+incorporate “web” to remind myself which type of client this is and
+“baboon” is just a random animal.</p>
+<p><img src="img/oauth-client-create-web-application.png" alt='Screenshot of the "Create OAuth client ID" screen with "Web application" selected as the Application type and "web-baboon" filled in the "Name" box. There are arrows pointing at the "Name" box and the "CREATE" button.' width="600px"></p>
+<p>You can leave “Authorized JavaScript origins” unconfigured.</p>
+<p>However, for the pseudo-oob flow, you <strong>must</strong> configure
+a URI in the “Authorized redirect URIs” section. This should be a web
+page capable of handling a successful response from Google’s
+authorization server. The page should take that response and expose a
+code that the user can copy and paste back into R. The gargle package
+then processes that input and extracts an authorization code needed to
+complete the auth process. Tidyverse packages use
+<code>https://www.tidyverse.org/google-callback/</code> for this
+purpose. If you want to host your own page, a suitable HTML file ships
+with the gargle package at
+<code>system.file("pseudo-oob/google-callback/index.html", package = "gargle")</code>.
+In that case, you should configure its associated URL as an “Authorized
+redirect URI”.</p>
+<p>From this point on, everything about downloading the JSON and
+configuring the OAuth client is the same as before.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
