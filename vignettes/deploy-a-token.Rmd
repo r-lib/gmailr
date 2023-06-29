@@ -50,7 +50,7 @@ writeLines(list.files(
 
 We will make reference to these files below.
 
-You may also wish to browse these files on GitHub: <INSERT LINK>.
+You may also wish to browse these files on GitHub: <https://github.com/r-lib/gmailr/tree/main/inst/deployed-token-demo>.
 
 ## Setup: store a token
 
