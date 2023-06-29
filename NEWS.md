@@ -1,7 +1,10 @@
 # gmailr (development version)
 
-## Automatic OAuth client discovery
+## Changes around the OAuth client
 
+* [Set up an OAuth client](https://gmailr.r-lib.org/articles/oauth-client.html)
+  is a new non-vignette article with detailed instructions for creating and
+  configuring an OAuth client.
 * `gm_default_oauth_client()` is a new helper that searches for the JSON file
   representing an OAuth client in a sequence of locations. The (file)path of
   least resistance is to place this file in the directory returned by
@@ -9,10 +12,18 @@
   filepath in the `GMAILR_OAUTH_CLIENT` environment variable. For backwards
   compatibility, the `GMAILR_APP` environment variable is still consulted, but
   generates a warning (#166).
+* `gm_auth()` no longer checks for an OAuth client before calling
+  `gargle::token_fetch()`. This allows other auth methods to work, which by and
+  large don't need an OAuth client, such as `gargle::credentials_byo_oauth2()`
+  (#160, #186).
 * If `gm_auth()` fails to get a token and no OAuth client has been configured,
   it silently calls `gm_auth_configure()` to make one attempt at automatic
   client discovery. If an OAuth client is indeed discovered, `gm_auth()` tries
   one more time to get a token.
+  
+  Since the lack of an OAuth client undoubtedly remains the most common reason
+  for `gm_auth()` to fail, its error message includes some specific content if
+  no OAuth client has been configured.
   
 ## Storing and deploying a token
 
@@ -55,15 +66,6 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth 
     `gm_auth_configure(path = gm_default_oauth_client())`.
 
 ## Other changes
-
-* `gm_auth()` no longer checks for an OAuth client before calling
-  `gargle::token_fetch()`. This allows other auth methods to work, which by and
-  large don't need an OAuth client, such as `gargle::credentials_byo_oauth2()`
-  (#160, #186).
-  
-  Since the lack of an OAuth client undoubtedly remains the most common reason
-  for `gm_auth()` to fail, its error message includes some specific content if
-  no OAuth client has been configured.
   
 * `gm_auth(subject =)` is a new argument that can be used with
   `gm_auth(path =)`, i.e. when using a service account. The `path` and
