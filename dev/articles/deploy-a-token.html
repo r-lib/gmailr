@@ -237,11 +237,12 @@ a limited lifetime, usually 1 week.</li>
 deployed product will no longer be able to access the Gmail API on
 behalf of the target user. It is a very good idea to rig your code to
 surface this failure in a very transparent way, so it’s easier for you
-to diagnose this problem. Functions like <code><a href="../reference/gm_profile.html">gm_profile()</a></code> and
-<code><a href="../reference/gm_has_token.html">gm_has_token()</a></code> can be useful for this. If the stored token
-can no longer be refreshed, the only remedy is to obtain, store,
-possibly encrypt, and deploy a new token, using the exact same process
-as before.</p>
+to diagnose this problem. Functions like <code><a href="../reference/gm_profile.html">gm_profile()</a></code>,
+<code><a href="https://gargle.r-lib.org/reference/token-info.html" class="external-link">gargle::token_tokeninfo()</a></code>, and
+<code><a href="https://gargle.r-lib.org/reference/token-info.html" class="external-link">gargle::token_userinfo()</a></code> can be useful for this. If the
+stored token can no longer be refreshed, the only remedy is to obtain,
+store, possibly encrypt, and deploy a new token, using the exact same
+process as before.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
