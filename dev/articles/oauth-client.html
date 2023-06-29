@@ -325,8 +325,8 @@ something like this:</p>
 <p>Now we will add a test user: YOU! Click on “+ ADD USERS”.</p>
 <p>(If you are creating an OAuth client within a Google Workspace and it
 is only for internal users, you can skip the steps around adding test
-users. That is only relevant to a client that aims to support external
-users.)</p>
+users. This is only relevant to a client that supports external users
+and that has “Testing” publishing status.)</p>
 <p><img src="img/edit-app-registration-5.png" alt='Screenshot with an arrow pointing at the "+ ADD USERS" button.' width="600px"></p>
 <p>Enter your email address and click “ADD”.</p>
 <p><img src="img/add-users.png" alt='Screenshot of the "Add users" screen with a box where the user has entered their email address, which is obscured by an opaque rectangle. There is an arrow pointing at the "ADD" button.' width="600px"></p>
@@ -365,23 +365,25 @@ CREDENTIALS”.</p>
 computer. More technically, this is appropriate for any setting where
 the httpuv R package will be able to spin up a local web server (gargle
 does this behind the scenes for you).</p>
-<p>This will also work in a hosted/cloud context, under very specific
-circumstances. The GCP project’s OAuth consent screen must be configured
-for internal users within a Google workspace or for external users in
-“Testing” mode. This is associated with a conventional or legacy
-“out-of-bound (oob) auth flow.</p>
+<p>The “Desktop app” client type can also be used in a hosted/cloud
+context, under very specific circumstances. The GCP project’s OAuth
+consent screen must be configured for internal users within a Google
+workspace or for external users in “Testing” mode. This is associated
+with a conventional or legacy out-of-bound (oob) auth flow.</p>
 </li>
 <li><p>Web application: use this if you’re going to use gmailr in some
 sort of hosted or cloud context, such as RStudio Server, Posit
-Workbench, Posit Cloud, or Google Colaboratory. This is the client type
-needed for a gargle-specific variant of oob known as
-pseudo-oob.</p></li>
+Workbench, Posit Cloud, or Google Colaboratory, with a GCP project whose
+OAuth consent screen is configured for external users with “In
+production” publishing status. This is the client type needed for a
+gargle-specific variant of oob known as pseudo-oob.</p></li>
 </ul>
 <p>Note that above, we are talking about the computing environment where
-you will do the OAuth dance, i.e. where you will obtain a new token. If
+you will do the OAuth dance, i.e. where you will obtain new tokens. If
 you are going to do auth on your local computer, then deploy that token
-to Posit Connect or Cloud, you need a “Desktop app”. (This workflow is
-detailed in <code><a href="../articles/deploy-a-token.html">vignette("deploy-a-token")</a></code>.)</p>
+to Posit Connect or Cloud or shinyapps.io, you can still use a “Desktop
+app”. (This workflow is detailed in
+<code><a href="../articles/deploy-a-token.html">vignette("deploy-a-token")</a></code>.)</p>
 <p>Let’s say you choose “Desktop app”. (In a later section, we address
 the “Web application” type.) Again, you’ll get a chance to give the
 client a name. I encourage you to give it a label that has some meaning
@@ -489,11 +491,10 @@ you specify non-default <code>scopes</code> in your
 and, hopefully, live out your gmailr-powered dreams of controlling Gmail
 from R.</p>
 <p>At this point, your GCP project is in “Testing” mode. That has the
-potential downside that refresh tokens only last for 1 week (at the time
-of writing), i.e. the credential can be refreshed automatically for only
-1 week. After that, the refresh token becomes invalid, and you’ll have
-to re-do the OAuth dance. There are two ways to get a token that is more
-persistent:</p>
+potential downside that refresh tokens only last for 1 week, i.e. the
+credential can be refreshed automatically for only 1 week. After that,
+the refresh token becomes invalid, and you’ll have to re-do the OAuth
+dance. There are two ways to get a token that is more persistent:</p>
 <ul>
 <li>Switch the publishing status, in your OAuth consent screen settings,
 from “Testing” to “In production”. That is explained in the next
@@ -553,9 +554,10 @@ when both of these are true:</p>
 <li>R is running in a web browser. Examples include RStudio Server,
 Posit Workbench, Posit Cloud, or Google Colaboratory.</li>
 <li>The OAuth consent screen for the GCP project that owns the OAuth
-client may have publishing status “In production” (as opposed to
-“Testing”). This is associated with a gargle-specific variant of the
-“out-of-bound” (oob) auth flow known as pseudo-oob.</li>
+client specifies the “External” user type and has publishing status “In
+production” (as opposed to “Testing”). This is associated with a
+gargle-specific variant of the “out-of-bound” (oob) auth flow known as
+pseudo-oob.</li>
 </ol>
 <p>The oob auth flows are described in the gargle article <a href="https://gargle.r-lib.org/articles/auth-from-web.html" class="external-link">Auth when
 using R from the browser</a>.</p>

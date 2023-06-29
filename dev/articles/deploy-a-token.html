@@ -202,8 +202,8 @@ invalid, for example:</p>
 <li>In the Security settings for their Google user account, a user can
 remove access associated with a specific OAuth client or app. This
 invalidates any token obtained with that client.</li>
-<li>If a token isn’t used for a period of time (usually months), it
-becomes invalid.</li>
+<li>If a token isn’t used for a period of time (~6 months), it becomes
+invalid.</li>
 <li>If an OAuth client is deleted or its host project disables the Gmail
 API, any associated tokens become invalid.</li>
 <li>There’s a limit to how many refresh tokens a user can have. If a
@@ -212,6 +212,7 @@ older tokens will “fall off the end” and become invalid.</li>
 <li>If an OAuth client is in “testing” mode, all associated tokens have
 a limited lifetime, usually 1 week.</li>
 </ul>
+<p>The general topic of refresh token expiration is documented in <a href="https://developers.google.com/identity/protocols/oauth2#expiration" class="external-link uri">https://developers.google.com/identity/protocols/oauth2#expiration</a>.</p>
 <p>If the token becomes invalid, token refresh will fail and your
 deployed product will no longer be able to access the Gmail API on
 behalf of the target user. It is a very good idea to rig your code to
