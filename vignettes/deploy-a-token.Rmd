@@ -148,5 +148,5 @@ The general topic of refresh token expiration is documented in <https://develope
 
 If the token becomes invalid, token refresh will fail and your deployed product will no longer be able to access the Gmail API on behalf of the target user.
 It is a very good idea to rig your code to surface this failure in a very transparent way, so it's easier for you to diagnose this problem.
-Functions like `gm_profile()` and `gm_has_token()` can be useful for this.
+Functions like `gm_profile()`, `gargle::token_tokeninfo()`, and `gargle::token_userinfo()` can be useful for this.
 If the stored token can no longer be refreshed, the only remedy is to obtain, store, possibly encrypt, and deploy a new token, using the exact same process as before.
