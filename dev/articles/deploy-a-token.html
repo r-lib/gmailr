@@ -118,31 +118,48 @@ article is about how to prepare a token for use in this scenario.</p>
 Therefore, you will need to modify the code below to account for the
 specifics of your situation.</p>
 <div class="section level2">
+<h2 id="demo-code">Demo code<a class="anchor" aria-label="anchor" href="#demo-code"></a>
+</h2>
+<p>gmailr ships with code for a working demo of the approach described
+here.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"deployed-token-demo"</span>, package <span class="op">=</span> <span class="st">"gmailr"</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; README.md</span></span>
+<span><span class="co">#&gt; send-email-byo-encrypted-token.Rmd</span></span>
+<span><span class="co">#&gt; token-setup.R</span></span></code></pre></div>
+<p>We will make reference to these files below.</p>
+<p>You may also wish to browse these files on GitHub: <insert link>.</insert></p>
+</div>
+<div class="section level2">
 <h2 id="setup-store-a-token">Setup: store a token<a class="anchor" aria-label="anchor" href="#setup-store-a-token"></a>
 </h2>
+<p><em>This process is recorded in the demo file
+<code>token-setup.R</code>.</em></p>
 <p>First, complete the OAuth dance in your primary, interactive
 environment as the target user, using the desired OAuth client and
 scopes, with <code>cache = FALSE</code>. If you have arranged for the
 desired OAuth client to be discovered via
 <code><a href="../reference/gmailr-configuration.html">gm_default_oauth_client()</a></code>, you only need to call
 <code><a href="../reference/gm_auth.html">gm_auth()</a></code>:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_auth.html">gm_auth</a></span><span class="op">(</span><span class="st">"jane@example.com"</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>If you need to specify the OAuth client explicitly, call
 <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> prior to <code><a href="../reference/gm_auth.html">gm_auth()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span><span class="st">"path/to/your/oauth_client.json"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/gm_auth.html">gm_auth</a></span><span class="op">(</span><span class="st">"jane@example.com"</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>You may wish to confirm that you are logged in as the intended
 user:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_profile.html">gm_profile</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Now, write the current gmailr token to file. If you are deploying to
 somewhere relatively private, such as a server accessible only within
 your organization, you don’t need to provide any arguments to
 <code><a href="../reference/gm_token_write.html">gm_token_write()</a></code>. But you’ll often want to specify the
 target <code>path</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_token_write.html">gm_token_write</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"path/to/gmailr-token.rds"</span><span class="op">)</span></span></code></pre></div>
 <p>The resulting token file is rather opaque, i.e. a general purpose
 automated tool can’t easily scrape your credentials from this. But a
@@ -160,7 +177,7 @@ probably with a line like this in your <code>.Renviron</code> file:</p>
 creating and/or editing this file.</p>
 <p>Once you’ve set up the encryption key, you can use it in
 <code>gm_token_write(key =)</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_token_write.html">gm_token_write</a></span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"path/to/gmailr-token.rds"</span>,</span>
 <span>  key <span class="op">=</span> <span class="st">"GMAILR_KEY"</span></span>
@@ -173,10 +190,13 @@ or GitHub Actions (<a href="https://docs.github.com/en/actions/security-guides/e
 <div class="section level2">
 <h2 id="usage-load-and-use-token">Usage: load and use token<a class="anchor" aria-label="anchor" href="#usage-load-and-use-token"></a>
 </h2>
+<p><em>The demo file <code>send-email-byo-encrypted-token.Rmd</code> is
+an example of a working Shiny app (Shiny document, in this case) that
+implements the technique described here..</em></p>
 <p>In the code that’s running in the deployed / unattended setting, use
 a snippet like this to read the token from file and tell gmailr to use
 it:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_auth.html">gm_auth</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="../reference/gm_token_write.html">gm_token_read</a></span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"path/to/gmailr-token.rds"</span>,</span>
 <span>  key <span class="op">=</span> <span class="st">"GMAILR_KEY"</span></span>

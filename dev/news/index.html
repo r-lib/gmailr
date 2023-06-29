@@ -70,6 +70,12 @@
 <li>If <code><a href="../reference/gm_auth.html">gm_auth()</a></code> fails to get a token and no OAuth client has been configured, it silently calls <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> to make one attempt at automatic client discovery. If an OAuth client is indeed discovered, <code><a href="../reference/gm_auth.html">gm_auth()</a></code> tries one more time to get a token.</li>
 </ul></div>
 <div class="section level3">
+<h3 id="storing-and-deploying-a-token-development-version">Storing and deploying a token<a class="anchor" aria-label="anchor" href="#storing-and-deploying-a-token-development-version"></a></h3>
+<ul><li><p><code><a href="../reference/gm_token_write.html">gm_token_write()</a></code> + <code><a href="../reference/gm_token_write.html">gm_token_read()</a></code> is a new matched pair of functions that make it much easier to explicitly store a token obtained in an interactive session then reuse that token elsewhere, such in CI or in a deployed product (<a href="https://github.com/r-lib/gmailr/issues/190" class="external-link">#190</a>).</p></li>
+<li><p>The directory <code>system.file("deployed-token-demo", package = "gmailr")</code> contains a working demo of how to use <code><a href="../reference/gm_token_write.html">gm_token_write()</a></code> + <code><a href="../reference/gm_token_write.html">gm_token_read()</a></code> in a deployed Shiny app.</p></li>
+<li><p><code><a href="../articles/deploy-a-token.html">vignette("deploy-a-token")</a></code> is a new vignette describing how to capture a token interactively, for later use in a non-interactive setting.</p></li>
+</ul></div>
+<div class="section level3">
 <h3 id="syncing-up-with-gargle-development-version">Syncing up with gargle<a class="anchor" aria-label="anchor" href="#syncing-up-with-gargle-development-version"></a></h3>
 <p>Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth and gmailr is syncing up that:</p>
 <ul><li>
@@ -100,7 +106,6 @@
 <p>Since the lack of an OAuth client undoubtedly remains the most common reason for <code><a href="../reference/gm_auth.html">gm_auth()</a></code> to fail, its error message includes some specific content if no OAuth client has been configured.</p>
 </li>
 <li><p><code>gm_auth(subject =)</code> is a new argument that can be used with <code>gm_auth(path =)</code>, i.e. when using a service account. The <code>path</code> and <code>subject</code> arguments are ultimately processed by <code><a href="https://gargle.r-lib.org/reference/credentials_service_account.html" class="external-link">gargle::credentials_service_account()</a></code> and support the use of a service account to impersonate a regular user.</p></li>
-<li><p><code><a href="../reference/gm_token_write.html">gm_token_write()</a></code> + <code><a href="../reference/gm_token_write.html">gm_token_read()</a></code> is a new matched pair of functions that make it much easier to explicitly store a token obtained in an interactive session then reuse that token elsewhere, such in CI or in a deployed product (<a href="https://github.com/r-lib/gmailr/issues/190" class="external-link">#190</a>).</p></li>
 <li><p><code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> can now take a character vector of scopes, each of which can be an actual scope or a short alias, e.g., <code>"gmail.readonly"</code>, which identifies a scope associated with the Gmail API. When called without arguments, <code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> still returns a named vector of Gmail API-specific scopes, where the names are the associated short aliases.</p></li>
 <li>
 <p>The deprecation process for legacy functions that lack the <code>gm_</code> prefix has been advanced. The functions are still present, but throw an error directing the user to switch to the prefixed version.</p>
