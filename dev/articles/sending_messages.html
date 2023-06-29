@@ -112,13 +112,13 @@
 using <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">text_msg</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Thu, 29 Jun 2023 16:35:50 GMT\r To:"       </span></span>
+<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Thu, 29 Jun 2023 16:40:41 GMT\r To:"       </span></span>
 <span><span class="co">#&gt; [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"   </span></span>
-<span><span class="co">#&gt; [3] "multipart/mixed; boundary=87570caf5b207dbbbaa5966db343d077\r"        </span></span>
-<span><span class="co">#&gt; [4] "--87570caf5b207dbbbaa5966db343d077\r MIME-Version: 1.0\r Date: Thu," </span></span>
-<span><span class="co">#&gt; [5] "29 Jun 2023 16:35:50 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
+<span><span class="co">#&gt; [3] "multipart/mixed; boundary=dc00b72cde8042977632c5e14a7f4794\r"        </span></span>
+<span><span class="co">#&gt; [4] "--dc00b72cde8042977632c5e14a7f4794\r MIME-Version: 1.0\r Date: Thu," </span></span>
+<span><span class="co">#&gt; [5] "29 Jun 2023 16:40:41 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
 <span><span class="co">#&gt; [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r Gmailr"</span></span>
-<span><span class="co">#&gt; [7] "is a very handy package!\r --87570caf5b207dbbbaa5966db343d077--\r"</span></span></code></pre></div>
+<span><span class="co">#&gt; [7] "is a very handy package!\r --dc00b72cde8042977632c5e14a7f4794--\r"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="html">HTML<a class="anchor" aria-label="anchor" href="#html"></a>
@@ -270,9 +270,10 @@ first attempt to use the API and it will look something like this:</p>
 <pre><code> Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  : 
   Gmail API error: 400
   Mail service not enabled </code></pre>
-<p>You can confirm the account’s lack of mail capability by visiting <a href="https://mail.google.com/mail/" class="external-link uri">https://mail.google.com/mail/</a> while logged in. If you
-don’t already have Gmail, this link gives you the option of adding mail
-to your existing account or creating a new, mail-capable account.</p>
+<p>You can confirm the account’s lack of mail capability by visiting
+<code>https://mail.google.com/mail/</code> while logged in. If you don’t
+already have Gmail, this link gives you the option of adding mail to
+your existing account or creating a new, mail-capable account.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
