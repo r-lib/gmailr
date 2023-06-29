@@ -13,6 +13,20 @@
   it silently calls `gm_auth_configure()` to make one attempt at automatic
   client discovery. If an OAuth client is indeed discovered, `gm_auth()` tries
   one more time to get a token.
+  
+## Storing and deploying a token
+
+* `gm_token_write()` + `gm_token_read()` is a new matched pair of functions that
+  make it much easier to explicitly store a token obtained in an interactive
+  session then reuse that token elsewhere, such in CI or in a deployed product
+  (#190).
+  
+* The directory `system.file("deployed-token-demo", package = "gmailr")`
+  contains a working demo of how to use `gm_token_write()` +
+  `gm_token_read()` in a deployed Shiny app.
+  
+* `vignette("deploy-a-token")` is a new vignette describing how to capture a
+  token interactively, for later use in a non-interactive setting.
 
 ## Syncing up with gargle
 
@@ -56,11 +70,6 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth 
   `subject` arguments are ultimately processed by
   `gargle::credentials_service_account()` and support the use of a service
   account to impersonate a regular user.
-
-* `gm_token_write()` + `gm_token_read()` is a new matched pair of functions that
-  make it much easier to explicitly store a token obtained in an interactive
-  session then reuse that token elsewhere, such in CI or in a deployed product
-  (#190).
 
 * `gm_scopes()` can now take a character vector of scopes, each of which can be
   an actual scope or a short alias, e.g., `"gmail.readonly"`, which identifies a

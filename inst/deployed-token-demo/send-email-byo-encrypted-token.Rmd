@@ -1,0 +1,96 @@
+---
+title: "Send email with gmailr"
+output:
+  html_document:
+    theme:
+      version: 5
+runtime: shiny
+resource_files:
+- .secrets/gmailr-token.rds
+---
+
+Scenario: BYO encrypted user token
+
+```{r setup, include = FALSE}
+library(shiny)
+
+can_decrypt <- gargle::secret_has_key("GMAILR_DEPLOY_DEMO_KEY")
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = can_decrypt
+)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, results = 'asis'}
+cat("*Decryption key is unavailable, so no code will be evaluated.*")
+```
+
+The following chunk reads the stored token from file, using the environment variable `"GMAILR_DEPLOY_DEMO_KEY"` to decrypt it, and tells gmailr to use it.
+
+```{r message = FALSE}
+library(gmailr)
+
+try(
+  gm_auth(token = gm_token_read(
+    ".secrets/gmailr-token.rds",
+    key = "GMAILR_DEPLOY_DEMO_KEY"
+  ))
+)
+```
+
+We wrap that in `try()` to guard against the scenario where the token *can* be decrypted, but then it can't be refreshed.
+If auth has been successful, the `gm_profile()` call below reveals details about the account associated with the cached token.
+If auth has not been successful, `gm_profile()` will throw an error.
+Other functions that can be helpful for confirming the validity of a re-loaded token are `gargle::token_tokeninfo()` and `gargle::token_userinfo()`.
+
+This Shiny document sends email from this account:
+
+```{r error = TRUE}
+(whoami <- gm_profile())
+```
+
+Here's the function that takes the inputs for `To:`, `Subject:`, and `Body:` and sends an email when the user clicks "Send mail":
+
+```{r}
+send_email <- function() {
+  gm_mime() |>
+    gm_to(input$field_to) |>
+    gm_from(whoami$emailAddress) |>
+    gm_subject(input$field_subject) |>
+    gm_text_body(input$field_body) |>
+    gm_send_message()
+}
+```
+
+## Send an Email
+
+```{r, echo = FALSE}
+textInput("field_to", "To:", placeholder = "jane@example.com")
+textInput("field_subject", "Subject:", placeholder = "fascinating email subject")
+textAreaInput("field_body", "Body:", placeholder = "riveting, but short, email body")
+
+actionButton("btn", "Send mail")
+
+observeEvent(input$btn, {
+  output$log_sent_email <- renderPrint({
+    cat("Sending email...\n")
+    cat(format(send_email()))
+  })
+})
+verbatimTextOutput("log_sent_email")
+```
+
+### Preview Email
+
+```{r, echo = FALSE}
+renderPrint({
+  cat(
+    "To: ", input$field_to,
+    "\nSubject: ", input$field_subject,
+    "\n\n", input$field_body,
+    sep = ""
+  )
+})
+```

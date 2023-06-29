@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, message = FALSE}
+```{r setup, message = FALSE, eval = TRUE}
 library(gmailr)
 ```
 
@@ -38,7 +38,23 @@ This article is about how to prepare a token for use in this scenario.
 The instructions below involve filepaths and environment variables.
 Therefore, you will need to modify the code below to account for the specifics of your situation.
 
+## Demo code
+
+gmailr ships with code for a working demo of the approach described here.
+
+```{r eval = TRUE}
+writeLines(list.files(
+  system.file("deployed-token-demo", package = "gmailr")
+))
+```
+
+We will make reference to these files below.
+
+You may also wish to browse these files on GitHub: <INSERT LINK>.
+
 ## Setup: store a token
+
+*This process is recorded in the demo file `token-setup.R`.*
 
 First, complete the OAuth dance in your primary, interactive environment as the target user, using the desired OAuth client and scopes, with `cache = FALSE`.
 If you have arranged for the desired OAuth client to be discovered via `gm_default_oauth_client()`, you only need to call `gm_auth()`:
@@ -93,6 +109,8 @@ gm_token_write(
 You must make this same `key` available as a secret or secure environment variable in the deployed context, e.g. on Posit Connect (https://docs.posit.co/connect/admin/security/#application-environment-variables) or GitHub Actions (https://docs.github.com/en/actions/security-guides/encrypted-secrets).
 
 ## Usage: load and use token
+
+*The demo file `send-email-byo-encrypted-token.Rmd` is an example of a working Shiny app (Shiny document, in this case) that implements the technique described here..*
 
 In the code that's running in the deployed / unattended setting, use a snippet like this to read the token from file and tell gmailr to use it:
 
