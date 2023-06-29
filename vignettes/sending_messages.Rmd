@@ -190,6 +190,6 @@ use the API and it will look something like this:
 ```
 
 You can confirm the account's lack of mail capability by visiting
-<https://mail.google.com/mail/> while logged in. If you don't already have
+`https://mail.google.com/mail/` while logged in. If you don't already have
 Gmail, this link gives you the option of adding mail to your existing account
 or creating a new, mail-capable account.
