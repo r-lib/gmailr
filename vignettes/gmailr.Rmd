@@ -190,4 +190,8 @@ unlink(tmp)
 unlink(tmp2, recursive = TRUE)
 ```
 
+## Quota
+
+The Gmail API is free to use for modest levels of activity.
+To learn more about Gmail API quotas see <https://developers.google.com/gmail/api/reference/quota>.
 
