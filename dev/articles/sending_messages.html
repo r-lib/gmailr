@@ -112,13 +112,13 @@
 using <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/strwrap.html" class="external-link">strwrap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">text_msg</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Thu, 29 Jun 2023 15:12:52 GMT\r To:"       </span></span>
+<span><span class="co">#&gt; [1] "MIME-Version: 1.0\r Date: Thu, 29 Jun 2023 15:25:19 GMT\r To:"       </span></span>
 <span><span class="co">#&gt; [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"   </span></span>
-<span><span class="co">#&gt; [3] "multipart/mixed; boundary=9f912aecc1801fe78df8ec3ab428d35c\r"        </span></span>
-<span><span class="co">#&gt; [4] "--9f912aecc1801fe78df8ec3ab428d35c\r MIME-Version: 1.0\r Date: Thu," </span></span>
-<span><span class="co">#&gt; [5] "29 Jun 2023 15:12:52 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
+<span><span class="co">#&gt; [3] "multipart/mixed; boundary=3984bfa478d02818ab387e17b884fe82\r"        </span></span>
+<span><span class="co">#&gt; [4] "--3984bfa478d02818ab387e17b884fe82\r MIME-Version: 1.0\r Date: Thu," </span></span>
+<span><span class="co">#&gt; [5] "29 Jun 2023 15:25:19 GMT\r Content-Type: text/plain; charset=utf-8;" </span></span>
 <span><span class="co">#&gt; [6] "format=flowed\r Content-Transfer-Encoding: quoted-printable\r Gmailr"</span></span>
-<span><span class="co">#&gt; [7] "is a very handy package!\r --9f912aecc1801fe78df8ec3ab428d35c--\r"</span></span></code></pre></div>
+<span><span class="co">#&gt; [7] "is a very handy package!\r --3984bfa478d02818ab387e17b884fe82--\r"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="html">HTML<a class="anchor" aria-label="anchor" href="#html"></a>
@@ -227,7 +227,7 @@ gmail’s default scanning and classification algorithms.</p>
 <p>This imports the email as though it was a normal message, with the
 same scanning and classification as normal email.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_insert_message.html">gm_insert_message</a></span><span class="op">(</span><span class="va">file_attachment</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_import_message.html">gm_import_message</a></span><span class="op">(</span><span class="va">file_attachment</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
