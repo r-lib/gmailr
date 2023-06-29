@@ -1,5 +1,19 @@
 # gmailr (development version)
 
+## Automatic OAuth client discovery
+
+* `gm_default_oauth_client()` is a new helper that searches for the JSON file
+  representing an OAuth client in a sequence of locations. The (file)path of
+  least resistance is to place this file in the directory returned by
+  `rappdirs::user_data_dir("gmailr")`. Another alternative is to record its
+  filepath in the `GMAILR_OAUTH_CLIENT` environment variable. For backwards
+  compatibility, the `GMAILR_APP` environment variable is still consulted, but
+  generates a warning (#166).
+* If `gm_auth()` fails to get a token and no OAuth client has been configured,
+  it silently calls `gm_auth_configure()` to make one attempt at automatic
+  client discovery. If an OAuth client is indeed discovered, `gm_auth()` tries
+  one more time to get a token.
+
 ## Syncing up with gargle
 
 Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth and gmailr is syncing up that:
@@ -26,27 +40,7 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth 
     which works because of the new default:
     `gm_auth_configure(path = gm_default_oauth_client())`.
 
-## Automatic OAuth client discovery
-
-* `gm_default_oauth_client()` is a new helper that searches for the JSON file
-  representing an OAuth client in a sequence of locations. The (file)path of
-  least resistance is to place this file in the directory returned by
-  `rappdirs::user_data_dir("gmailr")`. Another alternative is to record its
-  filepath in the `GMAILR_OAUTH_CLIENT` environment variable. For backwards
-  compatibility, the `GMAILR_APP` environment variable is still consulted, but
-  generates a warning (#166).
-* If `gm_auth()` fails to get a token and no OAuth client has been configured,
-  it silently calls `gm_auth_configure()` to make one attempt at automatic
-  client discovery. If an OAuth client is indeed discovered, `gm_auth()` tries
-  one more time to get a token.
-
 ## Other changes
-
-* `gm_auth(subject =)` is a new argument that can be used with
-  `gm_auth(path =)`, i.e. when using a service account. The `path` and
-  `subject` arguments are ultimately processed by
-  `gargle::credentials_service_account()` and support the use of a service
-  account to impersonate a regular user.
 
 * `gm_auth()` no longer checks for an OAuth client before calling
   `gargle::token_fetch()`. This allows other auth methods to work, which by and
@@ -57,6 +51,12 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth 
   for `gm_auth()` to fail, its error message includes some specific content if
   no OAuth client has been configured.
   
+* `gm_auth(subject =)` is a new argument that can be used with
+  `gm_auth(path =)`, i.e. when using a service account. The `path` and
+  `subject` arguments are ultimately processed by
+  `gargle::credentials_service_account()` and support the use of a service
+  account to impersonate a regular user.
+
 * `gm_token_write()` + `gm_token_read()` is a new matched pair of functions that
   make it much easier to explicitly store a token obtained in an interactive
   session then reuse that token elsewhere, such in CI or in a deployed product
@@ -115,7 +115,7 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth 
 * The google application bundled in previous gmailr releases has been removed,
   users will now need to create their own applications in order to use gmailr. See
   the [Setup](https://github.com/r-lib/gmailr/blob/main/README.md#setup) section
-  in the readme for details. This was nessesary to comply with stricter enforement
+  in the readme for details. This was necessary to comply with stricter enforcement
   of the API terms of service.
 
 ## New features
