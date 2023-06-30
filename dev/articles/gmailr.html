@@ -95,8 +95,7 @@
 
     
     
-<pre><code>No token available. Code chunks will not be evaluated.</code></pre>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gmailr.r-lib.org">gmailr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="oauth-client">OAuth client<a class="anchor" aria-label="anchor" href="#oauth-client"></a>
@@ -115,14 +114,14 @@ also make autodiscovery work by exposing the client’s JSON filepath as
 the <code>GMAILR_OAUTH_CLIENT</code> environment variable. If your
 client is configured for auto-discovery, your gmailr code should “just
 work”, without any explicit configuration around the client:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gmailr.r-lib.org">gmailr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># your gmailr code ...</span></span></code></pre></div>
 <p>Otherwise, your code must always include a call to
 <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code>, probably right after you attach
 gmailr:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gmailr.r-lib.org">gmailr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span><span class="st">"path/to/your/oauth_client.json"</span><span class="op">)</span></span>
 <span></span>
@@ -160,7 +159,7 @@ in <code>vignettes("deploy-a-token")</code>.</li>
 <p>Here’s how a script might begin if the OAuth client can’t be
 auto-discovered and the user needs to request non-default behaviour from
 <code><a href="../reference/gm_auth.html">gm_auth()</a></code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://gmailr.r-lib.org">gmailr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/gm_auth_configure.html">gm_auth_configure</a></span><span class="op">(</span><span class="st">"path/to/your/oauth_client.json"</span><span class="op">)</span></span>
 <span></span>
@@ -171,8 +170,12 @@ auto-discovered and the user needs to request non-default behaviour from
 <span><span class="op">)</span></span></code></pre></div>
 <p><code><a href="../reference/gm_profile.html">gm_profile()</a></code> is a handy function to confirm that gmailr
 is using the intended Google identity.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_profile.html">gm_profile</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_profile.html">gm_profile</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Logged in as:</span></span>
+<span><span class="co">#&gt;   * email: gargle-testuser@posit.co</span></span>
+<span><span class="co">#&gt;   * num_messages: 134</span></span>
+<span><span class="co">#&gt;   * num_threads: 134</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="compose-and-send-an-email">Compose and send an email<a class="anchor" aria-label="anchor" href="#compose-and-send-an-email"></a>
@@ -180,7 +183,7 @@ is using the intended Google identity.</p>
 <p>Create a new email with <code><a href="../reference/gm_mime.html">gm_mime()</a></code> and then build it up
 from parts, using helper functions like <code><a href="../reference/accessors.html">gm_to()</a></code> and
 <code><a href="../reference/accessors.html">gm_subject()</a></code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_email</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/gm_mime.html">gm_mime</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -189,7 +192,7 @@ from parts, using helper functions like <code><a href="../reference/accessors.ht
 <span>  <span class="fu"><a href="../reference/gm_mime.html">gm_text_body</a></span><span class="op">(</span><span class="st">"Can you hear me now?"</span><span class="op">)</span></span></code></pre></div>
 <p>You can even add a file attachment with
 <code><a href="../reference/gm_mime.html">gm_attach_file()</a></code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tmp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"mtcars-"</span>, fileext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">tmp</span><span class="op">)</span></span>
 <span><span class="va">test_email</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_mime.html">gm_attach_file</a></span><span class="op">(</span><span class="va">test_email</span>, <span class="va">tmp</span><span class="op">)</span></span></code></pre></div>
@@ -197,38 +200,44 @@ from parts, using helper functions like <code><a href="../reference/accessors.ht
 with <code><a href="../reference/gm_create_draft.html">gm_create_draft()</a></code> Then you can visit your Gmail drafts
 in the browser and confirm that the message content and formatting is as
 you intend.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_create_draft.html">gm_create_draft</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span></code></pre></div>
 <p>If you’re happy, you can either send that draft with
 <code><a href="../reference/gm_send_draft.html">gm_send_draft()</a></code>:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_send_draft.html">gm_send_draft</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_send_draft.html">gm_send_draft</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Draft Id: </span>1890adc229d349f6 </span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <p>Or you can send the original MIME message with
 <code><a href="../reference/gm_send_message.html">gm_send_message()</a></code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_send_message.html">gm_send_message</a></span><span class="op">(</span><span class="va">test_email</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="read-email">Read email<a class="anchor" aria-label="anchor" href="#read-email"></a>
 </h2>
 <p>You can retrieve email threads with <code><a href="../reference/gm_threads.html">gm_threads()</a></code>:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_threads</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_threads.html">gm_threads</a></span><span class="op">(</span>num_results <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>You can retrieve a specific thread with <code><a href="../reference/gm_thread.html">gm_thread()</a></code>:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># retrieve the latest thread by retrieving the first ID</span></span>
 <span><span class="va">latest_thread</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gm_thread.html">gm_thread</a></span><span class="op">(</span><span class="fu"><a href="../reference/gm_id.html">gm_id</a></span><span class="op">(</span><span class="va">my_threads</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <p>The messages in <code>latest_thread</code> are stored as a list. You
 can then isolate a specific message and access its parts.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_msg</span> <span class="op">&lt;-</span> <span class="va">latest_thread</span><span class="op">$</span><span class="va">messages</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/accessors.html">gm_date</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "Thu, 29 Jun 2023 22:52:26 -0700"</span></span>
 <span><span class="fu"><a href="../reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/gm_body.html">gm_body</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "this is just a gmailr test"</span></span>
+<span><span class="fu"><a href="../reference/gm_body.html">gm_body</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] "Can you hear me now?\r\n"</span></span></code></pre></div>
 <p>If a message has attachments, you can download them all locally with
 <code><a href="../reference/gm_save_attachments.html">gm_save_attachments()</a></code>:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tmp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="st">"attachments-"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.create</a></span><span class="op">(</span><span class="va">tmp2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/gm_save_attachments.html">gm_save_attachments</a></span><span class="op">(</span><span class="va">my_msg</span>, path <span class="op">=</span> <span class="va">tmp2</span><span class="op">)</span></span>
@@ -237,7 +246,14 @@ can then isolate a specific message and access its parts.</p>
 <span><span class="va">tmp2</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>full.names <span class="op">=</span> <span class="cn">TRUE</span>, pattern <span class="op">=</span> <span class="st">"[.]csv$"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                   X  mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></span>
+<span><span class="co">#&gt; 1         Mazda RX4 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span></span>
+<span><span class="co">#&gt; 2     Mazda RX4 Wag 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span></span>
+<span><span class="co">#&gt; 3        Datsun 710 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span></span>
+<span><span class="co">#&gt; 4    Hornet 4 Drive 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span></span>
+<span><span class="co">#&gt; 5 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span></span>
+<span><span class="co">#&gt; 6           Valiant 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="quota">Quota<a class="anchor" aria-label="anchor" href="#quota"></a>
