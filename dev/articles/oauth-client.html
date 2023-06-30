@@ -138,7 +138,8 @@ that is a good idea.</li>
 <li>Select the allowed scopes. Below I recommend a few nonsensitive
 default scopes, plus the Gmail-related scopes.</li>
 <li>List the allowed users. This applies to a project with external user
-type and “testing” app status (as opposed to “in production”).</li>
+type and “Testing” publishing status (as opposed to “In
+production”).</li>
 </ul>
 </li>
 <li>Create an OAuth client and download a JSON representation of it.
@@ -529,10 +530,12 @@ forced to use API configuration that is really designed for application
 developers.</p>
 <p><img src="img/oauth-consent-screen-in-production-needs-verification.png" alt='Screenshot of the configuration of the OAuth consent screen. There is an oval highlighting the new "In production" publishing status and another oval highlighting the "Needs verification" status.' width="600px"></p>
 <p>You should be able to make personal use of the OAuth client now,
-despite the fact that it “Needs verification”. My perception is that
-your project can exist in this state as long as the usage is extremely
-low, in terms of the number of unique users, which presumably will be 1
-or some other very small number.</p>
+despite the fact that it “Needs verification”. Your GCP project and
+OAuth client(s) can exist in this state as long as the usage is
+extremely low, in terms of the number of unique users, which presumably
+will be 1 or some other very small number. You can learn more about
+exceptions to the verification requirements in the <a href="https://support.google.com/cloud/answer/9110914#restricted-scopes&amp;zippy=%2Cexceptions-to-verification-requirements" class="external-link">Google
+OAuth API verification FAQ</a>.</p>
 <p>When you do the OAuth dance, you will again see some scary screens,
 due to the “Needs verification” flag on the project.</p>
 <p><img src="img/google-hasnt-verified-this-app-advanced.png" alt="Screenshot of a pop-up titled &quot;Google hasn't verified this app&quot;. There is an arrow pointing at the &quot;Advanced&quot; button." width="600px"></p>
