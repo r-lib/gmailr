@@ -13,6 +13,8 @@ development:
 
 news:
  releases:
+ - text: "gmailr 2.0.0"
+   href: https://www.tidyverse.org/blog/2023/06/gmailr-1-0-0/
  - text: "gmailr 1.0.0"
    href: https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/
 
