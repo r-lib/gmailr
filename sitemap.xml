@@ -4,19 +4,25 @@
     <loc>https://gmailr.r-lib.org/404.html</loc>
   </url>
   <url>
+    <loc>https://gmailr.r-lib.org/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
     <loc>https://gmailr.r-lib.org/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://gmailr.r-lib.org/MAINTENANCE.html</loc>
+    <loc>https://gmailr.r-lib.org/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://gmailr.r-lib.org/TODO.html</loc>
+    <loc>https://gmailr.r-lib.org/articles/deploy-a-token.html</loc>
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/articles/gmailr.html</loc>
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://gmailr.r-lib.org/articles/oauth-client.html</loc>
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/articles/sending_messages.html</loc>
@@ -35,9 +41,6 @@
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/reference/as.character.mime.html</loc>
-  </url>
-  <url>
-    <loc>https://gmailr.r-lib.org/reference/clear_token.html</loc>
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/reference/gm_attachment.html</loc>
@@ -121,6 +124,9 @@
     <loc>https://gmailr.r-lib.org/reference/gm_modify_thread.html</loc>
   </url>
   <url>
+    <loc>https://gmailr.r-lib.org/reference/gm_oauth_app.html</loc>
+  </url>
+  <url>
     <loc>https://gmailr.r-lib.org/reference/gm_profile.html</loc>
   </url>
   <url>
@@ -128,6 +134,9 @@
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/reference/gm_save_attachments.html</loc>
+  </url>
+  <url>
+    <loc>https://gmailr.r-lib.org/reference/gm_scopes.html</loc>
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/reference/gm_send_draft.html</loc>
@@ -145,6 +154,9 @@
     <loc>https://gmailr.r-lib.org/reference/gm_token.html</loc>
   </url>
   <url>
+    <loc>https://gmailr.r-lib.org/reference/gm_token_write.html</loc>
+  </url>
+  <url>
     <loc>https://gmailr.r-lib.org/reference/gm_trash_message.html</loc>
   </url>
   <url>
@@ -160,7 +172,10 @@
     <loc>https://gmailr.r-lib.org/reference/gm_update_label.html</loc>
   </url>
   <url>
-    <loc>https://gmailr.r-lib.org/reference/gmail_auth.html</loc>
+    <loc>https://gmailr.r-lib.org/reference/gmailr-configuration.html</loc>
+  </url>
+  <url>
+    <loc>https://gmailr.r-lib.org/reference/gmailr-deprecated-auth.html</loc>
   </url>
   <url>
     <loc>https://gmailr.r-lib.org/reference/gmailr-deprecated.html</loc>
@@ -172,12 +187,6 @@
     <loc>https://gmailr.r-lib.org/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://gmailr.r-lib.org/reference/pipe.html</loc>
-  </url>
-  <url>
     <loc>https://gmailr.r-lib.org/reference/quoted_printable_encode.html</loc>
-  </url>
-  <url>
-    <loc>https://gmailr.r-lib.org/reference/use_secret_file.html</loc>
   </url>
 </urlset>
