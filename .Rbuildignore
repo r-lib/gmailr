@@ -28,3 +28,4 @@ TODO.md
 ^vignettes/articles$
 ^internal$
 ^README\.Rmd$
+^CRAN-SUBMISSION$
