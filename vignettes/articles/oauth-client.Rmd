@@ -43,7 +43,7 @@ I include some detail here, so that someone who's done this before might be able
   - Select the allowed scopes. Below I recommend a few nonsensitive default
     scopes, plus the Gmail-related scopes.
   - List the allowed users. This applies to a project with external user type
-    and "testing" app status (as opposed to "in production").
+    and "Testing" publishing status (as opposed to "In production").
 * Create an OAuth client and download a JSON representation of it.
   - Here you must choose between the "Desktop app" or "Web" client type. We
     cover how to make this decision below.
@@ -767,7 +767,8 @@ knitr::include_graphics("img/oauth-consent-screen-in-production-needs-verificati
 ```
 
 You should be able to make personal use of the OAuth client now, despite the fact that it "Needs verification".
-My perception is that your project can exist in this state as long as the usage is extremely low, in terms of the number of unique users, which presumably will be 1 or some other very small number.
+Your GCP project and OAuth client(s) can exist in this state as long as the usage is extremely low, in terms of the number of unique users, which presumably will be 1 or some other very small number.
+You can learn more about exceptions to the verification requirements in the [Google OAuth API verification FAQ](https://support.google.com/cloud/answer/9110914#restricted-scopes&zippy=%2Cexceptions-to-verification-requirements).
 
 When you do the OAuth dance, you will again see some scary screens, due to the "Needs verification" flag on the project.
 
