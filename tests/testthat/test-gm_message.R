@@ -38,21 +38,30 @@ test_that("messages and message work", {
   expect_true(nzchar(gm_body(msg)))
 })
 
-test_that("import_message works", {
+test_that("gm_import_message() works", {
   skip_if_no_token()
 
-  new_id <- gm_id(gm_import_message(
-    gm_mime(From = "you@me.com", To = "any@one.com", Subject = "hello", body = "how are you doing?"),
-    label_ids = NULL
-  ))
-  on.exit(gm_delete_message(new_id))
+  msg_out <- gm_mime(
+    From = "you@me.com",
+    To = "any@one.com",
+    Subject = "hello from gm_import_message()",
+    body = "how are you doing?"
+  )
+  res <- gm_import_message(msg_out, label_ids = NULL)
+  new_id <- gm_id(res)
+
+  # even after successful message import, the "standard email delivery scanning
+  # and classification" that comes with `users.messages.import` can take
+  # several minutes
+  # therefore, the new message can't be addressed immediately
+  # that applies to getting it and to deleting it
+  # for now, I'm just going to comment out the code we wish we could run
+
+  # on.exit(gm_delete_message(new_id))
 
   expect_type(new_id, "character")
 
-  # Doing the scanning takes some time, so we can't retrieve the message
-  # directly after importing it
   # msg <- gm_message(new_id)
-
   # expect_equal(gm_id(msg), new_id)
   # expect_equal(gm_to(msg), "any@one.com")
   # expect_equal(gm_from(msg), "you@me.com")
