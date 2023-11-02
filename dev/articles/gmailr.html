@@ -174,8 +174,8 @@ is using the intended Google identity.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_profile.html">gm_profile</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Logged in as:</span></span>
 <span><span class="co">#&gt;   * email: gargle-testuser@posit.co</span></span>
-<span><span class="co">#&gt;   * num_messages: 152</span></span>
-<span><span class="co">#&gt;   * num_threads: 152</span></span></code></pre></div>
+<span><span class="co">#&gt;   * num_messages: 170</span></span>
+<span><span class="co">#&gt;   * num_threads: 170</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="compose-and-send-an-email">Compose and send an email<a class="anchor" aria-label="anchor" href="#compose-and-send-an-email"></a>
@@ -206,7 +206,7 @@ you intend.</p>
 <code><a href="../reference/gm_send_draft.html">gm_send_draft()</a></code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_send_draft.html">gm_send_draft</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Draft Id: </span>189b742558551eb3 </span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Draft Id: </span>18b9169b820c6894 </span></span>
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <p>Or you can send the original MIME message with
 <code><a href="../reference/gm_send_message.html">gm_send_message()</a></code>:</p>
@@ -229,7 +229,7 @@ can then isolate a specific message and access its parts.</p>
 <code class="sourceCode R"><span><span class="va">my_msg</span> <span class="op">&lt;-</span> <span class="va">latest_thread</span><span class="op">$</span><span class="va">messages</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/accessors.html">gm_date</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "Wed, 2 Aug 2023 12:18:44 -0500"</span></span>
+<span><span class="co">#&gt; [1] "Thu, 2 Nov 2023 12:01:47 -0700"</span></span>
 <span><span class="fu"><a href="../reference/accessors.html">gm_subject</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "this is just a gmailr test"</span></span>
 <span><span class="fu"><a href="../reference/gm_body.html">gm_body</a></span><span class="op">(</span><span class="va">my_msg</span><span class="op">)</span></span>
