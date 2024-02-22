@@ -41,6 +41,10 @@ gm_to.mime <- function(x, val, ...) {
   if (missing(val)) {
     return(x$header$To)
   }
+  if (length(val) > 1) {
+    x$header$To <- paste(val, collapse=",")
+    return(x)
+  }
   x$header$To <- val
   x
 }
@@ -61,6 +65,10 @@ gm_cc.mime <- function(x, val, ...) {
   if (missing(val)) {
     return(x$header$Cc)
   }
+  if (length(val) > 1) {
+    x$header$Cc <- paste(val, collapse=",")
+    return(x)
+  }
   x$header$Cc <- val
   x
 }
@@ -70,6 +78,10 @@ gm_cc.mime <- function(x, val, ...) {
 gm_bcc.mime <- function(x, val, ...) {
   if (missing(val)) {
     return(x$header$Bcc)
+  }
+  if (length(val) > 1) {
+   x$header$Bcc <- paste(val, collapse=",")
+   return(x)
   }
   x$header$Bcc <- val
   x
