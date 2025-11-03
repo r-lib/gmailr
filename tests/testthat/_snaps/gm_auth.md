@@ -6,8 +6,9 @@
     Condition
       Error in `gm_auth()`:
       ! `path` does not represent a service account.
-      Did you provide the JSON for an OAuth client instead of for a service account?
-      Use `gm_auth_configure()` to configure the OAuth client.
+      i If `path` is meant to be a filepath, perhaps the file does not exist?
+      i Did you provide the JSON for an OAuth client instead of for a service account?
+      i To configure the OAuth client, use `gm_auth_configure()` instead.
 
 # gm_auth() errors informatively
 
