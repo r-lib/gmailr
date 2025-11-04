@@ -29,3 +29,5 @@ TODO.md
 ^internal$
 ^README\.Rmd$
 ^CRAN-SUBMISSION$
+^[.]?air[.]toml$
+^\.vscode$
