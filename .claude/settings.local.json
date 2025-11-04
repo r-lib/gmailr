@@ -9,7 +9,8 @@
       "Edit(R/**)",
       "Edit(tests/**)",
       "Edit(vignettes/**)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": []
   }
