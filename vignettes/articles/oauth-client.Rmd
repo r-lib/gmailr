@@ -2,7 +2,8 @@
 title: "Set up an OAuth client"
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -68,8 +69,8 @@ Go to the [Google Cloud console](https://cloud.google.com/cloud-console) and sig
 #| out.width: 600px
 #| fig-alt: >
 #|   The sign in page for Google Cloud Platform.
-#|   The "Email or phone" box is selected and ready for user input.
-#|   In the lower left is a "Next" button.
+#|   The 'Email or phone' box is selected and ready for user input.
+#|   In the lower left is a 'Next' button.
 knitr::include_graphics("img/google-cloud-platform-sign-in.png")
 ```
 
@@ -98,8 +99,8 @@ Locate and click the "Select a project" button.
 #| label: fig-select-a-project-new-user-1
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at the "Select a project" button, which
-#|   is in the upper left, next to "Google Cloud".
+#|   Screenshot with an arrow pointing at the 'Select a project' button, which
+#|   is in the upper left, next to 'Google Cloud'.
 knitr::include_graphics("img/select-a-project-new-user-1.png")
 ```
 
@@ -112,7 +113,7 @@ It is fine to see "No organization" here; that's expected if the Google account 
 #| label: fig-select-a-project-new-user-2
 #| out.width: 600px
 #| fig-alt: >
-#|   The "Select a project" with an arrow pointing to the "NEW PROJECT" button.
+#|   The 'Select a project' with an arrow pointing to the 'NEW PROJECT' button.
 knitr::include_graphics("img/select-a-project-new-user-2.png")
 ```
 
@@ -123,8 +124,8 @@ Now you are on the "New Project" screen.
 #| label: new-project-new-user
 #| out.width: 600px
 #| fig-alt: >
-#|   The "New Project" screen with a box where the user enters the Project name
-#|   and a "CREATE" button. There are arrows pointing at this box, this button,
+#|   The 'New Project' screen with a box where the user enters the Project name
+#|   and a 'CREATE' button. There are arrows pointing at this box, this button,
 #|   and the Project ID.
 knitr::include_graphics("img/new-project-new-user.png")
 ```
@@ -141,8 +142,8 @@ Now you should see that you are working within your intended target project.
 #| label: fig-select-a-project-new-user-3
 #| out.width: 600px
 #| fig-alt: >
-#|   The button that previously said "Select a project" for a new user now says
-#|   "gmailr-fun", which is the name of the target project.
+#|   The button that previously said 'Select a project' for a new user now says
+#|   'gmailr-fun', which is the name of the target project.
 knitr::include_graphics("img/select-a-project-new-user-3.png")
 ```
 
@@ -158,7 +159,7 @@ The areas indicated by orange arrows are where you will see information about th
 #| fig-cap: >
 #|   One possible "Welcome" screen (using the gargle project as an example).
 #| fig-alt: >
-#|   The "Welcome" screen for an existing user with access to the gargle
+#|   The 'Welcome screen for an existing user with access to the gargle
 #|   project, which is reflected in various places on the page.
 knitr::include_graphics("img/google-cloud-welcome-returning-user.png")
 ```
@@ -189,7 +190,7 @@ knitr::include_graphics("img/apis-and-services-1.png")
 #| label: apis-and-services-2
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at "APIs & Services" in a left sidebar.
+#|   Screenshot with an arrow pointing at 'APIs & Services' in a left sidebar.
 knitr::include_graphics("img/apis-and-services-2.png")
 ```
 
@@ -203,7 +204,7 @@ Here's how this screen might look for a new project:
 #| label: apis-and-services-3
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrows pointing at the "+ ENABLE APIS AND SERVICES"
+#|   Screenshot with an arrows pointing at the '+ ENABLE APIS AND SERVICES'
 #|   button.
 knitr::include_graphics("img/apis-and-services-3.png")
 ```
@@ -217,7 +218,7 @@ You will get to a screen like this:
 #| label: enable-gmail-api
 #| out.width: 600px
 #| fig-alt: >
-#|   Screen for the Gmail API with an arrow pointing at the "ENABLE" button.
+#|   Screen for the Gmail API with an arrow pointing at the 'ENABLE' button.
 knitr::include_graphics("img/enable-gmail-api.png")
 ```
 
@@ -239,8 +240,8 @@ Click on "OAuth consent screen".
 #| label: oauth-consent-screen
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at "OAuth consent screen" within
-#|   "APIs & Services" in a left sidebar.
+#|   Screenshot with an arrow pointing at 'OAuth consent screen' within
+#|   'APIs & Services' in a left sidebar.
 knitr::include_graphics("img/oauth-consent-screen.png")
 ```
 
@@ -261,7 +262,7 @@ Select the "External" user type, then click "CREATE".
 #| out.width: 600px
 #| fig-alt: >
 #|   Screenshot with an arrow pointing at a filled radio button indicating the
-#|   "External" user type and an arrow pointing at the "CREATE" button.
+#|   'External' user type and an arrow pointing at the 'CREATE' button.
 knitr::include_graphics("img/create-external-oauth-consent-screen.png")
 ```
 
@@ -277,8 +278,8 @@ A good default for "User support email" is whatever Google email address you are
 #| label: edit-app-registration-1
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with arrows pointing at the boxes where a user enters "App name"
-#|   and "User support email".
+#|   Screenshot with arrows pointing at the boxes where a user enters 'App name'
+#|   and 'User support email'.
 knitr::include_graphics("img/edit-app-registration-1.png")
 ```
 
@@ -293,7 +294,7 @@ It's weird for the solo user, but it is what it is.
 #| out.width: 600px
 #| fig-alt: >
 #|   Screenshot with an arrow pointing at the box where a user enters an email
-#|   address as "Developer contact information".
+#|   address as 'Developer contact information'.
 knitr::include_graphics("img/edit-app-registration-2.png")
 ```
 
@@ -307,7 +308,7 @@ Click "ADD OR REMOVE SCOPES".
 #| label: add-or-remove-scopes
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at the "ADD OR REMOVE SCOPES" button.
+#|   Screenshot with an arrow pointing at the 'ADD OR REMOVE SCOPES' button.
 knitr::include_graphics("img/add-or-remove-scopes.png")
 ```
 
@@ -366,7 +367,7 @@ Scroll down to the bottom and click "SAVE AND CONTINUE".
 #| label: edit-app-registration-4
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at the "SAVE AND CONTINUE" button.
+#|   Screenshot with an arrow pointing at the 'SAVE AND CONTINUE' button.
 knitr::include_graphics("img/edit-app-registration-4.png")
 ```
 
@@ -381,7 +382,7 @@ This is only relevant to a client that supports external users and that has "Tes
 #| label: edit-app-registration-5
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at the "+ ADD USERS" button.
+#|   Screenshot with an arrow pointing at the '+ ADD USERS' button.
 knitr::include_graphics("img/edit-app-registration-5.png")
 ```
 
@@ -392,9 +393,9 @@ Enter your email address and click "ADD".
 #| label: add-users
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Add users" screen with a box where the user has
+#|   Screenshot of the 'Add users' screen with a box where the user has
 #|   entered their email address, which is obscured by an opaque rectangle.
-#|   There is an arrow pointing at the "ADD" button.
+#|   There is an arrow pointing at the 'ADD' button.
 knitr::include_graphics("img/add-users.png")
 ```
 
@@ -406,9 +407,9 @@ It will look something like this:
 #| label: edit-app-registration-6
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot that shows 1 user under "User information", where the email
+#|   Screenshot that shows 1 user under 'User information', where the email
 #|   address is obscured by an opaque rectangle. THere is an arrow pointing at
-#|   the "SAVE AND CONTINUE" button.
+#|   the 'SAVE AND CONTINUE' button.
 knitr::include_graphics("img/edit-app-registration-6.png")
 ```
 
@@ -425,7 +426,7 @@ You can get there in various ways, depending on where you start.
 #| label: go-to-credentials-1
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at "Credentials" below "APIs & Services"
+#|   Screenshot with an arrow pointing at 'Credentials' below 'APIs & Services'
 #|   in a left sidebar.
 knitr::include_graphics("img/go-to-credentials-1.png")
 ```
@@ -435,8 +436,8 @@ knitr::include_graphics("img/go-to-credentials-1.png")
 #| label: go-to-credentials-2
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at "Credentials" in a menu accessed by
-#|   clicking on "APIs & Services" in a left sidebar.
+#|   Screenshot with an arrow pointing at 'Credentials' in a menu accessed by
+#|   clicking on 'APIs & Services' in a left sidebar.
 knitr::include_graphics("img/go-to-credentials-2.png")
 ```
 
@@ -447,7 +448,7 @@ Here's how this screen will look for a new user and new project, i.e. where ther
 #| label: no-existing-credentials
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Credentials" page when there are no existing
+#|   Screenshot of the 'Credentials' page when there are no existing
 #|   credentials.
 knitr::include_graphics("img/no-existing-credentials.png")
 ```
@@ -459,7 +460,7 @@ Here's how this screen might look in a project that has existed for a long time,
 #| label: many-existing-credentials
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Credentials" page showing existing credentials, e.g. a
+#|   Screenshot of the 'Credentials' page showing existing credentials, e.g. a
 #|   couple of API keys and several OAuth 2.0 Client IDs.
 knitr::include_graphics("img/many-existing-credentials.png")
 ```
@@ -472,7 +473,7 @@ Click on "+ CREATE CREDENTIALS".
 #| label: create-credentials-button
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot with an arrow pointing at the "+ CREATE CREDENTIALS" button.
+#|   Screenshot with an arrow pointing at the '+ CREATE CREDENTIALS' button.
 knitr::include_graphics("img/create-credentials-button.png")
 ```
 
@@ -484,9 +485,9 @@ Select "OAuth client ID".
 #| out.width: 600px
 #| fig-alt: >
 #|   Screenshot of the choices presented when creating new credentials. There is
-#|   an arrow pointing at "OAuth client ID" which is the correct choice, along
-#|   with the text "YES". Two other choices, "API key" and "Service account",
-#|   are marked with the text "NO".
+#|   an arrow pointing at 'OAuth client ID' which is the correct choice, along
+#|   with the text 'YES'. Two other choices, 'API key' and 'Service account',
+#|   are marked with the text 'NO'.
 knitr::include_graphics("img/create-credentials-choices.png")
 ```
 
@@ -497,8 +498,8 @@ Next you must choose "Application type".
 #| label: oauth-client-type-choices
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Application type" dropdown menu with arrows pointing at
-#|   two of the choices, "Web application" and "Desktop app".
+#|   Screenshot of the 'Application type' dropdown menu with arrows pointing at
+#|   two of the choices, 'Web application' and 'Desktop app'.
 knitr::include_graphics("img/oauth-client-type-choices.png")
 ```
 
@@ -508,7 +509,7 @@ Here's how to choose the application type:
   More technically, this is appropriate for any setting where the httpuv R
   package will be able to spin up a local web server (gargle does this behind
   the scenes for you).
-  
+
   The "Desktop app" client type can also be used in a hosted/cloud context,
   under very specific circumstances. The GCP project's OAuth consent screen must
   be configured for internal users within a Google workspace or for external
@@ -520,11 +521,11 @@ Here's how to choose the application type:
   configured for external users with "In production" publishing status. This is
   the client type needed for a gargle-specific variant of oob known as
   pseudo-oob.
-  
+
 Note that above, we are talking about the computing environment where you will do the OAuth dance, i.e. where you will obtain new tokens.
 If you are going to do auth on your local computer, then deploy that token to Posit Connect or Cloud or shinyapps.io, you can still use a "Desktop app".
 (This workflow is detailed in `vignette("deploy-a-token")`.)
-  
+
 Let's say you choose "Desktop app".
 (In a later section, we address the "Web application" type.)
 Again, you'll get a chance to give the client a name.
@@ -539,9 +540,9 @@ You get the idea.
 #| label: oauth-client-create
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Create OAuth client ID" screen with "Desktop app"
-#|   selected as the Application type and "desktop-aardvark" filled in the
-#|   "Name" box. There are arrows pointing at the "Name" box and the "CREATE"
+#|   Screenshot of the 'Create OAuth client ID' screen with 'Desktop app'
+#|   selected as the Application type and 'desktop-aardvark' filled in the
+#|   'Name' box. There are arrows pointing at the 'Name' box and the 'CREATE'
 #|   button.
 knitr::include_graphics("img/oauth-client-create.png")
 ```
@@ -553,8 +554,8 @@ You should see the happy news that your OAuth client was created:
 #| label: oauth-client-created-yay
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "OAuth client created" pop-up, with a large oval
-#|   highlighting the "DOWNLOAD JSON" button.
+#|   Screenshot of the 'OAuth client created' pop-up, with a large oval
+#|   highlighting the 'DOWNLOAD JSON' button.
 knitr::include_graphics("img/oauth-client-created-yay.png")
 ```
 
@@ -576,8 +577,8 @@ Now the "Credentials" screen within "APIs & Services" will look more like this:
 #| label: one-existing-credential
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Credentials" screen showing 1 existing OAuth 2.0 Client
-#|   ID named "desktop-aardvark".
+#|   Screenshot of the 'Credentials' screen showing 1 existing OAuth 2.0 Client
+#|   ID named 'desktop-aardvark'.
 knitr::include_graphics("img/one-existing-credential.png")
 ```
 
@@ -591,9 +592,9 @@ Each existing OAuth client ID has a download button.
 #| label: oauth-client-post-hoc-download
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Credentials" screen with an arrow pointing at a
-#|   "download" icon in the table row associated with the existing OAuth 2.0
-#|    Client ID named "desktop-aardvark".
+#|   Screenshot of the 'Credentials' screen with an arrow pointing at a
+#|   'download' icon in the table row associated with the existing OAuth 2.0
+#|    Client ID named 'desktop-aardvark'.
 knitr::include_graphics("img/oauth-client-post-hoc-download.png")
 ```
 
@@ -621,23 +622,23 @@ In order of preference:
 1. Move the downloaded JSON file to the location returned by
    `rappdirs::user_data_dir("gmailr")`.
    You could accomplish this move with code like this:
-   
+
     ```{r}
     #| eval: false
     path_old <- "~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"
     d <- fs::dir_create(rappdirs::user_data_dir("gmailr"), recurse = TRUE)
     fs::file_move(path_old, d)
     ```
-    
+
    It's important that the target folder only has one file whose name "looks"
    like a Google OAuth client file.
-   
+
 2. Place the downloaded JSON file in some other location (perhaps this is out of
    your control).
-   Inform gmailr by recording this filepath in the `GMAILR_OAUTH_CLIENT` 
+   Inform gmailr by recording this filepath in the `GMAILR_OAUTH_CLIENT`
    environment variable.
    In your `.Renviron`, you would have something like this:
-   
+
    ```
    GMAILR_OAUTH_CLIENT=/path/to/my/gmailr/oauth-client.json
    ```
@@ -668,11 +669,11 @@ Once you do anything that triggers gmailr auth, you'll see this:
 #| label: google-hasnt-verified-this-app
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot that reads: "Google hasn't verified this app. You've been given
+#|   Screenshot that reads: Google hasn't verified this app. You've been given
 #|   access to an app that's currently being tested. You should only continue
-#|   if you know the developer that invited you." There is an arrow pointing
-#|   at the word "Continue". There is also a button labelled as "Back to
-#|   safety".
+#|   if you know the developer that invited you. There is an arrow pointing
+#|   at the word 'Continue'. There is also a button labelled as 'Back to
+#|   safety'.
 knitr::include_graphics("img/google-hasnt-verified-this-app.png")
 ```
 
@@ -683,19 +684,19 @@ Once you click "Continue", you'll need to say exactly what permissions you are w
 #| label: select-what-app-can-access
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot that reads: "gmailr-fun wants access to your Google Account".
-#|   Then it shows the email "jenny.f.bryan@gmail.com".
-#|   Next the text "Select what gmailr-fun can access".
-#|   The choice "Associate you with your personal info on Google" is preselected
+#|   Screenshot that reads: 'gmailr-fun wants access to your Google Account'.
+#|   Then it shows the email 'jenny.f.bryan@gmail.com'.
+#|   Next the text 'Select what gmailr-fun can access'.
+#|   The choice 'Associate you with your personal info on Google' is preselected
 #|   and greyed out, indicating this choice cannot be altered.
-#|   The choice "See your primary Google Account email address" is preselected
+#|   The choice 'See your primary Google Account email address' is preselected
 #|   and greyed out, indicating this choice cannot be altered.
-#|   The choice "Read, compose, send, and permanently delete all your email from
-#|   Gmail" has been checked. This is emphasized with an orange oval.
-#|   Then there is text: "Make sure you trust gmailr-fun. You may be sharing
+#|   The choice 'Read, compose, send, and permanently delete all your email from
+#|   Gmail' has been checked. This is emphasized with an orange oval.
+#|   Then there is text: 'Make sure you trust gmailr-fun. You may be sharing
 #|   sensitive info with this site or app. You can always see or remove access
 #|   in your Google Account.
-#|   There is an arrow pointing at the "Continue" button at the bottom of the
+#|   There is an arrow pointing at the 'Continue' button at the bottom of the
 #|   page.
 knitr::include_graphics("img/select-what-app-can-access.png")
 ```
@@ -716,7 +717,7 @@ There are two ways to get a token that is more persistent:
   consent screen for the "Internal" user type. This is obviously only
   available to folks working within a Google workspace and that either describes
   you or it doesn't.
-  
+
 ## Use a non-verified, "In production" app
 
 This section discusses the experience if your GCP project is *not* inside a Google workspace, but you have decided to change its publishing status from "Testing" to "In production".
@@ -730,7 +731,7 @@ Click the "PUBLISH APP" button.
 #| out.width: 600px
 #| fig-alt: >
 #|   Screenshot of the configuration of the OAuth consent screen.
-#|   There is an arrow pointing at the "PUBLISH APP" button in the Publishing
+#|   There is an arrow pointing at the 'PUBLISH APP' button in the Publishing
 #|   status section.
 knitr::include_graphics("img/oauth-consent-screen-publishing-status-testing.png")
 ```
@@ -743,8 +744,8 @@ You will then see a new pop-up asking you to confirm this choice, outlining vari
 #| out.width: 600px
 #| fig-alt: >
 #|   Screenshot of a pop-up explaining the implications of putting an app into
-#|   production mode, with the option to click "CANCEL" or "CONFIRM". There is
-#|   an arrow pointing at "CONFIRM".
+#|   production mode, with the option to click 'CANCEL' or 'CONFIRM'. There is
+#|   an arrow pointing at 'CONFIRM'.
 knitr::include_graphics("img/oauth-consent-screen-push-to-production.png")
 ```
 
@@ -761,8 +762,8 @@ You will just have to accept this situation as something awkward that comes when
 #| out.width: 600px
 #| fig-alt: >
 #|   Screenshot of the configuration of the OAuth consent screen.
-#|   There is an oval highlighting the new "In production" publishing status and
-#|   another oval highlighting the "Needs verification" status.
+#|   There is an oval highlighting the new 'In production' publishing status and
+#|   another oval highlighting the 'Needs verification' status.
 knitr::include_graphics("img/oauth-consent-screen-in-production-needs-verification.png")
 ```
 
@@ -777,8 +778,8 @@ When you do the OAuth dance, you will again see some scary screens, due to the "
 #| label: google-hasnt-verified-this-app-advanced
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of a pop-up titled "Google hasn't verified this app".
-#|   There is an arrow pointing at the "Advanced" button.
+#|   Screenshot of a pop-up titled 'Google hasn't verified this app'.
+#|   There is an arrow pointing at the 'Advanced' button.
 knitr::include_graphics("img/google-hasnt-verified-this-app-advanced.png")
 ```
 
@@ -791,8 +792,8 @@ Click "Go to YOUR-PROJECT-NAME (unsafe)" to proceed to the usual consent screens
 #| label: google-hasnt-verified-this-app-go-to-unsafe
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of a pop-up titled "Google hasn't verified this app".
-#|   There is an arrow pointing at the "Go to YOUR-PROJECT-NAME (unsafe)"
+#|   Screenshot of a pop-up titled 'Google hasn't verified this app'.
+#|   There is an arrow pointing at the 'Go to YOUR-PROJECT-NAME (unsafe)'
 #|   button.
 knitr::include_graphics("img/google-hasnt-verified-this-app-go-to-unsafe.png")
 ```
@@ -808,7 +809,7 @@ You will do this if you're going to obtain tokens, i.e. go through the OAuth dan
    specifies the "External" user type and has publishing status "In production"
    (as opposed to "Testing"). This is associated with a gargle-specific variant
    of the "out-of-bound" (oob) auth flow known as pseudo-oob.
-   
+
 The oob auth flows are described in the gargle article [Auth when using R from the browser](https://gargle.r-lib.org/articles/auth-from-web.html).
 
 Let's pick up the instruction above at the point where you are choosing an "Application type".
@@ -819,8 +820,8 @@ This time we choose "Web application".
 #| label: oauth-client-type-choices-reprise
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Application type" dropdown menu with arrows pointing at
-#|   two of the choices, "Web application" and "Desktop app".
+#|   Screenshot of the 'Application type' dropdown menu with arrows pointing at
+#|   two of the choices, 'Web application' and 'Desktop app'.
 knitr::include_graphics("img/oauth-client-type-choices.png")
 ```
 
@@ -834,9 +835,9 @@ I incorporate "web" to remind myself which type of client this is and "baboon" i
 #| label: oauth-client-create-web-application
 #| out.width: 600px
 #| fig-alt: >
-#|   Screenshot of the "Create OAuth client ID" screen with "Web application"
-#|   selected as the Application type and "web-baboon" filled in the
-#|   "Name" box. There are arrows pointing at the "Name" box and the "CREATE"
+#|   Screenshot of the 'Create OAuth client ID' screen with 'Web application'
+#|   selected as the Application type and 'web-baboon' filled in the
+#|   'Name' box. There are arrows pointing at the 'Name' box and the 'CREATE'
 #|   button.
 knitr::include_graphics("img/oauth-client-create-web-application.png")
 ```

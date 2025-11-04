@@ -7,7 +7,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 can_decrypt <- gargle::secret_has_key("GMAILR_KEY")
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -18,15 +19,22 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+```{r}
+#| eval: !expr '!can_decrypt'
+#| echo: false
+#| comment: NA
 message("No token available. Code chunks will not be evaluated.")
 ```
 
-```{r auth, include = FALSE}
+```{r}
+#| label: auth
+#| include: false
 gmailr:::gm_auth_testing()
 ```
 
-```{r setup, message = FALSE}
+```{r}
+#| label: setup
+#| message: false
 library(gmailr)
 ```
 
@@ -79,7 +87,8 @@ The arguments that are most useful in practice are:
 
 Here's how a script might begin if the OAuth client can't be auto-discovered and the user needs to request non-default behaviour from `gm_auth()`:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 library(gmailr)
 gm_auth_configure("path/to/your/oauth_client.json")
 
@@ -100,7 +109,8 @@ gm_profile()
 
 Create a new email with `gm_mime()` and then build it up from parts, using helper functions like `gm_to()` and `gm_subject()`.
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 test_email <-
   gm_mime() |>
   gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") |>
@@ -109,7 +119,8 @@ test_email <-
   gm_text_body("Can you hear me now?")
 ```
 
-```{r include = FALSE}
+```{r}
+#| include: false
 test_email <-
   gm_mime() |>
   gm_to("gargle-testuser@posit.co") |>
@@ -141,7 +152,8 @@ gm_send_draft(d)
 
 Or you can send the original MIME message with `gm_send_message()`:
 
-```{r eval = FALSE}
+```{r}
+#| eval: false
 gm_send_message(test_email)
 ```
 
@@ -185,7 +197,8 @@ tmp2 |>
   head()
 ```
 
-```{r include = FALSE}
+```{r}
+#| include: false
 unlink(tmp)
 unlink(tmp2, recursive = TRUE)
 ```
