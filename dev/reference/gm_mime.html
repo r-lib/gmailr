@@ -166,7 +166,6 @@ gm_mime() or iteratively using the various accessors."><meta name="robots" conte
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># using the field functions</span></span></span>
 <span class="r-in"><span><span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">gm_mime</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="accessors.html">gm_from</a></span><span class="op">(</span><span class="st">"james.f.hester@gmail.com"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="accessors.html">gm_to</a></span><span class="op">(</span><span class="st">"asdf@asdf.com"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">gm_text_body</span><span class="op">(</span><span class="st">"Test Message"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -177,6 +176,11 @@ gm_mime() or iteratively using the various accessors."><meta name="robots" conte
 <span class="r-in"><span>  To <span class="op">=</span> <span class="st">"asdf@asdf.com"</span></span></span>
 <span class="r-in"><span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu">gm_html_body</span><span class="op">(</span><span class="st">"&lt;b&gt;Test&lt;\b&gt; Message"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># send to multiple recipients</span></span></span>
+<span class="r-in"><span><span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">gm_mime</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="accessors.html">gm_to</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"alice@example.com"</span>, <span class="st">"bob@example.com"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">gm_text_body</span><span class="op">(</span><span class="st">"hello to multiple people at once!"</span><span class="op">)</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
