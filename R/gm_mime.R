@@ -10,7 +10,6 @@
 #' @examples
 #' # using the field functions
 #' msg <- gm_mime() |>
-#'   gm_from("james.f.hester@gmail.com") |>
 #'   gm_to("asdf@asdf.com") |>
 #'   gm_text_body("Test Message")
 #'
@@ -21,6 +20,11 @@
 #'   To = "asdf@asdf.com"
 #' ) |>
 #'   gm_html_body("<b>Test<\b> Message")
+#'
+#' # send to multiple recipients
+#' msg <- gm_mime() |>
+#'   gm_to(c("alice@example.com", "bob@example.com")) |>
+#'   gm_text_body("hello to multiple people at once!")
 gm_mime <- function(..., attr = NULL, body = NULL, parts = list()) {
   structure(
     list(
