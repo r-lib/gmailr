@@ -11,8 +11,23 @@
 #'
 #' first_10_threads <- gm_threads(10)
 #' }
-gm_threads <- function(search = NULL, num_results = NULL, page_token = NULL, label_ids = NULL, include_spam_trash = NULL, user_id = "me") {
-  page_and_trim("threads", user_id, num_results, search, page_token, label_ids, include_spam_trash)
+gm_threads <- function(
+  search = NULL,
+  num_results = NULL,
+  page_token = NULL,
+  label_ids = NULL,
+  include_spam_trash = NULL,
+  user_id = "me"
+) {
+  page_and_trim(
+    "threads",
+    user_id,
+    num_results,
+    search,
+    page_token,
+    label_ids,
+    include_spam_trash
+  )
 }
 
 #' Get a single thread
@@ -32,7 +47,11 @@ gm_thread <- function(id, user_id = "me") {
   stop_for_status(req)
   parsed_req <- structure(content(req, "parsed"), class = "gmail_thread")
 
-  parsed_req$messages[] <- lapply(parsed_req$messages, structure, class = "gmail_message")
+  parsed_req$messages[] <- lapply(
+    parsed_req$messages,
+    structure,
+    class = "gmail_message"
+  )
 
   parsed_req
 }
@@ -104,9 +123,22 @@ gm_delete_thread <- function(id, user_id = "me") {
 #' # add and remove at the same time
 #' gm_modify_thread(12345, add_labels = "label_2", remove_labels = "label_1")
 #' }
-gm_modify_thread <- function(id, add_labels = character(0), remove_labels = character(0), user_id = "me") {
-  body <- rename(list("add_labels" = add_labels, "remove_labels" = remove_labels))
-  req <- POST(gmail_path(rename(user_id), "threads", id, "modify"), body = body, encode = "json", gm_token())
+gm_modify_thread <- function(
+  id,
+  add_labels = character(0),
+  remove_labels = character(0),
+  user_id = "me"
+) {
+  body <- rename(list(
+    "add_labels" = add_labels,
+    "remove_labels" = remove_labels
+  ))
+  req <- POST(
+    gmail_path(rename(user_id), "threads", id, "modify"),
+    body = body,
+    encode = "json",
+    gm_token()
+  )
   stop_for_status(req)
   invisible(content(req, "parsed"))
 }

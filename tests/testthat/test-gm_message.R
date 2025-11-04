@@ -73,7 +73,12 @@ test_that("insert_message, modify_message, trash_message and untrash_message wor
   skip_if_no_token()
 
   new_id <- gm_id(gm_insert_message(
-    gm_mime(From = "you@me.com", To = "any@one.com", Subject = "hello", body = "how are you doing?"),
+    gm_mime(
+      From = "you@me.com",
+      To = "any@one.com",
+      Subject = "hello",
+      body = "how are you doing?"
+    ),
     label_ids = NULL
   ))
   msg <- gm_message(new_id)
@@ -109,7 +114,7 @@ test_that("send_message works", {
 
   msg <- gm_mime(
     From = gm_default_email(),
-    To   = gm_default_email(),
+    To = gm_default_email(),
     Subject = "hello myself",
     body = "how are you doing? I am doing well!"
   )

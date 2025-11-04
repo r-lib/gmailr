@@ -45,10 +45,20 @@ not_null <- function(x) {
 }
 
 gmail_path <- function(user, ...) {
-  paste("https://www.googleapis.com/gmail/v1/users", user, paste0(unlist(list(...)), collapse = "/"), sep = "/")
+  paste(
+    "https://www.googleapis.com/gmail/v1/users",
+    user,
+    paste0(unlist(list(...)), collapse = "/"),
+    sep = "/"
+  )
 }
 gmail_upload_path <- function(user, ...) {
-  paste("https://www.googleapis.com/upload/gmail/v1/users", user, paste0(list(...), collapse = "/"), sep = "/")
+  paste(
+    "https://www.googleapis.com/upload/gmail/v1/users",
+    user,
+    paste0(list(...), collapse = "/"),
+    sep = "/"
+  )
 }
 mark_utf8 <- function(x) {
   if (length(x)) {
@@ -80,8 +90,10 @@ dots <- function(...) {
 page_and_trim <- function(type, user_id, num_results, ...) {
   num_results <- num_results %||% 100
   itr <- function(...) {
-    req <- GET(gmail_path(user_id, type),
-      query = not_null(rename(...)), gm_token()
+    req <- GET(
+      gmail_path(user_id, type),
+      query = not_null(rename(...)),
+      gm_token()
     )
     stop_for_status(req)
     content(req, "parsed")

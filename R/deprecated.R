@@ -221,7 +221,11 @@ update_label <- function(...) {
 #' @rdname gmailr-deprecated
 #' @export
 update_label_patch <- function(...) {
-  deprecate_stop("2.0.0", "gmailr::update_label_patch()", "gm_update_label_patch()")
+  deprecate_stop(
+    "2.0.0",
+    "gmailr::update_label_patch()",
+    "gm_update_label_patch()"
+  )
 }
 
 #' @rdname gmailr-deprecated
@@ -289,7 +293,10 @@ gm_convert_file <- function(file) {
 get_deprecated_funs <- function() {
   file <- system.file(package = "gmailr", "R", "deprecated.R")
   lines <- readLines(file)
-  res <- rematch2::re_match(lines, "deprecate_.*gmailr:::?(?<old>[^(]+).*(?<new>gm_[^(]+)")
+  res <- rematch2::re_match(
+    lines,
+    "deprecate_.*gmailr:::?(?<old>[^(]+).*(?<new>gm_[^(]+)"
+  )
   res <- stats::na.omit(res)[c("old", "new")]
   # don't retain a spurious match from this function, i.e. the rematch2 line
   valid_fcn <- grepl("^[a-zA-Z\\.]", res$old)
@@ -315,10 +322,12 @@ clear_token <- function() {
 
 #' @rdname gmailr-deprecated-auth
 #' @export
-gmail_auth <- function(scope = c("read_only", "modify", "compose", "full"),
-                       id = the$id,
-                       secret = the$secret,
-                       secret_file = NULL) {
+gmail_auth <- function(
+  scope = c("read_only", "modify", "compose", "full"),
+  id = the$id,
+  secret = the$secret,
+  secret_file = NULL
+) {
   deprecate_stop("2.0.0", "gmailr::gmail_auth()", "gm_auth()")
 }
 

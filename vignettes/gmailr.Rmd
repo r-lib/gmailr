@@ -76,7 +76,7 @@ The arguments that are most useful in practice are:
   "read only" scope.
 * `token`: In a deployed setting, it can be useful to directly provide a stored
   token to gmailr. This use case is documented in `vignettes("deploy-a-token")`.
-  
+
 Here's how a script might begin if the OAuth client can't be auto-discovered and the user needs to request non-default behaviour from `gm_auth()`:
 
 ```{r eval = FALSE}
@@ -179,9 +179,9 @@ dir.create(tmp2)
 gm_save_attachments(my_msg, path = tmp2)
 
 # let's take a peek
-tmp2 |> 
-  list.files(full.names = TRUE, pattern = "[.]csv$") |> 
-  read.csv() |> 
+tmp2 |>
+  list.files(full.names = TRUE, pattern = "[.]csv$") |>
+  read.csv() |>
   head()
 ```
 
@@ -194,4 +194,3 @@ unlink(tmp2, recursive = TRUE)
 
 The Gmail API is free to use for modest levels of activity.
 To learn more about Gmail API quotas see <https://developers.google.com/gmail/api/reference/quota>.
-
