@@ -123,19 +123,3 @@
       Error in `readRDS()`:
       ! unknown input format
 
-# gm_token_write() / gm_token_read() roundtrip, explicit key
-
-    Code
-      readRDS(tmp)
-    Condition
-      Error in `readRDS()`:
-      ! unknown input format
-
----
-
-    Code
-      gm_token_read(tmp)
-    Condition
-      Error in `memDecompress()`:
-      ! internal error -5 in memDecompress(type = "bzip2")
-
