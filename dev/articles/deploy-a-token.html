@@ -184,10 +184,12 @@ implements the technique described here..</em></p>
 a snippet like this to read the token from file and tell gmailr to use
 it:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_auth.html">gm_auth</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="../reference/gm_token_write.html">gm_token_read</a></span><span class="op">(</span></span>
-<span>  path <span class="op">=</span> <span class="st">"path/to/gmailr-token.rds"</span>,</span>
-<span>  key <span class="op">=</span> <span class="st">"GMAILR_KEY"</span></span>
-<span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gm_auth.html">gm_auth</a></span><span class="op">(</span></span>
+<span>  token <span class="op">=</span> <span class="fu"><a href="../reference/gm_token_write.html">gm_token_read</a></span><span class="op">(</span></span>
+<span>    path <span class="op">=</span> <span class="st">"path/to/gmailr-token.rds"</span>,</span>
+<span>    key <span class="op">=</span> <span class="st">"GMAILR_KEY"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>If you did not specify the <code>key</code> in
 <code><a href="../reference/gm_token_write.html">gm_token_write()</a></code>, omit it from the
 <code><a href="../reference/gm_token_write.html">gm_token_read()</a></code> call as well. If you did specify the
