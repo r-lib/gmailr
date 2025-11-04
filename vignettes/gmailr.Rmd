@@ -114,7 +114,6 @@ Create a new email with `gm_mime()` and then build it up from parts, using helpe
 test_email <-
   gm_mime() |>
   gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") |>
-  gm_from("PUT_THE_GMAIL_ADDRESS_ASSOCIATED_WITH_YOUR_GOOGLE_ACCOUNT_HERE") |>
   gm_subject("this is just a gmailr test") |>
   gm_text_body("Can you hear me now?")
 ```
@@ -124,7 +123,6 @@ test_email <-
 test_email <-
   gm_mime() |>
   gm_to("gargle-testuser@posit.co") |>
-  gm_from("gargle-testuser@posit.co") |>
   gm_subject("this is just a gmailr test") |>
   gm_text_body("Can you hear me now?")
 ```
@@ -144,7 +142,7 @@ Then you can visit your Gmail drafts in the browser and confirm that the message
 d <- gm_create_draft(test_email)
 ```
 
-If you're happy, you can either send that draft with `gm_send_draft()`:
+If you're happy, you can either send that draft from the web UI or with `gm_send_draft()`:
 
 ```{r}
 gm_send_draft(d)
