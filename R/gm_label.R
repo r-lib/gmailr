@@ -73,14 +73,18 @@ gm_delete_label <- function(id, user_id = "me") {
 #' @references <https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create>
 #' @family label
 #' @export
-gm_create_label <- function(name,
-                            label_list_visibility = c("show", "hide", "show_unread"),
-                            message_list_visibility = c("show", "hide"),
-                            user_id = "me") {
+gm_create_label <- function(
+  name,
+  label_list_visibility = c("show", "hide", "show_unread"),
+  message_list_visibility = c("show", "hide"),
+  user_id = "me"
+) {
   label_list_visibility <- label_value_map[match.arg(label_list_visibility)]
   message_list_visibility <- match.arg(message_list_visibility)
 
-  gmailr_POST("labels", user_id,
+  gmailr_POST(
+    "labels",
+    user_id,
     body = c(rename(
       name,
       label_list_visibility,

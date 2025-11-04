@@ -11,12 +11,15 @@
 #' \dontrun{
 #' my_draft <- gm_draft("12345")
 #' }
-gm_draft <- function(id,
-                     user_id = "me",
-                     format = c("full", "minimal", "raw")) {
+gm_draft <- function(id, user_id = "me", format = c("full", "minimal", "raw")) {
   stopifnot(is_string(id), is_string(user_id))
   format <- match.arg(format)
-  res <- gmailr_GET(c("drafts", id), user_id, query = list(format = format), class = "gmail_draft")
+  res <- gmailr_GET(
+    c("drafts", id),
+    user_id,
+    query = list(format = format),
+    class = "gmail_draft"
+  )
 
   class(res$message) <- c("gmail_message", "list")
 
@@ -56,11 +59,12 @@ gm_drafts <- function(num_results = NULL, page_token = NULL, user_id = "me") {
 #'   Subject = "hello", "how are you doing?"
 #' ))
 #' }
-gm_create_draft <- function(mail,
-                            user_id = "me") {
+gm_create_draft <- function(mail, user_id = "me") {
   mail <- as.character(mail)
   stopifnot(is_string(user_id))
-  res <- gmailr_POST("drafts", user_id,
+  res <- gmailr_POST(
+    "drafts",
+    user_id,
     class = "gmail_draft",
     query = list(uploadType = "media"),
     body = mail,
@@ -89,10 +93,11 @@ gm_create_draft <- function(mail,
 #' ))
 #' gm_send_draft(draft)
 #' }
-gm_send_draft <- function(draft,
-                          user_id = "me") {
+gm_send_draft <- function(draft, user_id = "me") {
   stopifnot(has_class(draft, "gmail_draft"), is_string(user_id))
-  gmailr_POST(c("drafts", "send"), user_id,
+  gmailr_POST(
+    c("drafts", "send"),
+    user_id,
     class = "gmail_draft",
     body = draft,
     encode = "json"

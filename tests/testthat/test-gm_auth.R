@@ -18,7 +18,8 @@ test_that("gm_auth() errors if OAuth client is passed to `path`", {
     error = TRUE,
     gm_auth(
       path = system.file(
-        "extdata", "client_secret_installed.googleusercontent.com.json",
+        "extdata",
+        "client_secret_installed.googleusercontent.com.json",
         package = "gargle"
       )
     )
@@ -26,7 +27,9 @@ test_that("gm_auth() errors if OAuth client is passed to `path`", {
 })
 
 test_that("gm_auth() errors informatively", {
-  credentials_nope <- function(scopes, ...) { NULL }
+  credentials_nope <- function(scopes, ...) {
+    NULL
+  }
   gargle::local_cred_funs(funs = list(credentials_nope = credentials_nope))
   local_mocked_bindings(gm_default_oauth_client = function() NULL)
   local_interactive(FALSE)
@@ -54,7 +57,8 @@ test_that("gm_auth_configure() works", {
 
   gm_auth_configure(
     path = system.file(
-      "extdata", "client_secret_installed.googleusercontent.com.json",
+      "extdata",
+      "client_secret_installed.googleusercontent.com.json",
       package = "gargle"
     )
   )

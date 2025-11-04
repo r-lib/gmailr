@@ -22,15 +22,19 @@
 #' ) |>
 #'   gm_html_body("<b>Test<\b> Message")
 gm_mime <- function(..., attr = NULL, body = NULL, parts = list()) {
-  structure(list(
-    parts = parts,
-    header = with_defaults(
-      c("MIME-Version" = "1.0"),
-      Date = http_date(Sys.time()),
-      ...
+  structure(
+    list(
+      parts = parts,
+      header = with_defaults(
+        c("MIME-Version" = "1.0"),
+        Date = http_date(Sys.time()),
+        ...
+      ),
+      body = body,
+      attr = attr
     ),
-    body = body, attr = attr
-  ), class = "mime")
+    class = "mime"
+  )
 }
 
 #' @param x the object whose fields you are setting
@@ -93,13 +97,15 @@ gm_subject.mime <- function(x, val, ...) {
 #' @param ... additional parameters to put in the attr field
 #' @rdname gm_mime
 #' @export
-gm_text_body <- function(mime,
-                         body,
-                         content_type = "text/plain",
-                         charset = "utf-8",
-                         encoding = "quoted-printable",
-                         format = "flowed",
-                         ...) {
+gm_text_body <- function(
+  mime,
+  body,
+  content_type = "text/plain",
+  charset = "utf-8",
+  encoding = "quoted-printable",
+  format = "flowed",
+  ...
+) {
   if (missing(body)) {
     return(mime$parts[[TEXT_PART]])
   }
@@ -120,12 +126,14 @@ TEXT_PART <- 1L
 
 #' @rdname gm_mime
 #' @export
-gm_html_body <- function(mime,
-                         body,
-                         content_type = "text/html",
-                         charset = "utf-8",
-                         encoding = "base64",
-                         ...) {
+gm_html_body <- function(
+  mime,
+  body,
+  content_type = "text/html",
+  charset = "utf-8",
+  encoding = "base64",
+  ...
+) {
   if (missing(body)) {
     return(mime$parts[[HTML_PART]])
   }
@@ -180,7 +188,9 @@ gm_attach_file <- function(mime, filename, type = NULL, id = NULL, ...) {
 
   base_name <- basename(filename)
 
-  gm_attach_part(mime, body,
+  gm_attach_part(
+    mime,
+    body,
     content_type = type,
     name = base_name,
     filename = base_name,
@@ -205,7 +215,10 @@ header_encode <- function(x) {
 
   # complex addresses may need to be base64-encoded
   needs_encoding <- Encoding(m$phrase) != "unknown"
-  res[needs_encoding] <- sprintf("=?utf-8?B?%s?=", vcapply(m$phrase[needs_encoding], encode_base64))
+  res[needs_encoding] <- sprintf(
+    "=?utf-8?B?%s?=",
+    vcapply(m$phrase[needs_encoding], encode_base64)
+  )
   res[!needs_encoding] <- m$phrase[!needs_encoding]
 
   # Add the addr_spec onto non-simple examples
@@ -227,7 +240,12 @@ as.character.mime <- function(x, newline = "\r\n", ...) {
   x$header <- lapply(x$header, header_encode)
 
   # if we have both the text part and html part, we have to embed them in a multipart/alternative message
-  if (x$attr$content_type %!=% "multipart/alternative" && exists_list(x$parts, TEXT_PART) && exists_list(x$parts, HTML_PART)) {
+  if (
+    x$attr$content_type %!=%
+      "multipart/alternative" &&
+      exists_list(x$parts, TEXT_PART) &&
+      exists_list(x$parts, HTML_PART)
+  ) {
     x$attr$content_type <- "multipart/alternative"
   }
 
@@ -244,7 +262,13 @@ as.character.mime <- function(x, newline = "\r\n", ...) {
     # end is --boundary-- if mulitpart, otherwise nothing
     end <- paste0(newline, "--", boundary, "--", newline)
 
-    body_text <- paste0(collapse = sep, Filter(function(x) length(x) > 0L, c(lapply(x$parts, as.character), x$body)))
+    body_text <- paste0(
+      collapse = sep,
+      Filter(
+        function(x) length(x) > 0L,
+        c(lapply(x$parts, as.character), x$body)
+      )
+    )
   } else {
     boundary <- NULL
     sep <- newline
@@ -259,7 +283,8 @@ as.character.mime <- function(x, newline = "\r\n", ...) {
 
   encoding <- x$attr$encoding %||% ""
 
-  encoded_body <- switch(encoding,
+  encoded_body <- switch(
+    encoding,
     "base64" = encode_base64(body_text, 76L, newline),
     "quoted-printable" = quoted_printable_encode(body_text),
     body_text
@@ -292,18 +317,28 @@ generate_content_disposition <- function(header) {
 }
 
 random_hex <- function(width = 4) {
-  paste(sprintf("%x", sample(16, size = width, replace = TRUE) - 1L), collapse = "")
+  paste(
+    sprintf("%x", sample(16, size = width, replace = TRUE) - 1L),
+    collapse = ""
+  )
 }
 
 format_headers <- function(headers, newline) {
-  empty <- vapply(headers, function(x) {
-    is.null(x) || length(x) %==% 0L
-  }, logical(1L))
+  empty <- vapply(
+    headers,
+    function(x) {
+      is.null(x) || length(x) %==% 0L
+    },
+    logical(1L)
+  )
   keep_headers <- headers[!empty]
   if (length(keep_headers) %==% 0L) {
     return(NULL)
   }
-  paste0(paste(sep = ": ", collapse = newline, names(keep_headers), keep_headers), newline)
+  paste0(
+    paste(sep = ": ", collapse = newline, names(keep_headers), keep_headers),
+    newline
+  )
 }
 
 with_defaults <- function(defaults, ...) {

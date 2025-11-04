@@ -3,28 +3,54 @@ test_that("MIME - Basic functions", {
   msg <- gm_mime()
   expect_equal(class(msg), "mime", label = "msg object has correct class")
 
-  expect_true(length(msg$header) > 0, label = "Even the default object has headers")
+  expect_true(
+    length(msg$header) > 0,
+    label = "Even the default object has headers"
+  )
 
   rv <- gm_to(msg, "adam@ali.as")
-  expect_equal(header_encode(rv$header$To), "adam@ali.as", label = "to sets To Header")
+  expect_equal(
+    header_encode(rv$header$To),
+    "adam@ali.as",
+    label = "to sets To Header"
+  )
 
   rv <- gm_from(msg, "bob@ali.as")
-  expect_equal(header_encode(rv$header$From), "bob@ali.as", label = "from sets From Header")
+  expect_equal(
+    header_encode(rv$header$From),
+    "bob@ali.as",
+    label = "from sets From Header"
+  )
 
   rv <- gm_to(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
-  expect_equal(header_encode(rv$header$To), "adam@ali.as, another@ali.as, bob@ali.as", label = "to (multiple) sets To header")
+  expect_equal(
+    header_encode(rv$header$To),
+    "adam@ali.as, another@ali.as, bob@ali.as",
+    label = "to (multiple) sets To header"
+  )
 
   rv <- gm_cc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
-  expect_equal(header_encode(rv$header$Cc), "adam@ali.as, another@ali.as, bob@ali.as", label = "cc (multiple) sets To header")
+  expect_equal(
+    header_encode(rv$header$Cc),
+    "adam@ali.as, another@ali.as, bob@ali.as",
+    label = "cc (multiple) sets To header"
+  )
 
   rv <- gm_bcc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
-  expect_equal(header_encode(rv$header$Bcc), "adam@ali.as, another@ali.as, bob@ali.as", label = "bcc (multiple) sets To header")
+  expect_equal(
+    header_encode(rv$header$Bcc),
+    "adam@ali.as, another@ali.as, bob@ali.as",
+    label = "bcc (multiple) sets To header"
+  )
 })
 
 test_that("header_encode encodes non-ascii values as base64", {
   expect_equal(header_encode("f\U00F6\U00F6"), "=?utf-8?B?ZsO2w7Y=?=")
 
-  expect_equal(header_encode('"f\U00F6\U00F6 b\U00Er1" <baz@qux.com>'), "=?utf-8?B?ImbDtsO2IGIOcjEi?= <baz@qux.com>")
+  expect_equal(
+    header_encode('"f\U00F6\U00F6 b\U00Er1" <baz@qux.com>'),
+    "=?utf-8?B?ImbDtsO2IGIOcjEi?= <baz@qux.com>"
+  )
 
   res <- header_encode(
     c(
@@ -35,7 +61,10 @@ test_that("header_encode encodes non-ascii values as base64", {
     )
   )
 
-  expect_equal(res, "=?utf-8?B?ImbDtsO2IGLDoXIi?= <baz@qux.com>, \"foo bar\" <foo.bar@baz.com>, qux@baz.com, =?utf-8?B?InHDu3ggIg==?= <qux@foo.com>")
+  expect_equal(
+    res,
+    "=?utf-8?B?ImbDtsO2IGLDoXIi?= <baz@qux.com>, \"foo bar\" <foo.bar@baz.com>, qux@baz.com, =?utf-8?B?InHDu3ggIg==?= <qux@foo.com>"
+  )
 })
 
 test_that("MIME - More Complex", {
@@ -67,7 +96,11 @@ test_that("MIME - More Complex", {
   expect_match(msg2_chr, "gmail", label = "Email contains to string")
   expect_match(msg2_chr, "Hello", label = "Email contains subject string")
   expect_match(msg2_chr, "I am an email", label = "Email contains text_body")
-  expect_match(msg2_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
+  expect_match(
+    msg2_chr,
+    "Content-Type: application/octet-stream; name=test\\.ini",
+    label = "Email contains attachment Content-Type"
+  )
 
   msg3 <- gm_html_body(msg, "I am an html email<br>")
   msg3 <- gm_attach_file(
@@ -82,8 +115,16 @@ test_that("MIME - More Complex", {
   expect_match(msg3_chr, "gmail", label = "Email contains to string")
   expect_match(msg3_chr, "Hello", label = "Email contains subject string")
   expect_match(msg3_chr, "I am an email", label = "Email contains text_body")
-  expect_match(msg3_chr, base64url_encode("I am an html email<br>"), label = "Email contains html_body")
-  expect_match(msg3_chr, "Content-Type: application/octet-stream; name=test\\.ini", label = "Email contains attachment Content-Type")
+  expect_match(
+    msg3_chr,
+    base64url_encode("I am an html email<br>"),
+    label = "Email contains html_body"
+  )
+  expect_match(
+    msg3_chr,
+    "Content-Type: application/octet-stream; name=test\\.ini",
+    label = "Email contains attachment Content-Type"
+  )
 
   skip_if_no_token()
   for (email in c(msg1_chr, msg2_chr, msg3_chr)) {
@@ -107,12 +148,33 @@ test_that("MIME - Alternative emails contain correct parts", {
   expect_match(email_chr, "Jim Hester", label = "Email contains from name")
   expect_match(email_chr, "james.f.hester", label = "Email contains to string")
   expect_match(email_chr, "Hello", label = "Email contains subject string")
-  expect_match(email_chr, "Content-Type: multipart/alternative", label = "Email content type")
-  expect_match(email_chr, "Content-Type: text/plain", label = "Email content type")
-  expect_match(email_chr, "Content-Type: text/html", label = "Email content type")
+  expect_match(
+    email_chr,
+    "Content-Type: multipart/alternative",
+    label = "Email content type"
+  )
+  expect_match(
+    email_chr,
+    "Content-Type: text/plain",
+    label = "Email content type"
+  )
+  expect_match(
+    email_chr,
+    "Content-Type: text/html",
+    label = "Email content type"
+  )
 
-  expect_match(email_chr, quoted_printable_encode("I am an email"), label = "Email contains text body")
-  expect_match(email_chr, base64encode(charToRaw("<b>I am a html email</b>")), fixed = TRUE, label = "Email contains html body")
+  expect_match(
+    email_chr,
+    quoted_printable_encode("I am an email"),
+    label = "Email contains text body"
+  )
+  expect_match(
+    email_chr,
+    base64encode(charToRaw("<b>I am a html email</b>")),
+    fixed = TRUE,
+    label = "Email contains html body"
+  )
 })
 
 

@@ -35,7 +35,8 @@ test_that("gm_default_oauth_client() latches on to 1 matching .json file", {
   dir.create(user_data_dir, recursive = TRUE)
   file.copy(
     system.file(
-      "extdata", "client_secret_installed.googleusercontent.com.json",
+      "extdata",
+      "client_secret_installed.googleusercontent.com.json",
       package = "gargle"
     ),
     user_data_dir
@@ -61,14 +62,16 @@ test_that("gm_default_oauth_client() errors for >1 matching .json files", {
   dir.create(user_data_dir, recursive = TRUE)
   file.copy(
     system.file(
-      "extdata", "client_secret_installed.googleusercontent.com.json",
+      "extdata",
+      "client_secret_installed.googleusercontent.com.json",
       package = "gargle"
     ),
     user_data_dir
   )
   file.copy(
     system.file(
-      "extdata", "client_secret_web.googleusercontent.com.json",
+      "extdata",
+      "client_secret_web.googleusercontent.com.json",
       package = "gargle"
     ),
     user_data_dir
