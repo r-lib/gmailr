@@ -37,8 +37,8 @@ gm_modify_thread(12345, add_labels = "label_2", remove_labels = "label_1")
 \seealso{
 Other thread: 
 \code{\link{gm_delete_thread}()},
-\code{\link{gm_threads}()},
 \code{\link{gm_thread}()},
+\code{\link{gm_threads}()},
 \code{\link{gm_trash_thread}()},
 \code{\link{gm_untrash_thread}()}
 }

@@ -29,8 +29,8 @@ Function to create a label.
 \seealso{
 Other label: 
 \code{\link{gm_delete_label}()},
-\code{\link{gm_labels}()},
 \code{\link{gm_label}()},
+\code{\link{gm_labels}()},
 \code{\link{gm_update_label}()}
 }
 \concept{label}
