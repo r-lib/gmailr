@@ -52,6 +52,24 @@
       ! The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()` was deprecated in gmailr 2.0.0 and is now defunct.
       i Please use the `path` (strongly recommended) or `client` argument instead.
 
+---
+
+    Code
+      gm_auth_configure(appname = "APPNAME")
+    Condition
+      Error:
+      ! The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()` was deprecated in gmailr 2.0.0 and is now defunct.
+      i Please use the `path` (strongly recommended) or `client` argument instead.
+
+---
+
+    Code
+      gm_auth_configure(app = google_app)
+    Condition
+      Error:
+      ! The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()` was deprecated in gmailr 2.0.0 and is now defunct.
+      i Please use the `path` (strongly recommended) or `client` argument instead.
+
 # gm_oauth_app() is deprecated
 
     Code
@@ -96,4 +114,28 @@
 
     The use of extremely short scopes ("readonly", "compose") was deprecated in gmailr 2.0.0.
     i Please use the slightly longer form ("gmail.readonly", "gmail.compose") instead.
+
+# gm_token_write() / gm_token_read() roundtrip, built-in key
+
+    Code
+      readRDS(tmp)
+    Condition
+      Error in `readRDS()`:
+      ! unknown input format
+
+# gm_token_write() / gm_token_read() roundtrip, explicit key
+
+    Code
+      readRDS(tmp)
+    Condition
+      Error in `readRDS()`:
+      ! unknown input format
+
+---
+
+    Code
+      gm_token_read(tmp)
+    Condition
+      Error in `memDecompress()`:
+      ! internal error -5 in memDecompress(type = "bzip2")
 

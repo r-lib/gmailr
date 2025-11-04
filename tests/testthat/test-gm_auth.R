@@ -76,13 +76,13 @@ test_that("gm_auth_configure() errors for key, secret, appname, app", {
     error = TRUE,
     gm_auth_configure(key = "KEY", secret = "SECRET")
   )
-  expect_error(gm_auth_configure(appname = "APPNAME"))
+  expect_snapshot(error = TRUE, gm_auth_configure(appname = "APPNAME"))
   google_app <- httr::oauth_app(
     "gmailr",
     key = "KEYKEYKEY",
     secret = "SECRETSECRETSECRET"
   )
-  expect_error(gm_auth_configure(app = google_app))
+  expect_snapshot(error = TRUE, gm_auth_configure(app = google_app))
 })
 
 test_that("gm_oauth_app() is deprecated", {
@@ -155,7 +155,7 @@ test_that("gm_token_write() / gm_token_read() roundtrip, built-in key", {
   gm_token_write(fauxen_in, tmp)
   fauxen_out <- gm_token_read(tmp)
 
-  expect_error(readRDS(tmp))
+  expect_snapshot(error = TRUE, readRDS(tmp))
   expect_equal(fauxen_in, fauxen_out)
 })
 
@@ -169,8 +169,8 @@ test_that("gm_token_write() / gm_token_read() roundtrip, explicit key", {
 
   gm_token_write(fauxen_in, tmp, key = "GMAILR_ABCXYZ_KEY")
 
-  expect_error(readRDS(tmp))
-  expect_error(gm_token_read(tmp))
+  expect_snapshot(error = TRUE, readRDS(tmp))
+  expect_snapshot(error = TRUE, gm_token_read(tmp))
 
   fauxen_out <- gm_token_read(tmp, "GMAILR_ABCXYZ_KEY")
   expect_equal(fauxen_in, fauxen_out)
