@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 URL: https://gmailr.r-lib.org, https://github.com/r-lib/gmailr
 BugReports: https://github.com/r-lib/gmailr/issues
 Depends:
-    R (>= 3.6)
+    R (>= 4.1)
 Imports:
     base64enc,
     cli,
@@ -33,7 +33,7 @@ Suggests:
     rmarkdown,
     testthat (>= 3.1.8),
     withr
-VignetteBuilder: 
+VignetteBuilder:
     knitr
 Config/Needs/website: tidyverse/tidytemplate
 Encoding: UTF-8

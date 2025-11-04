@@ -10,8 +10,7 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  eval = getRversion() >= "4.1"
+  comment = "#>"
 )
 ```
 
@@ -184,9 +183,9 @@ will still be able to complete the `gmailr` authorization process via
 use the API and it will look something like this:
 
 ```
- Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  : 
+ Error in gmailr_POST(c("messages", "send"), user_id, class = "gmail_message",  :
   Gmail API error: 400
-  Mail service not enabled 
+  Mail service not enabled
 ```
 
 You can confirm the account's lack of mail capability by visiting
