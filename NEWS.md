@@ -6,6 +6,10 @@
   
 * Legacy auth functions `clear_token()`, `gmail_auth()`, and `use_secret_file()` have been removed, following the same deprecation timeline as described above.
 
+## Bug fixes
+
+* Fixed MIME structure for emails with text+HTML bodies and attachments. These messages now correctly use nested `multipart/mixed` (outer) containing `multipart/alternative` (text/HTML), preventing the loss of some of the message parts (#202).
+
 # gmailr 2.0.0
 
 ## Changes around the OAuth client

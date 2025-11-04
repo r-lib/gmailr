@@ -1,46 +1,30 @@
 test_that("MIME - Basic functions", {
-  # Create a new Email::Stuffer object
   msg <- gm_mime()
-  expect_equal(class(msg), "mime", label = "msg object has correct class")
-
-  expect_true(
-    length(msg$header) > 0,
-    label = "Even the default object has headers"
-  )
+  expect_s3_class(msg, "mime")
+  expect_true(length(msg$header) > 0)
 
   rv <- gm_to(msg, "adam@ali.as")
-  expect_equal(
-    header_encode(rv$header$To),
-    "adam@ali.as",
-    label = "to sets To Header"
-  )
+  expect_equal(header_encode(rv$header$To), "adam@ali.as")
 
   rv <- gm_from(msg, "bob@ali.as")
-  expect_equal(
-    header_encode(rv$header$From),
-    "bob@ali.as",
-    label = "from sets From Header"
-  )
+  expect_equal(header_encode(rv$header$From), "bob@ali.as")
 
   rv <- gm_to(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(
     header_encode(rv$header$To),
-    "adam@ali.as, another@ali.as, bob@ali.as",
-    label = "to (multiple) sets To header"
+    "adam@ali.as, another@ali.as, bob@ali.as"
   )
 
   rv <- gm_cc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(
     header_encode(rv$header$Cc),
-    "adam@ali.as, another@ali.as, bob@ali.as",
-    label = "cc (multiple) sets To header"
+    "adam@ali.as, another@ali.as, bob@ali.as"
   )
 
   rv <- gm_bcc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(
     header_encode(rv$header$Bcc),
-    "adam@ali.as, another@ali.as, bob@ali.as",
-    label = "bcc (multiple) sets To header"
+    "adam@ali.as, another@ali.as, bob@ali.as"
   )
 })
 
@@ -68,62 +52,51 @@ test_that("header_encode encodes non-ascii values as base64", {
 })
 
 test_that("MIME - More Complex", {
-  msg <- gm_mime()
-  msg <- gm_from(msg, "Jim Hester<james.f.hester@gmail.com>")
-  msg <- gm_to(msg, "james.f.hester@gmail.com")
-  msg <- gm_subject(msg, "Hello To:!")
-  msg <- gm_text_body(msg, "I am an email")
+  msg <- gm_mime() |>
+    gm_from("Gargle Testuser <gargle-testuser@posit.co>") |>
+    gm_to("jenny+gmailr-tests@posit.co") |>
+    gm_subject("Hello To:!") |>
+    gm_text_body("I am an email")
 
-  msg1 <- gm_attach_file(msg, test_path("fixtures", "volcano.png"))
-
+  # Text body with PNG attachment
+  msg1 <- msg |> gm_attach_file(test_path("fixtures", "volcano.png"))
   msg1_chr <- as.character(msg1)
+  expect_match(msg1_chr, "Gargle Testuser")
+  expect_match(msg1_chr, "posit")
+  expect_match(msg1_chr, "Hello")
+  expect_match(msg1_chr, "I am an email")
+  expect_match(msg1_chr, "volcano")
 
-  expect_match(msg1_chr, "Jim Hester", label = "Email contains from name")
-  expect_match(msg1_chr, "gmail", label = "Email contains to string")
-  expect_match(msg1_chr, "Hello", label = "Email contains subject string")
-  expect_match(msg1_chr, "I am an email", label = "Email contains text_body")
-  expect_match(msg1_chr, "volcano", label = "Email contains file name")
-
-  msg2 <- gm_attach_file(
-    msg,
-    test_path("fixtures", "test.ini"),
-    content_type = "text/plain"
-  )
-
+  # Text body with text attachment
+  msg2 <- msg |>
+    gm_attach_file(
+      test_path("fixtures", "test.ini"),
+      content_type = "text/plain"
+    )
   msg2_chr <- as.character(msg2)
-
-  expect_match(msg2_chr, "Jim Hester", label = "Email contains from name")
-  expect_match(msg2_chr, "gmail", label = "Email contains to string")
-  expect_match(msg2_chr, "Hello", label = "Email contains subject string")
-  expect_match(msg2_chr, "I am an email", label = "Email contains text_body")
+  expect_match(msg2_chr, "I am an email")
   expect_match(
     msg2_chr,
-    "Content-Type: application/octet-stream; name=test\\.ini",
-    label = "Email contains attachment Content-Type"
+    "Content-Type: application/octet-stream; name=test\\.ini"
   )
 
-  msg3 <- gm_html_body(msg, "I am an html email<br>")
-  msg3 <- gm_attach_file(
-    msg3,
-    test_path("fixtures", "test.ini"),
-    content_type = "application/octet-stream"
-  )
-
+  # Text + HTML body with attachment
+  msg3 <- msg |>
+    gm_html_body("<p>I am an <strong>html</strong> email</p>") |>
+    gm_attach_file(
+      test_path("fixtures", "test.ini"),
+      content_type = "application/octet-stream"
+    )
   msg3_chr <- as.character(msg3)
-
-  expect_match(msg3_chr, "Jim Hester", label = "Email contains from name")
-  expect_match(msg3_chr, "gmail", label = "Email contains to string")
-  expect_match(msg3_chr, "Hello", label = "Email contains subject string")
-  expect_match(msg3_chr, "I am an email", label = "Email contains text_body")
+  expect_match(msg3_chr, "I am an email")
   expect_match(
     msg3_chr,
-    base64url_encode("I am an html email<br>"),
-    label = "Email contains html_body"
+    base64encode(charToRaw("<p>I am an <strong>html</strong> email</p>")),
+    fixed = TRUE
   )
   expect_match(
     msg3_chr,
-    "Content-Type: application/octet-stream; name=test\\.ini",
-    label = "Email contains attachment Content-Type"
+    "Content-Type: application/octet-stream; name=test\\.ini"
   )
 
   skip_if_no_token()
@@ -136,47 +109,107 @@ test_that("MIME - More Complex", {
 })
 
 test_that("MIME - Alternative emails contain correct parts", {
-  msg <- gm_mime()
-  msg <- gm_from(msg, "Jim Hester<james.f.hester@gmail.com>")
-  msg <- gm_to(msg, "james.f.hester@gmail.com")
-  msg <- gm_subject(msg, "Hello To:!")
-  msg <- gm_text_body(msg, "I am an email")
-  msg <- gm_html_body(msg, "<b>I am a html email</b>")
+  msg <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Hello!") |>
+    gm_text_body("I am an email") |>
+    gm_html_body("<b>I am a html email</b>")
 
   email_chr <- as.character(msg)
 
-  expect_match(email_chr, "Jim Hester", label = "Email contains from name")
-  expect_match(email_chr, "james.f.hester", label = "Email contains to string")
-  expect_match(email_chr, "Hello", label = "Email contains subject string")
-  expect_match(
-    email_chr,
-    "Content-Type: multipart/alternative",
-    label = "Email content type"
-  )
-  expect_match(
-    email_chr,
-    "Content-Type: text/plain",
-    label = "Email content type"
-  )
-  expect_match(
-    email_chr,
-    "Content-Type: text/html",
-    label = "Email content type"
-  )
-
-  expect_match(
-    email_chr,
-    quoted_printable_encode("I am an email"),
-    label = "Email contains text body"
-  )
+  expect_match(email_chr, "test@example\\.com")
+  expect_match(email_chr, "user@example\\.com")
+  expect_match(email_chr, "Hello")
+  expect_match(email_chr, "Content-Type: multipart/alternative")
+  expect_match(email_chr, "Content-Type: text/plain")
+  expect_match(email_chr, "Content-Type: text/html")
+  expect_match(email_chr, quoted_printable_encode("I am an email"))
   expect_match(
     email_chr,
     base64encode(charToRaw("<b>I am a html email</b>")),
-    fixed = TRUE,
-    label = "Email contains html body"
+    fixed = TRUE
   )
 })
 
+test_that("MIME - Messages with attachments and alternative bodies", {
+  # Test 1: text + HTML + attachment should have nested structure
+  msg1 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Test with attachment") |>
+    gm_text_body("Plain text version") |>
+    gm_html_body("<b>HTML version</b>") |>
+    gm_attach_file(test_path("fixtures", "volcano.png"))
+
+  msg1_chr <- as.character(msg1)
+
+  # Verify outer is multipart/mixed
+  expect_match(msg1_chr, "Content-Type: multipart/mixed")
+  # Verify nested multipart/alternative exists
+  expect_match(msg1_chr, "Content-Type: multipart/alternative")
+  # Verify all parts present
+  expect_match(msg1_chr, "Plain text version")
+  expect_match(
+    msg1_chr,
+    base64encode(charToRaw("<b>HTML version</b>")),
+    fixed = TRUE
+  )
+  expect_match(msg1_chr, "volcano\\.png")
+
+  # Test 2: text + HTML + text attachment
+  # https://github.com/r-lib/gmailr/issues/202
+  msg2 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Test with text attachment") |>
+    gm_text_body("Email body text") |>
+    gm_html_body("<p>Email body HTML</p>") |>
+    gm_attach_file(test_path("fixtures", "test.ini"))
+
+  msg2_chr <- as.character(msg2)
+
+  expect_match(msg2_chr, "Content-Type: multipart/mixed")
+  expect_match(msg2_chr, "Content-Type: multipart/alternative")
+  expect_match(msg2_chr, "Email body text")
+  expect_match(
+    msg2_chr,
+    base64encode(charToRaw("<p>Email body HTML</p>")),
+    fixed = TRUE
+  )
+  expect_match(msg2_chr, "test\\.ini")
+
+  # Test 3: text only + attachment (no HTML) should be flat multipart/mixed
+  msg3 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Text only with attachment") |>
+    gm_text_body("Just plain text") |>
+    gm_attach_file(test_path("fixtures", "volcano.png"))
+
+  msg3_chr <- as.character(msg3)
+
+  expect_match(msg3_chr, "Content-Type: multipart/mixed")
+  # Should NOT have multipart/alternative since there's no HTML
+  expect_false(grepl("multipart/alternative", msg3_chr))
+
+  # Test 4: Multiple attachments
+  msg4 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Multiple attachments") |>
+    gm_text_body("Text body") |>
+    gm_html_body("<b>HTML body</b>") |>
+    gm_attach_file(test_path("fixtures", "test.ini")) |>
+    gm_attach_file(test_path("fixtures", "volcano.png"))
+
+  msg4_chr <- as.character(msg4)
+
+  expect_match(msg4_chr, "Content-Type: multipart/mixed")
+  expect_match(msg4_chr, "Content-Type: multipart/alternative")
+  expect_match(msg4_chr, "test\\.ini")
+  expect_match(msg4_chr, "volcano\\.png")
+})
 
 test_that("plain ascii should not be encoded", {
   expect_match(
