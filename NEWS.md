@@ -1,5 +1,11 @@
 # gmailr (development version)
 
+## Deprecations
+
+* Functions that lack the `gm_` prefix have been removed, concluding a deprecation process that kicked off with gmailr 1.0.0 (released 2019-08-23). These functions were hard deprecated in gmailr 2.0.0 (released 2023-06-30). This eliminates many name conflicts with other packages (including the base package).
+  
+* Legacy auth functions `clear_token()`, `gmail_auth()`, and `use_secret_file()` have been removed, following the same deprecation timeline as described above.
+
 # gmailr 2.0.0
 
 ## Changes around the OAuth client
@@ -122,7 +128,7 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth 
 
 * New `gm_auth_configure()` and `gm_auth()` functions added conforming to the
   conventions in the [gargle](https://cran.r-project.org/package=gargle) package.
-  `gmail_auth()`, `clear_token()` and `use_secret_token()` are now deprecated and will be removed
+  `gmail_auth()`, `clear_token()` and `use_secret_file()` are now deprecated and will be removed
   in a future release.
 
 * The google application bundled in previous gmailr releases has been removed,
