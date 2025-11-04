@@ -26,8 +26,8 @@ gm_trash_thread(12345)
 Other thread: 
 \code{\link{gm_delete_thread}()},
 \code{\link{gm_modify_thread}()},
-\code{\link{gm_threads}()},
 \code{\link{gm_thread}()},
+\code{\link{gm_threads}()},
 \code{\link{gm_untrash_thread}()}
 }
 \concept{thread}

@@ -7,11 +7,11 @@
 # The roxygen comments for these functions are mostly generated from data
 # in this list and template text maintained in gargle.
 gargle_lookup_table <- list(
-  PACKAGE     = "gmailr",
-  YOUR_STUFF  = "your Gmail projects",
-  PRODUCT     = "Google Gmail",
-  API         = "Gmail API",
-  PREFIX      = "gm"
+  PACKAGE = "gmailr",
+  YOUR_STUFF = "your Gmail projects",
+  PRODUCT = "Google Gmail",
+  API = "Gmail API",
+  PREFIX = "gm"
 )
 
 #' Authorize gmailr
@@ -59,12 +59,15 @@ gargle_lookup_table <- list(
 #'   scopes = "gmail.readonly",
 #'   cache = "some/nice/directory/"
 #' )
-gm_auth <- function(email = gm_default_email(),
-                    path = NULL, subject = NULL,
-                    scopes = "full",
-                    cache = gargle::gargle_oauth_cache(),
-                    use_oob = gargle::gargle_oob_default(),
-                    token = NULL) {
+gm_auth <- function(
+  email = gm_default_email(),
+  path = NULL,
+  subject = NULL,
+  scopes = "full",
+  cache = gargle::gargle_oauth_cache(),
+  use_oob = gargle::gargle_oob_default(),
+  token = NULL
+) {
   gargle::check_is_service_account(path, hint = "gm_auth_configure")
   scopes <- gm_scopes(scopes)
 
@@ -94,8 +97,13 @@ gm_auth <- function(email = gm_default_email(),
     if (inherits(gm_oauth_client(), "gargle_oauth_client")) {
       return(
         gm_auth(
-          email = email, path = path, subject = subject, scopes = scopes,
-          cache = cache, use_oob = use_oob, token = token
+          email = email,
+          path = path,
+          subject = subject,
+          scopes = scopes,
+          cache = cache,
+          use_oob = use_oob,
+          token = token
         )
       )
     }
@@ -224,20 +232,28 @@ gm_has_token <- function() {
 #'
 #' # restore original auth config
 #' gm_auth_configure(client = original_client)
-gm_auth_configure <- function(client = NULL,
-                              path = gm_default_oauth_client(),
-                              key = deprecated(),
-                              secret = deprecated(),
-                              appname = deprecated(),
-                              app = deprecated()) {
-  if (lifecycle::is_present(app) ||
+gm_auth_configure <- function(
+  client = NULL,
+  path = gm_default_oauth_client(),
+  key = deprecated(),
+  secret = deprecated(),
+  appname = deprecated(),
+  app = deprecated()
+) {
+  if (
+    lifecycle::is_present(app) ||
       lifecycle::is_present(key) ||
       lifecycle::is_present(secret) ||
-      lifecycle::is_present(appname)) {
-    what <- glue("
-      The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()`")
-    with <- glue("
-      the `path` (strongly recommended) or `client` argument")
+      lifecycle::is_present(appname)
+  ) {
+    what <- glue(
+      "
+      The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()`"
+    )
+    with <- glue(
+      "
+      the `path` (strongly recommended) or `client` argument"
+    )
     deprecate_stop(
       when = "2.0.0",
       what = I(what),
@@ -307,12 +323,17 @@ gm_profile <- function(user_id = "me", verbose = TRUE) {
 #' @export
 print.gmail_profile <- function(x, ...) {
   cat(
-    sprintf(paste0(
-      "Logged in as:\n",
-      "  * email: %s\n",
-      "  * num_messages: %i\n",
-      "  * num_threads: %i"
-    ), x[["emailAddress"]], x[["messagesTotal"]], x[["threadsTotal"]]),
+    sprintf(
+      paste0(
+        "Logged in as:\n",
+        "  * email: %s\n",
+        "  * num_messages: %i\n",
+        "  * num_threads: %i"
+      ),
+      x[["emailAddress"]],
+      x[["messagesTotal"]],
+      x[["threadsTotal"]]
+    ),
     sep = "\n"
   )
   invisible(x)
@@ -353,15 +374,15 @@ gm_scopes <- function(scopes = NULL) {
 }
 
 gmail_scopes <- c(
-  full                   = "https://mail.google.com/",
-  gmail.compose          = "https://www.googleapis.com/auth/gmail.compose",
-  gmail.readonly         = "https://www.googleapis.com/auth/gmail.readonly",
-  gmail.labels           = "https://www.googleapis.com/auth/gmail.labels",
-  gmail.send             = "https://www.googleapis.com/auth/gmail.send",
-  gmail.insert           = "https://www.googleapis.com/auth/gmail.insert",
-  gmail.modify           = "https://www.googleapis.com/auth/gmail.modify",
-  gmail.metadata         = "https://www.googleapis.com/auth/gmail.metadata",
-  gmail.settings_basic   = "https://www.googleapis.com/auth/gmail.settings.basic",
+  full = "https://mail.google.com/",
+  gmail.compose = "https://www.googleapis.com/auth/gmail.compose",
+  gmail.readonly = "https://www.googleapis.com/auth/gmail.readonly",
+  gmail.labels = "https://www.googleapis.com/auth/gmail.labels",
+  gmail.send = "https://www.googleapis.com/auth/gmail.send",
+  gmail.insert = "https://www.googleapis.com/auth/gmail.insert",
+  gmail.modify = "https://www.googleapis.com/auth/gmail.modify",
+  gmail.metadata = "https://www.googleapis.com/auth/gmail.metadata",
+  gmail.settings_basic = "https://www.googleapis.com/auth/gmail.settings.basic",
   gmail.settings_sharing = "https://www.googleapis.com/auth/gmail.settings.sharing"
 )
 
@@ -386,12 +407,16 @@ fixup_gmail_scopes <- function(scopes) {
   if (any(!is.na(m))) {
     needs_work <- haystack[m]
     needs_work <- needs_work[!is.na(needs_work)]
-    what <- glue('
+    what <- glue(
+      '
       The use of extremely short scopes \\
-      ({glue::glue_collapse(glue::double_quote(names(needs_work)), sep = ", ")})')
-    with <- glue('
+      ({glue::glue_collapse(glue::double_quote(names(needs_work)), sep = ", ")})'
+    )
+    with <- glue(
+      '
       the slightly longer form \\
-      ({glue::glue_collapse(glue::double_quote(needs_work), sep = ", ")})')
+      ({glue::glue_collapse(glue::double_quote(needs_work), sep = ", ")})'
+    )
     deprecate_warn(
       when = "2.0.0",
       what = I(what),
@@ -475,9 +500,11 @@ fixup_gmail_scopes <- function(scopes) {
 #'   match the `key` used in `gm_token_write()`.
 #'
 #' @export
-gm_token_write <- function(token = gm_token(),
-                           path = "gmailr-token.rds",
-                           key = NULL) {
+gm_token_write <- function(
+  token = gm_token(),
+  path = "gmailr-token.rds",
+  key = NULL
+) {
   if (inherits(token, "request")) {
     token <- token$auth_token
   }
@@ -490,7 +517,7 @@ gm_token_write <- function(token = gm_token(),
 
 #' @rdname gm_token_write
 #' @export
-gm_token_read <- function(path = "gmailr-token.rds",  key = NULL) {
+gm_token_read <- function(path = "gmailr-token.rds", key = NULL) {
   stopifnot(file.exists(path))
   key <- key %||% gmailr_obfuscate_key()
   gargle::secret_read_rds(path, key)
@@ -501,24 +528,30 @@ gm_auth_testing <- function() {
   can_decrypt <- gargle::secret_has_key("GMAILR_KEY")
   online <- !is.null(curl::nslookup("gmail.googleapis.com", error = FALSE))
   if (!can_decrypt || !online) {
-    cli::cli_abort(c(
-      "Auth unsuccessful:",
-      if (!can_decrypt) {
-        c("x" = "Can't decrypt the token.")
-      },
-      if (!online) {
-        c("x" = "We don't appear to be online. Or maybe the Gmail API is down?")
-      }
-    ),
-    class = "gmailr_auth_internal_error",
-    can_decrypt = can_decrypt, online = online
+    cli::cli_abort(
+      c(
+        "Auth unsuccessful:",
+        if (!can_decrypt) {
+          c("x" = "Can't decrypt the token.")
+        },
+        if (!online) {
+          c(
+            "x" = "We don't appear to be online. Or maybe the Gmail API is down?"
+          )
+        }
+      ),
+      class = "gmailr_auth_internal_error",
+      can_decrypt = can_decrypt,
+      online = online
     )
   }
 
-  gm_auth(token = gm_token_read(
-    system.file("secret", "gmailr-dev-token", package = "gmailr"),
-    key = "GMAILR_KEY"
-  ))
+  gm_auth(
+    token = gm_token_read(
+      system.file("secret", "gmailr-dev-token", package = "gmailr"),
+      key = "GMAILR_KEY"
+    )
+  )
   # credentials_byo_oauth2() tries to refresh the token and, if that fails, it
   # generates a warning like this:
   # Unable to refresh token: invalid_grant
@@ -568,7 +601,9 @@ gm_auth_testing <- function() {
 #' @export
 gm_oauth_app <- function() {
   deprecate_warn(
-    "2.0.0", "gm_oauth_app()", "gm_oauth_client()"
+    "2.0.0",
+    "gm_oauth_app()",
+    "gm_oauth_client()"
   )
   gm_oauth_client()
 }

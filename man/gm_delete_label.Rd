@@ -20,8 +20,8 @@ Function to delete a label by id.  This cannot be undone!
 \seealso{
 Other label: 
 \code{\link{gm_create_label}()},
-\code{\link{gm_labels}()},
 \code{\link{gm_label}()},
+\code{\link{gm_labels}()},
 \code{\link{gm_update_label}()}
 }
 \concept{label}

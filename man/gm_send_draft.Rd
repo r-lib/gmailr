@@ -29,7 +29,7 @@ gm_send_draft(draft)
 \seealso{
 Other draft: 
 \code{\link{gm_delete_draft}()},
-\code{\link{gm_drafts}()},
-\code{\link{gm_draft}()}
+\code{\link{gm_draft}()},
+\code{\link{gm_drafts}()}
 }
 \concept{draft}

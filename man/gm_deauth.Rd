@@ -16,14 +16,14 @@ gmailr is not usable in a de-authorized state. Therefore, calling
 subsequent requests are made with an API key in lieu of a token.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 gm_deauth()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
 Other auth functions: 
-\code{\link{gm_auth_configure}()},
 \code{\link{gm_auth}()},
+\code{\link{gm_auth_configure}()},
 \code{\link{gm_scopes}()},
 \code{\link{gmailr-configuration}}
 }

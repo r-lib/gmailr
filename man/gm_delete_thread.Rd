@@ -25,8 +25,8 @@ gm_delete_thread(12345)
 \seealso{
 Other thread: 
 \code{\link{gm_modify_thread}()},
-\code{\link{gm_threads}()},
 \code{\link{gm_thread}()},
+\code{\link{gm_threads}()},
 \code{\link{gm_trash_thread}()},
 \code{\link{gm_untrash_thread}()}
 }

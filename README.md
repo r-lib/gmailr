@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/gmailr)](https://CRAN.R-project.org/package=gmailr)
 [![R-CMD-check](https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/r-lib/gmailr/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/r-lib/gmailr/branch/main/graph/badge.svg)](https://app.codecov.io/gh/r-lib/gmailr?branch=main)
+coverage](https://codecov.io/gh/r-lib/gmailr/graph/badge.svg)](https://app.codecov.io/gh/r-lib/gmailr)
 <!-- badges: end -->
 
 Exposing the [Gmail API](https://developers.google.com/gmail/api) from
@@ -85,12 +85,12 @@ d <- gm_create_draft(test_email)
 
 # If all is good with your draft, then you can send the existing draft
 gm_send_draft(d)
-#> Draft Id: 189033f7e08ead50 
+#> Draft Id: 19a4c8f2ecd3e439 
 #> NULL
 
 # or the existing MIME message
 gm_send_message(test_email)
-#> Id: 189033f816495611
+#> Id: 19a4c8f30fae009f
 ```
 
 ## Read email
@@ -111,7 +111,7 @@ latest_thread <- gm_thread(gm_id(my_threads)[[1]])
 my_msg <- latest_thread$messages[[1]]
 
 gm_date(my_msg)
-#> [1] "Wed, 28 Jun 2023 11:24:00 -0700"
+#> [1] "Mon, 3 Nov 2025 20:50:43 -0500"
 gm_subject(my_msg)
 #> [1] "this is just a gmailr test"
 gm_body(my_msg)

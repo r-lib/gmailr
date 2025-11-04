@@ -18,7 +18,8 @@ test_that("gm_auth() errors if OAuth client is passed to `path`", {
     error = TRUE,
     gm_auth(
       path = system.file(
-        "extdata", "client_secret_installed.googleusercontent.com.json",
+        "extdata",
+        "client_secret_installed.googleusercontent.com.json",
         package = "gargle"
       )
     )
@@ -26,7 +27,9 @@ test_that("gm_auth() errors if OAuth client is passed to `path`", {
 })
 
 test_that("gm_auth() errors informatively", {
-  credentials_nope <- function(scopes, ...) { NULL }
+  credentials_nope <- function(scopes, ...) {
+    NULL
+  }
   gargle::local_cred_funs(funs = list(credentials_nope = credentials_nope))
   local_mocked_bindings(gm_default_oauth_client = function() NULL)
   local_interactive(FALSE)
@@ -54,7 +57,8 @@ test_that("gm_auth_configure() works", {
 
   gm_auth_configure(
     path = system.file(
-      "extdata", "client_secret_installed.googleusercontent.com.json",
+      "extdata",
+      "client_secret_installed.googleusercontent.com.json",
       package = "gargle"
     )
   )
@@ -72,13 +76,13 @@ test_that("gm_auth_configure() errors for key, secret, appname, app", {
     error = TRUE,
     gm_auth_configure(key = "KEY", secret = "SECRET")
   )
-  expect_error(gm_auth_configure(appname = "APPNAME"))
+  expect_snapshot(error = TRUE, gm_auth_configure(appname = "APPNAME"))
   google_app <- httr::oauth_app(
     "gmailr",
     key = "KEYKEYKEY",
     secret = "SECRETSECRETSECRET"
   )
-  expect_error(gm_auth_configure(app = google_app))
+  expect_snapshot(error = TRUE, gm_auth_configure(app = google_app))
 })
 
 test_that("gm_oauth_app() is deprecated", {
@@ -151,6 +155,9 @@ test_that("gm_token_write() / gm_token_read() roundtrip, built-in key", {
   gm_token_write(fauxen_in, tmp)
   fauxen_out <- gm_token_read(tmp)
 
+  # don't convert to a snapshot test, because the exact verbiage can vary across
+  # our matrix of OSes and R versions and it's not worth using `variant =`
+  # example: '! unknown input format' versus '! read error'
   expect_error(readRDS(tmp))
   expect_equal(fauxen_in, fauxen_out)
 })
@@ -165,6 +172,9 @@ test_that("gm_token_write() / gm_token_read() roundtrip, explicit key", {
 
   gm_token_write(fauxen_in, tmp, key = "GMAILR_ABCXYZ_KEY")
 
+  # don't convert to a snapshot test, because the exact verbiage can vary across
+  # our matrix of OSes and R versions and it's not worth using `variant =`
+  # example: '! unknown input format' versus '! read error'
   expect_error(readRDS(tmp))
   expect_error(gm_token_read(tmp))
 

@@ -7,7 +7,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -15,7 +16,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, message = FALSE, eval = TRUE}
+```{r}
+#| label: setup
+#| message: false
+#| eval: true
 library(gmailr)
 ```
 
@@ -42,7 +46,8 @@ Therefore, you will need to modify the code below to account for the specifics o
 
 gmailr ships with code for a working demo of the approach described here.
 
-```{r eval = TRUE}
+```{r}
+#| eval: true
 writeLines(list.files(
   system.file("deployed-token-demo", package = "gmailr")
 ))
@@ -115,12 +120,14 @@ You must make this same `key` available as a secret or secure environment variab
 In the code that's running in the deployed / unattended setting, use a snippet like this to read the token from file and tell gmailr to use it:
 
 ```{r}
-gm_auth(token = gm_token_read(
-  path = "path/to/gmailr-token.rds",
-  key = "GMAILR_KEY"
-))
+gm_auth(
+  token = gm_token_read(
+    path = "path/to/gmailr-token.rds",
+    key = "GMAILR_KEY"
+  )
+)
 ```
-  
+
 If you did not specify the `key` in `gm_token_write()`, omit it from the `gm_token_read()` call as well.
 If you did specify the `key` in `gm_token_write()`, use the same `key` in `gm_token_read()`.
 

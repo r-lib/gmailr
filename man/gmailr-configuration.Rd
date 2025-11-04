@@ -68,8 +68,8 @@ configuration is also relevant, which is mostly accomplished through
 \link[gargle:gargle_options]{options and associated accessor functions}.
 
 Other auth functions: 
-\code{\link{gm_auth_configure}()},
 \code{\link{gm_auth}()},
+\code{\link{gm_auth_configure}()},
 \code{\link{gm_deauth}()},
 \code{\link{gm_scopes}()}
 }

@@ -46,8 +46,8 @@ gm_scopes()
 the permissions for each scope.
 
 Other auth functions: 
-\code{\link{gm_auth_configure}()},
 \code{\link{gm_auth}()},
+\code{\link{gm_auth_configure}()},
 \code{\link{gm_deauth}()},
 \code{\link{gmailr-configuration}}
 }

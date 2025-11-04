@@ -40,5 +40,5 @@ test_that("create_label, update_label, update_label_patch and delete_label work"
 
   gm_delete_label(new_label3$id)
 
-  expect_error(gm_label(new_label3$id))
+  expect_snapshot(error = TRUE, gm_label(new_label3$id))
 })

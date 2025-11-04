@@ -20,7 +20,7 @@ If auth has been deactivated via \code{\link[=gm_deauth]{gm_deauth()}}, \code{gm
 returns \code{NULL}.
 }
 \examples{
-\dontshow{if (gm_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gm_has_token()) withAutoprint(\{ # examplesIf}
 gm_token()
 \dontshow{\}) # examplesIf}
 }

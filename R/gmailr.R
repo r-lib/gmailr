@@ -10,24 +10,28 @@
 gm_body <- function(x, ...) UseMethod("gm_body")
 
 #' @export
-gm_body.gmail_message <- function(x, type = "text/plain", collapse = FALSE, ...) {
+gm_body.gmail_message <- function(
+  x,
+  type = "text/plain",
+  collapse = FALSE,
+  ...
+) {
   is_multipart <- !is.null(x$payload$parts)
 
   if (is_multipart) {
     if (is.null(type)) {
       good_parts <- TRUE
     } else {
-      good_parts <- vapply(x$payload$parts,
+      good_parts <- vapply(
+        x$payload$parts,
         FUN.VALUE = logical(1),
         function(part) {
           any(
-            vapply(part$headers,
-              FUN.VALUE = logical(1),
-              function(header) {
-                tolower(header$name) %==% "content-type" &&
-                  grepl(type, header$value, ignore.case = TRUE)
-              }
-            )
+            vapply(part$headers, FUN.VALUE = logical(1), function(header) {
+              tolower(header$name) %==%
+                "content-type" &&
+                grepl(type, header$value, ignore.case = TRUE)
+            })
           )
         }
       )
@@ -40,7 +44,8 @@ gm_body.gmail_message <- function(x, type = "text/plain", collapse = FALSE, ...)
           base64url_decode_to_char(x$body$data)
         }
       )
-  } else { # non_multipart
+  } else {
+    # non_multipart
     res <- base64url_decode_to_char(x$payload$body$data)
   }
 
@@ -82,18 +87,20 @@ gm_id.gmail_draft <- gm_id.gmail_message
 #' @export
 #' @param what the type of id to return
 gm_id.gmail_messages <- function(x, what = c("message_id", "thread_id"), ...) {
-  what <- switch(match.arg(what),
-    message_id = "id",
-    thread_id = "threadId"
-  )
+  what <- switch(match.arg(what), message_id = "id", thread_id = "threadId")
   unlist(lapply(x, function(page) {
     vapply(page$messages, "[[", character(1), what)
   }))
 }
 
 #' @export
-gm_id.gmail_drafts <- function(x, what = c("draft_id", "message_id", "thread_id"), ...) {
-  what <- switch(match.arg(what),
+gm_id.gmail_drafts <- function(
+  x,
+  what = c("draft_id", "message_id", "thread_id"),
+  ...
+) {
+  what <- switch(
+    match.arg(what),
     draft_id = return(
       unlist(lapply(x, function(page) {
         vapply(page$drafts, "[[", character(1), "id")
@@ -103,9 +110,13 @@ gm_id.gmail_drafts <- function(x, what = c("draft_id", "message_id", "thread_id"
     thread_id = "threadId"
   )
   unlist(lapply(x, function(page) {
-    vapply(page$drafts, function(x) {
-      x$message[[what]]
-    }, character(1))
+    vapply(
+      page$drafts,
+      function(x) {
+        x$message[[what]]
+      },
+      character(1)
+    )
   }))
 }
 
@@ -210,7 +221,9 @@ gm_subject.gmail_draft <- function(x, ...) {
 }
 
 header_value <- function(x, name) {
-  mark_utf8(Find(function(header) identical(header$name, name), x$payload$headers)$value)
+  mark_utf8(
+    Find(function(header) identical(header$name, name), x$payload$headers)$value
+  )
 }
 
 #' @export
@@ -229,7 +242,9 @@ print.gmail_message <- function(x, ...) {
 
   cat(p(
     c(
-      crayon::bold("Id: "), id, "\n",
+      crayon::bold("Id: "),
+      id,
+      "\n",
       if (!is.null(to)) {
         c(crayon::bold("To: "), to, "\n")
       },
@@ -237,7 +252,13 @@ print.gmail_message <- function(x, ...) {
       if (!is.null(date)) c(crayon::bold("Date: "), date, "\n"),
       if (!is.null(subject)) c(crayon::bold("Subject: "), subject, "\n"),
       if (!is.null(body)) c(body),
-      if (!is.null(attached_files)) c(crayon::bold("Attachments: "), paste0("'", attached_files, "'", collapse = ", "), "\n")
+      if (!is.null(attached_files)) {
+        c(
+          crayon::bold("Attachments: "),
+          paste0("'", attached_files, "'", collapse = ", "),
+          "\n"
+        )
+      }
     )
   ))
 }
@@ -259,7 +280,10 @@ print.gmail_draft <- function(x, ...) {
 print.gmail_messages <- function(x, ...) {
   message_ids <- gm_id(x, "message_id")
   thread_ids <- gm_id(x, "thread_id")
-  print(format(data.frame(message_id = message_ids, thread_id = thread_ids)), ...)
+  print(
+    format(data.frame(message_id = message_ids, thread_id = thread_ids)),
+    ...
+  )
 }
 
 #' @export
@@ -276,12 +300,26 @@ print.gmail_drafts <- function(x, ...) {
   draft_ids <- gm_id(x, "draft_id")
   message_ids <- gm_id(x, "message_id")
   thread_ids <- gm_id(x, "thread_id")
-  print(format(data.frame(draft_ids, message_id = message_ids, thread_id = thread_ids)), ...)
+  print(
+    format(data.frame(
+      draft_ids,
+      message_id = message_ids,
+      thread_id = thread_ids
+    )),
+    ...
+  )
 }
 
 the$last_response <- list()
 
-gmailr_query <- function(fun, location, user_id, class = NULL, ..., upload = FALSE) {
+gmailr_query <- function(
+  fun,
+  location,
+  user_id,
+  class = NULL,
+  ...,
+  upload = FALSE
+) {
   path_fun <- if (upload) gmail_upload_path else gmail_path
   response <- fun(path_fun(user_id, location), gm_token(), ...)
   result <- content(response, "parsed")
@@ -293,7 +331,13 @@ gmailr_query <- function(fun, location, user_id, class = NULL, ..., upload = FAL
         call = sys.call(-1),
         content = result,
         response = response,
-        message = paste0("Gmail API error: ", status_code(response), "\n  ", result$error$message, "\n")
+        message = paste0(
+          "Gmail API error: ",
+          status_code(response),
+          "\n  ",
+          result$error$message,
+          "\n"
+        )
       ),
       class = c("condition", "error", "gmailr_error")
     )

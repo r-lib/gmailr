@@ -30,13 +30,13 @@ update.
 Other label: 
 \code{\link{gm_create_label}()},
 \code{\link{gm_delete_label}()},
-\code{\link{gm_labels}()},
-\code{\link{gm_label}()}
+\code{\link{gm_label}()},
+\code{\link{gm_labels}()}
 
 Other label: 
 \code{\link{gm_create_label}()},
 \code{\link{gm_delete_label}()},
-\code{\link{gm_labels}()},
-\code{\link{gm_label}()}
+\code{\link{gm_label}()},
+\code{\link{gm_labels}()}
 }
 \concept{label}

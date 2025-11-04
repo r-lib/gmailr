@@ -42,7 +42,7 @@ instructions on how to get an OAuth client. Then you can use
 \code{gm_oauth_client()} retrieves the currently configured OAuth client.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 # if your OAuth client can be auto-discovered (see ?gm_default_oauth_client),
 # you don't need to provide anything!
 gm_auth_configure()
