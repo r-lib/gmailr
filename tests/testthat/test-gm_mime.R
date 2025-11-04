@@ -132,6 +132,84 @@ test_that("MIME - Alternative emails contain correct parts", {
   )
 })
 
+test_that("MIME - Messages with attachments and alternative bodies", {
+  # Test 1: text + HTML + attachment should have nested structure
+  msg1 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Test with attachment") |>
+    gm_text_body("Plain text version") |>
+    gm_html_body("<b>HTML version</b>") |>
+    gm_attach_file(test_path("fixtures", "volcano.png"))
+
+  msg1_chr <- as.character(msg1)
+
+  # Verify outer is multipart/mixed
+  expect_match(msg1_chr, "Content-Type: multipart/mixed")
+  # Verify nested multipart/alternative exists
+  expect_match(msg1_chr, "Content-Type: multipart/alternative")
+  # Verify all parts present
+  expect_match(msg1_chr, "Plain text version")
+  expect_match(
+    msg1_chr,
+    base64encode(charToRaw("<b>HTML version</b>")),
+    fixed = TRUE
+  )
+  expect_match(msg1_chr, "volcano\\.png")
+
+  # Test 2: text + HTML + text attachment
+  # https://github.com/r-lib/gmailr/issues/202
+  msg2 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Test with text attachment") |>
+    gm_text_body("Email body text") |>
+    gm_html_body("<p>Email body HTML</p>") |>
+    gm_attach_file(test_path("fixtures", "test.ini"))
+
+  msg2_chr <- as.character(msg2)
+
+  expect_match(msg2_chr, "Content-Type: multipart/mixed")
+  expect_match(msg2_chr, "Content-Type: multipart/alternative")
+  expect_match(msg2_chr, "Email body text")
+  expect_match(
+    msg2_chr,
+    base64encode(charToRaw("<p>Email body HTML</p>")),
+    fixed = TRUE
+  )
+  expect_match(msg2_chr, "test\\.ini")
+
+  # Test 3: text only + attachment (no HTML) should be flat multipart/mixed
+  msg3 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Text only with attachment") |>
+    gm_text_body("Just plain text") |>
+    gm_attach_file(test_path("fixtures", "volcano.png"))
+
+  msg3_chr <- as.character(msg3)
+
+  expect_match(msg3_chr, "Content-Type: multipart/mixed")
+  # Should NOT have multipart/alternative since there's no HTML
+  expect_false(grepl("multipart/alternative", msg3_chr))
+
+  # Test 4: Multiple attachments
+  msg4 <- gm_mime() |>
+    gm_from("test@example.com") |>
+    gm_to("user@example.com") |>
+    gm_subject("Multiple attachments") |>
+    gm_text_body("Text body") |>
+    gm_html_body("<b>HTML body</b>") |>
+    gm_attach_file(test_path("fixtures", "test.ini")) |>
+    gm_attach_file(test_path("fixtures", "volcano.png"))
+
+  msg4_chr <- as.character(msg4)
+
+  expect_match(msg4_chr, "Content-Type: multipart/mixed")
+  expect_match(msg4_chr, "Content-Type: multipart/alternative")
+  expect_match(msg4_chr, "test\\.ini")
+  expect_match(msg4_chr, "volcano\\.png")
+})
 
 test_that("plain ascii should not be encoded", {
   expect_match(

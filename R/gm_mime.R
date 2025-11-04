@@ -243,14 +243,28 @@ as.character.mime <- function(x, newline = "\r\n", ...) {
   # encode headers
   x$header <- lapply(x$header, header_encode)
 
-  # if we have both the text part and html part, we have to embed them in a multipart/alternative message
-  if (
-    x$attr$content_type %!=%
-      "multipart/alternative" &&
-      exists_list(x$parts, TEXT_PART) &&
-      exists_list(x$parts, HTML_PART)
-  ) {
-    x$attr$content_type <- "multipart/alternative"
+  # Check if we need nested structure ((text + HTML) + attachments)
+  has_both_bodies <- exists_list(x$parts, TEXT_PART) &&
+    exists_list(x$parts, HTML_PART)
+  # Attachments, if present, always start at index 3
+  has_attachments <- length(x$parts) > 2
+
+  if (has_both_bodies) {
+    if (has_attachments) {
+      # Need a nested structure:
+      # multipart/mixed containing [multipart/alternative [text, html], attachment1, ...]
+      alternative_part <- gm_mime(
+        attr = list(content_type = "multipart/alternative"),
+        parts = list(x$parts[[TEXT_PART]], x$parts[[HTML_PART]])
+      )
+
+      attachment_parts <- x$parts[3:length(x$parts)]
+      x$parts <- c(list(alternative_part), attachment_parts)
+
+      x$attr$content_type <- "multipart/mixed"
+    } else {
+      x$attr$content_type <- "multipart/alternative"
+    }
   }
 
   # if a multipart message
