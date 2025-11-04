@@ -115,11 +115,3 @@
     The use of extremely short scopes ("readonly", "compose") was deprecated in gmailr 2.0.0.
     i Please use the slightly longer form ("gmail.readonly", "gmail.compose") instead.
 
-# gm_token_write() / gm_token_read() roundtrip, built-in key
-
-    Code
-      readRDS(tmp)
-    Condition
-      Error in `readRDS()`:
-      ! unknown input format
-

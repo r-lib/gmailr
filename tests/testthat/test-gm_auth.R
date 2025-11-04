@@ -155,7 +155,10 @@ test_that("gm_token_write() / gm_token_read() roundtrip, built-in key", {
   gm_token_write(fauxen_in, tmp)
   fauxen_out <- gm_token_read(tmp)
 
-  expect_snapshot(error = TRUE, readRDS(tmp))
+  # don't convert to a snapshot test, because the exact verbiage can vary across
+  # our matrix of OSes and R versions and it's not worth using `variant =`
+  # example: '! unknown input format' versus '! read error'
+  expect_error(readRDS(tmp))
   expect_equal(fauxen_in, fauxen_out)
 })
 
