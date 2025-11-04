@@ -53,6 +53,10 @@
 <ul><li><p>Functions that lack the <code>gm_</code> prefix have been removed, concluding a deprecation process that kicked off with gmailr 1.0.0 (released 2019-08-23). These functions were hard deprecated in gmailr 2.0.0 (released 2023-06-30). This eliminates many name conflicts with other packages (including the base package).</p></li>
 <li><p>Legacy auth functions <code>clear_token()</code>, <code>gmail_auth()</code>, and <code>use_secret_file()</code> have been removed, following the same deprecation timeline as described above.</p></li>
 </ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>Fixed MIME structure for emails with text+HTML bodies and attachments. These messages now correctly use nested <code>multipart/mixed</code> (outer) containing <code>multipart/alternative</code> (text/HTML), preventing the loss of some of the message parts (<a href="https://github.com/r-lib/gmailr/issues/202" class="external-link">#202</a>).</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.0" id="gmailr-200">gmailr 2.0.0<a class="anchor" aria-label="anchor" href="#gmailr-200"></a></h2><p class="text-muted">CRAN release: 2023-06-30</p>
