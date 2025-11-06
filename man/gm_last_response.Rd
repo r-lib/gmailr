@@ -7,5 +7,11 @@
 gm_last_response()
 }
 \description{
-Response from the last query
+gmailr now uses \code{\link[gargle:response_process]{gargle::response_process()}} to process responses, so
+\code{\link[gargle:gargle_last_response]{gargle::gargle_last_response()}} can and should be used for \emph{post mortem}
+analysis, instead of \code{gm_last_response()}. One benefit of this switch is that
+auth tokens are redacted in the stored response.
+}
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
