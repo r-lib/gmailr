@@ -261,7 +261,7 @@ test_that("header_encode_text() passes ASCII-only text through", {
 
 test_that("header_encode_text() encodes short Unicode text", {
   # Short subject with Unicode that fits in single encoded-word
-  short_unicode <- "Hello \u00E1\u00E9\u00ED\u00F3\u00FA" # "Hello áéíóú"
+  short_unicode <- "Hello \u00E1\u00E9\u00ED\u00F3\u00FA"
   result <- header_encode_text(short_unicode)
 
   # Should not contain CRLF (no folding)
@@ -291,11 +291,15 @@ test_that("header_encode_text() folds long non-ASCII text", {
 
 test_that("header_encode_text() roundtrip: encode then decode", {
   # this is to make sure we break up the encoded-text in chunks of 4 characters
-  original <- "\U0001F389\U0001F38A\U0001F388 Célébration extraordinaire à Zürich! \U0001F973\U0001F382\U0001F37E Join us for a très spécial soirée! \U0001F942\U0001F377\U0001F95C"
+  original <- "\U0001F389\U0001F38A\U0001F388 C\u00E9l\u00E9bration extraordinaire \u00E0 Z\u00FCrich! \U0001F973\U0001F382\U0001F37E Join us for a tr\u00E8s sp\u00E9cial soir\u00E9e! \U0001F942\U0001F377\U0001F95C"
   encoded <- header_encode_text(original)
+
   encoded_words <- strsplit(encoded, "\r\n ", fixed = TRUE)[[1]]
   encoded_text <- sub("[?]=$", "", sub("^=[?]utf-8[?]B[?]", "", encoded_words))
-  decoded <- paste0(rawToChar(base64decode(encoded_text)), collapse = "")
+
+  # Decode each chunk separately (to verify each is valid base64), then concatenate
+  decoded <- rawToChar(unlist(lapply(encoded_text, base64decode)))
+  Encoding(decoded) <- "UTF-8"
   expect_equal(decoded, original)
 })
 
