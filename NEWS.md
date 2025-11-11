@@ -5,6 +5,8 @@
   - Previously: `c("condition", "error", "gmail_error")`
   - Now: `c("gmailr_error", "gargle_error_request_failed", "http_error_{XXX}", "gargle_error", "rlang_error", "error", "condition")`
 
+* Text headers, such as `Subject`, are now properly prepared as per RFC 2047, fixing a problem with long-ish headers that contain non-ASCII characters (#193).
+
 ## Deprecations
 
 * Functions that lack the `gm_` prefix have been removed, concluding a deprecation process that kicked off with gmailr 1.0.0 (released 2019-08-23). These functions were hard deprecated in gmailr 2.0.0 (released 2023-06-30). This eliminates many name conflicts with other packages (including the base package).

@@ -205,32 +205,6 @@ gm_attach_file <- function(mime, filename, type = NULL, id = NULL, ...) {
   )
 }
 
-header_encode <- function(x) {
-  x <- enc2utf8(unlist(strsplit(as.character(x), ", ?")))
-
-  # this won't deal with <> used in quotes, but I think it is rare enough that
-  # is ok
-  m <- rematch2::re_match(x, "^(?<phrase>[^<]*?)(?: *<(?<addr_spec>[^>]+)>)?$")
-  res <- character(length(x))
-
-  # simple addresses contain no <>, so we don't need to do anything further
-  simple <- !nzchar(m$addr_spec)
-  res[simple] <- m$phrase[simple]
-
-  # complex addresses may need to be base64-encoded
-  needs_encoding <- Encoding(m$phrase) != "unknown"
-  res[needs_encoding] <- sprintf(
-    "=?utf-8?B?%s?=",
-    vcapply(m$phrase[needs_encoding], encode_base64)
-  )
-  res[!needs_encoding] <- m$phrase[!needs_encoding]
-
-  # Add the addr_spec onto non-simple examples
-  res[!simple] <- sprintf("%s <%s>", res[!simple], m$addr_spec[!simple])
-
-  paste0(res, collapse = ", ")
-}
-
 #' Convert a mime object to character representation
 #'
 #' This function converts a mime object into a character vector
@@ -240,8 +214,9 @@ header_encode <- function(x) {
 #' @param ... further arguments ignored
 #' @export
 as.character.mime <- function(x, newline = "\r\n", ...) {
-  # encode headers
-  x$header <- lapply(x$header, header_encode)
+  for (i in seq_along(x$header)) {
+    x$header[[i]] <- encode_header(names(x$header)[i], x$header[[i]])
+  }
 
   # Check if we need nested structure ((text + HTML) + attachments)
   has_both_bodies <- exists_list(x$parts, TEXT_PART) &&
@@ -363,4 +338,124 @@ with_defaults <- function(defaults, ...) {
   args <- list(...)
   missing <- setdiff(names(defaults), names(args))
   c(defaults[missing], args)
+}
+
+# Header encoding helpers ------------------------------------------------------
+#
+# In general, the Gmail API requires following RFC 2822 Internet Message Format
+# https://datatracker.ietf.org/doc/html/rfc2822
+#
+# Then, within that, non-ASCII text in headers is addressed in RFC 2047 MIME
+# Part Three: Message Header Extensions for Non-ASCII Text
+# https://datatracker.ietf.org/doc/html/rfc2047
+#
+# Refactoring the header processing was motivated by
+# https://github.com/r-lib/gmailr/issues/193
+
+# Strategy: Divide headers into address headers vs. everything else.
+#
+# Use existing helper to encode address headers, as it was clearly written for
+# that use case.
+#
+# Use a new helper for other headers, that can deal with "folding" (see the RFC)
+# long-ish, non-ASCII text, e.g. in the Subject.
+
+encode_header <- function(name, value) {
+  address_headers <- c(
+    "To",
+    "From",
+    "Cc",
+    "Bcc",
+    "Reply-To",
+    "Sender",
+    "Resent-To",
+    "Resent-From",
+    "Resent-Cc",
+    "Resent-Bcc",
+    "Resent-Sender"
+  )
+
+  fun <- if (name %in% address_headers) {
+    header_encode_address
+  } else {
+    header_encode_text
+  }
+  fun(value)
+}
+
+# Pre-existing helper now renamed to reflect its motivating use case.
+# - May contain multiple comma-separated addresses
+# - Each address may have the format "Name" <email@example.com>
+# - Only the "Name" part needs encoding, not the email address
+header_encode_address <- function(x) {
+  x <- enc2utf8(unlist(strsplit(as.character(x), ", ?")))
+
+  # this won't deal with <> used in quotes, but I think it is rare enough that
+  # is ok
+  m <- rematch2::re_match(x, "^(?<phrase>[^<]*?)(?: *<(?<addr_spec>[^>]+)>)?$")
+  res <- character(length(x))
+
+  # simple addresses contain no <>, so we don't need to do anything further
+  simple <- !nzchar(m$addr_spec)
+  res[simple] <- m$phrase[simple]
+
+  # complex addresses may need to be base64-encoded
+  needs_encoding <- Encoding(m$phrase) != "unknown"
+  res[needs_encoding] <- sprintf(
+    "=?utf-8?B?%s?=",
+    vcapply(m$phrase[needs_encoding], encode_base64)
+  )
+  res[!needs_encoding] <- m$phrase[!needs_encoding]
+
+  # Add the addr_spec onto non-simple examples
+  res[!simple] <- sprintf("%s <%s>", res[!simple], m$addr_spec[!simple])
+
+  paste0(res, collapse = ", ")
+}
+
+# New helper for a generic "text" header
+# - Single value (not comma-separated)
+# - May contain long Unicode text that exceeds RFC 2047's 75-character limit
+# - Must be "folded" into multiple encoded-words if too long
+header_encode_text <- function(x) {
+  if (length(x) == 0 || is.null(x)) {
+    return(x)
+  }
+
+  x <- enc2utf8(as.character(x))
+
+  # Pass pure ASCII through unchanged
+  if (Encoding(x) == "unknown") {
+    return(x)
+  }
+
+  # First, get a single base64-encoded string
+  b64_full <- encode_base64(x, line_length = 0L, newline = "")
+  b64_len <- nchar(b64_full)
+
+  # encoded-word = "=?" charset "?" encoding "?" encoded-text "?="
+  # charset is utf-8
+  # encoding is "B" (as opposed to "Q"), as in "BASE64"
+  encode_word <- function(b64) sprintf("=?utf-8?B?%s?=", b64)
+
+  # RFC 2047: "An 'encoded-word' may not be more than 75 characters long,
+  # including 'charset', 'encoding', 'encoded-text', and delimiters."
+  # Format: =?utf-8?B?<encoded-text>?=
+  # The formalities account for 12 characters, which leaves up to 63 characters
+  # for the encoded text. However, base64 works in 4-character groups, so we
+  # must use a multiple of 4: the largest is 60.
+  max_b64_per_word <- 60
+
+  # Return as single encoded-word, if possible
+  if (b64_len <= max_b64_per_word) {
+    return(encode_word(b64_full))
+  }
+
+  # Otherwise, split into multiple encoded-words
+  starts <- seq(1L, b64_len, by = max_b64_per_word)
+  stops <- c(starts[-1] - 1L, b64_len)
+  encoded_words <- encode_word(substring(b64_full, starts, stops))
+
+  # Join multiple encoded-words with CRLF SPACE per RFC 2047
+  paste0(encoded_words, collapse = "\r\n ")
 }
