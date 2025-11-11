@@ -285,8 +285,6 @@ generally used internally or for debugging.
 
 - [`gm_history()`](https://gmailr.r-lib.org/dev/reference/gm_history.md)
   : Retrieve change history for the inbox
-- [`gm_last_response()`](https://gmailr.r-lib.org/dev/reference/gm_last_response.md)
-  : Response from the last query
 - [`quoted_printable_encode()`](https://gmailr.r-lib.org/dev/reference/quoted_printable_encode.md)
   : Encode text using quoted printable
 

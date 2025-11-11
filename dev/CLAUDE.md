@@ -46,7 +46,7 @@ for implementation details.
 **HTTP Requests** All Gmail API calls go through httr. Request and
 response handling follows gargle conventions. The most recent API
 response is available via
-[`gm_last_response()`](https://gmailr.r-lib.org/dev/reference/gm_last_response.md)
+[`gargle::gargle_last_response()`](https://gargle.r-lib.org/reference/gargle_last_response.html)
 for debugging.
 
 **MIME Message Construction** Email messages are built using MIME

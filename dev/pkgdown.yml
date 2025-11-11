@@ -6,7 +6,7 @@ articles:
   gmailr: gmailr.html
   articles/oauth-client: oauth-client.html
   sending_messages: sending_messages.html
-last_built: 2025-11-11T00:47Z
+last_built: 2025-11-11T04:58Z
 urls:
   reference: https://gmailr.r-lib.org/reference
   article: https://gmailr.r-lib.org/articles

@@ -2,6 +2,17 @@
 
 ## gmailr (development version)
 
+- All HTTP responses are passed through
+  [`gargle::response_process()`](https://gargle.r-lib.org/reference/response_process.html),
+  which updates gmailr’s error handling to be consistent with other
+  packages that use gargle for HTTP requests. Users might notice that
+  errors are more verbose (and hopefully more informative). Also the
+  class vector has changed:
+
+  - Previously: `c("condition", "error", "gmail_error")`
+  - Now:
+    `c("gmailr_error", "gargle_error_request_failed", "http_error_{XXX}", "gargle_error", "rlang_error", "error", "condition")`
+
 ### Deprecations
 
 - Functions that lack the `gm_` prefix have been removed, concluding a
@@ -14,12 +25,17 @@
   `use_secret_file()` have been removed, following the same deprecation
   timeline as described above.
 
+- [`gm_last_response()`](https://gmailr.r-lib.org/dev/reference/gm_last_response.md)
+  is deprecated, in favor of
+  [`gargle::gargle_last_response()`](https://gargle.r-lib.org/reference/gargle_last_response.html),
+  since gmailr no longer caches the last response itself.
+
 ### Bug fixes
 
 - Fixed MIME structure for emails with text+HTML bodies and attachments.
   These messages now correctly use nested `multipart/mixed` (outer)
-  containing `multipart/alternative` (text/HTML), preventing the loss of
-  some of the message parts
+  containing `multipart/alternative` (inner text/HTML), preventing the
+  loss of some of the message parts
   ([\#202](https://github.com/r-lib/gmailr/issues/202)).
 
 ## gmailr 2.0.0

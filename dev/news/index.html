@@ -48,14 +48,22 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="gmailr-development-version">gmailr (development version)<a class="anchor" aria-label="anchor" href="#gmailr-development-version"></a></h2>
-<div class="section level3">
+<ul><li>
+<p>All HTTP responses are passed through <code><a href="https://gargle.r-lib.org/reference/response_process.html" class="external-link">gargle::response_process()</a></code>, which updates gmailr’s error handling to be consistent with other packages that use gargle for HTTP requests. Users might notice that errors are more verbose (and hopefully more informative). Also the class vector has changed:</p>
+<ul><li>Previously: <code>c("condition", "error", "gmail_error")</code>
+</li>
+<li>Now: <code>c("gmailr_error", "gargle_error_request_failed", "http_error_{XXX}", "gargle_error", "rlang_error", "error", "condition")</code>
+</li>
+</ul></li>
+</ul><div class="section level3">
 <h3 id="deprecations-development-version">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-development-version"></a></h3>
 <ul><li><p>Functions that lack the <code>gm_</code> prefix have been removed, concluding a deprecation process that kicked off with gmailr 1.0.0 (released 2019-08-23). These functions were hard deprecated in gmailr 2.0.0 (released 2023-06-30). This eliminates many name conflicts with other packages (including the base package).</p></li>
 <li><p>Legacy auth functions <code>clear_token()</code>, <code>gmail_auth()</code>, and <code>use_secret_file()</code> have been removed, following the same deprecation timeline as described above.</p></li>
+<li><p><code><a href="../reference/gm_last_response.html">gm_last_response()</a></code> is deprecated, in favor of <code><a href="https://gargle.r-lib.org/reference/gargle_last_response.html" class="external-link">gargle::gargle_last_response()</a></code>, since gmailr no longer caches the last response itself.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>Fixed MIME structure for emails with text+HTML bodies and attachments. These messages now correctly use nested <code>multipart/mixed</code> (outer) containing <code>multipart/alternative</code> (text/HTML), preventing the loss of some of the message parts (<a href="https://github.com/r-lib/gmailr/issues/202" class="external-link">#202</a>).</li>
+<ul><li>Fixed MIME structure for emails with text+HTML bodies and attachments. These messages now correctly use nested <code>multipart/mixed</code> (outer) containing <code>multipart/alternative</code> (inner text/HTML), preventing the loss of some of the message parts (<a href="https://github.com/r-lib/gmailr/issues/202" class="external-link">#202</a>).</li>
 </ul></div>
 </div>
     <div class="section level2">
