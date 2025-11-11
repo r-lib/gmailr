@@ -31,3 +31,6 @@ TODO.md
 ^CRAN-SUBMISSION$
 ^[.]?air[.]toml$
 ^\.vscode$
+^CLAUDE\.md$
+^\.claude/*$
+^scratch\.R$

@@ -6,9 +6,9 @@ gmailr provides R access to the Gmail RESTful API, allowing users to read, send,
 
 ## Essential Commands
 
-Always use `R --quiet --vanilla` when running R from the console.
+Always use `R --no-save --no-restore-data` when running R from the console.
 
-Always run `air format .` after generating or modifying code.
+Always run `air format .` after generating or modifying code. The binary of air is probably not on the PATH but is typically found inside the Air extension used by Positron, e.g. something like `~/.positron/extensions/posit.air-vscode-0.18.0/bundled/bin/air`
 
 ## Development Workflow
 
