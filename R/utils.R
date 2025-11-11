@@ -171,9 +171,9 @@ encode_base64 <- function(x, line_length = 76L, newline = "\r\n") {
   }
 
   if (is.raw(x)) {
-    base64encode(x, 76L, newline)
+    base64encode(x, line_length, newline)
   } else {
-    base64encode(charToRaw(x), 76L, "\r\n")
+    base64encode(charToRaw(x), line_length, newline)
   }
 }
 
