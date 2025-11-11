@@ -4,39 +4,39 @@ test_that("MIME - Basic functions", {
   expect_true(length(msg$header) > 0)
 
   rv <- gm_to(msg, "adam@ali.as")
-  expect_equal(header_encode(rv$header$To), "adam@ali.as")
+  expect_equal(header_encode_address(rv$header$To), "adam@ali.as")
 
   rv <- gm_from(msg, "bob@ali.as")
-  expect_equal(header_encode(rv$header$From), "bob@ali.as")
+  expect_equal(header_encode_address(rv$header$From), "bob@ali.as")
 
   rv <- gm_to(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(
-    header_encode(rv$header$To),
+    header_encode_address(rv$header$To),
     "adam@ali.as, another@ali.as, bob@ali.as"
   )
 
   rv <- gm_cc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(
-    header_encode(rv$header$Cc),
+    header_encode_address(rv$header$Cc),
     "adam@ali.as, another@ali.as, bob@ali.as"
   )
 
   rv <- gm_bcc(msg, c("adam@ali.as", "another@ali.as", "bob@ali.as"))
   expect_equal(
-    header_encode(rv$header$Bcc),
+    header_encode_address(rv$header$Bcc),
     "adam@ali.as, another@ali.as, bob@ali.as"
   )
 })
 
-test_that("header_encode encodes non-ascii values as base64", {
-  expect_equal(header_encode("f\U00F6\U00F6"), "=?utf-8?B?ZsO2w7Y=?=")
+test_that("header_encode_address encodes non-ascii values as base64", {
+  expect_equal(header_encode_address("f\U00F6\U00F6"), "=?utf-8?B?ZsO2w7Y=?=")
 
   expect_equal(
-    header_encode('"f\U00F6\U00F6 b\U00Er1" <baz@qux.com>'),
+    header_encode_address('"f\U00F6\U00F6 b\U00Er1" <baz@qux.com>'),
     "=?utf-8?B?ImbDtsO2IGIOcjEi?= <baz@qux.com>"
   )
 
-  res <- header_encode(
+  res <- header_encode_address(
     c(
       '"f\U00F6\U00F6 b\U00E1r" <baz@qux.com>',
       '"foo bar" <foo.bar@baz.com>',
@@ -246,5 +246,72 @@ test_that("trailing whitespace", {
   expect_equal(
     "foo=09=20\n=20=09",
     quoted_printable_encode("foo\t \n \t")
+  )
+})
+
+test_that("header_encode_text() passes ASCII-only text through", {
+  ascii_subject <- "This is a plain ASCII subject"
+  result <- header_encode_text(ascii_subject)
+  expect_equal(result, ascii_subject)
+
+  long_ascii <- strrep("a", 100)
+  result <- header_encode_text(long_ascii)
+  expect_equal(result, long_ascii)
+})
+
+test_that("header_encode_text() encodes short Unicode text", {
+  # Short subject with Unicode that fits in single encoded-word
+  short_unicode <- "Hello \u00E1\u00E9\u00ED\u00F3\u00FA" # "Hello áéíóú"
+  result <- header_encode_text(short_unicode)
+
+  # Should not contain CRLF (no folding)
+  expect_no_match(result, "\r\n", fixed = TRUE)
+  # Should be a single encoded-word
+  expect_match(result, "^=[?]utf-8[?]B[?][A-Za-z0-9+/=]+[?]=$")
+  # Should be within RFC 2047 limit
+  expect_lte(nchar(result), 75)
+})
+
+# https://github.com/r-lib/gmailr/issues/193
+test_that("header_encode_text() folds long non-ASCII text", {
+  long_subject <- paste0("\u00E1", strrep("a", 54), "\u00E1")
+  result <- header_encode_text(long_subject)
+
+  # Should contain CRLF SPACE (folded into multiple encoded-words)
+  expect_match(result, "\r\n ", fixed = TRUE)
+
+  # Each line should be an encoded-word within RFC 2047 limit
+  lines <- strsplit(result, "\r\n ", fixed = TRUE)[[1]]
+  expect_gt(length(lines), 1)
+  for (line in lines) {
+    expect_lte(nchar(line), 75)
+    expect_match(line, "^=[?]utf-8[?]B[?][A-Za-z0-9+/=]+[?]=$")
+  }
+})
+
+test_that("header_encode_text() roundtrip: encode then decode", {
+  # this is to make sure we break up the encoded-text in chunks of 4 characters
+  original <- "\U0001F389\U0001F38A\U0001F388 Célébration extraordinaire à Zürich! \U0001F973\U0001F382\U0001F37E Join us for a très spécial soirée! \U0001F942\U0001F377\U0001F95C"
+  encoded <- header_encode_text(original)
+  encoded_words <- strsplit(encoded, "\r\n ", fixed = TRUE)[[1]]
+  encoded_text <- sub("[?]=$", "", sub("^=[?]utf-8[?]B[?]", "", encoded_words))
+  decoded <- paste0(rawToChar(base64decode(encoded_text)), collapse = "")
+  expect_equal(decoded, original)
+})
+
+test_that("gm_subject() uses proper encoding in full MIME message", {
+  # Long subject - should be folded
+  long_subject <- paste0("\u00E1", strrep("a", 100), "\u00E1")
+  msg_long <- gm_mime() |>
+    gm_to("test@example.com") |>
+    gm_subject(long_subject) |>
+    gm_text_body("Body")
+
+  msg_long_chr <- as.character(msg_long)
+
+  # The subject should span multiple lines with proper folding
+  expect_match(
+    msg_long_chr,
+    "Subject: =[?]utf-8[?]B[?][A-Za-z0-9+/=]+[?]=\r\n =[?]utf-8[?]B[?]"
   )
 })
