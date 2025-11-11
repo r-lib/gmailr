@@ -84,6 +84,4 @@ reference:
     These functions don't fit neatly into the above categories and are generally used internally or for debugging.
   contents:
   - gm_history
-  - gm_last_response
   - quoted_printable_encode
-  - gm_last_response

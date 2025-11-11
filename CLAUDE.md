@@ -27,7 +27,7 @@ Follow tidyverse style guide conventions. Use `cli::cli_abort()` for error messa
 OAuth authentication is managed through the gargle package. Users must provide their own OAuth client via `gm_auth_configure()`. Authentication state is maintained across sessions. See `R/gm_auth.R` for implementation details.
 
 **HTTP Requests**
-All Gmail API calls go through httr. Request and response handling follows gargle conventions. The most recent API response is available via `gm_last_response()` for debugging.
+All Gmail API calls go through httr. Request and response handling follows gargle conventions. The most recent API response is available via `gargle::gargle_last_response()` for debugging.
 
 **MIME Message Construction**
 Email messages are built using MIME (Multipurpose Internet Mail Extensions) format. The `gm_mime()` function creates a base MIME object, which is then populated using builder functions like `gm_to()`, `gm_subject()`, and `gm_text_body()`. See `R/gm_mime.R` for the implementation.

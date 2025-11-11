@@ -310,39 +310,24 @@ print.gmail_drafts <- function(x, ...) {
   )
 }
 
-the$last_response <- list()
-
 gmailr_query <- function(
   fun,
   location,
   user_id,
   class = NULL,
   ...,
-  upload = FALSE
+  upload = FALSE,
+  call = caller_env()
 ) {
   path_fun <- if (upload) gmail_upload_path else gmail_path
   response <- fun(path_fun(user_id, location), gm_token(), ...)
-  result <- content(response, "parsed")
 
-  the$last_response <- response
-  if (status_code(response) >= 300) {
-    cond <- structure(
-      list(
-        call = sys.call(-1),
-        content = result,
-        response = response,
-        message = paste0(
-          "Gmail API error: ",
-          status_code(response),
-          "\n  ",
-          result$error$message,
-          "\n"
-        )
-      ),
-      class = c("condition", "error", "gmailr_error")
-    )
-    stop(cond)
-  }
+  result <- gargle::response_process(
+    response,
+    remember = TRUE,
+    call = call,
+    error_class = "gmailr_error"
+  )
 
   if (!is.null(class) && !is.null(result)) {
     class(result) <- class
@@ -352,27 +337,71 @@ gmailr_query <- function(
 
 #' Response from the last query
 #'
+#' `r lifecycle::badge("deprecated")`
+#'
+#' @description
+#' gmailr now uses [gargle::response_process()] to process responses, so
+#' [gargle::gargle_last_response()] can and should be used for *post mortem*
+#' analysis, instead of `gm_last_response()`. One benefit of this switch is that
+#' auth tokens are redacted in the stored response.
+#'
+#' @keywords internal
 #' @export
 gm_last_response <- function() {
-  the$last_response
+  lifecycle::deprecate_warn(
+    "3.0.0",
+    "gm_last_response()",
+    "gargle::gargle_last_response()"
+  )
+  gargle::gargle_last_response()
 }
 
-gmailr_GET <- function(location, user_id, class = NULL, ...) {
-  gmailr_query(GET, location, user_id, class, ...)
+gmailr_GET <- function(
+  location,
+  user_id,
+  class = NULL,
+  ...,
+  call = caller_env()
+) {
+  gmailr_query(GET, location, user_id, class, ..., call = call)
 }
 
-gmailr_DELETE <- function(location, user_id, class = NULL, ...) {
-  gmailr_query(DELETE, location, user_id, class, ...)
+gmailr_DELETE <- function(
+  location,
+  user_id,
+  class = NULL,
+  ...,
+  call = caller_env()
+) {
+  gmailr_query(DELETE, location, user_id, class, ..., call = call)
 }
 
-gmailr_PATCH <- function(location, user_id, class = NULL, ...) {
-  gmailr_query(PATCH, location, user_id, class, ...)
+gmailr_PATCH <- function(
+  location,
+  user_id,
+  class = NULL,
+  ...,
+  call = caller_env()
+) {
+  gmailr_query(PATCH, location, user_id, class, ..., call = call)
 }
 
-gmailr_POST <- function(location, user_id, class = NULL, ...) {
-  gmailr_query(POST, location, user_id, class, ...)
+gmailr_POST <- function(
+  location,
+  user_id,
+  class = NULL,
+  ...,
+  call = caller_env()
+) {
+  gmailr_query(POST, location, user_id, class, ..., call = call)
 }
 
-gmailr_PUT <- function(location, user_id, class = NULL, ...) {
-  gmailr_query(PUT, location, user_id, class, ...)
+gmailr_PUT <- function(
+  location,
+  user_id,
+  class = NULL,
+  ...,
+  call = caller_env()
+) {
+  gmailr_query(PUT, location, user_id, class, ..., call = call)
 }
