@@ -55,6 +55,7 @@
 <li>Now: <code>c("gmailr_error", "gargle_error_request_failed", "http_error_{XXX}", "gargle_error", "rlang_error", "error", "condition")</code>
 </li>
 </ul></li>
+<li><p>Text headers, such as <code>Subject</code>, are now properly prepared as per RFC 2047, fixing a problem with long-ish headers that contain non-ASCII characters (<a href="https://github.com/r-lib/gmailr/issues/193" class="external-link">#193</a>).</p></li>
 </ul><div class="section level3">
 <h3 id="deprecations-development-version">Deprecations<a class="anchor" aria-label="anchor" href="#deprecations-development-version"></a></h3>
 <ul><li><p>Functions that lack the <code>gm_</code> prefix have been removed, concluding a deprecation process that kicked off with gmailr 1.0.0 (released 2019-08-23). These functions were hard deprecated in gmailr 2.0.0 (released 2023-06-30). This eliminates many name conflicts with other packages (including the base package).</p></li>

@@ -13,6 +13,10 @@
   - Now:
     `c("gmailr_error", "gargle_error_request_failed", "http_error_{XXX}", "gargle_error", "rlang_error", "error", "condition")`
 
+- Text headers, such as `Subject`, are now properly prepared as per RFC
+  2047, fixing a problem with long-ish headers that contain non-ASCII
+  characters ([\#193](https://github.com/r-lib/gmailr/issues/193)).
+
 ### Deprecations
 
 - Functions that lack the `gm_` prefix have been removed, concluding a
