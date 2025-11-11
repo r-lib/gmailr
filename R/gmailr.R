@@ -345,6 +345,7 @@ gmailr_query <- function(
 #' analysis, instead of `gm_last_response()`. One benefit of this switch is that
 #' auth tokens are redacted in the stored response.
 #'
+#' @keywords internal
 #' @export
 gm_last_response <- function() {
   lifecycle::deprecate_warn(
