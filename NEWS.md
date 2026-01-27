@@ -7,17 +7,15 @@
 
 * Text headers, such as `Subject`, are now properly prepared as per RFC 2047, fixing a problem with long-ish headers that contain non-ASCII characters (#193).
 
+* Fixed MIME structure for emails with text+HTML bodies and attachments. These messages now correctly use nested `multipart/mixed` (outer) containing `multipart/alternative` (inner text/HTML), preventing the loss of some of the message parts (#202).
+
 ## Deprecations
 
-* Functions that lack the `gm_` prefix have been removed, concluding a deprecation process that kicked off with gmailr 1.0.0 (released 2019-08-23). These functions were hard deprecated in gmailr 2.0.0 (released 2023-06-30). This eliminates many name conflicts with other packages (including the base package).
+* Functions that lack the `gm_` prefix have been removed, concluding a deprecation process that kicked off with gmailr 1.0.0 (released 2019-08-23). These functions were hard deprecated in gmailr 2.0.0 (released 2023-06-30). This eliminates many name conflicts with other packages (including with the base package, e.g. `base::body()` or `base::message()`).
   
 * Legacy auth functions `clear_token()`, `gmail_auth()`, and `use_secret_file()` have been removed, following the same deprecation timeline as described above.
 
 * `gm_last_response()` is deprecated, in favor of `gargle::gargle_last_response()`, since gmailr no longer caches the last response itself.
-
-## Bug fixes
-
-* Fixed MIME structure for emails with text+HTML bodies and attachments. These messages now correctly use nested `multipart/mixed` (outer) containing `multipart/alternative` (inner text/HTML), preventing the loss of some of the message parts (#202).
 
 # gmailr 2.0.0
 
