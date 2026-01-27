@@ -15,13 +15,13 @@
 Source:
 [`DESCRIPTION`](https://github.com/r-lib/gmailr/blob/main/DESCRIPTION)
 
-Hester J, Bryan J (2025). *gmailr: Access the 'Gmail' 'RESTful' API*. R
+Hester J, Bryan J (2026). *gmailr: Access the 'Gmail' 'RESTful' API*. R
 package version 2.0.0.9000, <https://gmailr.r-lib.org>.
 
     @Manual{,
       title = {gmailr: Access the 'Gmail' 'RESTful' API},
       author = {Jim Hester and Jennifer Bryan},
-      year = {2025},
+      year = {2026},
       note = {R package version 2.0.0.9000},
       url = {https://gmailr.r-lib.org},
     }
