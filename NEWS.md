@@ -189,7 +189,7 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth 
 ### Major Changes
 
 * Added ability to create and send drafts and messages. (#5, #6)
-* Added a number of tests for mime message creation derived from the [Email::Stuffer](http://search.cpan.org/~rjbs/Email-Stuffer-0.009/lib/Email/Stuffer.pm) perl module.
+* Added a number of tests for mime message creation derived from the [Email::Stuffer](https://metacpan.org/pod/release/RJBS/Email-Stuffer-0.009/lib/Email/Stuffer.pm) perl module.
 
 ### Minor Fixes
 

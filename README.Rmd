@@ -133,4 +133,4 @@ More details are available in the [Get started](https://gmailr.r-lib.org/article
 
 ## Policies
 
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+[Privacy policy](https://tidyverse.org/google_privacy_policy/)

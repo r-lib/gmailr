@@ -14,5 +14,5 @@ Does no do any line wrapping of the output to 76 characters
 Implementation derived from the perl MIME::QuotedPrint
 }
 \references{
-\url{http://search.cpan.org/~gaas/MIME-Base64-3.14/QuotedPrint.pm}
+\url{https://metacpan.org/pod/release/GAAS/MIME-Base64-3.14/QuotedPrint.pm}
 }

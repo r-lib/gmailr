@@ -85,12 +85,12 @@ d <- gm_create_draft(test_email)
 
 # If all is good with your draft, then you can send the existing draft
 gm_send_draft(d)
-#> Draft Id: 19a4c8f2ecd3e439 
+#> Draft Id: 19c01d17602c97f8 
 #> NULL
 
 # or the existing MIME message
 gm_send_message(test_email)
-#> Id: 19a4c8f30fae009f
+#> Id: 19c01d1785c5f52f
 ```
 
 ## Read email
@@ -111,7 +111,7 @@ latest_thread <- gm_thread(gm_id(my_threads)[[1]])
 my_msg <- latest_thread$messages[[1]]
 
 gm_date(my_msg)
-#> [1] "Mon, 3 Nov 2025 20:50:43 -0500"
+#> [1] "Tue, 27 Jan 2026 15:37:11 -0800"
 gm_subject(my_msg)
 #> [1] "this is just a gmailr test"
 gm_body(my_msg)
@@ -127,4 +127,4 @@ gmailr’s [other articles](https://gmailr.r-lib.org/articles/index.html).
 
 ## Policies
 
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+[Privacy policy](https://tidyverse.org/google_privacy_policy/)
