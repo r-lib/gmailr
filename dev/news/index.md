@@ -297,7 +297,7 @@ CRAN release: 2014-09-19
   ([\#5](https://github.com/r-lib/gmailr/issues/5),
   [\#6](https://github.com/r-lib/gmailr/issues/6))
 - Added a number of tests for mime message creation derived from the
-  [Email::Stuffer](http://search.cpan.org/~rjbs/Email-Stuffer-0.009/lib/Email/Stuffer.pm)
+  [Email::Stuffer](https://metacpan.org/pod/release/RJBS/Email-Stuffer-0.009/lib/Email/Stuffer.pm)
   perl module.
 
 #### Minor Fixes

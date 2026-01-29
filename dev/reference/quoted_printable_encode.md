@@ -17,4 +17,4 @@ quoted_printable_encode(data)
 
 ## References
 
-<http://search.cpan.org/~gaas/MIME-Base64-3.14/QuotedPrint.pm>
+<https://metacpan.org/pod/release/GAAS/MIME-Base64-3.14/QuotedPrint.pm>
