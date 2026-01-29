@@ -93,8 +93,8 @@ identity.
 gm_profile()
 #> Logged in as:
 #>   * email: gargle-testuser@posit.co
-#>   * num_messages: 118
-#>   * num_threads: 118
+#>   * num_messages: 137
+#>   * num_threads: 137
 ```
 
 ## Compose and send an email
@@ -136,7 +136,7 @@ If you’re happy, you can either send that draft from the web UI or with
 
 ``` r
 gm_send_draft(d)
-#> Draft Id: 19c0a76c01580fa2 
+#> Draft Id: 19c0bea0ae3a89ea 
 #> NULL
 ```
 
@@ -171,7 +171,7 @@ isolate a specific message and access its parts.
 my_msg <- latest_thread$messages[[1]]
 
 gm_date(my_msg)
-#> [1] "Thu, 29 Jan 2026 07:54:40 -0800"
+#> [1] "Thu, 29 Jan 2026 14:40:13 -0800"
 gm_subject(my_msg)
 #> [1] "this is just a gmailr test"
 gm_body(my_msg)
