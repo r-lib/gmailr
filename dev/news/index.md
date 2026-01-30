@@ -2,6 +2,10 @@
 
 ## gmailr (development version)
 
+## gmailr 3.0.0
+
+CRAN release: 2026-01-30
+
 - All HTTP responses are passed through
   [`gargle::response_process()`](https://gargle.r-lib.org/reference/response_process.html),
   which updates gmailr’s error handling to be consistent with other
