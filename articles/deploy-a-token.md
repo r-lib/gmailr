@@ -1,0 +1,193 @@
+# Deploy a token
+
+``` r
+library(gmailr)
+```
+
+The Gmail API is primarily intended for use on behalf of a regular
+Google user account, as opposed to a service account. The gmailr package
+guides an interactive R user through a process in which they
+authenticate themselves to Google and authorize Gmail activities
+initiated from R. This is sometimes referred to as the “OAuth dance”.
+
+But what about settings where there is no interactive user sitting
+around, i.e. when gmailr-using code is deployed to a remote server or
+otherwise runs unattended? For most Google APIs, the standard advice is
+“use a service account”. But the Gmail API is special. To use a service
+account with the Gmail API basically requires that the service account
+has been delegated domain-wide authority. This is tricky for at least
+two reasons. First, this is only possible within a Google Workspace.
+It’s not available to personal Google accounts. Second, most Google
+Workspace admins will refuse to do this, for security reasons.
+
+Therefore, if you want to deploy a data product that uses gmailr, it’s
+entirely possible that you really do need to use a user token. This
+article is about how to prepare a token for use in this scenario.
+
+The instructions below involve filepaths and environment variables.
+Therefore, you will need to modify the code below to account for the
+specifics of your situation.
+
+## Demo code
+
+gmailr ships with code for a working demo of the approach described
+here.
+
+``` r
+writeLines(list.files(
+  system.file("deployed-token-demo", package = "gmailr")
+))
+#> README.md
+#> send-email-byo-encrypted-token.Rmd
+#> token-setup.R
+```
+
+We will make reference to these files below.
+
+You may also wish to browse these files on GitHub:
+<https://github.com/r-lib/gmailr/tree/main/inst/deployed-token-demo>.
+
+## Setup: store a token
+
+*This process is recorded in the demo file `token-setup.R`.*
+
+First, complete the OAuth dance in your primary, interactive environment
+as the target user, using the desired OAuth client and scopes, with
+`cache = FALSE`. If you have arranged for the desired OAuth client to be
+discovered via
+[`gm_default_oauth_client()`](https://gmailr.r-lib.org/reference/gmailr-configuration.md),
+you only need to call
+[`gm_auth()`](https://gmailr.r-lib.org/reference/gm_auth.md):
+
+``` r
+gm_auth("jane@example.com", cache = FALSE)
+```
+
+If you need to specify the OAuth client explicitly, call
+[`gm_auth_configure()`](https://gmailr.r-lib.org/reference/gm_auth_configure.md)
+prior to [`gm_auth()`](https://gmailr.r-lib.org/reference/gm_auth.md):
+
+``` r
+gm_auth_configure("path/to/your/oauth_client.json")
+gm_auth("jane@example.com", cache = FALSE)
+```
+
+You may wish to confirm that you are logged in as the intended user:
+
+``` r
+gm_profile()
+```
+
+Now, write the current gmailr token to file. If you are deploying to
+somewhere relatively private, such as a server accessible only within
+your organization, you don’t need to provide any arguments to
+[`gm_token_write()`](https://gmailr.r-lib.org/reference/gm_token_write.md).
+But you’ll often want to specify the target `path`:
+
+``` r
+gm_token_write(path = "path/to/gmailr-token.rds")
+```
+
+The resulting token file is rather opaque, i.e. a general purpose
+automated tool can’t easily scrape your credentials from this. But a
+knowledgeable R programmer could decode the token, if they made an
+effort.
+
+If the token file will be exposed in a more public location, such as on
+GitHub or inside a CRAN package, it should be encrypted. You can
+generate an encryption key with
+[`gargle::secret_make_key()`](https://gargle.r-lib.org/reference/gargle_secret.html)
+(this is a copy of
+[`httr2::secret_make_key()`](https://httr2.r-lib.org/reference/secrets.html),
+which you could also use). In your local development environment, make
+this key available as an environment variable, e.g. `GMAILR_KEY`,
+probably with a line like this in your `.Renviron` file:
+
+    GMAILR_KEY=xxxxxxxxxxxxxxx
+
+The `usethis::edit_r_environ()` function can be handy for creating
+and/or editing this file.
+
+Once you’ve set up the encryption key, you can use it in
+`gm_token_write(key =)`:
+
+``` r
+gm_token_write(
+  path = "path/to/gmailr-token.rds",
+  key = "GMAILR_KEY"
+)
+```
+
+You must make this same `key` available as a secret or secure
+environment variable in the deployed context, e.g. on Posit Connect
+(<https://docs.posit.co/connect/admin/security/#application-environment-variables>)
+or GitHub Actions
+(<https://docs.github.com/en/actions/security-guides/encrypted-secrets>).
+
+## Usage: load and use token
+
+*The demo file `send-email-byo-encrypted-token.Rmd` is an example of a
+working Shiny app (Shiny document, in this case) that implements the
+technique described here..*
+
+In the code that’s running in the deployed / unattended setting, use a
+snippet like this to read the token from file and tell gmailr to use it:
+
+``` r
+gm_auth(
+  token = gm_token_read(
+    path = "path/to/gmailr-token.rds",
+    key = "GMAILR_KEY"
+  )
+)
+```
+
+If you did not specify the `key` in
+[`gm_token_write()`](https://gmailr.r-lib.org/reference/gm_token_write.md),
+omit it from the
+[`gm_token_read()`](https://gmailr.r-lib.org/reference/gm_token_write.md)
+call as well. If you did specify the `key` in
+[`gm_token_write()`](https://gmailr.r-lib.org/reference/gm_token_write.md),
+use the same `key` in
+[`gm_token_read()`](https://gmailr.r-lib.org/reference/gm_token_write.md).
+
+## Ongoing maintenance
+
+The saved credential contains a refresh token, which is potentially
+rather long-lived, but is still perishable. As long as the refresh token
+remains valid, it can be used to obtain short-lived access tokens,
+without any user interaction. This is sometimes referred to as
+“refreshing the token” and this is what’s happening behind the scenes
+with a deployed token.
+
+However, there are many ways that the refresh token can become invalid,
+for example:
+
+- In the Security settings for their Google user account, a user can
+  remove access associated with a specific OAuth client or app. This
+  invalidates any token obtained with that client.
+- If a token isn’t used for a period of time (~6 months), it becomes
+  invalid.
+- If an OAuth client is deleted or its host project disables the Gmail
+  API, any associated tokens become invalid.
+- There’s a limit to how many refresh tokens a user can have. If a user
+  repeatedly mints new tokens (versus refreshing existing ones), older
+  tokens will “fall off the end” and become invalid.
+- If an OAuth client is in “testing” mode, all associated tokens have a
+  limited lifetime, usually 1 week.
+
+The general topic of refresh token expiration is documented in
+<https://developers.google.com/identity/protocols/oauth2#expiration>.
+
+If the token becomes invalid, token refresh will fail and your deployed
+product will no longer be able to access the Gmail API on behalf of the
+target user. It is a very good idea to rig your code to surface this
+failure in a very transparent way, so it’s easier for you to diagnose
+this problem. Functions like
+[`gm_profile()`](https://gmailr.r-lib.org/reference/gm_profile.md),
+[`gargle::token_tokeninfo()`](https://gargle.r-lib.org/reference/token-info.html),
+and
+[`gargle::token_userinfo()`](https://gargle.r-lib.org/reference/token-info.html)
+can be useful for this. If the stored token can no longer be refreshed,
+the only remedy is to obtain, store, possibly encrypt, and deploy a new
+token, using the exact same process as before.

@@ -5,78 +5,63 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="gmailr">
 <title>Set up an OAuth client • gmailr</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.6/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.6/font.css" rel="stylesheet">
-<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Set up an OAuth client">
-<meta property="og:description" content="gmailr">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><script defer data-domain="gmailr.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Set up an OAuth client">
+<script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script><script defer data-domain="gmailr.r-lib.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 </head>
 <body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-none"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-none" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">gmailr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.0.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/gmailr.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/gmailr.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/oauth-client.html">Set up an OAuth client</a>
-    <a class="dropdown-item" href="../articles/deploy-a-token.html">Deploy a token</a>
-    <a class="dropdown-item" href="../articles/sending_messages.html">Sending Messages With Gmailr</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/deploy-a-token.html">Deploy a token</a></li>
+    <li><a class="dropdown-item" href="../articles/oauth-client.html">Set up an OAuth client</a></li>
+    <li><a class="dropdown-item" href="../articles/sending_messages.html">Sending Messages With Gmailr</a></li>
+  </ul>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-news">
-    <h6 class="dropdown-header" data-toc-skip>Releases</h6>
-    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2023/06/gmailr-2-0-0/">gmailr 2.0.0</a>
-    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2019/08/gmailr-1-0-0/">gmailr 1.0.0</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../news/index.html">Changelog</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-news">
+<li><h6 class="dropdown-header" data-toc-skip>Releases</h6></li>
+    <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2023/06/gmailr-1-0-0/">gmailr 2.0.0</a></li>
+    <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/articles/2019/08/gmailr-1-0-0/">gmailr 1.0.0</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../news/index.html">Changelog</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/r-lib/gmailr/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/r-lib/gmailr/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article" id="container">
 
@@ -85,10 +70,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Set up an OAuth client</h1>
+
+      <h1>Set up an OAuth client</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/r-lib/gmailr/blob/HEAD/vignettes/articles/oauth-client.Rmd" class="external-link"><code>vignettes/articles/oauth-client.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/r-lib/gmailr/blob/main/vignettes/articles/oauth-client.Rmd" class="external-link"><code>vignettes/articles/oauth-client.Rmd</code></a></small>
       <div class="d-none name"><code>oauth-client.Rmd</code></div>
     </div>
 
@@ -170,10 +156,10 @@ this article.</em></p>
 <p>Go to the <a href="https://cloud.google.com/cloud-console" class="external-link">Google
 Cloud console</a> and sign in:</p>
 <p><a href="https://console.cloud.google.com/" class="external-link uri">https://console.cloud.google.com/</a></p>
-<p><img src="img/google-cloud-platform-sign-in.png" alt='The sign in page for Google Cloud Platform. The "Email or phone" box is selected and ready for user input. In the lower left is a "Next" button.' width="600px"></p>
+<p><img src="img/google-cloud-platform-sign-in.png" class="r-plt" alt="The sign in page for Google Cloud Platform. The 'Email or phone' box is selected and ready for user input. In the lower left is a 'Next' button." width="600px"></p>
 <p>Since this is your first usage of Google Cloud, you need to agree to
 their Terms of Service.</p>
-<p><img src="img/google-cloud-welcome-new-user.png" alt="A screen with a checkbox to agree to the Google Cloud terms of service." width="600px"></p>
+<p><img src="img/google-cloud-welcome-new-user.png" class="r-plt" alt="A screen with a checkbox to agree to the Google Cloud terms of service." width="600px"></p>
 <p>At this point, you might see an offer to start a free trial of Google
 Cloud Platform, but that is not necessary in order to create an OAuth
 client. You might be interested in the free trial if you want to
@@ -187,14 +173,14 @@ works with gmailr.</p>
 </h2>
 <p>Next we need to select a project. Locate and click the “Select a
 project” button.</p>
-<p><img src="img/select-a-project-new-user-1.png" alt='Screenshot with an arrow pointing at the "Select a project" button, which is in the upper left, next to "Google Cloud".' width="600px"></p>
+<p><img src="img/select-a-project-new-user-1.png" class="r-plt" alt="Screenshot with an arrow pointing at the 'Select a project' button, which is in the upper left, next to 'Google Cloud'." width="600px"></p>
 <p>Since you are a new user, presumably you don’t have any existing
 projects. Click “NEW PROJECT” in the upper right corner. It is fine to
 see “No organization” here; that’s expected if the Google account you’re
 using exists outside of Google Workspace.</p>
-<p><img src="img/select-a-project-new-user-2.png" alt='The "Select a project" with an arrow pointing to the "NEW PROJECT" button.' width="600px"></p>
+<p><img src="img/select-a-project-new-user-2.png" class="r-plt" alt="The 'Select a project' with an arrow pointing to the 'NEW PROJECT' button." width="600px"></p>
 <p>Now you are on the “New Project” screen.</p>
-<p><img src="img/new-project-new-user.png" alt='The "New Project" screen with a box where the user enters the Project name and a "CREATE" button. There are arrows pointing at this box, this button, and the Project ID.' width="600px"></p>
+<p><img src="img/new-project-new-user.png" class="r-plt" alt="The 'New Project' screen with a box where the user enters the Project name and a 'CREATE' button. There are arrows pointing at this box, this button, and the Project ID." width="600px"></p>
 <p>I strongly recommend that you <strong>do not</strong> accept the
 automatically generated project name. Instead I recommend that you give
 the project some meaningful (or at least memorable) label that reminds
@@ -204,14 +190,14 @@ button. In this example, we are using “gmailr-fun” as the project name
 (and ID).</p>
 <p>Now you should see that you are working within your intended target
 project.</p>
-<p><img src="img/select-a-project-new-user-3.png" alt='The button that previously said "Select a project" for a new user now says "gmailr-fun", which is the name of the target project.' width="600px"></p>
+<p><img src="img/select-a-project-new-user-3.png" class="r-plt" alt="The button that previously said 'Select a project' for a new user now says 'gmailr-fun', which is the name of the target project." width="600px"></p>
 <!--
 An existing Google Cloud user will land on a page similar to one of those shown here.
 **The important thing is to confirm that the selected project (the project in which you want to create the OAuth client) is selected.**
 The areas indicated by orange arrows are where you will see information about the currently selected project.
 
 <div class="figure">
-<img src="/home/runner/work/gmailr/gmailr/vignettes/articles/img/google-cloud-welcome-returning-user.png" alt="The &quot;Welcome&quot; screen for an existing user with access to the gargle project, which is reflected in various places on the page." width="600px" />
+<img src="/home/runner/work/gmailr/gmailr/vignettes/articles/img/google-cloud-welcome-returning-user.png" class="r-plt" alt="The 'Welcome screen for an existing user with access to the gargle project, which is reflected in various places on the page." width="600px" />
 <p class="caption">One possible "Welcome" screen (using the gargle project as an example).
 </p>
 </div>
@@ -227,22 +213,22 @@ type of Google account. Hopefully you can find your way to something
 like this:</p>
 <!--
 <div class="figure">
-<img src="/home/runner/work/gmailr/gmailr/vignettes/articles/img/apis-and-services-1.png" alt="alt" width="600px" />
+<img src="/home/runner/work/gmailr/gmailr/vignettes/articles/img/apis-and-services-1.png" class="r-plt" alt="alt" width="600px" />
 <p class="caption">caption
 </p>
 </div>
 -->
-<p><img src="img/apis-and-services-2.png" alt='Screenshot with an arrow pointing at "APIs &amp; Services" in a left sidebar.' width="600px"></p>
+<p><img src="img/apis-and-services-2.png" class="r-plt" alt="Screenshot with an arrow pointing at 'APIs &amp; Services' in a left sidebar." width="600px"></p>
 <p>Click on “APIs &amp; Services” and then on “Enabled APIs &amp;
 services”. Don’t be surprised if some APIs are already enabled, even in
 a new project; this happens by default. If this page reveals that the
 Gmail API is already enabled, you can move on (that won’t be true in a
 new project, but could be true for an existing project). Here’s how this
 screen might look for a new project:</p>
-<p><img src="img/apis-and-services-3.png" alt='Screenshot with an arrows pointing at the "+ ENABLE APIS AND SERVICES" button.' width="600px"></p>
+<p><img src="img/apis-and-services-3.png" class="r-plt" alt="Screenshot with an arrows pointing at the '+ ENABLE APIS AND SERVICES' button." width="600px"></p>
 <p>Click on “+ ENABLE APIS AND SERVICES”. In the next screen, search for
 the Gmail API and select it. You will get to a screen like this:</p>
-<p><img src="img/enable-gmail-api.png" alt='Screen for the Gmail API with an arrow pointing at the "ENABLE" button.' width="600px"></p>
+<p><img src="img/enable-gmail-api.png" class="r-plt" alt="Screen for the Gmail API with an arrow pointing at the 'ENABLE' button." width="600px"></p>
 <p>Click “ENABLE”.</p>
 </div>
 <div class="section level2">
@@ -258,7 +244,7 @@ work I plan to do with the Gmail API from R”.</p>
 <p>It’s time to go to “OAuth consent screen”, which is one of the pages
 you can access from APIs &amp; Services. Click on “OAuth consent
 screen”.</p>
-<p><img src="img/oauth-consent-screen.png" alt='Screenshot with an arrow pointing at "OAuth consent screen" within "APIs &amp; Services" in a left sidebar.' width="600px"></p>
+<p><img src="img/oauth-consent-screen.png" class="r-plt" alt="Screenshot with an arrow pointing at 'OAuth consent screen' within 'APIs &amp; Services' in a left sidebar." width="600px"></p>
 <p>It is quite difficult to have an OAuth “app” that works for just
 anyone. There is an onerous registration and verification process. The
 tidyverse team has done this for the Drive, Sheets, and BigQuery APIs,
@@ -273,7 +259,7 @@ except with different APIs enabled for the project.</p>
 must choose the “External” user type. This may seem weird, but since you
 are not part of an organization, there is no such thing as an internal
 user. Select the “External” user type, then click “CREATE”.</p>
-<p><img src="img/create-external-oauth-consent-screen.png" alt='Screenshot with an arrow pointing at a filled radio button indicating the "External" user type and an arrow pointing at the "CREATE" button.' width="600px"></p>
+<p><img src="img/create-external-oauth-consent-screen.png" class="r-plt" alt="Screenshot with an arrow pointing at a filled radio button indicating the 'External' user type and an arrow pointing at the 'CREATE' button." width="600px"></p>
 <p>(This article focuses on the solo user who is in not part of Google
 Workspace, but the process has substantial overlap with creating an
 OAuth client for use within an Google Workspace organization. In that
@@ -283,17 +269,17 @@ the best choice.)</p>
 to use the same label you used as the project name and project ID,
 e.g. “gmailr-fun”. A good default for “User support email” is whatever
 Google email address you are logged in with.</p>
-<p><img src="img/edit-app-registration-1.png" alt='Screenshot with arrows pointing at the boxes where a user enters "App name" and "User support email".' width="600px"></p>
+<p><img src="img/edit-app-registration-1.png" class="r-plt" alt="Screenshot with arrows pointing at the boxes where a user enters 'App name' and 'User support email'." width="600px"></p>
 <p>You can leave “App logo” and “App domain” unconfigured. For the
 “Developer contact information”, a good default is whatever Google email
 address you are logged in with, which we also used for the “User support
 email”. All of this setup and terminology makes more sense for those who
 really are creating an application for multiple users. It’s weird for
 the solo user, but it is what it is.</p>
-<p><img src="img/edit-app-registration-2.png" alt='Screenshot with an arrow pointing at the box where a user enters an email address as "Developer contact information".' width="600px"></p>
+<p><img src="img/edit-app-registration-2.png" class="r-plt" alt="Screenshot with an arrow pointing at the box where a user enters an email address as 'Developer contact information'." width="600px"></p>
 <p>Click “SAVE AND CONTINUE”.</p>
 <p>Now we add scopes. Click “ADD OR REMOVE SCOPES”.</p>
-<p><img src="img/add-or-remove-scopes.png" alt='Screenshot with an arrow pointing at the "ADD OR REMOVE SCOPES" button.' width="600px"></p>
+<p><img src="img/add-or-remove-scopes.png" class="r-plt" alt="Screenshot with an arrow pointing at the 'ADD OR REMOVE SCOPES' button." width="600px"></p>
 <p>First, select these (nonsensitive) scopes:</p>
 <ul>
 <li><code>".../auth/userinfo.email"</code></li>
@@ -304,7 +290,7 @@ the solo user, but it is what it is.</p>
 token downstream. In particular, the gargle package always adds the
 <code>".../auth/userinfo.email"</code> scope when obtaining user tokens,
 so you definitely want that enabled here.</p>
-<p><img src="img/nonsensitive-scopes.png" alt="Screenshot showing three checked checkboxes for 3 scopes." width="600px"></p>
+<p><img src="img/nonsensitive-scopes.png" class="r-plt" alt="Screenshot showing three checked checkboxes for 3 scopes." width="600px"></p>
 <p>Then, use the “Filter” feature to find the scopes associated with the
 Gmail API. You may want to adjust “Rows per page” to a number high
 enough to fit all the Gmail scopes on one page (at the time of writing,
@@ -316,25 +302,25 @@ to you in <code><a href="../reference/gm_auth.html">gm_auth()</a></code>. If you
 conservative and you know you only plan to do “read only” work, then you
 can be extra careful and only enable specific scopes here. When you’re
 done selecting scopes, click “UPDATE”.</p>
-<p><img src="img/filter-and-select-gmail-scopes.png" alt="Screenshot showing many checked checkboxes for the Gmail API scopes." width="600px"></p>
+<p><img src="img/filter-and-select-gmail-scopes.png" class="r-plt" alt="Screenshot showing many checked checkboxes for the Gmail API scopes." width="600px"></p>
 <p>When you are returned to the “Edit app registration” screen, things
 look quite different, thanks to all the scopes you added. It will look
 something like this:</p>
-<p><img src="img/edit-app-registration-3.png" alt="Screenshot of the Scopes page listing the many scopes are now added to the app." width="600px"></p>
+<p><img src="img/edit-app-registration-3.png" class="r-plt" alt="Screenshot of the Scopes page listing the many scopes are now added to the app." width="600px"></p>
 <p>Scroll down to the bottom and click “SAVE AND CONTINUE”.</p>
-<p><img src="img/edit-app-registration-4.png" alt='Screenshot with an arrow pointing at the "SAVE AND CONTINUE" button.' width="600px"></p>
+<p><img src="img/edit-app-registration-4.png" class="r-plt" alt="Screenshot with an arrow pointing at the 'SAVE AND CONTINUE' button." width="600px"></p>
 <p>Now we will add a test user: YOU! Click on “+ ADD USERS”.</p>
 <p>(If you are creating an OAuth client within a Google Workspace and it
 is only for internal users, you can skip the steps around adding test
 users. This is only relevant to a client that supports external users
 and that has “Testing” publishing status.)</p>
-<p><img src="img/edit-app-registration-5.png" alt='Screenshot with an arrow pointing at the "+ ADD USERS" button.' width="600px"></p>
+<p><img src="img/edit-app-registration-5.png" class="r-plt" alt="Screenshot with an arrow pointing at the '+ ADD USERS' button." width="600px"></p>
 <p>Enter your email address and click “ADD”.</p>
-<p><img src="img/add-users.png" alt='Screenshot of the "Add users" screen with a box where the user has entered their email address, which is obscured by an opaque rectangle. There is an arrow pointing at the "ADD" button.' width="600px"></p>
+<p><img src="img/add-users.png" class="r-plt" alt="Screenshot of the 'Add users' screen with a box where the user has entered their email address, which is obscured by an opaque rectangle. There is an arrow pointing at the 'ADD' button." width="600px"></p>
 <p>When you are returned to the “Edit app registration” screen, things
 look different, thanks to the test user you added. It will look
 something like this:</p>
-<p><img src="img/edit-app-registration-6.png" alt='Screenshot that shows 1 user under "User information", where the email address is obscured by an opaque rectangle. THere is an arrow pointing at the "SAVE AND CONTINUE" button.' width="600px"></p>
+<p><img src="img/edit-app-registration-6.png" class="r-plt" alt="Screenshot that shows 1 user under 'User information', where the email address is obscured by an opaque rectangle. THere is an arrow pointing at the 'SAVE AND CONTINUE' button." width="600px"></p>
 <p>Click “SAVE AND CONTINUE”. Now you arrive at a “Summary” screen, that
 summarizes what you’ve entered for “OAuth consent screen”, “Scopes”, and
 “Test users”.</p>
@@ -344,21 +330,21 @@ summarizes what you’ve entered for “OAuth consent screen”, “Scopes”, a
 </h2>
 <p>Now we go to the “Credentials” section of “APIs &amp; Services”. You
 can get there in various ways, depending on where you start.</p>
-<p><img src="img/go-to-credentials-1.png" alt='Screenshot with an arrow pointing at "Credentials" below "APIs &amp; Services" in a left sidebar.' width="600px"></p>
-<p><img src="img/go-to-credentials-2.png" alt='Screenshot with an arrow pointing at "Credentials" in a menu accessed by clicking on "APIs &amp; Services" in a left sidebar.' width="600px"></p>
+<p><img src="img/go-to-credentials-1.png" class="r-plt" alt="Screenshot with an arrow pointing at 'Credentials' below 'APIs &amp; Services' in a left sidebar." width="600px"></p>
+<p><img src="img/go-to-credentials-2.png" class="r-plt" alt="Screenshot with an arrow pointing at 'Credentials' in a menu accessed by clicking on 'APIs &amp; Services' in a left sidebar." width="600px"></p>
 <p>Here’s how this screen will look for a new user and new project,
 i.e. where there are no credentials yet.</p>
-<p><img src="img/no-existing-credentials.png" alt='Screenshot of the "Credentials" page when there are no existing credentials.' width="600px"></p>
+<p><img src="img/no-existing-credentials.png" class="r-plt" alt="Screenshot of the 'Credentials' page when there are no existing credentials." width="600px"></p>
 <p>Here’s how this screen might look in a project that has existed for a
 long time, that has many existing credentials of various types.</p>
-<p><img src="img/many-existing-credentials.png" alt='Screenshot of the "Credentials" page showing existing credentials, e.g. a couple of API keys and several OAuth 2.0 Client IDs.' width="600px"></p>
+<p><img src="img/many-existing-credentials.png" class="r-plt" alt="Screenshot of the 'Credentials' page showing existing credentials, e.g. a couple of API keys and several OAuth 2.0 Client IDs." width="600px"></p>
 <p>Now we create a new OAuth client. Click on “+ CREATE
 CREDENTIALS”.</p>
-<p><img src="img/create-credentials-button.png" alt='Screenshot with an arrow pointing at the "+ CREATE CREDENTIALS" button.' width="600px"></p>
+<p><img src="img/create-credentials-button.png" class="r-plt" alt="Screenshot with an arrow pointing at the '+ CREATE CREDENTIALS' button." width="600px"></p>
 <p>Select “OAuth client ID”.</p>
-<p><img src="img/create-credentials-choices.png" alt='Screenshot of the choices presented when creating new credentials. There is an arrow pointing at "OAuth client ID" which is the correct choice, along with the text "YES". Two other choices, "API key" and "Service account", are marked with the text "NO".' width="600px"></p>
+<p><img src="img/create-credentials-choices.png" class="r-plt" alt="Screenshot of the choices presented when creating new credentials. There is an arrow pointing at 'OAuth client ID' which is the correct choice, along with the text 'YES'. Two other choices, 'API key' and 'Service account', are marked with the text 'NO'." width="600px"></p>
 <p>Next you must choose “Application type”.</p>
-<p><img src="img/oauth-client-type-choices.png" alt='Screenshot of the "Application type" dropdown menu with arrows pointing at two of the choices, "Web application" and "Desktop app".' width="600px"></p>
+<p><img src="img/oauth-client-type-choices.png" class="r-plt" alt="Screenshot of the 'Application type' dropdown menu with arrows pointing at two of the choices, 'Web application' and 'Desktop app'." width="600px"></p>
 <p>Here’s how to choose the application type:</p>
 <ul>
 <li>
@@ -394,9 +380,9 @@ remind myself which type of client this is and “aardvark” is just a
 random animal. If I need to add another client later (maybe of “Web
 application” type), I might call that one “web-baboon”. You get the
 idea.</p>
-<p><img src="img/oauth-client-create.png" alt='Screenshot of the "Create OAuth client ID" screen with "Desktop app" selected as the Application type and "desktop-aardvark" filled in the "Name" box. There are arrows pointing at the "Name" box and the "CREATE" button.' width="600px"></p>
+<p><img src="img/oauth-client-create.png" class="r-plt" alt="Screenshot of the 'Create OAuth client ID' screen with 'Desktop app' selected as the Application type and 'desktop-aardvark' filled in the 'Name' box. There are arrows pointing at the 'Name' box and the 'CREATE' button." width="600px"></p>
 <p>You should see the happy news that your OAuth client was created:</p>
-<p><img src="img/oauth-client-created-yay.png" alt='Screenshot of the "OAuth client created" pop-up, with a large oval highlighting the "DOWNLOAD JSON" button.' width="600px"></p>
+<p><img src="img/oauth-client-created-yay.png" class="r-plt" alt="Screenshot of the 'OAuth client created' pop-up, with a large oval highlighting the 'DOWNLOAD JSON' button." width="600px"></p>
 <p>We want to “DOWNLOAD JSON”, but rest assured that, as it says: “The
 client ID and secret can always be accessed from Credentials in APIs
 &amp; Services” (including as downloadable JSON). This is not one of
@@ -409,14 +395,14 @@ The filename will look like this (but longer and more random):</p>
 <p>If you’re still looking at the “OAuth client created” pop-up, click
 “OK”. Now the “Credentials” screen within “APIs &amp; Services” will
 look more like this:</p>
-<p><img src="img/one-existing-credential.png" alt='Screenshot of the "Credentials" screen showing 1 existing OAuth 2.0 Client ID named "desktop-aardvark".' width="600px"></p>
+<p><img src="img/one-existing-credential.png" class="r-plt" alt="Screenshot of the 'Credentials' screen showing 1 existing OAuth 2.0 Client ID named 'desktop-aardvark'." width="600px"></p>
 <p>You should see your successfully created OAuth client ID, with the
 name you gave it.</p>
 <p>If you ever need to access to this JSON again, come back to the
 “Credentials” screen. Each existing OAuth client ID has a download
 button.</p>
-<p><img src="img/oauth-client-post-hoc-download.png" alt='Screenshot of the "Credentials" screen with an arrow pointing at a "download" icon in the table row associated with the existing OAuth 2.0
- Client ID named "desktop-aardvark".' width="600px"></p>
+<p><img src="img/oauth-client-post-hoc-download.png" class="r-plt" alt="Screenshot of the 'Credentials' screen with an arrow pointing at a 'download' icon in the table row associated with the existing OAuth 2.0
+ Client ID named 'desktop-aardvark'." width="600px"></p>
 </div>
 <div class="section level2">
 <h2 id="tell-gmailr-about-your-oauth-client">Tell gmailr about your OAuth client<a class="anchor" aria-label="anchor" href="#tell-gmailr-about-your-oauth-client"></a>
@@ -424,9 +410,9 @@ button.</p>
 <p><code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> is the function we use to tell
 gmailr about this OAuth client. It is best to provide the filepath of
 the downloaded JSON to the <code>path</code> argument:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>gm_auth_configure <span class="ot">&lt;-</span> <span class="cf">function</span>(...,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">path =</span> <span class="fu">gm_default_oauth_client</span>(),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                              ...) { ... }</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>gm_auth_configure <span class="ot">&lt;-</span> <span class="cf">function</span>(...,</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>                              <span class="at">path =</span> <span class="fu">gm_default_oauth_client</span>(),</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>                              ...) { ... }</span></code></pre></div>
 <p>There are a couple of ways this can work. You can provide an actual
 <code>path</code> in your R code. This makes sense in some settings. But
 most users should take advantage of the default value of
@@ -479,10 +465,10 @@ explicit call to <code><a href="../reference/gm_auth.html">gm_auth()</a></code>.
 <p>Note that you will see some slightly scary screens when using your
 own personal OAuth client as one of the test users. Once you do anything
 that triggers gmailr auth, you’ll see this:</p>
-<p><img src="img/google-hasnt-verified-this-app.png" alt="Screenshot that reads: &quot;Google hasn't verified this app. You've been given access to an app that's currently being tested. You should only continue if you know the developer that invited you.&quot; There is an arrow pointing at the word &quot;Continue&quot;. There is also a button labelled as &quot;Back to safety&quot;." width="600px"></p>
+<p><img src="img/google-hasnt-verified-this-app.png" class="r-plt" alt="Screenshot that reads: Google hasn't verified this app. You've been given access to an app that's currently being tested. You should only continue if you know the developer that invited you. There is an arrow pointing at the word 'Continue'. There is also a button labelled as 'Back to safety'." width="600px"></p>
 <p>Once you click “Continue”, you’ll need to say exactly what
 permissions you are willing to grant:</p>
-<p><img src="img/select-what-app-can-access.png" alt='Screenshot that reads: "gmailr-fun wants access to your Google Account". Then it shows the email "jenny.f.bryan@gmail.com". Next the text "Select what gmailr-fun can access". The choice "Associate you with your personal info on Google" is preselected and greyed out, indicating this choice cannot be altered. The choice "See your primary Google Account email address" is preselected and greyed out, indicating this choice cannot be altered. The choice "Read, compose, send, and permanently delete all your email from Gmail" has been checked. This is emphasized with an orange oval. Then there is text: "Make sure you trust gmailr-fun. You may be sharing sensitive info with this site or app. You can always see or remove access in your Google Account. There is an arrow pointing at the "Continue" button at the bottom of the page.' width="600px"></p>
+<p><img src="img/select-what-app-can-access.png" class="r-plt" alt="Screenshot that reads: 'gmailr-fun wants access to your Google Account'. Then it shows the email 'jenny.f.bryan@gmail.com'. Next the text 'Select what gmailr-fun can access'. The choice 'Associate you with your personal info on Google' is preselected and greyed out, indicating this choice cannot be altered. The choice 'See your primary Google Account email address' is preselected and greyed out, indicating this choice cannot be altered. The choice 'Read, compose, send, and permanently delete all your email from Gmail' has been checked. This is emphasized with an orange oval. Then there is text: 'Make sure you trust gmailr-fun. You may be sharing sensitive info with this site or app. You can always see or remove access in your Google Account. There is an arrow pointing at the 'Continue' button at the bottom of the page." width="600px"></p>
 <p>The pre-checked items reflect those nonsensitive scopes mentioned
 earlier. But you still need to explicitly check the box for “Read,
 compose, send, and permanently delete all your email from Gmail”. Note
@@ -515,10 +501,10 @@ its publishing status from “Testing” to “In production”. The reason you
 might do this is to get a token that remains valid for more than 1 week.
 This can be done in the OAuth consent screen configuration. Click the
 “PUBLISH APP” button.</p>
-<p><img src="img/oauth-consent-screen-publishing-status-testing.png" alt='Screenshot of the configuration of the OAuth consent screen. There is an arrow pointing at the "PUBLISH APP" button in the Publishing status section.' width="600px"></p>
+<p><img src="img/oauth-consent-screen-publishing-status-testing.png" class="r-plt" alt="Screenshot of the configuration of the OAuth consent screen. There is an arrow pointing at the 'PUBLISH APP' button in the Publishing status section." width="600px"></p>
 <p>You will then see a new pop-up asking you to confirm this choice,
 outlining various implications and requirements.</p>
-<p><img src="img/oauth-consent-screen-push-to-production.png" alt='Screenshot of a pop-up explaining the implications of putting an app into production mode, with the option to click "CANCEL" or "CONFIRM". There is an arrow pointing at "CONFIRM".' width="600px"></p>
+<p><img src="img/oauth-consent-screen-push-to-production.png" class="r-plt" alt="Screenshot of a pop-up explaining the implications of putting an app into production mode, with the option to click 'CANCEL' or 'CONFIRM'. There is an arrow pointing at 'CONFIRM'." width="600px"></p>
 <p>Presumably you have no intention of doing any of these things, since
 this OAuth client is for personal use. Regardless, click “CONFIRM” to
 proceed.</p>
@@ -528,7 +514,7 @@ project “Needs verification”. You will just have to accept this
 situation as something awkward that comes when an individual R user is
 forced to use API configuration that is really designed for application
 developers.</p>
-<p><img src="img/oauth-consent-screen-in-production-needs-verification.png" alt='Screenshot of the configuration of the OAuth consent screen. There is an oval highlighting the new "In production" publishing status and another oval highlighting the "Needs verification" status.' width="600px"></p>
+<p><img src="img/oauth-consent-screen-in-production-needs-verification.png" class="r-plt" alt="Screenshot of the configuration of the OAuth consent screen. There is an oval highlighting the new 'In production' publishing status and another oval highlighting the 'Needs verification' status." width="600px"></p>
 <p>You should be able to make personal use of the OAuth client now,
 despite the fact that it “Needs verification”. Your GCP project and
 OAuth client(s) can exist in this state as long as the usage is
@@ -538,13 +524,13 @@ exceptions to the verification requirements in the <a href="https://support.goog
 OAuth API verification FAQ</a>.</p>
 <p>When you do the OAuth dance, you will again see some scary screens,
 due to the “Needs verification” flag on the project.</p>
-<p><img src="img/google-hasnt-verified-this-app-advanced.png" alt="Screenshot of a pop-up titled &quot;Google hasn't verified this app&quot;. There is an arrow pointing at the &quot;Advanced&quot; button." width="600px"></p>
+<p><img src="img/google-hasnt-verified-this-app-advanced.png" class="r-plt" alt="Screenshot of a pop-up titled 'Google hasn't verified this app'. There is an arrow pointing at the 'Advanced' button." width="600px"></p>
 <p>When you are first informed that “Google hasn’t verified this app”,
 click “Advanced” to proceed. You will get a slightly different scary
 screen, advising you to continue only if you understand the risks and
 trust the developer, i.e. yourself. Click “Go to YOUR-PROJECT-NAME
 (unsafe)” to proceed to the usual consent screens.</p>
-<p><img src="img/google-hasnt-verified-this-app-go-to-unsafe.png" alt="Screenshot of a pop-up titled &quot;Google hasn't verified this app&quot;. There is an arrow pointing at the &quot;Go to YOUR-PROJECT-NAME (unsafe)&quot; button." width="600px"></p>
+<p><img src="img/google-hasnt-verified-this-app-go-to-unsafe.png" class="r-plt" alt="Screenshot of a pop-up titled 'Google hasn't verified this app'. There is an arrow pointing at the 'Go to YOUR-PROJECT-NAME (unsafe)' button." width="600px"></p>
 </div>
 <div class="section level2">
 <h2 id="create-an-oauth-client-of-web-application-type">Create an OAuth client of “Web application” type<a class="anchor" aria-label="anchor" href="#create-an-oauth-client-of-web-application-type"></a>
@@ -567,13 +553,13 @@ using R from the browser</a>.</p>
 <p>Let’s pick up the instruction above at the point where you are
 choosing an “Application type”. This time we choose “Web
 application”.</p>
-<p><img src="img/oauth-client-type-choices.png" alt='Screenshot of the "Application type" dropdown menu with arrows pointing at two of the choices, "Web application" and "Desktop app".' width="600px"></p>
+<p><img src="img/oauth-client-type-choices.png" class="r-plt" alt="Screenshot of the 'Application type' dropdown menu with arrows pointing at two of the choices, 'Web application' and 'Desktop app'." width="600px"></p>
 <p>You’ll get a chance to give the client a name. I encourage you to
 give it a label that has some meaning and that you can hold in your head
 for minutes at a time. In this example, I use the name “web-baboon”. I
 incorporate “web” to remind myself which type of client this is and
 “baboon” is just a random animal.</p>
-<p><img src="img/oauth-client-create-web-application.png" alt='Screenshot of the "Create OAuth client ID" screen with "Web application" selected as the Application type and "web-baboon" filled in the "Name" box. There are arrows pointing at the "Name" box and the "CREATE" button.' width="600px"></p>
+<p><img src="img/oauth-client-create-web-application.png" class="r-plt" alt="Screenshot of the 'Create OAuth client ID' screen with 'Web application' selected as the Application type and 'web-baboon' filled in the 'Name' box. There are arrows pointing at the 'Name' box and the 'CREATE' button." width="600px"></p>
 <p>You can leave “Authorized JavaScript origins” unconfigured.</p>
 <p>However, for the pseudo-oob flow, you <strong>must</strong> configure
 a URI in the “Authorized redirect URIs” section. This should be a web
@@ -591,7 +577,7 @@ redirect URI”.</p>
 <p>From this point on, everything about downloading the JSON and
 configuring the OAuth client is the same as before.</p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -600,13 +586,11 @@ configuring the OAuth client is the same as before.</p>
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
+  <p>Developed by <a href="https://www.jimhester.com/" class="external-link">Jim Hester</a>, <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
   </div></footer>
