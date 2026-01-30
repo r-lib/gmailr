@@ -13,7 +13,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/r-lib/gmailr/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/r-lib/gmailr/blob/v3.0.0/DESCRIPTION)
 
 Hester J, Bryan J (2026). *gmailr: Access the 'Gmail' 'RESTful' API*. R
 package version 3.0.0, <https://gmailr.r-lib.org>.
