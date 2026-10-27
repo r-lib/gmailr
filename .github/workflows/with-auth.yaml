@@ -10,6 +10,10 @@ on:
   pull_request:
     branches: [main, master]
   workflow_dispatch:
+  schedule:
+    # Mondays, 09:17 UTC (off the hour, when GitHub's scheduler is busiest)
+    # https://crontab.guru is your friend
+    - cron: "17 9 * * 1"
 
 name: with-auth
 
