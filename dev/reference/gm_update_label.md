@@ -41,9 +41,3 @@ Other label:
 [`gm_delete_label()`](https://gmailr.r-lib.org/dev/reference/gm_delete_label.md),
 [`gm_label()`](https://gmailr.r-lib.org/dev/reference/gm_label.md),
 [`gm_labels()`](https://gmailr.r-lib.org/dev/reference/gm_labels.md)
-
-Other label:
-[`gm_create_label()`](https://gmailr.r-lib.org/dev/reference/gm_create_label.md),
-[`gm_delete_label()`](https://gmailr.r-lib.org/dev/reference/gm_delete_label.md),
-[`gm_label()`](https://gmailr.r-lib.org/dev/reference/gm_label.md),
-[`gm_labels()`](https://gmailr.r-lib.org/dev/reference/gm_labels.md)

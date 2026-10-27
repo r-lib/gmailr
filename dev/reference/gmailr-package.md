@@ -19,6 +19,8 @@ Useful links:
 
 Authors:
 
+- Jennifer Bryan <jenny@posit.co>
+
 - Jim Hester
 
 Other contributors:
