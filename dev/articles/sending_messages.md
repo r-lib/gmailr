@@ -25,11 +25,11 @@ You can convert the message to a properly formatted MIME message using
 ``` r
 
 strwrap(as.character(text_msg))
-#> [1] "MIME-Version: 1.0\r Date: Tue, 27 Oct 2026 20:55:57 GMT\r To:"    
+#> [1] "MIME-Version: 1.0\r Date: Tue, 27 Oct 2026 21:17:28 GMT\r To:"    
 #> [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"
 #> [3] "multipart/mixed; boundary=c6be45eee35844e7ec1d6ada44bc15ee\r"     
 #> [4] "--c6be45eee35844e7ec1d6ada44bc15ee\r MIME-Version: 1.0\r Date:"   
-#> [5] "Tue, 27 Oct 2026 20:55:57 GMT\r Content-Type: text/plain;"        
+#> [5] "Tue, 27 Oct 2026 21:17:28 GMT\r Content-Type: text/plain;"        
 #> [6] "charset=utf-8; format=flowed\r Content-Transfer-Encoding:"        
 #> [7] "quoted-printable\r Gmailr is a very handy package!\r"             
 #> [8] "--c6be45eee35844e7ec1d6ada44bc15ee--\r"
