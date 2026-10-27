@@ -31,7 +31,7 @@ secret, in one of the forms supported for the \code{txt} argument of
 \value{
 \itemize{
 \item \code{gm_auth_configure()}: An object of R6 class
-\link[gargle:AuthState-class]{gargle::AuthState}, invisibly.
+\link[gargle:AuthState]{gargle::AuthState}, invisibly.
 \item \code{gm_oauth_client()}: the current user-configured OAuth client.
 }
 }
@@ -69,10 +69,10 @@ gm_auth_configure(client = original_client)
 \code{\link[=gm_default_oauth_client]{gm_default_oauth_client()}} to learn how you can make your OAuth
 client easy for gmailr to discover.
 
-Other auth functions: 
-\code{\link{gm_auth}()},
-\code{\link{gm_deauth}()},
-\code{\link{gm_scopes}()},
+Other auth functions:
+\code{\link[=gm_auth]{gm_auth()}},
+\code{\link[=gm_deauth]{gm_deauth()}},
+\code{\link[=gm_scopes]{gm_scopes()}},
 \code{\link{gmailr-configuration}}
 }
 \concept{auth functions}

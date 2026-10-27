@@ -27,16 +27,10 @@ update.
 \url{https://developers.google.com/gmail/api/reference/rest/v1/users.labels/patch}
 }
 \seealso{
-Other label: 
-\code{\link{gm_create_label}()},
-\code{\link{gm_delete_label}()},
-\code{\link{gm_label}()},
-\code{\link{gm_labels}()}
-
-Other label: 
-\code{\link{gm_create_label}()},
-\code{\link{gm_delete_label}()},
-\code{\link{gm_label}()},
-\code{\link{gm_labels}()}
+Other label:
+\code{\link[=gm_create_label]{gm_create_label()}},
+\code{\link[=gm_delete_label]{gm_delete_label()}},
+\code{\link[=gm_label]{gm_label()}},
+\code{\link[=gm_labels]{gm_labels()}}
 }
 \concept{label}

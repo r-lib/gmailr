@@ -17,7 +17,7 @@ accessed through wrapper functions that provide some additional smarts.
 \section{\code{gm_default_email()}}{
 
 \code{gm_default_email()} returns the environment variable \code{GMAILR_EMAIL}, if it
-exists, and \code{\link[gargle:gargle_options]{gargle::gargle_oauth_email()}}, otherwise.
+exists, and \code{\link[gargle:gargle_oauth_email]{gargle::gargle_oauth_email()}}, otherwise.
 }
 
 \section{\code{gm_default_oauth_client()}}{
@@ -67,10 +67,10 @@ Since gmailr uses the gargle package to handle auth, gargle's
 configuration is also relevant, which is mostly accomplished through
 \link[gargle:gargle_options]{options and associated accessor functions}.
 
-Other auth functions: 
-\code{\link{gm_auth}()},
-\code{\link{gm_auth_configure}()},
-\code{\link{gm_deauth}()},
-\code{\link{gm_scopes}()}
+Other auth functions:
+\code{\link[=gm_auth]{gm_auth()}},
+\code{\link[=gm_auth_configure]{gm_auth_configure()}},
+\code{\link[=gm_deauth]{gm_deauth()}},
+\code{\link[=gm_scopes]{gm_scopes()}}
 }
 \concept{auth functions}

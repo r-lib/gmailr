@@ -17,7 +17,7 @@ requests.
 gm_has_token()
 }
 \seealso{
-Other low-level API functions: 
-\code{\link{gm_token}()}
+Other low-level API functions:
+\code{\link[=gm_token]{gm_token()}}
 }
 \concept{low-level API functions}

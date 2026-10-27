@@ -27,10 +27,10 @@ Function to create a label.
 \url{https://developers.google.com/gmail/api/reference/rest/v1/users.labels/create}
 }
 \seealso{
-Other label: 
-\code{\link{gm_delete_label}()},
-\code{\link{gm_label}()},
-\code{\link{gm_labels}()},
-\code{\link{gm_update_label}()}
+Other label:
+\code{\link[=gm_delete_label]{gm_delete_label()}},
+\code{\link[=gm_label]{gm_label()}},
+\code{\link[=gm_labels]{gm_labels()}},
+\code{\link[=gm_update_label]{gm_update_label()}}
 }
 \concept{label}

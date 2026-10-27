@@ -7,7 +7,7 @@
 gm_token()
 }
 \value{
-A \code{request} object (an S3 class provided by \link[httr:httr-package]{httr}).
+A \code{request} object (an S3 class provided by \link[httr:httr]{httr}).
 }
 \description{
 For internal use or for those programming around the Gmail API.
@@ -25,7 +25,7 @@ gm_token()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other low-level API functions: 
-\code{\link{gm_has_token}()}
+Other low-level API functions:
+\code{\link[=gm_has_token]{gm_has_token()}}
 }
 \concept{low-level API functions}

@@ -45,10 +45,10 @@ gm_scopes()
 \url{https://developers.google.com/gmail/api/auth/scopes} for details on
 the permissions for each scope.
 
-Other auth functions: 
-\code{\link{gm_auth}()},
-\code{\link{gm_auth_configure}()},
-\code{\link{gm_deauth}()},
+Other auth functions:
+\code{\link[=gm_auth]{gm_auth()}},
+\code{\link[=gm_auth_configure]{gm_auth_configure()}},
+\code{\link[=gm_deauth]{gm_deauth()}},
 \code{\link{gmailr-configuration}}
 }
 \concept{auth functions}

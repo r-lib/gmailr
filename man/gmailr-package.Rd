@@ -22,6 +22,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Jennifer Bryan \email{jenny@posit.co}
   \item Jim Hester
 }
 

@@ -167,10 +167,10 @@ gm_auth(
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other auth functions: 
-\code{\link{gm_auth_configure}()},
-\code{\link{gm_deauth}()},
-\code{\link{gm_scopes}()},
+Other auth functions:
+\code{\link[=gm_auth_configure]{gm_auth_configure()}},
+\code{\link[=gm_deauth]{gm_deauth()}},
+\code{\link[=gm_scopes]{gm_scopes()}},
 \code{\link{gmailr-configuration}}
 }
 \concept{auth functions}

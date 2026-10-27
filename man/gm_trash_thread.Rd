@@ -23,11 +23,11 @@ gm_trash_thread(12345)
 \url{https://developers.google.com/gmail/api/reference/rest/v1/users.threads/trash}
 }
 \seealso{
-Other thread: 
-\code{\link{gm_delete_thread}()},
-\code{\link{gm_modify_thread}()},
-\code{\link{gm_thread}()},
-\code{\link{gm_threads}()},
-\code{\link{gm_untrash_thread}()}
+Other thread:
+\code{\link[=gm_delete_thread]{gm_delete_thread()}},
+\code{\link[=gm_modify_thread]{gm_modify_thread()}},
+\code{\link[=gm_thread]{gm_thread()}},
+\code{\link[=gm_threads]{gm_threads()}},
+\code{\link[=gm_untrash_thread]{gm_untrash_thread()}}
 }
 \concept{thread}
