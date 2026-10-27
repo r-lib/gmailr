@@ -8,12 +8,14 @@ R.
 Install the released version of gmailr from CRAN:
 
 ``` r
+
 install.packages("gmailr")
 ```
 
 Or install the development version from GitHub with:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("r-lib/gmailr")
 ```
@@ -21,6 +23,7 @@ pak::pak("r-lib/gmailr")
 ## Attach gmailr
 
 ``` r
+
 library(gmailr)
 ```
 
@@ -61,6 +64,7 @@ build it up from parts, using helper functions like
 [`gm_subject()`](https://gmailr.r-lib.org/dev/reference/accessors.md).
 
 ``` r
+
 test_email <-
   gm_mime() |>
   gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") |>
@@ -78,6 +82,7 @@ or send the original MIME message with
 [`gm_send_message()`](https://gmailr.r-lib.org/dev/reference/gm_send_message.md).
 
 ``` r
+
 # Verify it looks correct, i.e. look at your Gmail drafts in the browser
 d <- gm_create_draft(test_email)
 
@@ -100,6 +105,7 @@ or retrieve a specific thread with
 You can then isolate a specific message and access its parts.
 
 ``` r
+
 # view recent threads
 my_threads <- gm_threads(num_results = 10)
 

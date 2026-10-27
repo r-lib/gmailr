@@ -138,12 +138,14 @@ around OAuth and gmailr is syncing up that:
     explicitly::
 
     ``` r
+
     gm_auth_configure(path = "path/to/my-oauth-client.json")
     ```
 
     or implicitly:
 
     ``` r
+
     gm_auth_configure()
     ```
 

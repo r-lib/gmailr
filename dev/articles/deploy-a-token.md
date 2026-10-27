@@ -1,6 +1,7 @@
 # Deploy a token
 
 ``` r
+
 library(gmailr)
 ```
 
@@ -34,6 +35,7 @@ gmailr ships with code for a working demo of the approach described
 here.
 
 ``` r
+
 writeLines(list.files(
   system.file("deployed-token-demo", package = "gmailr")
 ))
@@ -60,6 +62,7 @@ you only need to call
 [`gm_auth()`](https://gmailr.r-lib.org/dev/reference/gm_auth.md):
 
 ``` r
+
 gm_auth("jane@example.com", cache = FALSE)
 ```
 
@@ -69,6 +72,7 @@ prior to
 [`gm_auth()`](https://gmailr.r-lib.org/dev/reference/gm_auth.md):
 
 ``` r
+
 gm_auth_configure("path/to/your/oauth_client.json")
 gm_auth("jane@example.com", cache = FALSE)
 ```
@@ -76,6 +80,7 @@ gm_auth("jane@example.com", cache = FALSE)
 You may wish to confirm that you are logged in as the intended user:
 
 ``` r
+
 gm_profile()
 ```
 
@@ -86,6 +91,7 @@ your organization, you don’t need to provide any arguments to
 But you’ll often want to specify the target `path`:
 
 ``` r
+
 gm_token_write(path = "path/to/gmailr-token.rds")
 ```
 
@@ -113,6 +119,7 @@ Once you’ve set up the encryption key, you can use it in
 `gm_token_write(key =)`:
 
 ``` r
+
 gm_token_write(
   path = "path/to/gmailr-token.rds",
   key = "GMAILR_KEY"
@@ -135,6 +142,7 @@ In the code that’s running in the deployed / unattended setting, use a
 snippet like this to read the token from file and tell gmailr to use it:
 
 ``` r
+
 gm_auth(
   token = gm_token_read(
     path = "path/to/gmailr-token.rds",

@@ -86,7 +86,7 @@ gm_auth_configure(path = path_to_json)
 # confirm that a (fake) OAuth client is now configured
 gm_oauth_client()
 #> <gargle_oauth_client>
-#> name: a_project_d1c5a8066d2cbe48e8d94514dd286163
+#> name: a_project_59aa1797ab7ac4667a77617c3400999c
 #> id: abc.apps.googleusercontent.com
 #> secret: <REDACTED>
 #> type: installed

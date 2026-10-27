@@ -1,6 +1,7 @@
 # gmailr
 
 ``` r
+
 library(gmailr)
 ```
 
@@ -26,6 +27,7 @@ for auto-discovery, your gmailr code should “just work”, without any
 explicit configuration around the client:
 
 ``` r
+
 library(gmailr)
 
 # your gmailr code ...
@@ -36,6 +38,7 @@ Otherwise, your code must always include a call to
 probably right after you attach gmailr:
 
 ``` r
+
 library(gmailr)
 gm_auth_configure("path/to/your/oauth_client.json")
 
@@ -75,6 +78,7 @@ auto-discovered and the user needs to request non-default behaviour from
 [`gm_auth()`](https://gmailr.r-lib.org/dev/reference/gm_auth.md):
 
 ``` r
+
 library(gmailr)
 gm_auth_configure("path/to/your/oauth_client.json")
 
@@ -90,11 +94,12 @@ is a handy function to confirm that gmailr is using the intended Google
 identity.
 
 ``` r
+
 gm_profile()
 #> Logged in as:
 #>   * email: gargle-testuser@posit.co
-#>   * num_messages: 154
-#>   * num_threads: 154
+#>   * num_messages: 159
+#>   * num_threads: 159
 ```
 
 ## Compose and send an email
@@ -106,6 +111,7 @@ then build it up from parts, using helper functions like
 [`gm_subject()`](https://gmailr.r-lib.org/dev/reference/accessors.md).
 
 ``` r
+
 test_email <-
   gm_mime() |>
   gm_to("PUT_A_VALID_EMAIL_ADDRESS_THAT_YOU_CAN_CHECK_HERE") |>
@@ -117,6 +123,7 @@ You can even add a file attachment with
 [`gm_attach_file()`](https://gmailr.r-lib.org/dev/reference/gm_mime.md):
 
 ``` r
+
 tmp <- tempfile("mtcars-", fileext = ".csv")
 write.csv(mtcars, tmp)
 test_email <- gm_attach_file(test_email, tmp)
@@ -128,6 +135,7 @@ Then you can visit your Gmail drafts in the browser and confirm that the
 message content and formatting is as you intend.
 
 ``` r
+
 d <- gm_create_draft(test_email)
 ```
 
@@ -135,8 +143,9 @@ If you’re happy, you can either send that draft from the web UI or with
 [`gm_send_draft()`](https://gmailr.r-lib.org/dev/reference/gm_send_draft.md):
 
 ``` r
+
 gm_send_draft(d)
-#> Draft Id: 19c0fb5bbb89e6f3 
+#> Draft Id: 1a17f25e44bbdc59 
 #> NULL
 ```
 
@@ -144,6 +153,7 @@ Or you can send the original MIME message with
 [`gm_send_message()`](https://gmailr.r-lib.org/dev/reference/gm_send_message.md):
 
 ``` r
+
 gm_send_message(test_email)
 ```
 
@@ -153,6 +163,7 @@ You can retrieve email threads with
 [`gm_threads()`](https://gmailr.r-lib.org/dev/reference/gm_threads.md):
 
 ``` r
+
 my_threads <- gm_threads(num_results = 10)
 ```
 
@@ -160,6 +171,7 @@ You can retrieve a specific thread with
 [`gm_thread()`](https://gmailr.r-lib.org/dev/reference/gm_thread.md):
 
 ``` r
+
 # retrieve the latest thread by retrieving the first ID
 latest_thread <- gm_thread(gm_id(my_threads)[[1]])
 ```
@@ -168,10 +180,11 @@ The messages in `latest_thread` are stored as a list. You can then
 isolate a specific message and access its parts.
 
 ``` r
+
 my_msg <- latest_thread$messages[[1]]
 
 gm_date(my_msg)
-#> [1] "Fri, 30 Jan 2026 08:21:34 -0800"
+#> [1] "Tue, 27 Oct 2026 13:55:52 -0700"
 gm_subject(my_msg)
 #> [1] "this is just a gmailr test"
 gm_body(my_msg)
@@ -183,6 +196,7 @@ If a message has attachments, you can download them all locally with
 [`gm_save_attachments()`](https://gmailr.r-lib.org/dev/reference/gm_save_attachments.md):
 
 ``` r
+
 tmp2 <- tempfile("attachments-")
 dir.create(tmp2)
 gm_save_attachments(my_msg, path = tmp2)

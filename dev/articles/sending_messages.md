@@ -1,6 +1,7 @@
 # Sending Messages With Gmailr
 
 ``` r
+
 library(gmailr)
 ```
 
@@ -11,6 +12,7 @@ library(gmailr)
 First we will construct a simple text only message
 
 ``` r
+
 text_msg <- gm_mime() |>
   gm_to("james.f.hester@gmail.com") |>
   gm_from("me@somewhere.com") |>
@@ -21,12 +23,13 @@ You can convert the message to a properly formatted MIME message using
 [`as.character()`](https://rdrr.io/r/base/character.html).
 
 ``` r
+
 strwrap(as.character(text_msg))
-#> [1] "MIME-Version: 1.0\r Date: Fri, 30 Jan 2026 16:21:41 GMT\r To:"    
+#> [1] "MIME-Version: 1.0\r Date: Tue, 27 Oct 2026 20:55:57 GMT\r To:"    
 #> [2] "james.f.hester@gmail.com\r From: me@somewhere.com\r Content-Type:"
 #> [3] "multipart/mixed; boundary=c6be45eee35844e7ec1d6ada44bc15ee\r"     
 #> [4] "--c6be45eee35844e7ec1d6ada44bc15ee\r MIME-Version: 1.0\r Date:"   
-#> [5] "Fri, 30 Jan 2026 16:21:41 GMT\r Content-Type: text/plain;"        
+#> [5] "Tue, 27 Oct 2026 20:55:57 GMT\r Content-Type: text/plain;"        
 #> [6] "charset=utf-8; format=flowed\r Content-Transfer-Encoding:"        
 #> [7] "quoted-printable\r Gmailr is a very handy package!\r"             
 #> [8] "--c6be45eee35844e7ec1d6ada44bc15ee--\r"
@@ -39,6 +42,7 @@ only message along with the html message, but with modern email clients
 this is not strictly necessary.
 
 ``` r
+
 html_msg <- gm_mime() |>
   gm_to("james.f.hester@gmail.com") |>
   gm_from("me@somewhere.com") |>
@@ -56,6 +60,7 @@ You can add attachments to your message in two ways.
     or you can specify it yourself with the `type` parameter.
 
 ``` r
+
 write.csv(file = "iris.csv", iris)
 
 msg <- html_msg |>
@@ -68,6 +73,7 @@ msg <- html_msg |>
     to attach the binary data to your file.
 
 ``` r
+
 msg <- html_msg |>
   gm_attach_part(part = charToRaw("attach me!"), name = "please")
 ```
@@ -81,6 +87,7 @@ tag value can by any unique identifier. E.g. here is an example of
 including a ggplot2 image
 
 ``` r
+
 # First create a plot to send, and save it to mtcars.png
 mtcars$gear <- as.factor(mtcars$gear)
 
@@ -126,6 +133,7 @@ You can upload any mime message into your gmail drafts using
 Be sure to give yourself at least `compose` permissions first.
 
 ``` r
+
 gm_create_draft(file_attachment)
 ```
 
@@ -135,6 +143,7 @@ This inserts the message directly into your mailbox, bypassing gmail’s
 default scanning and classification algorithms.
 
 ``` r
+
 gm_insert_message(file_attachment)
 ```
 
@@ -144,6 +153,7 @@ This imports the email as though it was a normal message, with the same
 scanning and classification as normal email.
 
 ``` r
+
 gm_import_message(file_attachment)
 ```
 
@@ -157,6 +167,7 @@ created with
 [`gm_create_draft()`](https://gmailr.r-lib.org/dev/reference/gm_create_draft.md)).
 
 ``` r
+
 my_drafts <- gm_drafts()
 
 gm_send_draft(gm_id(my_drafts, "draft_id")[1])
@@ -168,6 +179,7 @@ You can also send an email message directly from a `mime` object using
 [`gm_send_message()`](https://gmailr.r-lib.org/dev/reference/gm_send_message.md).
 
 ``` r
+
 gm_send_message(file_attachment)
 ```
 

@@ -435,6 +435,7 @@ In order of preference:
     with code like this:
 
     ``` r
+
     path_old <- "~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"
     d <- fs::dir_create(rappdirs::user_data_dir("gmailr"), recurse = TRUE)
     fs::file_move(path_old, d)
@@ -458,6 +459,7 @@ with no arguments, like this, and then immediately use
 to confirm that a client has been configured:
 
 ``` r
+
 library(gmailr)
 
 gm_auth_configure()
