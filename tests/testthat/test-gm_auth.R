@@ -43,7 +43,6 @@ test_that("gm_auth() errors informatively", {
 # gm_auth_configure() ----
 test_that("gm_auth_configure() works", {
   withr::local_envvar(GMAILR_OAUTH_CLIENT = NA)
-  withr::local_envvar(GMAILR_APP = NA)
   old_client <- gm_oauth_client()
   withr::defer(gm_auth_configure(client = old_client))
 
@@ -71,25 +70,6 @@ test_that("gm_auth_configure() works", {
   )
 })
 
-test_that("gm_auth_configure() errors for key, secret, appname, app", {
-  expect_snapshot(
-    error = TRUE,
-    gm_auth_configure(key = "KEY", secret = "SECRET")
-  )
-  expect_snapshot(error = TRUE, gm_auth_configure(appname = "APPNAME"))
-  google_app <- httr::oauth_app(
-    "gmailr",
-    key = "KEYKEYKEY",
-    secret = "SECRETSECRETSECRET"
-  )
-  expect_snapshot(error = TRUE, gm_auth_configure(app = google_app))
-})
-
-test_that("gm_oauth_app() is deprecated", {
-  withr::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(absorb <- gm_oauth_app())
-})
-
 # gm_scopes() ----
 test_that("gm_scopes() reveals gmail scopes", {
   expect_snapshot(gm_scopes())
@@ -107,24 +87,6 @@ test_that("gm_scopes() substitutes actual scope for short form", {
       "https://www.googleapis.com/auth/gmail.readonly",
       "https://www.googleapis.com/auth/gmail.settings.basic"
     )
-  )
-})
-
-test_that("gm_scopes() substitutes actual scope for legacy super-short form", {
-  withr::local_options(lifecycle_verbosity = "warning")
-
-  expect_snapshot_warning(
-    out <- gm_scopes("readonly")
-  )
-  expect_equal(out, gm_scopes("gmail.readonly"))
-
-  # multiple legacy scopes, plus another one
-  expect_snapshot_warning(
-    out <- gm_scopes(c("readonly", "openid", "compose"))
-  )
-  expect_equal(
-    out,
-    gm_scopes(c("gmail.readonly", "openid", "gmail.compose"))
   )
 })
 

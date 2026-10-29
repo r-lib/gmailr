@@ -5,14 +5,7 @@
 \alias{gm_oauth_client}
 \title{Edit auth configuration}
 \usage{
-gm_auth_configure(
-  client = NULL,
-  path = gm_default_oauth_client(),
-  key = deprecated(),
-  secret = deprecated(),
-  appname = deprecated(),
-  app = deprecated()
-)
+gm_auth_configure(client = NULL, path = gm_default_oauth_client())
 
 gm_oauth_client()
 }
@@ -24,9 +17,6 @@ preferred to specify the client with JSON, using the \code{path} argument.}
 \item{path}{JSON downloaded from \href{https://console.cloud.google.com}{Google Cloud Console}, containing a client id and
 secret, in one of the forms supported for the \code{txt} argument of
 \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
-
-\item{key, secret, appname, app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Use the
-\code{path} (strongly recommended) or \code{client} argument instead.}
 }
 \value{
 \itemize{
@@ -37,8 +27,18 @@ secret, in one of the forms supported for the \code{txt} argument of
 }
 \description{
 See the article \href{https://gmailr.r-lib.org/dev/articles/oauth-client.html}{Set up an OAuth client} for
-instructions on how to get an OAuth client. Then you can use
-\code{gm_auth_configure()} to register your client for use with gmailr.
+instructions on how to get an OAuth client.
+
+These functions give more control over and visibility into the auth
+configuration than \code{\link[=gm_auth]{gm_auth()}} does. \code{gm_auth_configure()}
+lets the user specify their own:
+\itemize{
+\item OAuth client, which is used when obtaining a user token.
+}
+
+See the \code{vignette("get-api-credentials", package = "gargle")}
+for more.
+
 \code{gm_oauth_client()} retrieves the currently configured OAuth client.
 }
 \examples{

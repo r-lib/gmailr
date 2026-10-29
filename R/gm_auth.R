@@ -179,41 +179,28 @@ gm_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
-# gm_auth_configure() started out with a signature that is quite different from
-# other packages, because gmailr adopted gargle later in its life. Therefore I
-# had to document the arguments "by hand". That situation will improve with
-# time, i.e. once I can truly remove deprecated arguments.
-
 #' Edit auth configuration
 #'
 #' @description
-
 #' See the article [Set up an OAuth
 #' client](https://gmailr.r-lib.org/dev/articles/oauth-client.html) for
-#' instructions on how to get an OAuth client. Then you can use
-#' `gm_auth_configure()` to register your client for use with gmailr.
-#' `gm_oauth_client()` retrieves the currently configured OAuth client.
+#' instructions on how to get an OAuth client.
+
+#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table, .has_api_key = FALSE, .fallbacks = FALSE)
 #'
-#' @param client A Google OAuth client, presumably constructed via
-#'   [gargle::gargle_oauth_client_from_json()]. Note, however, that it is
-#'   preferred to specify the client with JSON, using the `path` argument.
-#' @inheritParams gargle::gargle_oauth_client_from_json
-#' @param key,secret,appname,app `r lifecycle::badge('deprecated')` Use the
-#'   `path` (strongly recommended) or `client` argument instead.
 #'
-#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key
-#'   = FALSE)
+#' @eval gargle:::PREFIX_auth_configure_params(.has_api_key = FALSE)
+#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key = FALSE)
 #'
 #' @seealso [gm_default_oauth_client()] to learn how you can make your OAuth
 #'   client easy for gmailr to discover.
 #' @family auth functions
 #' @export
-
 #' @examplesIf rlang::is_interactive()
 #' # if your OAuth client can be auto-discovered (see ?gm_default_oauth_client),
 #' # you don't need to provide anything!
 #' gm_auth_configure()
-
+#'
 #' @examples
 #' # see and store the current user-configured OAuth client
 #' (original_client <- gm_oauth_client())
@@ -234,33 +221,8 @@ gm_has_token <- function() {
 #' gm_auth_configure(client = original_client)
 gm_auth_configure <- function(
   client = NULL,
-  path = gm_default_oauth_client(),
-  key = deprecated(),
-  secret = deprecated(),
-  appname = deprecated(),
-  app = deprecated()
+  path = gm_default_oauth_client()
 ) {
-  if (
-    lifecycle::is_present(app) ||
-      lifecycle::is_present(key) ||
-      lifecycle::is_present(secret) ||
-      lifecycle::is_present(appname)
-  ) {
-    what <- glue(
-      "
-      The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()`"
-    )
-    with <- glue(
-      "
-      the `path` (strongly recommended) or `client` argument"
-    )
-    deprecate_stop(
-      when = "2.0.0",
-      what = I(what),
-      with = I(with)
-    )
-  }
-
   if (!missing(client) && !missing(path)) {
     cli::cli_abort(
       "Must supply exactly one of {.arg client} and {.arg path}, not both."
@@ -363,13 +325,6 @@ gm_scopes <- function(scopes = NULL) {
     return(gmail_scopes)
   }
 
-  # In hindsight, I think it is better for the short form to be slightly less
-  # short. Once you start to think about the full set of APIs and supporting
-  # this in gargle, it seems that "gmail.compose" is better than "compose".
-  # gmailr will continue to accept the original, very short forms for backwards
-  # compatibility, but we catch, warn, and modify them here.
-  scopes <- fixup_gmail_scopes(scopes)
-
   resolve_scopes(user_scopes = scopes, package_scopes = gmail_scopes)
 }
 
@@ -389,42 +344,6 @@ gmail_scopes <- c(
 resolve_scopes <- function(user_scopes, package_scopes) {
   m <- match(user_scopes, names(package_scopes))
   ifelse(is.na(m), user_scopes, package_scopes[m])
-}
-
-# 'readonly' --> 'gmail.readonly'
-# 'whatever' --> 'whatever'
-fixup_gmail_scopes <- function(scopes) {
-  haystack <- grep(
-    "^https://www.googleapis.com/auth/gmail.",
-    gmail_scopes,
-    value = TRUE
-  )
-  haystack <- basename(haystack)
-  haystack <- set_names(haystack, function(x) sub("^gmail[.]", "", x))
-
-  m <- match(scopes, names(haystack))
-
-  if (any(!is.na(m))) {
-    needs_work <- haystack[m]
-    needs_work <- needs_work[!is.na(needs_work)]
-    what <- glue(
-      '
-      The use of extremely short scopes \\
-      ({glue::glue_collapse(glue::double_quote(names(needs_work)), sep = ", ")})'
-    )
-    with <- glue(
-      '
-      the slightly longer form \\
-      ({glue::glue_collapse(glue::double_quote(needs_work), sep = ", ")})'
-    )
-    deprecate_warn(
-      when = "2.0.0",
-      what = I(what),
-      with = I(with)
-    )
-  }
-
-  ifelse(is.na(m), scopes, haystack[m])
 }
 
 # gm_token_write / gm_token_read() ----
@@ -586,24 +505,4 @@ gm_auth_testing <- function() {
   print(whoami)
 
   invisible(TRUE)
-}
-
-# deprecated functions ----
-
-#' Get currently configured OAuth app (deprecated)
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' In light of the new [gargle::gargle_oauth_client()] constructor and class of
-#' the same name, `gm_oauth_app()` is being replaced by [gm_oauth_client()].
-#' @keywords internal
-#' @export
-gm_oauth_app <- function() {
-  deprecate_warn(
-    "2.0.0",
-    "gm_oauth_app()",
-    "gm_oauth_client()"
-  )
-  gm_oauth_client()
 }
