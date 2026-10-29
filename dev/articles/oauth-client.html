@@ -427,11 +427,11 @@ order of preference:</p>
 <ol style="list-style-type: decimal">
 <li>
 <p>Move the downloaded JSON file to the location returned by
-<code>rappdirs::user_data_dir("gmailr")</code>. You could accomplish
+<code>tools::R_user_dir("gmailr", "config")</code>. You could accomplish
 this move with code like this:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">path_old</span> <span class="op">&lt;-</span> <span class="st">"~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="fu">rappdirs</span><span class="fu">::</span><span class="fu"><a href="https://rappdirs.r-lib.org/reference/user_data_dir.html" class="external-link">user_data_dir</a></span><span class="op">(</span><span class="st">"gmailr"</span><span class="op">)</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="fu">tools</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/tools/userdir.html" class="external-link">R_user_dir</a></span><span class="op">(</span><span class="st">"gmailr"</span>, <span class="st">"config"</span><span class="op">)</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/file_move.html" class="external-link">file_move</a></span><span class="op">(</span><span class="va">path_old</span>, <span class="va">d</span><span class="op">)</span></span></code></pre></div>
 <p>It’s important that the target folder only has one file whose name
 “looks” like a Google OAuth client file.</p>

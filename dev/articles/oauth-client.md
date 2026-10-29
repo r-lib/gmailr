@@ -431,13 +431,13 @@ arrange for the OAuth client JSON to be discovered by
 In order of preference:
 
 1.  Move the downloaded JSON file to the location returned by
-    `rappdirs::user_data_dir("gmailr")`. You could accomplish this move
-    with code like this:
+    `tools::R_user_dir("gmailr", "config")`. You could accomplish this
+    move with code like this:
 
     ``` r
 
     path_old <- "~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"
-    d <- fs::dir_create(rappdirs::user_data_dir("gmailr"), recurse = TRUE)
+    d <- fs::dir_create(tools::R_user_dir("gmailr", "config"), recurse = TRUE)
     fs::file_move(path_old, d)
     ```
 

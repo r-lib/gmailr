@@ -20,8 +20,8 @@ will also be useful.
 Unless you have reason to do otherwise, my recommendation is to place
 the JSON file for your OAuth client in the default location, so that it
 is discovered automatically. The default location is returned by
-`rappdirs::user_data_dir("gmailr")`. Alternatively, you can also make
-autodiscovery work by exposing the client’s JSON filepath as the
+`tools::R_user_dir("gmailr", "config")`. Alternatively, you can also
+make autodiscovery work by exposing the client’s JSON filepath as the
 `GMAILR_OAUTH_CLIENT` environment variable. If your client is configured
 for auto-discovery, your gmailr code should “just work”, without any
 explicit configuration around the client:
@@ -98,8 +98,8 @@ identity.
 gm_profile()
 #> Logged in as:
 #>   * email: gargle-testuser@posit.co
-#>   * num_messages: 219
-#>   * num_threads: 219
+#>   * num_messages: 233
+#>   * num_threads: 233
 ```
 
 ## Compose and send an email
@@ -145,7 +145,7 @@ If you’re happy, you can either send that draft from the web UI or with
 ``` r
 
 gm_send_draft(d)
-#> Draft Id: 1a188ffe1b37c8a3 
+#> Draft Id: 1a189bd1bd4f1780 
 #> NULL
 ```
 
@@ -184,7 +184,7 @@ isolate a specific message and access its parts.
 my_msg <- latest_thread$messages[[1]]
 
 gm_date(my_msg)
-#> [1] "Thu, 29 Oct 2026 18:50:33 +0000"
+#> [1] "Thu, 29 Oct 2026 22:17:14 +0000"
 gm_subject(my_msg)
 #> [1] "this is just a gmailr test"
 gm_body(my_msg)

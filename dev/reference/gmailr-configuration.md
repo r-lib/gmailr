@@ -30,15 +30,15 @@ unfolds like so:
   to be the path to the target JSON file.
 
 - A `.json` file found in the directory returned by
-  `rappdirs::user_data_dir("gmailr")`, whose filename uniquely matches
-  the regular expression `"client_secret.+[.]json$"`.
+  `tools::R_user_dir("gmailr", "config")`, whose filename uniquely
+  matches the regular expression `"client_secret.+[.]json$"`.
 
 Here's an inspirational snippet to move the JSON file you downloaded
 into the right place for auto-discovery by
 [`gm_auth_configure()`](https://gmailr.r-lib.org/dev/reference/gm_auth_configure.md):
 
     path_old <- "~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"
-    d <- fs::dir_create(rappdirs::user_data_dir("gmailr"), recurse = TRUE)
+    d <- fs::dir_create(tools::R_user_dir("gmailr", "config"), recurse = TRUE)
     fs::file_move(path_old, d)
 
 ## See also
@@ -67,6 +67,7 @@ withr::with_envvar(
 #> [1] "jenny@example.com"
 
 gm_default_oauth_client()
+#> NULL
 
 withr::with_envvar(
   c(GMAILR_OAUTH_CLIENT = "path/to/my-client.json"),
