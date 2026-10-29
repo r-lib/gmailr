@@ -59,7 +59,7 @@ gm_default_email <- function() {
 #' * `GMAILR_OAUTH_CLIENT` environment variable: If defined, it is assumed to be
 #'   the path to the target JSON file.
 #' * A `.json` file found in the directory returned by
-#'   `rappdirs::user_data_dir("gmailr")`, whose filename uniquely matches the
+#'   `tools::R_user_dir("gmailr", "config")`, whose filename uniquely matches the
 #'   regular expression `"client_secret.+[.]json$"`.
 
 #'
@@ -67,7 +67,7 @@ gm_default_email <- function() {
 #' right place for auto-discovery by `gm_auth_configure()`:
 #' ``` r
 #' path_old <- "~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"
-#' d <- fs::dir_create(rappdirs::user_data_dir("gmailr"), recurse = TRUE)
+#' d <- fs::dir_create(tools::R_user_dir("gmailr", "config"), recurse = TRUE)
 #' fs::file_move(path_old, d)
 #' ```
 
@@ -85,13 +85,43 @@ gm_default_oauth_client <- function() {
     return(path)
   }
 
-  user_data_dir <- rappdirs::user_data_dir("gmailr")
+  config_dir <- tools::R_user_dir("gmailr", "config")
+  path <- find_oauth_client_json(config_dir)
+  if (!is.null(path)) {
+    return(path)
+  }
+
+  # TODO: Remove this fallback, and the rappdirs dependency, in a future release
+  legacy_dir <- rappdirs::user_data_dir("gmailr")
+  path <- find_oauth_client_json(legacy_dir)
+  if (!is.null(path)) {
+    deprecate_warn(
+      when = "3.1.0",
+      what = I(
+        'Storing the OAuth client in `rappdirs::user_data_dir("gmailr")`'
+      ),
+      with = I('`tools::R_user_dir("gmailr", "config")`'),
+      details = c(
+        "i" = "OAuth client found in the deprecated location:",
+        " " = path,
+        "i" = "Move it to this directory:",
+        " " = config_dir,
+        "i" = "See `?gmailr::gm_default_oauth_client` for help."
+      )
+    )
+  }
+  path
+}
+
+# Returns the path to the unique OAuth client JSON in `dir`, NULL if there are
+# no candidates, and errors if there are multiple.
+find_oauth_client_json <- function(dir, call = caller_env()) {
   # WANT THIS, typical filename of downloaded OAuth client:
   # client_secret_1234-abcd.apps.googleusercontent.com.json
   # EXCLUDE THIS, typical filename of a service account key:
   # gargle-169921-1234abcd.json
   candidates <- list.files(
-    user_data_dir,
+    dir,
     pattern = "client_secret.+[.]json$",
     full.names = TRUE
   )
@@ -101,9 +131,14 @@ gm_default_oauth_client <- function() {
   }
 
   if (n > 1) {
-    cli::cli_abort(c(
-      "{n} candidate JSON files found in {.path {user_data_dir}}.",
-      " " = "OAuth client can't be automatically discovered."
-    ))
+    cli::cli_abort(
+      c(
+        "{n} candidate JSON files found in {.path {dir}}.",
+        " " = "OAuth client can't be automatically discovered."
+      ),
+      call = call
+    )
   }
+
+  NULL
 }

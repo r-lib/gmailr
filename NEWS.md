@@ -1,5 +1,7 @@
 # gmailr (development version)
 
+* `gm_default_oauth_client()` now looks for the OAuth client JSON file in the directory returned by `tools::R_user_dir("gmailr", "config")`, instead of `rappdirs::user_data_dir("gmailr")` (#217). For now, the old location is still consulted as a fallback, but a deprecation warning is issued when an OAuth client is found there.
+
 * The `key`, `secret`, `appname`, and `app` arguments of `gm_auth_configure()`, defunct since gmailr 2.0.0, have been removed. Use `path` or `client` instead.
 
 * `gm_oauth_app()`, deprecated since gmailr 2.0.0, has been removed. Use `gm_oauth_client()` instead.
