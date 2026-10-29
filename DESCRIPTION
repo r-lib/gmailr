@@ -26,7 +26,8 @@ Imports:
     mime,
     rappdirs,
     rematch2,
-    rlang (>= 1.1.0)
+    rlang (>= 1.1.0),
+    tools
 Suggests:
     curl,
     knitr,

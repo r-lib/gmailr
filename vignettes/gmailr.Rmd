@@ -45,7 +45,7 @@ The article [Set up an OAuth client](https://gmailr.r-lib.org/dev/articles/oauth
 The help topics for `?gm_auth_configure` and `?gm_default_oauth_client` will also be useful.
 
 Unless you have reason to do otherwise, my recommendation is to place the JSON file for your OAuth client in the default location, so that it is discovered automatically.
-The default location is returned by `rappdirs::user_data_dir("gmailr")`.
+The default location is returned by `tools::R_user_dir("gmailr", "config")`.
 Alternatively, you can also make autodiscovery work by exposing the client's JSON filepath as the `GMAILR_OAUTH_CLIENT` environment variable.
 If your client is configured for auto-discovery, your gmailr code should "just work", without any explicit configuration around the client:
 
