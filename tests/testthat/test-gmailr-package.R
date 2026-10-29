@@ -86,19 +86,3 @@ test_that("gm_default_oauth_client() errors for >1 matching .json files", {
     transform = scrub_volatile_filepath
   )
 })
-
-test_that("gm_default_oauth_client() still consults GMAILR_APP, but warns", {
-  # unset GMAILR_OAUTH_CLIENT
-  withr::local_envvar(GMAILR_OAUTH_CLIENT = NA)
-  expect_equal(Sys.getenv("GMAILR_OAUTH_CLIENT"), "")
-
-  # make sure nothing is found in the gmailr user data
-  tmp <- withr::local_tempdir(pattern = "R_USER_DATA_DIR-")
-  withr::local_envvar(R_USER_DATA_DIR = tmp)
-
-  withr::local_options(lifecycle_verbosity = "warning")
-  withr::local_envvar(GMAILR_APP = "path/to/my-client.json")
-
-  expect_snapshot_warning(client <- gm_default_oauth_client())
-  expect_equal(client, "path/to/my-client.json")
-})

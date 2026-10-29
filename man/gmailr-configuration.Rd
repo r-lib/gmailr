@@ -32,10 +32,6 @@ the path to the target JSON file.
 \item A \code{.json} file found in the directory returned by
 \code{rappdirs::user_data_dir("gmailr")}, whose filename uniquely matches the
 regular expression \code{"client_secret.+[.]json$"}.
-\item \code{GMAILR_APP} environment variable: This is supported for backwards
-compatibility, but it is preferable to store the JSON below
-\code{rappdirs::user_data_dir("gmailr")} or to store the path in the
-\code{GMAILR_OAUTH_CLIENT} environment variable.
 }
 
 Here's an inspirational snippet to move the JSON file you downloaded into the

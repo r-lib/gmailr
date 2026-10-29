@@ -4,6 +4,8 @@
 
 * `gm_oauth_app()`, deprecated since gmailr 2.0.0, has been removed. Use `gm_oauth_client()` instead.
 
+* `gm_default_oauth_client()` no longer consults the `GMAILR_APP` environment variable, which has been deprecated since gmailr 2.0.0. Use `GMAILR_OAUTH_CLIENT` or the default storage location instead.
+
 # gmailr 3.0.0
 
 * All HTTP responses are passed through `gargle::response_process()`, which updates gmailr's error handling to be consistent with other packages that use gargle for HTTP requests. Users might notice that errors are more verbose (and hopefully more informative). Also the class vector has changed:

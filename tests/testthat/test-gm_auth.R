@@ -43,7 +43,6 @@ test_that("gm_auth() errors informatively", {
 # gm_auth_configure() ----
 test_that("gm_auth_configure() works", {
   withr::local_envvar(GMAILR_OAUTH_CLIENT = NA)
-  withr::local_envvar(GMAILR_APP = NA)
   old_client <- gm_oauth_client()
   withr::defer(gm_auth_configure(client = old_client))
 
