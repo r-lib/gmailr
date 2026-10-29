@@ -179,39 +179,28 @@ gm_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
-# gm_auth_configure() started out with a signature that is quite different from
-# other packages, because gmailr adopted gargle later in its life. Therefore I
-# had to document the arguments "by hand". That situation will improve with
-# time, i.e. once I can truly remove deprecated arguments.
-
 #' Edit auth configuration
 #'
 #' @description
-
 #' See the article [Set up an OAuth
 #' client](https://gmailr.r-lib.org/dev/articles/oauth-client.html) for
-#' instructions on how to get an OAuth client. Then you can use
-#' `gm_auth_configure()` to register your client for use with gmailr.
-#' `gm_oauth_client()` retrieves the currently configured OAuth client.
+#' instructions on how to get an OAuth client.
+
+#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table, .has_api_key = FALSE, .fallbacks = FALSE)
 #'
-#' @param client A Google OAuth client, presumably constructed via
-#'   [gargle::gargle_oauth_client_from_json()]. Note, however, that it is
-#'   preferred to specify the client with JSON, using the `path` argument.
-#' @inheritParams gargle::gargle_oauth_client_from_json
 #'
-#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key
-#'   = FALSE)
+#' @eval gargle:::PREFIX_auth_configure_params(.has_api_key = FALSE)
+#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key = FALSE)
 #'
 #' @seealso [gm_default_oauth_client()] to learn how you can make your OAuth
 #'   client easy for gmailr to discover.
 #' @family auth functions
 #' @export
-
 #' @examplesIf rlang::is_interactive()
 #' # if your OAuth client can be auto-discovered (see ?gm_default_oauth_client),
 #' # you don't need to provide anything!
 #' gm_auth_configure()
-
+#'
 #' @examples
 #' # see and store the current user-configured OAuth client
 #' (original_client <- gm_oauth_client())
