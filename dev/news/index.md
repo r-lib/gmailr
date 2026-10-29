@@ -2,6 +2,27 @@
 
 ## gmailr (development version)
 
+- The `key`, `secret`, `appname`, and `app` arguments of
+  [`gm_auth_configure()`](https://gmailr.r-lib.org/dev/reference/gm_auth_configure.md),
+  defunct since gmailr 2.0.0, have been removed. Use `path` or `client`
+  instead.
+
+- `gm_oauth_app()`, deprecated since gmailr 2.0.0, has been removed. Use
+  [`gm_oauth_client()`](https://gmailr.r-lib.org/dev/reference/gm_auth_configure.md)
+  instead.
+
+- [`gm_default_oauth_client()`](https://gmailr.r-lib.org/dev/reference/gmailr-configuration.md)
+  no longer consults the `GMAILR_APP` environment variable, which has
+  been deprecated since gmailr 2.0.0. Use `GMAILR_OAUTH_CLIENT` or the
+  default storage location instead.
+
+- [`gm_scopes()`](https://gmailr.r-lib.org/dev/reference/gm_scopes.md)
+  and [`gm_auth()`](https://gmailr.r-lib.org/dev/reference/gm_auth.md)
+  no longer translate the very short scope forms (`"readonly"`,
+  `"compose"`, `"labels"`, `"send"`, `"insert"`, `"modify"`,
+  `"metadata"`), deprecated since gmailr 2.0.0. Use the
+  `gmail.`-prefixed forms, e.g. `"gmail.readonly"`.
+
 ## gmailr 3.0.0
 
 CRAN release: 2026-01-30
@@ -116,16 +137,14 @@ Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes
 around OAuth and gmailr is syncing up that:
 
 - [`gm_oauth_client()`](https://gmailr.r-lib.org/dev/reference/gm_auth_configure.md)
-  is a new function to replace the now-deprecated
-  [`gm_oauth_app()`](https://gmailr.r-lib.org/dev/reference/gm_oauth_app.md).
-  This is somewhat about a vocabulary change (“client” instead of
-  “app”), but it’s really connected to a more meaningful shift in
-  gargle, which has a new appreciation for different OAuth client types
-  (e.g., “installed” vs. “web”).
+  is a new function to replace the now-deprecated `gm_oauth_app()`. This
+  is somewhat about a vocabulary change (“client” instead of “app”), but
+  it’s really connected to a more meaningful shift in gargle, which has
+  a new appreciation for different OAuth client types (e.g., “installed”
+  vs. “web”).
 - [`gm_oauth_client()`](https://gmailr.r-lib.org/dev/reference/gm_auth_configure.md)
-  (and the function it’s replacing,
-  [`gm_oauth_app()`](https://gmailr.r-lib.org/dev/reference/gm_oauth_app.md))
-  no longer error if there is no configured OAuth client.
+  (and the function it’s replacing, `gm_oauth_app()`) no longer error if
+  there is no configured OAuth client.
 - [`gm_auth_configure()`](https://gmailr.r-lib.org/dev/reference/gm_auth_configure.md)
   has an updated signature:
   - The first argument is now named `client`, which is morally

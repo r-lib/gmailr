@@ -2,21 +2,25 @@
 
 See the article [Set up an OAuth
 client](https://gmailr.r-lib.org/dev/articles/oauth-client.html) for
-instructions on how to get an OAuth client. Then you can use
-`gm_auth_configure()` to register your client for use with gmailr.
+instructions on how to get an OAuth client.
+
+These functions give more control over and visibility into the auth
+configuration than
+[`gm_auth()`](https://gmailr.r-lib.org/dev/reference/gm_auth.md) does.
+`gm_auth_configure()` lets the user specify their own:
+
+- OAuth client, which is used when obtaining a user token.
+
+See the
+[`vignette("get-api-credentials", package = "gargle")`](https://gargle.r-lib.org/articles/get-api-credentials.html)
+for more.
+
 `gm_oauth_client()` retrieves the currently configured OAuth client.
 
 ## Usage
 
 ``` r
-gm_auth_configure(
-  client = NULL,
-  path = gm_default_oauth_client(),
-  key = deprecated(),
-  secret = deprecated(),
-  appname = deprecated(),
-  app = deprecated()
-)
+gm_auth_configure(client = NULL, path = gm_default_oauth_client())
 
 gm_oauth_client()
 ```
@@ -37,11 +41,6 @@ gm_oauth_client()
   secret, in one of the forms supported for the `txt` argument of
   [`jsonlite::fromJSON()`](https://jeroen.r-universe.dev/jsonlite/reference/fromJSON.html)
   (typically, a file path or JSON string).
-
-- key, secret, appname, app:
-
-  **\[deprecated\]** Use the `path` (strongly recommended) or `client`
-  argument instead.
 
 ## Value
 

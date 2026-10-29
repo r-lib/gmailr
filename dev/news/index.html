@@ -48,7 +48,11 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="gmailr-development-version">gmailr (development version)<a class="anchor" aria-label="anchor" href="#gmailr-development-version"></a></h2>
-</div>
+<ul><li><p>The <code>key</code>, <code>secret</code>, <code>appname</code>, and <code>app</code> arguments of <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code>, defunct since gmailr 2.0.0, have been removed. Use <code>path</code> or <code>client</code> instead.</p></li>
+<li><p><code>gm_oauth_app()</code>, deprecated since gmailr 2.0.0, has been removed. Use <code><a href="../reference/gm_auth_configure.html">gm_oauth_client()</a></code> instead.</p></li>
+<li><p><code><a href="../reference/gmailr-configuration.html">gm_default_oauth_client()</a></code> no longer consults the <code>GMAILR_APP</code> environment variable, which has been deprecated since gmailr 2.0.0. Use <code>GMAILR_OAUTH_CLIENT</code> or the default storage location instead.</p></li>
+<li><p><code><a href="../reference/gm_scopes.html">gm_scopes()</a></code> and <code><a href="../reference/gm_auth.html">gm_auth()</a></code> no longer translate the very short scope forms (<code>"readonly"</code>, <code>"compose"</code>, <code>"labels"</code>, <code>"send"</code>, <code>"insert"</code>, <code>"modify"</code>, <code>"metadata"</code>), deprecated since gmailr 2.0.0. Use the <code>gmail.</code>-prefixed forms, e.g. <code>"gmail.readonly"</code>.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.0.0" id="gmailr-300">gmailr 3.0.0<a class="anchor" aria-label="anchor" href="#gmailr-300"></a></h2><p class="text-muted">CRAN release: 2026-01-30</p>
 <ul><li>
@@ -89,9 +93,9 @@
 <h3 id="syncing-up-with-gargle-2-0-0">Syncing up with gargle<a class="anchor" aria-label="anchor" href="#syncing-up-with-gargle-2-0-0"></a></h3>
 <p>Versions 1.3.0, 1.4.0, and 1.5.1 of gargle introduced some changes around OAuth and gmailr is syncing up that:</p>
 <ul><li>
-<code><a href="../reference/gm_auth_configure.html">gm_oauth_client()</a></code> is a new function to replace the now-deprecated <code><a href="../reference/gm_oauth_app.html">gm_oauth_app()</a></code>. This is somewhat about a vocabulary change (“client” instead of “app”), but it’s really connected to a more meaningful shift in gargle, which has a new appreciation for different OAuth client types (e.g., “installed” vs. “web”).</li>
+<code><a href="../reference/gm_auth_configure.html">gm_oauth_client()</a></code> is a new function to replace the now-deprecated <code>gm_oauth_app()</code>. This is somewhat about a vocabulary change (“client” instead of “app”), but it’s really connected to a more meaningful shift in gargle, which has a new appreciation for different OAuth client types (e.g., “installed” vs. “web”).</li>
 <li>
-<code><a href="../reference/gm_auth_configure.html">gm_oauth_client()</a></code> (and the function it’s replacing, <code><a href="../reference/gm_oauth_app.html">gm_oauth_app()</a></code>) no longer error if there is no configured OAuth client.</li>
+<code><a href="../reference/gm_auth_configure.html">gm_oauth_client()</a></code> (and the function it’s replacing, <code>gm_oauth_app()</code>) no longer error if there is no configured OAuth client.</li>
 <li>
 <code><a href="../reference/gm_auth_configure.html">gm_auth_configure()</a></code> has an updated signature:
 <ul><li><p>The first argument is now named <code>client</code>, which is morally equivalent to the previous <code>app</code>, i.e. this is essentially a name change.</p></li>

@@ -80,10 +80,6 @@ the path to the target JSON file.</p></li>
 <li><p>A <code>.json</code> file found in the directory returned by
 <code>rappdirs::user_data_dir("gmailr")</code>, whose filename uniquely matches the
 regular expression <code>"client_secret.+[.]json$"</code>.</p></li>
-<li><p><code>GMAILR_APP</code> environment variable: This is supported for backwards
-compatibility, but it is preferable to store the JSON below
-<code>rappdirs::user_data_dir("gmailr")</code> or to store the path in the
-<code>GMAILR_OAUTH_CLIENT</code> environment variable.</p></li>
 </ul><p>Here's an inspirational snippet to move the JSON file you downloaded into the
 right place for auto-discovery by <code><a href="gm_auth_configure.html">gm_auth_configure()</a></code>:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">path_old</span> <span class="op">&lt;-</span> <span class="st">"~/Downloads/client_secret_123-abc.apps.googleusercontent.com.json"</span></span>
