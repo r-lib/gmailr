@@ -71,11 +71,6 @@ test_that("gm_auth_configure() works", {
   )
 })
 
-test_that("gm_oauth_app() is deprecated", {
-  withr::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(absorb <- gm_oauth_app())
-})
-
 # gm_scopes() ----
 test_that("gm_scopes() reveals gmail scopes", {
   expect_snapshot(gm_scopes())

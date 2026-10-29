@@ -43,15 +43,6 @@
       Error in `gm_auth_configure()`:
       ! Must supply either `client` or `path`.
 
-# gm_oauth_app() is deprecated
-
-    Code
-      absorb <- gm_oauth_app()
-    Condition
-      Warning:
-      `gm_oauth_app()` was deprecated in gmailr 2.0.0.
-      i Please use `gm_oauth_client()` instead.
-
 # gm_scopes() reveals gmail scopes
 
     Code

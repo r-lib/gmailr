@@ -560,23 +560,3 @@ gm_auth_testing <- function() {
 
   invisible(TRUE)
 }
-
-# deprecated functions ----
-
-#' Get currently configured OAuth app (deprecated)
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' In light of the new [gargle::gargle_oauth_client()] constructor and class of
-#' the same name, `gm_oauth_app()` is being replaced by [gm_oauth_client()].
-#' @keywords internal
-#' @export
-gm_oauth_app <- function() {
-  deprecate_warn(
-    "2.0.0",
-    "gm_oauth_app()",
-    "gm_oauth_client()"
-  )
-  gm_oauth_client()
-}
