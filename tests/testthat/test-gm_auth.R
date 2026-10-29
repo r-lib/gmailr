@@ -71,20 +71,6 @@ test_that("gm_auth_configure() works", {
   )
 })
 
-test_that("gm_auth_configure() errors for key, secret, appname, app", {
-  expect_snapshot(
-    error = TRUE,
-    gm_auth_configure(key = "KEY", secret = "SECRET")
-  )
-  expect_snapshot(error = TRUE, gm_auth_configure(appname = "APPNAME"))
-  google_app <- httr::oauth_app(
-    "gmailr",
-    key = "KEYKEYKEY",
-    secret = "SECRETSECRETSECRET"
-  )
-  expect_snapshot(error = TRUE, gm_auth_configure(app = google_app))
-})
-
 test_that("gm_oauth_app() is deprecated", {
   withr::local_options(lifecycle_verbosity = "warning")
   expect_snapshot(absorb <- gm_oauth_app())

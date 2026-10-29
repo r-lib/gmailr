@@ -198,8 +198,6 @@ gm_has_token <- function() {
 #'   [gargle::gargle_oauth_client_from_json()]. Note, however, that it is
 #'   preferred to specify the client with JSON, using the `path` argument.
 #' @inheritParams gargle::gargle_oauth_client_from_json
-#' @param key,secret,appname,app `r lifecycle::badge('deprecated')` Use the
-#'   `path` (strongly recommended) or `client` argument instead.
 #'
 #' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table, .has_api_key
 #'   = FALSE)
@@ -234,33 +232,8 @@ gm_has_token <- function() {
 #' gm_auth_configure(client = original_client)
 gm_auth_configure <- function(
   client = NULL,
-  path = gm_default_oauth_client(),
-  key = deprecated(),
-  secret = deprecated(),
-  appname = deprecated(),
-  app = deprecated()
+  path = gm_default_oauth_client()
 ) {
-  if (
-    lifecycle::is_present(app) ||
-      lifecycle::is_present(key) ||
-      lifecycle::is_present(secret) ||
-      lifecycle::is_present(appname)
-  ) {
-    what <- glue(
-      "
-      The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()`"
-    )
-    with <- glue(
-      "
-      the `path` (strongly recommended) or `client` argument"
-    )
-    deprecate_stop(
-      when = "2.0.0",
-      what = I(what),
-      with = I(with)
-    )
-  }
-
   if (!missing(client) && !missing(path)) {
     cli::cli_abort(
       "Must supply exactly one of {.arg client} and {.arg path}, not both."

@@ -1,5 +1,7 @@
 # gmailr (development version)
 
+* The `key`, `secret`, `appname`, and `app` arguments of `gm_auth_configure()`, defunct since gmailr 2.0.0, have been removed. Use `path` or `client` instead.
+
 # gmailr 3.0.0
 
 * All HTTP responses are passed through `gargle::response_process()`, which updates gmailr's error handling to be consistent with other packages that use gargle for HTTP requests. Users might notice that errors are more verbose (and hopefully more informative). Also the class vector has changed:

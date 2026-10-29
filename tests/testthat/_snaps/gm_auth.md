@@ -43,33 +43,6 @@
       Error in `gm_auth_configure()`:
       ! Must supply either `client` or `path`.
 
-# gm_auth_configure() errors for key, secret, appname, app
-
-    Code
-      gm_auth_configure(key = "KEY", secret = "SECRET")
-    Condition
-      Error:
-      ! The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()` was deprecated in gmailr 2.0.0 and is now defunct.
-      i Please use the `path` (strongly recommended) or `client` argument instead.
-
----
-
-    Code
-      gm_auth_configure(appname = "APPNAME")
-    Condition
-      Error:
-      ! The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()` was deprecated in gmailr 2.0.0 and is now defunct.
-      i Please use the `path` (strongly recommended) or `client` argument instead.
-
----
-
-    Code
-      gm_auth_configure(app = google_app)
-    Condition
-      Error:
-      ! The use of `key`, `secret`, `appname`, and `app` with `gm_auth_configure()` was deprecated in gmailr 2.0.0 and is now defunct.
-      i Please use the `path` (strongly recommended) or `client` argument instead.
-
 # gm_oauth_app() is deprecated
 
     Code
