@@ -69,13 +69,3 @@
                                         gmail.settings_sharing 
       "https://www.googleapis.com/auth/gmail.settings.sharing" 
 
-# gm_scopes() substitutes actual scope for legacy super-short form
-
-    The use of extremely short scopes ("readonly") was deprecated in gmailr 2.0.0.
-    i Please use the slightly longer form ("gmail.readonly") instead.
-
----
-
-    The use of extremely short scopes ("readonly", "compose") was deprecated in gmailr 2.0.0.
-    i Please use the slightly longer form ("gmail.readonly", "gmail.compose") instead.
-

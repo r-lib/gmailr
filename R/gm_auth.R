@@ -336,13 +336,6 @@ gm_scopes <- function(scopes = NULL) {
     return(gmail_scopes)
   }
 
-  # In hindsight, I think it is better for the short form to be slightly less
-  # short. Once you start to think about the full set of APIs and supporting
-  # this in gargle, it seems that "gmail.compose" is better than "compose".
-  # gmailr will continue to accept the original, very short forms for backwards
-  # compatibility, but we catch, warn, and modify them here.
-  scopes <- fixup_gmail_scopes(scopes)
-
   resolve_scopes(user_scopes = scopes, package_scopes = gmail_scopes)
 }
 
@@ -362,42 +355,6 @@ gmail_scopes <- c(
 resolve_scopes <- function(user_scopes, package_scopes) {
   m <- match(user_scopes, names(package_scopes))
   ifelse(is.na(m), user_scopes, package_scopes[m])
-}
-
-# 'readonly' --> 'gmail.readonly'
-# 'whatever' --> 'whatever'
-fixup_gmail_scopes <- function(scopes) {
-  haystack <- grep(
-    "^https://www.googleapis.com/auth/gmail.",
-    gmail_scopes,
-    value = TRUE
-  )
-  haystack <- basename(haystack)
-  haystack <- set_names(haystack, function(x) sub("^gmail[.]", "", x))
-
-  m <- match(scopes, names(haystack))
-
-  if (any(!is.na(m))) {
-    needs_work <- haystack[m]
-    needs_work <- needs_work[!is.na(needs_work)]
-    what <- glue(
-      '
-      The use of extremely short scopes \\
-      ({glue::glue_collapse(glue::double_quote(names(needs_work)), sep = ", ")})'
-    )
-    with <- glue(
-      '
-      the slightly longer form \\
-      ({glue::glue_collapse(glue::double_quote(needs_work), sep = ", ")})'
-    )
-    deprecate_warn(
-      when = "2.0.0",
-      what = I(what),
-      with = I(with)
-    )
-  }
-
-  ifelse(is.na(m), scopes, haystack[m])
 }
 
 # gm_token_write / gm_token_read() ----

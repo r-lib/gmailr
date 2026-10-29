@@ -6,6 +6,8 @@
 
 * `gm_default_oauth_client()` no longer consults the `GMAILR_APP` environment variable, which has been deprecated since gmailr 2.0.0. Use `GMAILR_OAUTH_CLIENT` or the default storage location instead.
 
+* `gm_scopes()` and `gm_auth()` no longer translate the very short scope forms (`"readonly"`, `"compose"`, `"labels"`, `"send"`, `"insert"`, `"modify"`, `"metadata"`), deprecated since gmailr 2.0.0. Use the `gmail.`-prefixed forms, e.g. `"gmail.readonly"`.
+
 # gmailr 3.0.0
 
 * All HTTP responses are passed through `gargle::response_process()`, which updates gmailr's error handling to be consistent with other packages that use gargle for HTTP requests. Users might notice that errors are more verbose (and hopefully more informative). Also the class vector has changed:

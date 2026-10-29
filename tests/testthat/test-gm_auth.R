@@ -90,24 +90,6 @@ test_that("gm_scopes() substitutes actual scope for short form", {
   )
 })
 
-test_that("gm_scopes() substitutes actual scope for legacy super-short form", {
-  withr::local_options(lifecycle_verbosity = "warning")
-
-  expect_snapshot_warning(
-    out <- gm_scopes("readonly")
-  )
-  expect_equal(out, gm_scopes("gmail.readonly"))
-
-  # multiple legacy scopes, plus another one
-  expect_snapshot_warning(
-    out <- gm_scopes(c("readonly", "openid", "compose"))
-  )
-  expect_equal(
-    out,
-    gm_scopes(c("gmail.readonly", "openid", "gmail.compose"))
-  )
-})
-
 test_that("gm_scopes() passes unrecognized scopes through", {
   expect_equal(
     gm_scopes(c(
